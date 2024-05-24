@@ -22,9 +22,9 @@ try {
 }
 
 // Configurações da autenticação do Google OAuth
-$google_oauth_client_id = '529869352786-3eq5s9oqkqmb900ichve6qjdb36cld3k.apps.googleusercontent.com'; // ID do cliente OAuth do Google
-$google_oauth_client_secret = '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'; // Segredo do cliente OAuth do Google
-$google_oauth_redirect_uri = 'http://localhost/redes/google-oauth2.php'; // URI de redirecionamento após a autenticação do Google
+$google_oauth_client_id = ''; // ID do cliente OAuth do Gogit add google-oauth.php google-oauth2.phpogle
+$google_oauth_client_secret = ''; // Segredo do cliente OAuth do Google
+$google_oauth_redirect_uri = ''; // URI de redirecionamento após a autenticação do Google
 $google_oauth_version = 'v3'; // Versão da API do Google OAuth
 
 // Verifica se o código de autorização está presente na URL e não está vazio
