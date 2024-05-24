@@ -1,0 +1,291 @@
+body {
+    width: 100%;
+    margin: 0;
+  overflow-x: hidden;
+
+  }
+  
+  .menu {
+    position:fixed;
+    padding-top: 10px;
+    margin-top: -50px;
+    width: 240px;
+    background-color: black;
+    height: 100vh;
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-color: antiquewhite;
+    display: flex;
+  }
+  
+  .menu a:hover {
+    background-color: blueviolet;
+  }
+  
+  .menu ul {
+    margin-left: -25px;
+  }
+  
+  .menu li {
+    display: table-cell;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
+    text-align: left;
+    width: 200px;
+    height: 45px;
+    margin-left: 10px;
+    padding-right: 16px;
+    margin-left: 2px;
+    padding-left: 10px;
+    background-color: black;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu span {
+    padding-top: 20px;
+    padding-right: 20px;
+  }
+
+
+  .graficos
+  {
+    width: 300px;
+    height: 0px;
+    margin-left: 1020px;
+  }
+
+  #receber
+  {
+    width: 300px;
+    height: 400px;
+  }
+
+  #despesas
+  {
+    width: 300px;
+    height: 400px;
+    margin-top: 100px;
+  }
+
+  .receber .addfatia
+  {
+    margin-left: 265px;
+    margin-top: -50px;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 300px;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    height: 300px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;  
+  }
+
+  .receber .addfatia h2
+  {
+    margin-top: -20px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .receber .criafatia
+  {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin-left: 650px;
+    margin-top: -420px;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 300px;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    height: 300px;
+  }
+
+  .receber .criafatia h2
+  {
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 50px;
+  }
+
+
+  .conteudo
+  {
+    margin-top: 50px;
+  }
+
+  #fatia
+  {
+    width: 95%;
+    height: 25px;
+    margin-bottom: 10px;
+  }
+
+  #valor
+  {
+    width: 280px;
+    height: 17.5px;
+  }
+
+  #salvar
+  {
+    width: 100px;
+    height: 25px;
+    margin-top: 50px;
+    margin-left: 100px;
+    background-color: white;
+    color: black;
+  }
+
+  #salvar2
+  {
+    width: 100px;
+    height: 25px;
+    margin-top: 50px;
+    margin-left: 100px;
+    background-color: white;
+    color: black;
+  }
+
+  #salvar3
+  {
+    width: 100px;
+    height: 25px;
+    margin-top: 50px;
+    margin-left: 100px;
+    background-color: white;
+    color: black;
+  }
+
+  #salvar4
+  {
+    width: 100px;
+    height: 25px;
+    margin-top: 50px;
+    margin-left: 100px;
+    background-color: white;
+    color: black;
+  }
+
+  #valortitulo
+  {
+    margin-top: 30px;
+  }
+
+
+
+  .receber2
+  {
+    margin-top: 160px;
+    width: 1000px;
+    background-color: rgba(0, 0, 0);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+
+  .receber2 .addfatia
+  {
+    margin-left: 265px;
+    margin-top: -50px;
+    width: 300px;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    height: 300px;
+  }
+
+  .receber2 .addfatia h2
+  {
+    margin-top: -20px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .receber2 .criafatia
+  {
+    margin-left: 650px;
+    margin-top: -420px;
+    width: 300px;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14.5px;
+    height: 300px;
+  }
+
+  .receber2 .criafatia h2
+  {
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 50px;
+  }
+
+
+  .conta
+  {
+    margin-left: 280px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 400px;
+  }
+
+  .conta h3
+  {
+    color: rgba(0, 0, 255, 0.8);
+    margin-top: 100px;
+  }
+
+  .conta h1
+  {
+    color: blue;
+  }
+
+
+  .estatisticas
+  {
+    display: flex;
+    margin-top: 150px;
+    bottom: 0px;
+  }
+
+  .estatisticas h1
+  {
+    margin-left: 700px;
+    width: 200px;
+    border: 2px solid rgba(0, 0, 255, 0.1);
+    text-align: center;
+    background-color: rgba(0, 0, 255, .8);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .estatisticas a
+  {
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    text-decoration: none;
+    color: white;
+    width: 300px;
+  }
