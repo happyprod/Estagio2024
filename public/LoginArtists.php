@@ -1,5 +1,6 @@
 <?php
 require_once '../src/Helpers/init.php';
+require_once '../src/Helpers/functions.php';
 
 $url = getCurrentUrl();
 
