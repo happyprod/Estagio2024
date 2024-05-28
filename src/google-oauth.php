@@ -1,21 +1,17 @@
 <?php
-// Inicia a sessão para manter a persistência de dados entre as requisições
-session_start();
 
-// Configurações da base de dados
-$db_host = 'localhost'; // Host do banco de dados
-$db_name = 'concertpulse'; // Nome do banco de dados
-$db_user = 'root'; // Usuário do banco de dados
-$db_pass = ''; // Senha do banco de dados
+use App\Helpers\Database;
+
+
+require_once './Helpers/init.php';
 
 // Tenta estabelecer a conexão com o banco de dados usando o PDO
 try {
-    // Cria uma nova instância da classe PDO para estabelecer a conexão com o banco de dados
-    $pdo = new PDO('mysql:host=' . $db_host . ';dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
 
-    // Configuração do PDO para lançar exceções em caso de erros, facilitando a detecção e tratamento de problemas na conexão
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Conectar ao banco de dados usando PDO
+    $db = Database::connect();
 
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $exception) {
     // Se ocorrer uma exceção durante a conexão, encerra o script exibindo uma mensagem de erro
     exit('Falha ao conectar ao banco de dados!');
@@ -24,7 +20,7 @@ try {
 // Configurações da autenticação do Google OAuth
 $google_oauth_client_id = '529869352786-3eq5s9oqkqmb900ichve6qjdb36cld3k.apps.googleusercontent.com'; // ID do cliente OAuth do Google
 $google_oauth_client_secret = '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'; // Segredo do cliente OAuth do Google
-$google_oauth_redirect_uri = 'http://localhost/redes/google-oauth.php'; // URI de redirecionamento após a autenticação do Google
+$google_oauth_redirect_uri = 'http://localhost/redes/src/google-oauth.php'; // URI de redirecionamento após a autenticação do Google
 $google_oauth_version = 'v3'; // Versão da API do Google OAuth
 
 // Verifica se o código de autorização está presente na URL e não está vazio
@@ -82,7 +78,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
 
             // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o email corresponde ao email do perfil do usuário do Google
-            $stmt = $pdo->prepare('SELECT * FROM accounts WHERE email = ?');
+            $stmt = $db->prepare('SELECT * FROM accounts WHERE email = ?');
 
             // Executa a consulta SQL, substituindo o marcador de posição '?' pelo valor do endereço de e-mail do perfil do usuário do Google
             $stmt->execute([$profile['email']]);
@@ -130,8 +126,6 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
                 } else {
                     echo "A pasta '$mailpasta' já existe dentro de '$utilizadorPath'.";
                 }
-
-
             } else {
 
                 // Se a conta já existe, obtém o ID da conta existente
@@ -148,7 +142,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
 
             // Redireciona para a página de perfil após a autenticação bem-sucedida
-            header('Location: ./dashboard.php');
+            header('Location: ../public/dashboard.php');
             exit;
         } else {
             exit('Não foi possível obter informações do perfil! Por favor, tente novamente mais tarde!');
@@ -173,4 +167,3 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
     header('Location: https://accounts.google.com/o/oauth2/auth?' . http_build_query($params));
     exit;
 }
-?>

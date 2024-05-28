@@ -20,46 +20,103 @@ namespace App\Controllers;
 
 use App\Helpers\Database;
 
+use MyApp\Models\User;
+
 
 class AuthController
 {
     public function showLoginForm($error = null)
     {
-        require __DIR__ . '/../Views/login.php';
+        session_destroy(); 
+
+        require __DIR__ . '/../Views/Accounts/login.php';
+    }
+
+    public function showRegisterForm($error = null)
+    {
+        session_destroy(); 
+
+        require __DIR__ . '/../Views/Accounts/register.php';
     }
 
 
-    public function login($username, $password)
+    public function login($email, $senha)
     {
-
-        // Connect to the database
+        // Conectar ao banco de dados usando PDO
         $db = Database::connect();
-
-        // Prepare the SQL statement
-        $stmt = $db->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
-        $stmt->execute(['username' => $username, 'password' => $password]);
-
-        // Fetch the user data
-        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-        // Check if the user exists and the password is correct
-        if ($user && $password) {
-            // Start the session
-
-            // Set the user ID in the session
-            $_SESSION['user_id'] = $user['id'];
-
-            $url = '/sucesso';
-
-            header('Location: ' . $url);
-
-            exit();
+    
+        // Verifica se o formulário foi submetido
+        if (isset($email, $senha)) {
+    
+            // Consulta SQL para selecionar o usuário com o email fornecido
+            $query = "SELECT id, email, password FROM accounts WHERE email = :email";
+            $stmt = $db->prepare($query);
+    
+            // Verifica se a preparação da consulta foi bem-sucedida
+            if ($stmt) {
+                $stmt->bindParam(":email", $email);
+                $stmt->execute();
+    
+                // Obtém o resultado da consulta
+                $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+                // Verifica se encontrou exatamente um registro
+                if ($user) {
+                    // Verifica se a senha fornecida está correta
+                    if ($user['password'] == $senha) {
+                        // Credenciais de login válidas
+                        $_SESSION['user_id'] = $user['id'];
+    
+                        // Verifica se o checkbox foi marcado
+                        if (isset($_POST['checkbox'])) {
+                            // Define um cookie com duração de 1 mês (30 dias)
+                            setcookie("email", $email, time() + (60 * 60 * 24 * 30));
+                        } else {
+                            // Define um cookie com duração de 1 dia
+                            setcookie("email", $email, time() + (3600 * 24));
+                        }
+    
+                        // Resposta de sucesso
+                        echo json_encode(['success' => true, 'message' => 'Login realizado com sucesso.']);
+                    } else {
+                        // Senha incorreta
+                        echo json_encode(['success' => false, 'message' => 'Nome de email ou senha inválidos.']);
+                    }
+                } else {
+                    // Usuário não encontrado
+                    echo json_encode(['success' => false, 'message' => 'Nome de email ou senha inválidos.']);
+                }
+            } else {
+                // Erro ao preparar a consulta
+                echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta SQL.']);
+            }
         } else {
-            // Display an error message
-            $error = 'Nome de usuário ou senha inválidos';
-            header ('Location: ../../public/loginartists.php');
+            // Dados do formulário não fornecidos
+            echo json_encode(['success' => false, 'message' => 'Dados do formulário não fornecidos.']);
         }
     }
+    
+
+
+
+    public function user_cenas($name, $email, $password) {
+        // Validação dos dados do formulário de registro
+
+        // Por exemplo, verificando se o email já está em uso
+        // (Esta lógica pode estar no modelo ou em uma classe de serviço separada)
+        
+        // Criar uma instância do modelo User
+        $user = new User($name, $email, $password);
+        
+        // Salvar o user na bd
+        $user->save();
+        
+        // Redirecionar para uma página de sucesso ou exibir uma mensagem de sucesso
+    }
+
+
+
+
 
     public function logout()
     {

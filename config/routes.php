@@ -8,6 +8,7 @@ $routes = [
     '/' => 'HomeController@index',
     '/profile/(\d+)' => 'PageController@show',
     '/contact' => 'PageController@contact',
+    '/registerartists' => [AuthController::class, 'showRegisterForm'],
     '/loginartists' => [AuthController::class, 'showLoginForm'],
     '/logout' => [AuthController::class, 'logout'],
     '/register' => 'AuthController@register',

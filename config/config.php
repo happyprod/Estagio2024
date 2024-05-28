@@ -22,9 +22,4 @@ define('API_KEY', 'minha_chave_api');
 define('API_SECRET', 'meu_segredo_api');
 
 
-// Configurações de sessão
-ini_set('session.cookie_lifetime', 86400); // 1 dia
-ini_set('session.gc_maxlifetime', 86400);  // 1 dia
-session_name('minha_sessao');
-
 
