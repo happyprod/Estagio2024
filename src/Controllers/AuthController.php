@@ -20,6 +20,7 @@ namespace App\Controllers;
 
 use App\Helpers\Database;
 
+
 class AuthController
 {
     public function showLoginForm($error = null)
@@ -28,49 +29,42 @@ class AuthController
     }
 
 
-    public function login()
+    public function login($username, $password)
     {
-        // Check if the submit button has been clicked
-        if (isset($_POST['submit'])) {
-            // Define the username and password variables
-            $username = $_POST['username'];
-            $password = $_POST['password'];
 
-            // Connect to the database
-            $db = Database::connect();
+        // Connect to the database
+        $db = Database::connect();
 
-            // Prepare the SQL statement
-            $stmt = $db->prepare('SELECT * FROM users WHERE username = :username');
-            $stmt->execute(['username' => $username]);
+        // Prepare the SQL statement
+        $stmt = $db->prepare('SELECT * FROM users WHERE username = :username AND password = :password');
+        $stmt->execute(['username' => $username, 'password' => $password]);
 
-            // Fetch the user data
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+        // Fetch the user data
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            // Check if the user exists and the password is correct
-            if ($user && password_verify($password, $user['password'])) {
-                // Start the session
-                session_start();
+        // Check if the user exists and the password is correct
+        if ($user && $password) {
+            // Start the session
 
-                // Set the user ID in the session
-                $_SESSION['user_id'] = $user['id'];
+            // Set the user ID in the session
+            $_SESSION['user_id'] = $user['id'];
 
-                // Redirect to the homepage
-                header('Location: /');
-                exit();
-            } else {
-                // Display an error message
-                $error = 'Nome de usuário ou senha inválidos';
-                require __DIR__ . '/../Views/login.php';
-            }
+            $url = '/sucesso';
+
+            header('Location: ' . $url);
+
+            exit();
         } else {
-            // Display the login form
-            require __DIR__ . '/../Views/login.php';
+            // Display an error message
+            $error = 'Nome de usuário ou senha inválidos';
+            header ('Location: ../../public/loginartists.php');
         }
     }
 
     public function logout()
     {
         session_start();
+        session_unset();
         session_destroy();
         header('Location: /login');
         exit();

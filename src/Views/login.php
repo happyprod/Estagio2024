@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-<body>x\
-    <form action="login.php" method="POST">
+<body>
+    <form action="../src/Handlers/LoginArtists_process.php" method="POST">
         <h1>Login</h1>
-        <?php if (isset($error)): ?>
-            <p style="color:red;"><?= $error ?></p>
-        <?php endif; ?>
         <div>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
