@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="<?php echo BASE_LOGO; ?>">
   <title>
     Login
   </title>
@@ -16,6 +16,8 @@
   <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARtHqWhhONSQVfBMlIV4SMerzDmSTDf4o&libraries=places"></script>
+
   <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -25,18 +27,115 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
+  <style>
+    .RegisterModal1 .modal-content {
+      text-align: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .RegisterModal1 .modal-body .btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      text-align: center;
+      height: 350px;
+      /* Altura dos botões */
+      padding: 20px;
+      /* Adiciona um pouco de margem interna */
+    }
+
+    .RegisterModal1 img {
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    .RegisterModal1 .btn-selected {
+      background-color: #1E90FF;
+      /* Reduzindo a opacidade do azul */
+      border: none;
+      /* Mudando a cor da borda para #1E90FF */
+      color: #fff;
+      box-shadow: 0px 5px 15px #1E90FF;
+      /* Adicionando uma sombra com a cor #1E90FF */
+    }
+
+    .RegisterModal1 .btn-selected h5 {
+      color: white;
+    }
+
+    .RegisterModal1 .btn-selected img {
+      filter: invert(100%);
+    }
+
+    @media (min-width: 576px) {
+      .RegisterModal1 .modal-body .btn {
+        height: 300px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .RegisterModal1 .modal-body .btn {
+        height: 270px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .RegisterModal1 .modal-body .btn {
+        height: 250px;
+      }
+    }
+
+    .RegisterModal1 .btn-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .RegisterModal1 .opcao:hover img {
+      filter: invert(100%);
+    }
+
+    .RegisterModal1 .opcao:hover h5 {
+      color: white;
+    }
+
+    .RegisterModal1 .opcao:hover p {
+      color: white;
+    }
+
+    .RegisterModal1 .opcao:hover {
+      background-color: #6c757d;
+    }
+
+    .RegisterModal1 h5 {
+      font-size: 1.25rem;
+      text-transform: none;
+    }
+
+    .RegisterModal1 p {
+      font-size: 1rem;
+      text-transform: none;
+    }
+  </style>
 </head>
 
 <body class="">
   <div class="position-sticky z-index-sticky top-0 d-flex justify-content-center align-items-center h-100 w-100">
     <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute ps-3 my-3 py-2 start-15 end-15 d-flex justify-content-center">
       <div class="p-2 ms-2">
-        <a class="navbar-brand font-weight-bolder ms-lg-0" href="../public/dashboard.php">
+        <a class="navbar-brand font-weight-bolder ms-lg-0" href="<?php echo BASE_URL; ?>">
           ConcertPulse Artist's
         </a>
       </div>
     </nav>
   </div>
+
   <main class="main-content mt-0">
     <section>
       <div class="page-header min-vh-75">
@@ -55,7 +154,7 @@
                       <div class="col-6">
                         <label for="tipo">Tipo</label>
                         <div class="mb-3">
-                          <input type="text" class="form-control" placeholder="Tipo" id="tipo" name="tipo" aria-describedby="tipo-addon">
+                          <input type="text" class="form-control" data-toggle="modal" data-target="#freelancerModal" placeholder="Tipo" id="tipo" name="tipo" aria-describedby="tipo-addon">
                         </div>
                       </div>
                       <div class="col-6">
@@ -67,28 +166,104 @@
                     </div>
 
                     <div class="row">
-                    <div class="col-6">
-
-                    <label for="name">Nome</label>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="Nome" id="name" name="name" aria-describedby="name-addon">
-                    </div>
-                    </div>
                       <div class="col-6">
-                    <label for="password">Palavra-passe</label>
-                    <div class="mb-3">
-                      <input type="password" class="form-control" placeholder="Password" id="password" aria-label="Password" name="password" aria-describedby="password-addon">
+
+                        <label for="name">Nome</label>
+                        <div class="mb-3">
+                          <input type="text" class="form-control" placeholder="Nome" id="name" name="name" aria-describedby="name-addon">
+                        </div>
                       </div>
+                      <div class="col-6">
+                        <label for="password">Palavra-passe</label>
+                        <div class="mb-3">
+                          <input type="password" class="form-control" placeholder="Password" id="password" aria-label="Password" name="password" aria-describedby="password-addon">
+                        </div>
                       </div>
-                    
+
                     </div>
                     <label for="localizacao">Localização</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" placeholder="Localização" id="localizacao" name="localizacao" aria-describedby="localizacao-addon">
+                      <input type="text" class="form-control" placeholder="Localização" id="autocomplete" name="localizacao" aria-describedby="localizacao-addon">
                     </div>
 
+
+                    <div class="RegisterModal1"></div>
                     <div class="text-center">
-                      <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Registar</button>
+                      <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Registar
+                      </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade RegisterModal1" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Que tipo és?</h4>
+                            <button type="button" class="btn-close text-dark" style="font-size: 2em; margin-top: -0.8em;" data-bs-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <button type="button" class="w-100 btn opcao btn-outline-secondary">
+                                  <div class="btn-content">
+                                    <img src="./img/promotor.png" alt="Promotor">
+                                    <h5 id="1">Promotor</h5>
+                                    <p>Organiza eventos musicais.</p>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-md-4">
+                                <button type="button" class="btn opcao w-100 btn-outline-secondary">
+                                  <div class="btn-content">
+                                    <img src="./img/artist.png" alt="Artista">
+                                    <h5>Artista</h5>
+                                    <p>Dj/Cantor/Banda…</p>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-md-4">
+                                <button type="button" class="w-100 opcao btn btn-outline-secondary">
+                                  <div class="btn-content">
+                                    <img src="./img/booking agent.png" alt="Agentes de Booking">
+                                    <h5>Agentes de Booking</h5>
+                                    <p>Negocia contratos e datas de shows para artistas.</p>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-md-6">
+                                <button type="button" class="btn opcao btn-outline-secondary">
+                                  <div class="btn-content">
+                                    <img src="./img/Booking Agency.png" alt="Agencia de Booking">
+                                    <h5>Agencia de Booking</h5>
+                                    <p>Representa artistas na negociação de oportunidades de trabalho.</p>
+                                  </div>
+                                </button>
+                              </div>
+                              <div class="col-md-6">
+                                <button type="button" class="btn opcao w-100 btn-outline-secondary">
+                                  <div class="btn-content">
+                                    <img src="./img/festival.png" alt="Festival">
+                                    <h5>Evento</h5>
+                                    <p>Evento com apresentações artísticas e musicais.</p>
+                                  </div>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" data-dismiss="modal">Continuar</button>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
                     </>
                 </div>

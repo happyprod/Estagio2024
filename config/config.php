@@ -3,7 +3,9 @@
 define('APP_ENV', 'development');
 
 // URL base da aplicação
-define('BASE_URL', '../public/index');
+define('BASE_URL', '../public/dashboard.php');
+
+define('BASE_LOGO', '../public/img/logo.png');
 
 // Constantes globais
 define('APP_NAME', 'Concert Pulse');
