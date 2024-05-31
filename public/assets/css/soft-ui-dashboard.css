@@ -27566,6 +27566,110 @@ gmp-map:not(:defined) {
 
 
 
+.RegisterModal1 .modal-content {
+  text-align: center;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.RegisterModal1 .modal-body .btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  text-align: center;
+  height: 350px;
+  /* Altura dos botões */
+  padding: 20px;
+  /* Adiciona um pouco de margem interna */
+}
+
+.RegisterModal1 img {
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.RegisterModal1 .btn-selected {
+  background-color: #1E90FF;
+  /* Reduzindo a opacidade do azul */
+  border: none;
+  /* Mudando a cor da borda para #1E90FF */
+  color: #fff;
+  box-shadow: 0px 5px 15px #1E90FF;
+  /* Adicionando uma sombra com a cor #1E90FF */
+}
+
+.RegisterModal1 .btn-selected h5 {
+  color: white;
+}
+
+.RegisterModal1 .btn-selected img {
+  filter: invert(100%);
+}
+
+@media (min-width: 576px) {
+  .RegisterModal1 .modal-body .btn {
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  .RegisterModal1 .modal-body .btn {
+    height: 270px;
+  }
+}
+
+@media (min-width: 992px) {
+  .RegisterModal1 .modal-body .btn {
+    height: 250px;
+  }
+}
+
+.RegisterModal1 .btn-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterModal1 .opcao:hover img {
+  filter: invert(100%);
+}
+
+.RegisterModal1 .opcao:hover h5 {
+  color: white;
+}
+
+.RegisterModal1 .opcao:hover p {
+  color: white;
+}
+
+.RegisterModal1 .opcao:hover {
+  background-color: #6c757d;
+}
+
+.RegisterModal1 .opcao.no-hover:hover {
+  background-color: #1E90FF;
+  /* Reduzindo a opacidade do azul */
+  border: none;
+  /* Mudando a cor da borda para #1E90FF */
+  color: #fff;
+  box-shadow: 0px 5px 15px #1E90FF;
+  /* Adicionando uma sombra com a cor #1E90FF */
+}
+
+.RegisterModal1 h5 {
+  font-size: 1.25rem;
+  text-transform: none;
+}
+
+.RegisterModal1 p {
+  font-size: 1rem;
+  text-transform: none;
+}
+
 
 /*
 Or just:

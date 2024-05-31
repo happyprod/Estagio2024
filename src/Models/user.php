@@ -39,54 +39,20 @@ class User
 }
 */
 
-
+// Arquivo: app/Models/User.php
 namespace MyApp\Models;
 
+use App\Helpers\Database;
+
 class User {
-    private $name;
-    private $email;
-    private $password;
+    public function emailExiste($email) {
+        $db = Database::connect();
 
-    public function __construct($name, $email, $password) {
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
+        $query = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE email = :email");
+        $query->bindParam(':email', $email);
+        $query->execute();
+    
+        return $query->fetchColumn() > 0;
     }
-
-    // Métodos para acessar e manipular os dados do usuário, como getters e setters
-
-    public function save() {
-        // Conexão com o banco de dados (substitua as credenciais e o nome do banco de dados conforme necessário)
-        $mysqli = new mysqli("localhost", "usuario", "senha", "nome_do_banco");
-    
-        // Verifica se houve erro na conexão
-        if ($mysqli->connect_error) {
-            die("Erro na conexão com o banco de dados: " . $mysqli->connect_error);
-        }
-    
-        // Prepara a consulta SQL
-        $query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $statement = $mysqli->prepare($query);
-    
-        // Verifica se a preparação da consulta teve êxito
-        if (!$statement) {
-            die("Erro na preparação da consulta: " . $mysqli->error);
-        }
-    
-        // Associa os parâmetros à consulta
-        $statement->bind_param("sss", $this->name, $this->email, $this->password);
-    
-        // Executa a consulta
-        $result = $statement->execute();
-    
-        // Verifica se a execução da consulta teve êxito
-        if (!$result) {
-            die("Erro na execução da consulta: " . $statement->error);
-        }
-    
-        // Fecha a declaração e a conexão
-        $statement->close();
-        $mysqli->close();
-    }
-    
 }
+?>
