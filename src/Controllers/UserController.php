@@ -8,5 +8,12 @@ editProfile(): Exibe e processa o formulário de edição de perfil.
 friends(): Exibe a lista de amigos ou seguidores de um usuário.
 */
 
+namespace App\Controllers;
 
-?>
+class UserController
+{
+    public function show($userId) {
+        echo "Página de Perfil do Usuário: $userId";
+    }
+            
+}

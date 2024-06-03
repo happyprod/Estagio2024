@@ -11,4 +11,16 @@ about(): Mostra a página "Sobre nós".
 contact(): Exibe o formulário de contato.
 Outros métodos para exibir outras páginas informativas.
 */
-?>
+namespace App\Controllers;
+
+class PageController
+{
+    public function show($profileId)
+    {
+        // Remove a extensão .php, se presente, do número do perfil
+        $profileId = str_replace('.php', '', $profileId);
+
+        // Agora você pode usar $profileId normalmente, por exemplo:
+        echo "Página de Perfil do Usuário: $profileId";
+    }
+}

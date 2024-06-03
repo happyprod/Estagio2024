@@ -3,10 +3,13 @@
 require_once __DIR__ . '/../vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
 
 use App\Controllers\AuthController;
+use App\Controllers\HomeController;
+use App\Controllers\UserController;
 
 $routes = [
-    '/' => 'HomeController@index',
-    '/profile/(\d+)' => 'PageController@show',
+    '/home' => [HomeController::class, 'showHome'],
+    '/perfil' => [UserController::class, 'show'],
+    '/utilizadores/(\d+\.php)' => [UserController::class, 'show'],
     '/contact' => 'PageController@contact',
     '/registerartists' => [AuthController::class, 'showRegisterForm'],
     '/loginartists' => [AuthController::class, 'showLoginForm'],
@@ -14,13 +17,14 @@ $routes = [
     '/register' => 'AuthController@register',
 ];
 
+
+
 function route($url, $routes) {
     foreach ($routes as $route => $controllerAction) {
         $routePattern = "@^" . preg_replace('/\\\d\+/', '\d+', $route) . "$@";
         if (preg_match($routePattern, $url, $matches)) {
             if (is_string($controllerAction)) {
                 list($controller, $method) = explode('@', $controllerAction);
-                require_once "../src/Controllers/{$controller}.php";
                 $controllerInstance = new $controller();
             } else {
                 list($controller, $method) = $controllerAction;
@@ -34,6 +38,8 @@ function route($url, $routes) {
     // Página 404
     echo "404 - Página não encontrada";
 }
+
+
 
 // Exemplo de uso:
 // route('/loginartists', $routes);
