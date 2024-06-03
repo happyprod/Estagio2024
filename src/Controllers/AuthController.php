@@ -40,20 +40,37 @@ class AuthController
     }
 
 
-    public function verificaEmail($email) {
+    public function verificaEmail($email)
+    {
         $User = new User();
-    
+
         if ($User->emailExiste($_POST['email'])) {
-          // Email já existe na base de dados
-          // Exibir mensagem de erro
-          echo json_encode(array('error' => true));
+            // Email já existe na base de dados
+            // Exibir mensagem de erro
+            echo json_encode(array('error' => true));
         } else {
-          // Email não existe na base de dados
-          // Continuar com o registro
-          echo json_encode(array('error' => false));
+            // Email não existe na base de dados
+            // Continuar com o registro
+            echo json_encode(array('error' => false));
         }
     }
-    
+
+    public function verificaIdentity($identity)
+    {
+        $User = new User();
+
+        if ($User->identityExiste($_POST['identity'])) {
+            // Email já existe na base de dados
+            // Exibir mensagem de erro
+            echo json_encode(array('error' => true));
+        } else {
+            // Email não existe na base de dados
+            // Continuar com o registro
+            echo json_encode(array('error' => false));
+        }
+    }
+
+
     public function register($email, $senha, $identity, $location, $name, $selectedType)
     {
         // Conectar ao banco de dados usando PDO
@@ -73,45 +90,62 @@ class AuthController
                 // Verifica se o email já está registrado
                 if ($stmt->rowCount() > 0) {
                     // Email já está registrado
-                    echo json_encode(['success' => false, 'message' => 'Email já registrado.']);
+                    echo json_encode(['success' => false, 'message' => 'Email já em uso.']);
                     return;
                 }
 
-                // Consulta SQL para inserir um novo usuário
-                $query = "INSERT INTO accounts (email, password, name, id_name, location, identity) VALUES (:email, :senha, :name, :id_name, :location, :selectedType)";
+
+                $query = "SELECT id_name FROM accounts WHERE id_name = :id_name";
                 $stmt = $db->prepare($query);
 
-                if ($stmt) {
-                    // Vincula os parâmetros
-                    $stmt->bindParam(":email", $email);
-                    $stmt->bindParam(":senha", $senha); // Deveria usar hash de senha, ex: password_hash($senha, PASSWORD_BCRYPT)
-                    $stmt->bindParam(":name", $name);
-                    $stmt->bindParam(":id_name", $identity);
-                    $stmt->bindParam(":location", $location);
-                    $stmt->bindParam(":selectedType", $selectedType);
 
-                    // Executa a consulta
-                    if ($stmt->execute()) {
-                        // Registro bem-sucedido
-                        echo json_encode(['success' => true, 'message' => 'Registro realizado com sucesso.']);
+                if ($stmt) {
+                    $stmt->bindParam(":id_name", $identity);
+                    $stmt->execute();
+
+                    // Verifica se o email já está registrado
+                    if ($stmt->rowCount() > 0) {
+                        // Email já está registrado
+                        echo json_encode(['success' => false, 'message' => 'Indentificação já em uso.']);
+                        return;
+                    }
+
+
+                    // Consulta SQL para inserir um novo usuário
+                    $query = "INSERT INTO accounts (email, password, name, id_name, location, identity) VALUES (:email, :senha, :name, :id_name, :location, :selectedType)";
+                    $stmt = $db->prepare($query);
+
+                    if ($stmt) {
+                        // Vincula os parâmetros
+                        $stmt->bindParam(":email", $email);
+                        $stmt->bindParam(":senha", $senha); // Deveria usar hash de senha, ex: password_hash($senha, PASSWORD_BCRYPT)
+                        $stmt->bindParam(":name", $name);
+                        $stmt->bindParam(":id_name", $identity);
+                        $stmt->bindParam(":location", $location);
+                        $stmt->bindParam(":selectedType", $selectedType);
+
+                        // Executa a consulta
+                        if ($stmt->execute()) {
+                            // Registro bem-sucedido
+                            echo json_encode(['success' => true, 'message' => 'Registro realizado com sucesso.']);
+                        } else {
+                            // Falha ao inserir o usuário
+                            echo json_encode(['success' => false, 'message' => 'Erro ao registrar usuário.']);
+                        }
                     } else {
-                        // Falha ao inserir o usuário
-                        echo json_encode(['success' => false, 'message' => 'Erro ao registrar usuário.']);
+                        // Erro ao preparar a consulta de inserção
+                        echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de inserção.']);
                     }
                 } else {
-                    // Erro ao preparar a consulta de inserção
-                    echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de inserção.']);
+                    // Erro ao preparar a consulta de verificação de email
+                    echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de verificação de email.']);
                 }
             } else {
-                // Erro ao preparar a consulta de verificação de email
-                echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de verificação de email.']);
+                // Dados do formulário não fornecidos
+                echo json_encode(['success' => false, 'message' => 'Dados do formulário não fornecidos.']);
             }
-        } else {
-            // Dados do formulário não fornecidos
-            echo json_encode(['success' => false, 'message' => 'Dados do formulário não fornecidos.']);
         }
     }
-
 
     public function login($email, $senha)
     {

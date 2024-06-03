@@ -7,7 +7,6 @@ require_once './Helpers/init.php';
 
 // Tenta estabelecer a conexão com o banco de dados usando o PDO
 try {
-
     // Conectar ao banco de dados usando PDO
     $db = Database::connect();
 

@@ -44,15 +44,27 @@ namespace MyApp\Models;
 
 use App\Helpers\Database;
 
-class User {
-    public function emailExiste($email) {
+class User
+{
+    public function emailExiste($email)
+    {
         $db = Database::connect();
 
-        $query = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE email = :email");
+        $query = $db->prepare("SELECT COUNT(*) FROM accounts WHERE email = :email");
         $query->bindParam(':email', $email);
         $query->execute();
-    
+
+        return $query->fetchColumn() > 0;
+    }
+
+    public function identityExiste($identity)
+    {
+        $db = Database::connect();
+
+        $query = $db->prepare("SELECT COUNT(*) FROM accounts WHERE id_name = :id_name");
+        $query->bindParam(':id_name', $identity);
+        $query->execute();
+
         return $query->fetchColumn() > 0;
     }
 }
-?>

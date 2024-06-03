@@ -1,5 +1,5 @@
 <?php
-// verifica_email.php
+// verifica_identity.php
 
 header('Content-Type: application/json');
 
@@ -11,8 +11,8 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $identity = $_POST['identity'];
-    $authController = new AuthController();
-    $result = $authController->verificaEmail($identity); 
+    $authController = new AuthController(); // Supondo que AuthController seja uma classe
+    $result = $authController->verificaIdentity($identity); // Supondo que verificaEmail() retorna true se o email existe
     if ($result) {
         echo json_encode(array('status' => 'existe'));
     } else {

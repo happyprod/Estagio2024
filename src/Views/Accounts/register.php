@@ -59,10 +59,11 @@
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">@</span>
-                            <input type="text" class="form-control" required id="identity" placeholder="Nome de Utilizador" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" required id="identity" name="identity" placeholder="Nome de Utilizador" aria-label="Username" aria-describedby="basic-addon1">
                           </div>
                         </div>
                       </div>
+
                       <div class="col-6">
                         <label for="email">Email</label>
                         <div class="mb-3">
@@ -70,7 +71,6 @@
                         </div>
                       </div>
                     </div>
-
                     <div class="row">
                       <div class="col-6">
                         <label for="name">Nome</label>
@@ -169,8 +169,8 @@
                             </div>
                           </div>
                         </div>
-                        </div>
-                        </div>
+                      </div>
+                    </div>
                   </form>
                 </div>
 
