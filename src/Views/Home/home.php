@@ -555,7 +555,7 @@
                                 echo '
                 
                 <button type="button" class="btn-tooltip border-0 ps-0" id="tooltipButton' . $i . '"
-                onclick="location.href = \'./utilizador/' . $user_id . '.php\';"
+                onclick="location.href = \'./utilizadores/' . $user_id . '.php\';"
                 style="background-color: rgba(0, 0, 0, 0); color: #495057; font-family: Arial, Helvetica, sans-serif; margin-left: -1.4em">
                 ' . $name . '
               </button>';
@@ -565,7 +565,7 @@
               <div class="custom-tooltip' . $i . ' text-sm text-center" id="customTooltip' . $i . '">
                 <img src="' . $image_url . '" class="img-fluid border-radius-lg mt-2 mb-1"
                   style="width: 50px; height: 50px; border-radius: 50%;">
-                <a href="./utilizador/' . $user_id . '.php">
+                <a href="./utilizadores/' . $user_id . '.php">
                   ';
 
                             if ($verified == "true") {
@@ -661,7 +661,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                            <img class="w-100 position-relative z-index-2 pt-4" src="./img/logo.png" alt="rocket">
+                            <img class="w-100 position-relative z-index-2 pt-4" src="http://localhost/redes/public/img/logo.png" alt="rocket">
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ $(document).ready(function() {
       success: function(response) {
         if (response.success) {
           // Redirecionar para a página de dashboard em caso de sucesso
-          window.location.href = 'dashboard.php';
+          window.location.href = 'home.php';
         } else {
           // Exibir mensagem de erro usando Toastr
           erro(response.message);

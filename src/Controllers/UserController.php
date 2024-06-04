@@ -13,7 +13,16 @@ namespace App\Controllers;
 class UserController
 {
     public function show($userId) {
-        echo "Página de Perfil do Usuário: $userId";
+
+        require __DIR__ . '/../Views/Users/Perfil.php';
+
     }
-            
+
+
+    public function showEditar()
+    {
+        require __DIR__ . '/../Views/Users/editarPerfil.php';
+    }
+
+
 }

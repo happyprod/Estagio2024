@@ -1,8 +1,8 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="./home.php">
-            <img src="./img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
+        <a class="navbar-brand m-0" href="http://localhost/redes/public/home.php">
+            <img src="http://localhost/redes/public/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Concert Pulse Artist's</span>
         </a>
     </div>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse w-auto h-80 " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="./home.php">
+                <a class="nav-link active" href="<?php echo BASE_URL; ?>">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -32,7 +32,20 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="./Perfil.php">
+                <a class="nav-link <?php
+                                    $filePath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+                                    // Obter o nome da última pasta no caminho do diretório
+                                    $lastDirectoryName = basename($filePath);
+
+                                    // Remover extensão .php
+                                    $lastDirectoryName = rtrim($lastDirectoryName, ".php");
+
+                                    if ($lastDirectoryName == $_SESSION['user_id']) {
+                                        echo 'active';
+                                    }
+
+                                    ?>" href="http://localhost/redes/public/utilizadores/<?php echo $_SESSION['user_id']; ?>.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>

@@ -5,18 +5,20 @@ use App\Helpers\Database;
 
 $db = Database::connect();
 
-// Caminho completo para o arquivo atual
-$filePath = __DIR__; // Use __DIR__ para obter o diretório atual do script
+
+$filePath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
 
 // Obter o nome da última pasta no caminho do diretório
 $lastDirectoryName = basename($filePath);
 
+// Remover extensão .php
+$lastDirectoryName = rtrim($lastDirectoryName, ".php");
+
+
 // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
 $stmt = $db->prepare('SELECT * FROM accounts WHERE url = ?');
 
-
-
-echo $lastDirectoryName;
 // Executa a consulta SQL, substituindo o marcador de posição '?' pelo valor de $lastDirectoryName
 $stmt->execute([$lastDirectoryName]);
 
@@ -73,8 +75,8 @@ if ($row_infos) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://localhost/redes/public/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="http://localhost/redes/public/assets/img/favicon.png">
     <title>
         ConcertPulse Artist
     </title>
@@ -82,15 +84,15 @@ if ($row_infos) {
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
     <!-- Nucleo Icons -->
-    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../public/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+    <link id="pagestyle" href="../../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
@@ -99,48 +101,48 @@ if ($row_infos) {
 
 <body class="g-sidenav-show bg-gray-100">
 
-<?php include ('../Layouts/Menu.php'); ?>
+    <?php
+    include('../src/Views/Layouts/Menu.php'); ?>
 
-<div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 py-3">
+    <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 py-3">
 
         <!-- End Navbar -->
-        <div class="container-fluid mt-5 py-1">
+        <div class="container-fluid">
             <div class="page-header min-height-300 border-radius-xl mt-4" <?php
-            if ($fotodecapa == null) {
-                echo 'style="background-image: url(\'../../assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
-            } else {
-                echo 'style="background-image: url(\'../../utilizador/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%; "';
-            }
-            ?>>
+                                                                            if ($fotodecapa == null) {
+                                                                                echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
+                                                                            } else {
+                                                                                echo 'style="background-image: url(\'http://localhost/redes/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%; "';
+                                                                            }
+                                                                            ?>>
             </div>
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
                 <div class="row gx-4">
                     <div class="col-auto">
-                        <div class="avatar avatar-xl position-relative">
+                        <div class="position-relative">
                             <img <?php
 
 
-                            // Obtém a extensão do arquivo em letras minúsculas
-                            $extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
+                                    // Obtém a extensão do arquivo em letras minúsculas
+                                    $extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
 
-                            // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
-                            $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
-                            
-                            // Verifica se a extensão está na lista de extensões permitidas
-                            if (in_array($extension, $allowed_extensions)) {
-                                $google_image = false;
-                            } else {
-                                $google_image = true;
-                            }
+                                    // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
+                                    $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
+
+                                    // Verifica se a extensão está na lista de extensões permitidas
+                                    if (in_array($extension, $allowed_extensions)) {
+                                        $google_image = false;
+                                    } else {
+                                        $google_image = true;
+                                    }
 
 
-                            if ($google_image == false) {
-                                echo 'src="../../utilizador/' . $id . '/' . $fotodeperfil . '"';
-                            } else {
-                                echo 'src="' . $fotodeperfil . '"';
-                            }
-                            ?>
-                                alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                    if ($google_image == false) {
+                                        echo 'src="http://localhost/redes/public/users/' . $id . '/' . $fotodeperfil . '"';
+                                    } else {
+                                        echo 'src="' . $fotodeperfil . '"';
+                                    }
+                                    ?> alt="profile_image" style="height: 80px; width: 80px;" class="border-radius-lg shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
@@ -164,13 +166,12 @@ if ($row_infos) {
 
                                 if ($session_id == $id) {
                                     echo '
-                                    <a href="./editarperfil.php">
+                                    <a href="http://localhost/redes/public/editarPerfil.php">
                                        <button type="button" class="btn btn-primary btn-sm me-4" style="margin-top: 1em;" >
                                        <i class="fas fa-user-edit text-sm me-2" data-bs-toggle="tooltip"></i>
                                        Editar Perfil</button>
                                     </a>
                                     ';
-
                                 } else {
                                     echo '<li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1" href="javascript:;" role="tab" aria-selected="false">
@@ -213,115 +214,30 @@ if ($row_infos) {
         <div class="container-fluid py-4 perfil" id="perfil">
 
 
-        <?php include ('PerfilEstatisticas.php'); ?>
 
+            <?php include('PerfilEstatisticas.php'); ?>
 
-            <?php
-
-            $facebook_url = $facebook;
-
-            // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-            if (!preg_match("~^(?:f|ht)tps?://~i", $facebook_url)) {
-                $facebook_url = 'http://' . $facebook_url;
-            }
-
-
-            $instagram = $row_infos["instagram"];
-
-            $instagram_url = $instagram;
-
-            // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-            if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
-                $instagram_url = 'http://' . $instagram_url;
-            }
-
-
-
-            $twitter = $row_infos["twitter"];
-
-            $twitter_url = $twitter;
-
-            // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-            if (!preg_match("~^(?:f|ht)tps?://~i", $twitter_url)) {
-                $twitter_url = 'http://' . $twitter_url;
-            }
             
+            <?php
+            include('../src/Views/Users/PerfilSobre.php');
+            include('../src/Views/Users/PerfilAvaliacoes.php');
+            include('../src/Views/Users/PerfilProjetos.php');
             ?>
 
-            <?php include ('PerfilSobre.php'); ?>
 
-            <?php include ('PerfilAvaliacoes.php'); ?>
-
-            <?php include ('PerfilProjetos.php'); ?>
-            
         </div>
     </div>
-    </div>
-    </div>
-    <div class="fixed-plugin">
-        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-            <i class="fa fa-cog py-2"> </i>
-        </a>
-        <div class="card shadow-lg ">
-            <div class="card-header pb-0 pt-3 ">
-                <div class="float-start">
-                    <h5 class="mt-3 mb-0">Configurations</h5>
-                    <p>See your dashboard options</p>
-                </div>
-                <div class="float-end mt-4">
-                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
-                <!-- End Toggle Button -->
-            </div>
-            <hr class="horizontal dark my-1">
-            <div class="card-body pt-sm-3 pt-0">
-                <!-- Sidebar Backgrounds -->
-                <div>
-                    <h6 class="mb-0">Sidebar Colors</h6>
-                </div>
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors my-2 text-start">
-                        <span class="badge filter bg-gradient-primary active" data-color="primary"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-dark" data-color="dark"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-info" data-color="info"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-success" data-color="success"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-warning" data-color="warning"
-                            onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-danger" data-color="danger"
-                            onclick="sidebarColor(this)"></span>
-                    </div>
-                </a>
-                <!-- Sidenav Type -->
-                <div class="mt-4">
-                    <h6 class="mb-0">Sidenav Type</h6>
-                    <p class="text-sm">Choose between 2 different sidenav types.</p>
-                </div>
-                <div class="d-flex">
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-transparent"
-                        onclick="sidebarType(this)">Transparent</button>
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white"
-                        onclick="sidebarType(this)">White</button>
-                </div>
-                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.
-                </p>
 
-                <hr class="horizontal dark my-sm-4">
-                <div class="w-100 text-center">
-                </div>
-            </div>
-        </div>
+
     </div>
+    </div>
+
+
     <!--   Core JS Files   -->
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap.min.js"></script>
-    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../../public/assets/js/core/popper.min.js"></script>
+    <script src="../../public/assets/js/core/bootstrap.min.js"></script>
+    <script src="../../public/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../public/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -332,12 +248,13 @@ if ($row_infos) {
         }
     </script>
 
-    <script src="../../assets/js/perfil.js"></script>
+
+    <script src="../../public/assets/js/perfil.js"></script>
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+    <script src="../../public/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
 
 </body>
 
