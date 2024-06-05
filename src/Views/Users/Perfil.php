@@ -75,8 +75,8 @@ if ($row_infos) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="http://localhost/redes/public/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="http://localhost/redes/public/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../public/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../public/img/logo.png">
     <title>
         ConcertPulse Artist
     </title>
@@ -87,13 +87,27 @@ if ($row_infos) {
     <link href="../../public/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Incluir Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  
     <!-- CSS Files -->
     <link id="pagestyle" href="../../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 
+    <script src="../../public/assets/js/perfilLoad.js"></script>
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -255,6 +269,16 @@ if ($row_infos) {
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../public/assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
+    <script src="../public/assets/js/plugins/chartjs.min.js"></script>
+
+
 
 </body>
 

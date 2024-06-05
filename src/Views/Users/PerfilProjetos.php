@@ -72,11 +72,16 @@
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="w-100">
                                                     <button type="button"
-                                                        class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
+                                                        class="btn bg-gradient-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
                                                         data-bs-toggle="modal" data-bs-target="#modal-default' . $count . '">Ver
                                                         Mais</button>
 
-                                                        
+                                                        ';
+
+                        include('../src/Views/Users/PerfilProjetosEditar.php');
+
+                        echo '
+                                                    
                                                     <div class="modal fade" id="modal-default' . $count . '" tabindex="-1"
                                                     role="dialog" aria-labelledby="modal-default' . $count . '"
                                                     aria-hidden="true">

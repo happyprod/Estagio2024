@@ -6,6 +6,7 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 
+
 $routes = [
     '/home' => [HomeController::class, 'showHome'],
     '/perfil' => [UserController::class, 'show'],

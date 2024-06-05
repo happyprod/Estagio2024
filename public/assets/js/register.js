@@ -24,7 +24,7 @@ $(document).ready(function () {
           success: function (response) {
               // Tratamento da resposta do servidor
               if (response.success) {
-                  window.location.href = 'dashboard.php';
+                  window.location.href = 'home.php';
               } else {
                   // Mostrar mensagem de erro usando Toastr
                   erro(response.message);
