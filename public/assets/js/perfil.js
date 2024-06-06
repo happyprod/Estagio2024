@@ -92,7 +92,6 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 }
 
 
-
 let map; // Variável global para armazenar o objeto do mapa
 
 function initMap() {
@@ -113,7 +112,6 @@ function initMap() {
         exibirMapa(place.geometry.location);
     });
 }
-
 
 
 function exibirMapa(location) {
@@ -147,9 +145,9 @@ function loadGoogleMapsScript() {
 }
 
 
+
 // Carregar a API do Google Maps quando a página for totalmente carregada
 window.onload = loadGoogleMapsScript;
-
 
 
 function alteradocomsucesso() {
@@ -323,11 +321,11 @@ $(document).ready(function () {
 });
 
 
-function updateData(var1, var2) {
+function updateData(var1, var2, var3) {
     $.ajax({
         url: '../../src/Handlers/getEditarImagens.php',
         method: 'GET',
-        data: { var1: var1, var2: var2 }, // Passando variáveis na requisição
+        data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
         success: function(data){
             $('#imageContainer' + var1).html(data);
 
@@ -337,3 +335,4 @@ function updateData(var1, var2) {
         }
     });
 }
+

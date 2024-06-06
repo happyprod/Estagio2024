@@ -14,10 +14,11 @@ $model = new User($db);
 $controller = new UserController($model);
 
 // Verifica se as variáveis foram passadas na requisição
-if(isset($_GET['var1']) && isset($_GET['var2'])) {
+if(isset($_GET['var1']) && isset($_GET['var2']) && isset($_GET['var3'])) {
     // Recupera os valores das variáveis
     $count = $_GET['var1'];
     $id = $_GET['var2'];
+    $p_id = $_GET['var3'];
 } else {
     // Se as variáveis não foram passadas, retorne um erro ou uma mensagem adequada
     echo "Erro: Variáveis não foram passadas na requisição.";
@@ -25,7 +26,7 @@ if(isset($_GET['var1']) && isset($_GET['var2'])) {
 
 
 // Obtém os dados
-$data = $controller->getEditarImagens($count);
+$data = $controller->getEditarImagens($count, $p_id);
 
 
 // Gera o HTML

@@ -20,7 +20,7 @@ namespace App\Controllers;
 
 use App\Helpers\Database;
 
-use MyApp\Models\User;
+use App\Models\User;
 
 
 class AuthController
@@ -38,38 +38,6 @@ class AuthController
 
         require __DIR__ . '/../Views/Accounts/register.php';
     }
-
-
-    public function verificaEmail($email)
-    {
-        $User = new User();
-
-        if ($User->emailExiste($_POST['email'])) {
-            // Email já existe na base de dados
-            // Exibir mensagem de erro
-            echo json_encode(array('error' => true));
-        } else {
-            // Email não existe na base de dados
-            // Continuar com o registro
-            echo json_encode(array('error' => false));
-        }
-    }
-
-    public function verificaIdentity($identity)
-    {
-        $User = new User();
-
-        if ($User->identityExiste($_POST['identity'])) {
-            // Email já existe na base de dados
-            // Exibir mensagem de erro
-            echo json_encode(array('error' => true));
-        } else {
-            // Email não existe na base de dados
-            // Continuar com o registro
-            echo json_encode(array('error' => false));
-        }
-    }
-
 
     public function register($email, $senha, $identity, $location, $name, $selectedType)
     {

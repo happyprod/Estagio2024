@@ -22,7 +22,7 @@ echo '
                     <div class="row">
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" id="update-button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="alterarImageContainer(imageContainer' . $count . '); updateData(' . $count . ', ' . $id . ')" data-bs-target="#alterarimagens' . $count . '">
+                            <button type="button" id="update-button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="alterarImageContainer(imageContainer' . $count . '); updateData(' . $count . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#alterarimagens' . $count . '">
                                 Alterar Imagens
                             </button>
                         </div>
@@ -374,7 +374,7 @@ echo '
                 </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
+                <button type="button" onclick="verificarOArray()" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
                 <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1" onclick="guardarimagens()">Confirmar</button>
             </div>
         </div>

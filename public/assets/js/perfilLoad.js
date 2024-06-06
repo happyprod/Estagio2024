@@ -20,6 +20,17 @@ $(function () {
 });
 
 
+function verificarOArray() {
+    $(".sortable-list").each(function (index) {
+        var order = $(this).sortable('toArray', {
+            attribute: 'data-id'
+        });
+        console.log("Lista " + (index + 1) + ":", order);
+    });
+}
+
+
+
 // Função para remover um nome da lista
 function removerNome(button, event) {
     console.log('Função removerNome foi chamada.');
@@ -511,3 +522,5 @@ function setupDeleteLinks() {
         });
     });
 }
+
+

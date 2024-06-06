@@ -20,7 +20,7 @@ class UserController
         require __DIR__ . '/../Views/Users/editarPerfil.php';
     }
 
-    public function getEditarImagens($count) {
-        return $this->model->getEditarImagens($count);
+    public function getEditarImagens($count, $p_id) {
+        return $this->model->getEditarImagens($count, $p_id);
     }
 }

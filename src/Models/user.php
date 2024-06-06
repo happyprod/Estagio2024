@@ -14,10 +14,10 @@ class User
     }
 
 
-    public function getEditarImagens($count)
+    public function getEditarImagens($count, $p_id)
     {
         $stmt = $this->db->prepare("SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem");
-        $stmt->execute([$count]);  // Bind the id parameter
+        $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         
         return $result;
