@@ -45,7 +45,6 @@ function alterarperfilon() {
 
 }
 
-
 function mostrarPerfil() {
     var perfilDiv = document.getElementById('perfil');
     if (perfilDiv) {
@@ -81,6 +80,8 @@ function mostrarTextoCompleto() {
     btnVerMais.style.display = 'none';
 }
 
+
+
 // Verificar se o texto na div ultrapassa a altura máxima
 var divTexto = document.getElementById('textoDiv');
 var btnVerMais = document.getElementById('verMaisBtn');
@@ -92,19 +93,16 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 
 
 
-
-
-
 let map; // Variável global para armazenar o objeto do mapa
 
 function initMap() {
     const autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('endereco'), {
-            types: ['geocode']
-        }
+        types: ['geocode']
+    }
     );
 
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function () {
         const place = autocomplete.getPlace();
         if (!place.geometry) {
             console.log("Endereço não encontrado.");
@@ -115,6 +113,8 @@ function initMap() {
         exibirMapa(place.geometry.location);
     });
 }
+
+
 
 function exibirMapa(location) {
     if (!map) {
@@ -137,6 +137,7 @@ function exibirMapa(location) {
     });
 }
 
+
 function loadGoogleMapsScript() {
     const script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyARtHqWhhONSQVfBMlIV4SMerzDmSTDf4o&libraries=places&callback=initMap';
@@ -144,6 +145,7 @@ function loadGoogleMapsScript() {
     script.async = true;
     document.head.appendChild(script);
 }
+
 
 // Carregar a API do Google Maps quando a página for totalmente carregada
 window.onload = loadGoogleMapsScript;
@@ -156,13 +158,12 @@ function alteradocomsucesso() {
     toastr.success('Alterado com sucesso');
 }
 
+
 function erro(mensagem) {
     toastr.options.timeOut = 10000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
     toastr.error(mensagem);
 }
-
-
 
 
 function guardarimagens() {
@@ -185,133 +186,8 @@ function guardarprivacidade() {
 
 
 
-
-
-var imageContainer = "ola";
-var id_entrada;
-
-// Adiciona o ouvinte de evento quando o documento HTML é carregado
-document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('fileInput');
-    fileInput.addEventListener('change', handleFileInputChange);
-});
-
-function handleFileInputChange() {
-    const files = this.files;
-    if (files.length > 0) {
-        let lastDataId = 0;
-        const existingDivs = document.querySelectorAll(`#${id_entrada} div[data-id]`);
-
-        existingDivs.forEach(div => {
-            const dataId = parseInt(div.getAttribute('data-id'));
-            if (!isNaN(dataId) && dataId > lastDataId) {
-                lastDataId = dataId;
-            }
-        });
-
-        Array.from(files).forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imageUrl = e.target.result;
-                const newId = lastDataId + index + 1; // Incrementar o último data-id
-                displayImageBeforeFixedItem(imageUrl, newId);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-}
-
-function alterarImageContainer(novothis) {
-    const fileInput = document.getElementById('fileInput');
-    imageContainer = document.getElementById(novothis.id);
-    console.log('mudou: ', imageContainer);
-
-    const fixedItem = document.getElementById('fixedItem');
-
-    console.log('Image Container: ', imageContainer);
-    console.log("Novo This: ", novothis)
-    console.log("Novo This id: ", novothis.id);
-
-    id_entrada = imageContainer.id;
-    console.log("fffffffffffff", id_entrada);
-
-}
-
-function displayImageBeforeFixedItem(imageUrl, newId) {
-    const div = document.createElement('div');
-    div.classList.add('col-4', 'mb-3', 'ui-sortable-handle');
-    div.setAttribute('data-id', newId);
-    div.innerHTML = `
-<a class="delete-image" data-id="${newId}">
-    <i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12.5em;">
-        <svg style="width: 2em; height: 2em; color: white;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 32 32">
-            <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" fill="rgb(255, 255, 255)"></path>
-        </svg>
-    </i>
-</a>
-<img src="${imageUrl}" class="ui-state-default d-block rounded" style="width:100%; height: 100%;" alt="...">
-`;
-
-    document.getElementById(id_entrada).prepend(div);
-
-
-    // Add delete event
-    div.querySelector('.delete-image').addEventListener('click', function(e) {
-        e.preventDefault();
-        const dataId = this.getAttribute('data-id');
-        const elementToDelete = document.querySelector(`[data-id="${dataId}"]`);
-        if (elementToDelete) {
-            elementToDelete.remove();
-        }
-    });
-}
-
-
-
-
-
-
-// Chamar a função setupDeleteLinks assim que o documento HTML estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
-    setupDeleteLinks();
-});
-
-
-
-function setupDeleteLinks() {
-    // Selecionar todos os elementos com a classe delete-image
-    const deleteLinks = document.querySelectorAll('.delete-image');
-    console.log(deleteLinks);
-
-    // Iterar sobre cada link de exclusão e adicionar o manipulador de evento
-    deleteLinks.forEach(deleteLink => {
-        deleteLink.addEventListener('click', function(e) {
-            e.preventDefault(); // Evitar o comportamento padrão do link
-
-            const dataId = this.getAttribute('data-id'); // Obter o atributo data-id do link clicado
-            console.log(dataId);
-
-            console.log("asdasdasdasdasdas", id_entrada);
-            const divToDelete = document.querySelector(`#${id_entrada} [data-id="${dataId}"]`); // Encontrar a div correspondente
-            console.log(divToDelete);
-
-            if (divToDelete) {
-                divToDelete.remove(); // Remover a div correspondente se encontrada
-                console.log(`Elemento com data-id ${dataId} removido`);
-                dataId = 0;
-            } else {
-                console.log(`Elemento com data-id ${dataId} não encontrado`);
-            }
-        });
-    });
-}
-
-
-
-
-
-$(document).ready(function() {
-    $('#email').on('input', function() {
+$(document).ready(function () {
+    $('#email').on('input', function () {
         var id_name = $(this).val().trim();
 
         // Limpar o datalist antes de atualizar com novas opções
@@ -325,7 +201,7 @@ $(document).ready(function() {
                 data: {
                     id_name: id_name
                 },
-                success: function(response) {
+                success: function (response) {
                     console.log('Resposta do servidor:', response);
 
                     try {
@@ -337,7 +213,7 @@ $(document).ready(function() {
                         if (Array.isArray(response)) {
                             $('#emails').empty(); // Limpar opções anteriores
 
-                            response.forEach(function(item) {
+                            response.forEach(function (item) {
                                 var option = $('<option value="' + item.id_name + '">' + item.name + '</option>');
                                 $('#emails').append(option);
                             });
@@ -348,7 +224,7 @@ $(document).ready(function() {
                         console.error('Erro ao manipular JSON:', error);
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Erro na requisição AJAX:', error);
                 }
             });
@@ -356,14 +232,14 @@ $(document).ready(function() {
     });
 
     // Evento quando uma opção do datalist é selecionada
-    $('#email').on('change', function() {
+    $('#email').on('change', function () {
         var selectedIdName = $(this).val().trim();
         adicionarNome(selectedIdName); // Adicionar o id_name à lista
         $(this).val(''); // Limpar o campo de texto
     });
 
     // Evento quando o botão "Adicionar" é clicado
-    $('#btnAdicionar').on('click', function() {
+    $('#btnAdicionar').on('click', function () {
         var selectedIdName = $('#email').val().trim();
         adicionarNome(selectedIdName); // Adicionar o id_name à lista
         $('#email').val(''); // Limpar o campo de texto
@@ -379,9 +255,9 @@ $(document).ready(function() {
         }
 
         // Verifica se o id_name já está na lista
-        if ($('#listaNomes').find('li').filter(function() {
-                return $(this).find('p').text().trim() === id_name;
-            }).length > 0) {
+        if ($('#listaNomes').find('li').filter(function () {
+            return $(this).find('p').text().trim() === id_name;
+        }).length > 0) {
             erro('Conta já inserida!');
             return;
         }
@@ -399,7 +275,7 @@ $(document).ready(function() {
             data: {
                 id_name: id_name
             },
-            success: function(response) {
+            success: function (response) {
                 if (typeof response === 'string') {
                     response = JSON.parse(response);
                 }
@@ -424,9 +300,9 @@ $(document).ready(function() {
                 `;
 
                     // Adicionar o novo item à lista apenas se não existir na lista
-                    if ($('#listaNomes').find('li').filter(function() {
-                            return $(this).find('p').text().trim() === id_name;
-                        }).length === 0) {
+                    if ($('#listaNomes').find('li').filter(function () {
+                        return $(this).find('p').text().trim() === id_name;
+                    }).length === 0) {
                         $('#listaNomes').append(listItem);
                         numUsuarios++;
                         var boxcomnomes = document.getElementById('boxcomnomes');
@@ -438,7 +314,7 @@ $(document).ready(function() {
                     erro('Conta inserida não existe!');
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error('Erro na verificação de id_name:', error);
             }
         });
@@ -447,4 +323,17 @@ $(document).ready(function() {
 });
 
 
+function updateData(var1, var2) {
+    $.ajax({
+        url: '../../src/Handlers/getEditarImagens.php',
+        method: 'GET',
+        data: { var1: var1, var2: var2 }, // Passando variáveis na requisição
+        success: function(data){
+            $('#imageContainer' + var1).html(data);
 
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}

@@ -87,11 +87,11 @@ if ($row_infos) {
     <link href="../../public/assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
-      <!-- Font Awesome Icons -->
-      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="../../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -103,7 +103,7 @@ if ($row_infos) {
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  
+
     <!-- CSS Files -->
     <link id="pagestyle" href="../../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 
@@ -231,7 +231,7 @@ if ($row_infos) {
 
             <?php include('PerfilEstatisticas.php'); ?>
 
-            
+
             <?php
             include('../src/Views/Users/PerfilSobre.php');
             include('../src/Views/Users/PerfilAvaliacoes.php');
@@ -273,7 +273,7 @@ if ($row_infos) {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
-   
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
     <script src="../public/assets/js/plugins/chartjs.min.js"></script>

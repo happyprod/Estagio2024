@@ -1,11 +1,13 @@
 <?php
-
+require_once '../src/Helpers/init.php';
+require_once '../src/Helpers/functions.php';
 require_once __DIR__ . '/../vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
 
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
-
+use App\Models\User;
+use App\Helpers\Database;
 
 $routes = [
     '/home' => [HomeController::class, 'showHome'],
@@ -21,14 +23,10 @@ $routes = [
 
 function route($url, $routes) {
     foreach ($routes as $route => $controller) {
-        // Verifica se a URL corresponde ao padrão da rota
         if (preg_match("~^$route$~", $url, $matches)) {
-            // Remove a rota correspondente da URL
             $url = preg_replace("~^$route$~", '', $url);
-            // Remove a parte vazia do início da URL
             $url = ltrim($url, '/');
             
-            // Se a rota corresponder, chama o controlador e o método correspondentes
             if (is_string($controller)) {
                 list($controller, $method) = explode('@', $controller);
                 $controllerPath = "../src/Controllers/{$controller}.php";
@@ -41,20 +39,26 @@ function route($url, $routes) {
                 }
             } else {
                 list($controller, $method) = $controller;
-                $controllerInstance = new $controller();
+                $db = Database::connect(); // Conectar ao banco de dados
+                $model = new User($db); // Passar a conexão ao modelo
+                $controllerInstance = new $controller($model); // Passar o modelo ao controlador
             }
 
-            // Passa o ID do usuário, se houver, como parâmetro para o método
             if (!empty($matches[1])) {
                 $controllerInstance->$method($matches[1]);
             } else {
                 $controllerInstance->$method();
             }
-            return; // Encerra a função depois de encontrar a rota correspondente
+            return;
         }
     }
     
-    // Se nenhuma rota corresponder, exibe a página 404
     echo "404 - Página não encontrada";
 }
 
+// Exemplo de uso
+$url = $_SERVER['REQUEST_URI'];
+$pos = strrpos($url, "/public/");
+if ($pos !== false) {
+    $url = '/' . substr($url, $pos + strlen("/public/"));
+}

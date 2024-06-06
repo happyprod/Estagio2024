@@ -104,7 +104,7 @@
 
                                 $pi_imagem = $row2["image"];
 
-                                echo '
+                                                    echo '
                                                         <div class="carousel-item ' . ($isActive ? 'active' : '') . '">
                                                             <img src="http://localhost/redes/public/users/' . $id . '/' . $pi_imagem . '" class="d-block rounded" class="d-block rounded"
                                                             style="margin-left: 2.5%; width:95%; height: 25em;" alt="...">

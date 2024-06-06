@@ -1,20 +1,5 @@
 <?php
 
-
-/*
-Propriedades:
-
-id
-name
-email
-password
-profile_picture
-bio
-created_at
-updated_at
-
-<?php
-
 namespace App\Models;
 
 use PDO;
@@ -28,43 +13,14 @@ class User
         $this->db = $db;
     }
 
-    public function find($id)
+
+    public function getEditarImagens($count)
     {
-        $stmt = $this->db->prepare('SELECT * FROM users WHERE id = :id');
-        $stmt->execute(['id' => $id]);
-        return $stmt->fetch(PDO::FETCH_OBJ);
-    }
+        $stmt = $this->db->prepare("SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem");
+        $stmt->execute([$count]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+        return $result;
 
-    // Outros métodos do modelo...
-}
-*/
-
-// Arquivo: app/Models/User.php
-namespace MyApp\Models;
-
-use App\Helpers\Database;
-
-class User
-{
-    public function emailExiste($email)
-    {
-        $db = Database::connect();
-
-        $query = $db->prepare("SELECT COUNT(*) FROM accounts WHERE email = :email");
-        $query->bindParam(':email', $email);
-        $query->execute();
-
-        return $query->fetchColumn() > 0;
-    }
-
-    public function identityExiste($identity)
-    {
-        $db = Database::connect();
-
-        $query = $db->prepare("SELECT COUNT(*) FROM accounts WHERE id_name = :id_name");
-        $query->bindParam(':id_name', $identity);
-        $query->execute();
-
-        return $query->fetchColumn() > 0;
     }
 }
