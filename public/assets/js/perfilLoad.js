@@ -21,38 +21,32 @@ $(function () {
     $(".sortable-list").disableSelection();
 });
 
-
-function guardarImagens(idCount) {
-    $(".sortable-list").each(function (index) {
-        var order = $(this).sortable('toArray', {
-            attribute: 'data-id'
-        });
-        console.log("Lista " + (index + 1) + ":", order);
-
-        // Envie os dados para o script PHP usando AJAX
-        $.ajax({
-            url: '../../src/Handlers/guardarEditarImagens.php',
-            method: 'POST',
-            data: { 
-                idCount: idCount,
-                order: order
-            },
-            success: function(response) {
-                console.log('Dados enviados com sucesso para handler.php');
-                console.log(response); // Resposta do script PHP, se houver
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao enviar dados para handler.php:', error);
-            }
-        });
+function guardarImagens(index) {
+    console.log (index);
+    var order = [];
+    $(".sortable-list").eq(index - 1).children("div").each(function () {
+        var dataId = $(this).attr('data-id');
+        var imgSrc = $(this).find('img').attr('src');
+        order.push({ dataId: dataId, imgSrc: imgSrc });
     });
 
-    elementsWithDataId = document.querySelectorAll('[data-id]');
-    elementsWithDataId.forEach(element => {
-        element.removeAttribute('data-id');
+    // Verificar os dados antes de enviar
+    console.log("Dados a serem enviados:", order);
+
+    // Enviar os dados para o handler PHP usando AJAX
+    $.ajax({
+        url: '../../src/Handlers/guardarEditarImagens.php', // URL do seu manipulador PHP
+        method: 'POST',
+        data: { order: order, index: index },
+        success: function(response) {
+            console.log("Dados enviados com sucesso:", response);
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro ao enviar dados:", error);
+        }
     });
-    console.log("Todos os data-id foram removidos.");
 }
+
 
 
 
