@@ -370,12 +370,12 @@ echo '
             <div class="modal-body">
 
                 <div class="row sortable-list" id="imageContainer' . $count . '">
-                    
+                    <!-- conteudo dinamico será exibido aquim -->
                 </div>
 
             <div class="modal-footer">
                 <button type="button" onclick="verificarOArray()" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
-                <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1" onclick="guardarimagens()">Confirmar</button>
+                <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1" onclick="guardarImagens(' . $count . ')">Confirmar</button>
             </div>
         </div>
     </div>

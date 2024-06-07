@@ -531,7 +531,7 @@
 
                             if ($verified == "true") {
                                 echo '<button type="button" class="btn-tooltip border-0 ps-0" id="tooltipButton' . $i . '"
-                onclick="location.href = \'./utilizador/' . $user_id . '.php\';"
+                onclick="location.href = \'./utilizadores/' . $user_id . '.php\';"
                 style="background-color: rgba(0, 0, 0, 0); color: #495057; font-family: Arial, Helvetica, sans-serif;">
                 ' . $name . ' 
                 <svg class="ms-0" style="margin-top: -0.15em;" width=\'24\' height=\'24\' viewBox=\'0 0 24 24\'

@@ -1,4 +1,6 @@
 
+$lastImageCount = 0;
+var elementsWithDataId;
 // Variável para contar o número de usuários na lista
 var numUsuarios = 0;
 
@@ -20,13 +22,36 @@ $(function () {
 });
 
 
-function verificarOArray() {
+function guardarImagens(idCount) {
     $(".sortable-list").each(function (index) {
         var order = $(this).sortable('toArray', {
             attribute: 'data-id'
         });
         console.log("Lista " + (index + 1) + ":", order);
+
+        // Envie os dados para o script PHP usando AJAX
+        $.ajax({
+            url: '../../src/Handlers/guardarEditarImagens.php',
+            method: 'POST',
+            data: { 
+                idCount: idCount,
+                order: order
+            },
+            success: function(response) {
+                console.log('Dados enviados com sucesso para handler.php');
+                console.log(response); // Resposta do script PHP, se houver
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao enviar dados para handler.php:', error);
+            }
+        });
     });
+
+    elementsWithDataId = document.querySelectorAll('[data-id]');
+    elementsWithDataId.forEach(element => {
+        element.removeAttribute('data-id');
+    });
+    console.log("Todos os data-id foram removidos.");
 }
 
 
@@ -466,11 +491,13 @@ function alterarImageContainer(novothis) {
 
 function displayImageBeforeFixedItem(imageUrl, newId) {
     const div = document.createElement('div');
+    newId = newId + $lastImageCount;
+    $lastImageCount = 0;
     div.classList.add('col-4', 'mb-3', 'ui-sortable-handle');
     div.setAttribute('data-id', newId);
     div.innerHTML = `
         <a class="delete-image" data-id="${newId}">
-            <i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12.5em;">
+            <i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12em;">
                 <svg style="width: 2em; height: 2em; color: white;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 32 32">
                     <path d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z" fill="rgb(255, 255, 255)"></path>
                 </svg>
@@ -491,6 +518,8 @@ function displayImageBeforeFixedItem(imageUrl, newId) {
             elementToDelete.remove();
         }
     });
+
+    limparImagensData();
 }
 
 
@@ -505,7 +534,7 @@ function setupDeleteLinks() {
         deleteLink.addEventListener('click', function (e) {
             e.preventDefault(); // Evitar o comportamento padrão do link
 
-            const dataId = this.getAttribute('data-id'); // Obter o atributo data-id do link clicado
+            var dataId = this.getAttribute('data-id'); // Obter o atributo data-id do link clicado
             console.log(dataId);
 
             console.log("asdasdasdasdasdas", id_entrada);
@@ -515,12 +544,24 @@ function setupDeleteLinks() {
             if (divToDelete) {
                 divToDelete.remove(); // Remover a div correspondente se encontrada
                 console.log(`Elemento com data-id ${dataId} removido`);
+
+                if (dataId == elementsWithDataId)
+                    {
+                        $lastImageCount++;
+                    }
+
                 dataId = 0;
             } else {
                 console.log(`Elemento com data-id ${dataId} não encontrado`);
             }
+            
         });
     });
 }
 
-
+function limparImagensData (){
+    elementsWithDataId = document.querySelectorAll('[data-id]');
+    console.log(`Número de elementos com data-id: ${elementsWithDataId.length}`);
+    elementsWithDataId = elementsWithDataId.length / 2;
+    console.log(elementsWithDataId);
+}

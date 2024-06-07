@@ -164,15 +164,6 @@ function erro(mensagem) {
 }
 
 
-function guardarimagens() {
-    // Coloque aqui o código que deseja executar quando o botão for clicado
-    console.log("Botão 'Confirmar' clicado!");
-    // Por exemplo, você pode fechar a modal se necessário
-
-    // Função para mostrar a mensagem de sucesso
-    alteradocomsucesso();
-}
-
 function guardarprivacidade() {
     // Coloque aqui o código que deseja executar quando o botão for clicado
     console.log("Botão 'Confirmar' clicado!");
@@ -181,7 +172,6 @@ function guardarprivacidade() {
     // Função para mostrar a mensagem de sucesso
     alteradocomsucesso();
 }
-
 
 
 $(document).ready(function () {
@@ -322,6 +312,7 @@ $(document).ready(function () {
 
 
 function updateData(var1, var2, var3) {
+    var elementsWithDataId;
     $.ajax({
         url: '../../src/Handlers/getEditarImagens.php',
         method: 'GET',
@@ -335,4 +326,3 @@ function updateData(var1, var2, var3) {
         }
     });
 }
-

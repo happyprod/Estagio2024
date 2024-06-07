@@ -17,7 +17,7 @@ $lastDirectoryName = rtrim($lastDirectoryName, ".php");
 
 
 // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
-$stmt = $db->prepare('SELECT * FROM accounts WHERE url = ?');
+$stmt = $db->prepare('SELECT * FROM accounts WHERE id = ?');
 
 // Executa a consulta SQL, substituindo o marcador de posição '?' pelo valor de $lastDirectoryName
 $stmt->execute([$lastDirectoryName]);
