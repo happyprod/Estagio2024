@@ -23,4 +23,13 @@ class UserController
     public function getEditarImagens($count, $p_id) {
         return $this->model->getEditarImagens($count, $p_id);
     }
+
+    public function getEditarInfoProjects($count, $p_id) {
+        return $this->model->getEditarInfoProjects($count, $p_id);
+    }
+
+    public function getEditarInfoProjectsCollabs($count, $p_id) {
+        return $this->model->getEditarInfoProjectsCollabs($count, $p_id);
+    }
+
 }

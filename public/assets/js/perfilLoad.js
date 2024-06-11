@@ -39,6 +39,14 @@ function guardarImagens(index) {
         method: 'POST',
         data: { order: order, index: index },
         success: function(response) {
+            if (response == 'erro')
+                {
+                    erro("Ocorreu um erro!");
+                } else {
+                    alteradocomsucesso("Alterado com sucesso");
+                }
+
+
             console.log("Dados enviados com sucesso:", response);
         },
         error: function(xhr, status, error) {
@@ -69,7 +77,6 @@ function removerNome(button, event) {
         var boxcomnomes = document.getElementById('boxcomnomes');
 
         console.log('teste', numUsuarios)
-        boxcomnomes.classList.add('d-none');
     }
 }
 
@@ -558,4 +565,18 @@ function limparImagensData (){
     console.log(`Número de elementos com data-id: ${elementsWithDataId.length}`);
     elementsWithDataId = elementsWithDataId.length / 2;
     console.log(elementsWithDataId);
+}
+
+
+function erro(mensagem) {
+    toastr.options.timeOut = 5000; // 10 segundos
+    toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
+    toastr.error(mensagem);
+}
+
+
+function alteradocomsucesso() {
+    toastr.options.timeOut = 5000; // 10 segundos
+    toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
+    toastr.success('Alterado com sucesso');
 }

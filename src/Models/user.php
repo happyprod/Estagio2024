@@ -21,6 +21,27 @@ class User
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         
         return $result;
-
     }
+
+    public function getEditarInfoProjects($count, $p_id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM projects WHERE id = ?");
+        $stmt->execute([$p_id]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+        return $result;
+    }
+
+    public function getEditarInfoProjectsCollabs($count, $p_id)
+    {
+        $stmt = $this->db->prepare("SELECT accounts.name as name, accounts.picture as picture, accounts.id_name as idName
+        FROM accounts
+        JOIN projects_collabs AS ids ON accounts.id = ids.id_user 
+        WHERE ids.id_project = ?");
+        $stmt->execute([$p_id]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+        return $result;
+    }
+
 }

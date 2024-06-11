@@ -75,8 +75,8 @@ if ($row_infos) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../public/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../public/img/logo.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../public/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../public/img/logo.png">
     <title>
         ConcertPulse Artist
     </title>
@@ -250,8 +250,6 @@ if ($row_infos) {
     <!--   Core JS Files   -->
     <script src="../../public/assets/js/core/popper.min.js"></script>
     <script src="../../public/assets/js/core/bootstrap.min.js"></script>
-    <script src="../../public/assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../public/assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {

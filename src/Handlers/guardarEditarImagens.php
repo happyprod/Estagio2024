@@ -97,5 +97,5 @@ try {
         echo "Erro durante a operação: " . $e->getMessage();
     }
 } else {
-    echo "Nenhum dado de imagem foi enviado.";
+    echo "erro";
 }

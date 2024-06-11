@@ -29,7 +29,7 @@ echo '
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" data-bs-target="#exampleModalMessage3">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateDataInfo(' . $count . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#modalAlterarInfo' . $count . '">
                                 Alterar Informações
                             </button>
                         </div>
@@ -169,7 +169,7 @@ echo '
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalMessage3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAlterarInfo' . $count . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -181,164 +181,10 @@ echo '
                 <div class="modal-body ">
 
 
-                    <form action="">
+                <div id="alterarInfo' . $count . '">
+                                
 
-                        <div class="row">
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Nome do evento</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Tomorrowland" required>
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <div class="row" style="height: 2em;">
-                                        <div class="col-10">
-                                            <div class="form-group">
-                                                <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Identificação do
-                                                    Evento</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">@</span>
-                                        <input type="text" class="form-control" placeholder="TomorrowlandOfficial" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="title" style="font-size: 16px;" for="exampleFormControlTextarea1">Descrição</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 295px;"></textarea>
-                        </div>
-
-
-                        <div class="row" style="margin-top: 2em;">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <label class="title" style="font-size: 16px;" for="exampleFormControlTextarea1">Data</label>
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input class="form-control" type="date" value="2018-11-23" id="example-date-input">
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-
-                                <div class="form-group">
-                                    <div class="row" style="height: 2.1em;">
-                                        <div class="col-10">
-                                            <div class="form-group">
-                                                <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Empresa de Booking</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">@</span>
-                                        <input type="text" class="form-control" placeholder="TomorrowlandOfficial" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- promotores envolvidos, uma caixa de texto onde sera possivel escrever o @ do promotor e em baixo será possivel ver as pessoas com um @ semelhante, caso nao exista será exibido alguma mensagem de erro-->
-
-                        <!-- Localização -->
-
-
-                        <div class="border-top mt-4 w-85 mx-auto" style="opacity: 50%; margin-bottom: 2.2em;">
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-6">
-                                <div class="">
-                                    <div class="row" style="height: 2.1em;">
-
-                                        <div class="col-10">
-                                            <div class="form-group">
-                                                <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Localização</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="text" id="endereco" class="form-control mb-1" placeholder="Digite o endereço...">
-                                    <div id="mapa" class="mt-3 rounded" style="height: 300px;"></div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-
-                                <div class="row" style="height: 1.975em;">
-
-                                    <div class="col-10">
-                                        <div class="form-group">
-                                            <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Colaboradores</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">@</span>
-                                        <input type="text" class="form-control" placeholder="Promotor/Organizador" aria-label="Promotor/Organizador" aria-describedby="button-addon2" id="email" name="email" style="border-radius: 0em !important;" list="emails">
-                                        <datalist id="emails"></datalist>
-                                        <button class="btn btn-outline-primary mb-0" type="button" id="btnAdicionar">Adicionar</button>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row d-none" id="boxcomnomes">
-                                    <div class="col-xl-12 mb-3 mb-lg-5">
-                                        <div class="card">
-                                            <div id="listaNomes" class="overflow-auto p-3" style="max-height: 300px;">
-                                                <!-- Lista de nomes e emails adicionados -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </form>
-
+                </div>
 
 
                 </div>

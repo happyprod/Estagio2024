@@ -113,7 +113,6 @@ function initMap() {
     });
 }
 
-
 function exibirMapa(location) {
     if (!map) {
         // Criar um novo mapa se ainda não existir
@@ -135,7 +134,6 @@ function exibirMapa(location) {
     });
 }
 
-
 function loadGoogleMapsScript() {
     const script = document.createElement('script');
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyARtHqWhhONSQVfBMlIV4SMerzDmSTDf4o&libraries=places&callback=initMap';
@@ -143,8 +141,6 @@ function loadGoogleMapsScript() {
     script.async = true;
     document.head.appendChild(script);
 }
-
-
 
 // Carregar a API do Google Maps quando a página for totalmente carregada
 window.onload = loadGoogleMapsScript;
@@ -173,51 +169,48 @@ function guardarprivacidade() {
     alteradocomsucesso();
 }
 
+function colaboradoresComplete() {
+    var id_name = $('#email').val().trim();
 
-$(document).ready(function () {
-    $('#email').on('input', function () {
-        var id_name = $(this).val().trim();
+    // Limpar o datalist antes de atualizar com novas opções
+    $('#emails').empty();
 
-        // Limpar o datalist antes de atualizar com novas opções
-        $('#emails').empty();
+    // Enviar requisição AJAX apenas se o campo não estiver vazio
+    if (id_name !== '') {
+        $.ajax({
+            url: '../../src/Handlers/colaboradoresComplete.php',
+            type: 'POST',
+            data: {
+                id_name: id_name
+            },
+            success: function (response) {
+                console.log('Resposta do servidor:', response);
 
-        // Enviar requisição AJAX apenas se o campo não estiver vazio
-        if (id_name !== '') {
-            $.ajax({
-                url: '../../public/pesquisar.php',
-                type: 'POST',
-                data: {
-                    id_name: id_name
-                },
-                success: function (response) {
-                    console.log('Resposta do servidor:', response);
-
-                    try {
-                        // Tentar converter response para JSON se necessário
-                        if (typeof response === 'string') {
-                            response = JSON.parse(response);
-                        }
-
-                        if (Array.isArray(response)) {
-                            $('#emails').empty(); // Limpar opções anteriores
-
-                            response.forEach(function (item) {
-                                var option = $('<option value="' + item.id_name + '">' + item.name + '</option>');
-                                $('#emails').append(option);
-                            });
-                        } else {
-                            console.error('Resposta não é um array:', response);
-                        }
-                    } catch (error) {
-                        console.error('Erro ao manipular JSON:', error);
+                try {
+                    // Tentar converter response para JSON se necessário
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
                     }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Erro na requisição AJAX:', error);
+
+                    if (Array.isArray(response)) {
+                        $('#emails').empty(); // Limpar opções anteriores
+
+                        response.forEach(function (item) {
+                            var option = $('<option>').val(item.id_name).text(item.name);
+                            $('#emails').append(option);
+                        });
+                    } else {
+                        console.error('Resposta não é um array:', response);
+                    }
+                } catch (error) {
+                    console.error('Erro ao manipular JSON:', error);
                 }
-            });
-        }
-    });
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro na requisição AJAX:', error);
+            }
+        });
+    }
 
     // Evento quando uma opção do datalist é selecionada
     $('#email').on('change', function () {
@@ -232,45 +225,48 @@ $(document).ready(function () {
         adicionarNome(selectedIdName); // Adicionar o id_name à lista
         $('#email').val(''); // Limpar o campo de texto
     });
+}
 
-    // Função para adicionar o id_name à lista
-    function adicionarNome(id_name) {
 
-        id_name = id_name.toLowerCase();
 
-        if (id_name === '') {
-            return; // Não adiciona se o id_name estiver vazio
-        }
+// Função para adicionar o id_name à lista
+function adicionarNome(id_name) {
 
-        // Verifica se o id_name já está na lista
-        if ($('#listaNomes').find('li').filter(function () {
-            return $(this).find('p').text().trim() === id_name;
-        }).length > 0) {
-            erro('Conta já inserida!');
-            return;
-        }
+    id_name = id_name.toLowerCase();
 
-        // Limitar o número máximo de usuários na lista
-        if ($('#listaNomes').children().length >= 10) {
-            erro('Limite máximo de 10 utilizadores atingido!');
-            return;
-        }
+    if (id_name === '') {
+        return; // Não adiciona se o id_name estiver vazio
+    }
 
-        // Verifica se o id_name existe na base de dados
-        $.ajax({
-            url: '../../public/verificar_email.php', // Caminho para o arquivo PHP
-            type: 'POST',
-            data: {
-                id_name: id_name
-            },
-            success: function (response) {
-                if (typeof response === 'string') {
-                    response = JSON.parse(response);
-                }
+    // Verifica se o id_name já está na lista
+    if ($('#listaNomes').find('li').filter(function () {
+        return $(this).find('p').text().trim() === id_name;
+    }).length > 0) {
+        erro('Conta já inserida!');
+        return;
+    }
 
-                if (response.status === 'valid') {
-                    // Criar e adicionar um novo item à lista de nomes com os dados do usuário
-                    var listItem = `
+    // Limitar o número máximo de usuários na lista
+    if ($('#listaNomes').children().length >= 10) {
+        erro('Limite máximo de 10 utilizadores atingido!');
+        return;
+    }
+
+    // Verifica se o id_name existe na base de dados
+    $.ajax({
+        url: '../../public/verificar_email.php', // Caminho para o arquivo PHP
+        type: 'POST',
+        data: {
+            id_name: id_name
+        },
+        success: function (response) {
+            if (typeof response === 'string') {
+                response = JSON.parse(response);
+            }
+
+            if (response.status === 'valid') {
+                // Criar e adicionar um novo item à lista de nomes com os dados do usuário
+                var listItem = `
                     <li class="list-group-item pt-0 pb-3">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0 me-3">
@@ -287,28 +283,103 @@ $(document).ready(function () {
                     </li>
                 `;
 
-                    // Adicionar o novo item à lista apenas se não existir na lista
-                    if ($('#listaNomes').find('li').filter(function () {
-                        return $(this).find('p').text().trim() === id_name;
-                    }).length === 0) {
-                        $('#listaNomes').append(listItem);
-                        numUsuarios++;
-                        var boxcomnomes = document.getElementById('boxcomnomes');
-                        boxcomnomes.classList.remove('d-none');
-                    } else {
-                        erro('Conta já inserida!');
-                    }
+                // Adicionar o novo item à lista apenas se não existir na lista
+                if ($('#listaNomes').find('li').filter(function () {
+                    return $(this).find('p').text().trim() === id_name;
+                }).length === 0) {
+                    $('#listaNomes').append(listItem);
+                    numUsuarios++;
+                    var boxcomnomes = document.getElementById('boxcomnomes');
+                    boxcomnomes.classList.remove('d-none');
                 } else {
-                    erro('Conta inserida não existe!');
+                    erro('Conta já inserida!');
+                }
+            } else {
+                erro('Conta inserida não existe!');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro na verificação de id_name:', error);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+function bookingComplete() {
+    var id_name = $('#bookinginput').val().trim();
+    console.log('mm');
+
+    // Limpar o datalist antes de atualizar com novas opções
+    $('#bookinginputs').empty();
+
+    // Enviar requisição AJAX apenas se o campo não estiver vazio
+    if (id_name !== '') {
+        $.ajax({
+            url: '../../public/pesquisar.php',
+            type: 'POST',
+            data: {
+                id_name: id_name
+            },
+            success: function (response) {
+                console.log('Resposta do servidor:', response);
+
+                try {
+                    // Tentar converter response para JSON se necessário
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
+
+                    if (Array.isArray(response)) {
+                        $('#bookinginputs').empty(); // Limpar opções anteriores
+
+                        response.forEach(function (item) {
+                            var option = $('<option>').val(item.id_name).text(item.name);
+                            $('#bookinginputs').append(option);
+                        });
+                    } else {
+                        console.error('Resposta não é um array:', response);
+                    }
+                } catch (error) {
+                    console.error('Erro ao manipular JSON:', error);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Erro na verificação de id_name:', error);
+                console.error('Erro na requisição AJAX:', error);
             }
         });
     }
 
-});
+    // Evento quando uma opção do datalist é selecionada
+    $('#bookinginput').on('change', function () {
+        var selectedIdName = $(this).val().trim();
+        adicionarNome(selectedIdName); // Adicionar o id_name à lista
+        $(this).val(''); // Limpar o campo de texto
+    });
+
+    // Evento quando o botão "Adicionar" é clicado
+    $('#btnAdicionar').on('click', function () {
+        var selectedIdName = $('#bookinginput').val().trim();
+        adicionarNome(selectedIdName); // Adicionar o id_name à lista
+        $('#bookinginput').val(''); // Limpar o campo de texto
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 function updateData(var1, var2, var3) {
@@ -317,11 +388,28 @@ function updateData(var1, var2, var3) {
         url: '../../src/Handlers/getEditarImagens.php',
         method: 'GET',
         data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
-        success: function(data){
+        success: function (data) {
             $('#imageContainer' + var1).html(data);
 
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+
+function updateDataInfo(var1, var2, var3) {
+    var elementsWithDataId;
+    $.ajax({
+        url: '../../src/Handlers/getAlterarInfo.php',
+        method: 'GET',
+        data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#alterarInfo' + var1).html(data);
+
+        },
+        error: function (xhr, status, error) {
             console.error('Erro ao obter dados:', error);
         }
     });
