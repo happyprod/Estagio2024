@@ -66,7 +66,6 @@ function mostrarPerfil() {
     if (opcao2) {
         opcao2.classList.remove('active');
     }
-
 }
 
 function mostrarTextoCompleto() {
@@ -81,7 +80,6 @@ function mostrarTextoCompleto() {
 }
 
 
-
 // Verificar se o texto na div ultrapassa a altura máxima
 var divTexto = document.getElementById('textoDiv');
 var btnVerMais = document.getElementById('verMaisBtn');
@@ -92,46 +90,62 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 }
 
 
-let map; // Variável global para armazenar o objeto do mapa
+var map, autocomplete;
 
 function initMap() {
-    const autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('endereco'), {
-        types: ['geocode']
-    }
-    );
+    const mapaDiv = document.getElementById('mapa');
+    map = new google.maps.Map(mapaDiv, {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 15,
+        mapTypeId: 'satellite', // Definir o tipo de mapa para satélite
+        streetViewControl: false // Desabilitar o controle do Street View
+    });
 
-    autocomplete.addListener('place_changed', function () {
-        const place = autocomplete.getPlace();
+    // Inicializar o Autocomplete
+    const inputEndereco = document.getElementById('endereco');
+    autocomplete = new google.maps.places.Autocomplete(inputEndereco);
+    autocomplete.bindTo('bounds', map);
+
+    autocomplete.addListener('place_changed', function() {
+        var place = autocomplete.getPlace();
         if (!place.geometry) {
-            console.log("Endereço não encontrado.");
+            // Caso o usuário tenha inserido um lugar sem selecionar uma sugestão
+            erro("Por favor, selecione um lugar das sugeridas.");
             return;
         }
-
-        // Mostrar o mapa com a localização selecionada
         exibirMapa(place.geometry.location);
     });
+
+    geocodeAddress(); // Geocodificar o endereço inicial
+}
+
+function geocodeAddress() {
+    const address = document.getElementById('endereco').value;
+    if (address) {
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status === 'OK') {
+                exibirMapa(results[0].geometry.location);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
 }
 
 function exibirMapa(location) {
-    if (!map) {
-        // Criar um novo mapa se ainda não existir
-        map = new google.maps.Map(document.getElementById('mapa'), {
-            center: location,
-            zoom: 15,
-            mapTypeId: 'satellite', // Definir o tipo de mapa para satélite
-            streetViewControl: false // Desabilitar o controle do Street View
-        });
-    } else {
+    if (map) {
         // Atualizar o centro do mapa para a nova localização
         map.setCenter(location);
-    }
 
-    // Adicionar um marcador no mapa
-    new google.maps.Marker({
-        position: location,
-        map: map
-    });
+        // Adicionar um marcador no mapa
+        new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    } else {
+        console.error('O mapa não foi inicializado corretamente.');
+    }
 }
 
 function loadGoogleMapsScript() {
@@ -145,6 +159,26 @@ function loadGoogleMapsScript() {
 // Carregar a API do Google Maps quando a página for totalmente carregada
 window.onload = loadGoogleMapsScript;
 
+function updateDataInfo(var1, var2, var3) {
+    $.ajax({
+        url: '../../src/Handlers/getAlterarInfo.php',
+        method: 'GET',
+        data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#alterarInfo' + var1).html(data);
+
+            // Verificar se a div do mapa foi atualizada
+            if (document.getElementById('mapa')) {
+                loadGoogleMapsScript();
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+
 
 function alteradocomsucesso() {
     toastr.options.timeOut = 10000; // 10 segundos
@@ -152,13 +186,11 @@ function alteradocomsucesso() {
     toastr.success('Alterado com sucesso');
 }
 
-
 function erro(mensagem) {
     toastr.options.timeOut = 10000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
     toastr.error(mensagem);
 }
-
 
 function guardarprivacidade() {
     // Coloque aqui o código que deseja executar quando o botão for clicado
@@ -227,8 +259,6 @@ function colaboradoresComplete() {
     });
 }
 
-
-
 // Função para adicionar o id_name à lista
 function adicionarNome(id_name) {
 
@@ -274,7 +304,7 @@ function adicionarNome(id_name) {
                             </div>
                             <div class="flex-grow-1">
                                 <h6 class="mb-0 text-sm">${response.name}</h6>
-                                <p class="mb-0 text-muted text-xs">${id_name}</p>
+                                <p class="mb-0 text-muted text-xs" id="idNameUser">${id_name}</p>
                             </div>
                             <div class="flex-shrink-0 text-end">
                                 <button class="btn btn-md my-auto btn-danger" onclick="removerNome(this, event)">Remover</button>
@@ -304,40 +334,28 @@ function adicionarNome(id_name) {
     });
 }
 
-
-
-
-
-
-
-
 function bookingComplete() {
     var id_name = $('#bookinginput').val().trim();
-    console.log('mm');
 
-    // Limpar o datalist antes de atualizar com novas opções
+    // Clear the datalist before updating with new options
     $('#bookinginputs').empty();
 
-    // Enviar requisição AJAX apenas se o campo não estiver vazio
+    // Send AJAX request only if the field is not empty
     if (id_name !== '') {
         $.ajax({
-            url: '../../public/pesquisar.php',
+            url: '../../src/Handlers/bookingComplete.php',
             type: 'POST',
-            data: {
-                id_name: id_name
-            },
+            data: { id_name: id_name },
             success: function (response) {
                 console.log('Resposta do servidor:', response);
 
                 try {
-                    // Tentar converter response para JSON se necessário
+                    // Try to parse response to JSON if necessary
                     if (typeof response === 'string') {
                         response = JSON.parse(response);
                     }
 
                     if (Array.isArray(response)) {
-                        $('#bookinginputs').empty(); // Limpar opções anteriores
-
                         response.forEach(function (item) {
                             var option = $('<option>').val(item.id_name).text(item.name);
                             $('#bookinginputs').append(option);
@@ -354,33 +372,47 @@ function bookingComplete() {
             }
         });
     }
-
-    // Evento quando uma opção do datalist é selecionada
-    $('#bookinginput').on('change', function () {
-        var selectedIdName = $(this).val().trim();
-        adicionarNome(selectedIdName); // Adicionar o id_name à lista
-        $(this).val(''); // Limpar o campo de texto
-    });
-
-    // Evento quando o botão "Adicionar" é clicado
-    $('#btnAdicionar').on('click', function () {
-        var selectedIdName = $('#bookinginput').val().trim();
-        adicionarNome(selectedIdName); // Adicionar o id_name à lista
-        $('#bookinginput').val(''); // Limpar o campo de texto
-    });
 }
 
+function EventosComplete() {
+    var id_name = $('#eventoInput').val().trim();
 
+    // Clear the datalist before updating with new options
+    $('#eventoInputs').empty();
 
+    // Send AJAX request only if the field is not empty
+    if (id_name !== '') {
+        $.ajax({
+            url: '../../src/Handlers/eventosComplete.php',
+            type: 'POST',
+            data: { id_name: id_name },
+            success: function (response) {
+                console.log('Resposta do servidor:', response);
 
+                try {
+                    // Try to parse response to JSON if necessary
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
 
-
-
-
-
-
-
-
+                    if (Array.isArray(response)) {
+                        response.forEach(function (item) {
+                            var option = $('<option>').val(item.id_name).text(item.name);
+                            $('#eventoInputs').append(option);
+                        });
+                    } else {
+                        console.error('Resposta não é um array:', response);
+                    }
+                } catch (error) {
+                    console.error('Erro ao manipular JSON:', error);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro na requisição AJAX:', error);
+            }
+        });
+    }
+}
 
 function updateData(var1, var2, var3) {
     var elementsWithDataId;
@@ -399,18 +431,60 @@ function updateData(var1, var2, var3) {
 }
 
 
-function updateDataInfo(var1, var2, var3) {
-    var elementsWithDataId;
-    $.ajax({
-        url: '../../src/Handlers/getAlterarInfo.php',
-        method: 'GET',
-        data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
-        success: function (data) {
-            $('#alterarInfo' + var1).html(data);
 
-        },
-        error: function (xhr, status, error) {
-            console.error('Erro ao obter dados:', error);
-        }
+function guardarSobre(id_projeto) {
+    var nomeEvento = document.getElementById("exampleFormControlInput1")?.value || '';
+    var identificacaoEvento = document.getElementById("eventoInput")?.value || '';
+    var descricao = document.getElementById("exampleFormControlTextarea1")?.value || '';
+    var data = document.getElementById("example-date-input")?.value || '';
+    var empresaBooking = document.getElementById("bookinginput")?.value || '';
+    var localizacao = document.getElementById("endereco")?.value || '';
+
+    var switchEvento = document.getElementById("switchEvento")?.checked || false;
+    var switchData = document.getElementById("switchData")?.checked || false;
+    var switchBooking = document.getElementById("switchBooking")?.checked || false;
+    var switchLocal = document.getElementById("switchLocal")?.checked || false;
+    var switchCollabs = document.getElementById("switchCollabs")?.checked || false;
+
+    var arrayC_idName = [];
+    var elementosC_idName = document.querySelectorAll('#idNameUser');
+    elementosC_idName.forEach(function (elemento) {
+        arrayC_idName.push(elemento.textContent.trim());
     });
+
+    var xhr = new XMLHttpRequest();
+    var url = "../../src/Handlers/guardar_sobre.php";
+    var params = "nomeEvento=" + encodeURIComponent(nomeEvento) +
+                 "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
+                 "&descricao=" + encodeURIComponent(descricao) +
+                 "&data=" + encodeURIComponent(data) +
+                 "&empresaBooking=" + encodeURIComponent(empresaBooking) +
+                 "&localizacao=" + encodeURIComponent(localizacao) +
+                 "&switchEvento=" + encodeURIComponent(switchEvento) +
+                 "&switchData=" + encodeURIComponent(switchData) +
+                 "&switchBooking=" + encodeURIComponent(switchBooking) +
+                 "&switchLocal=" + encodeURIComponent(switchLocal) +
+                 "&id_projeto=" + encodeURIComponent(id_projeto) +
+                 "&switchCollabs=" + encodeURIComponent(switchCollabs) +
+                 "&arrayC_idName=" + encodeURIComponent(JSON.stringify(arrayC_idName));
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                if (xhr.responseText == 'Evento')
+                    {
+                        erro("Evento ou booking não existe.");
+                    } else if (xhr.responseText == 'Data') {
+                            erro("Data não suportada!");
+                        }
+            } else {
+                console.error("Erro na requisição: " + xhr.status);
+            }
+        }
+    };
+    xhr.send(params);
 }
+

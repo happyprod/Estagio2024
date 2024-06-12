@@ -55,9 +55,6 @@ function guardarImagens(index) {
     });
 }
 
-
-
-
 // Função para remover um nome da lista
 function removerNome(button, event) {
     console.log('Função removerNome foi chamada.');
@@ -79,7 +76,6 @@ function removerNome(button, event) {
         console.log('teste', numUsuarios)
     }
 }
-
 
 
 var projetos = [];
@@ -428,7 +424,6 @@ function showProject(contador) {
 }
 
 
-
 var imageContainer = "ola";
 var id_entrada;
 
@@ -523,7 +518,6 @@ function displayImageBeforeFixedItem(imageUrl, newId) {
     limparImagensData();
 }
 
-
 function setupDeleteLinks() {
     console.log('ovitawaekfdjksf');
     // Selecionar todos os elementos com a classe delete-image
@@ -567,16 +561,15 @@ function limparImagensData (){
     console.log(elementsWithDataId);
 }
 
-
 function erro(mensagem) {
     toastr.options.timeOut = 5000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
     toastr.error(mensagem);
 }
 
-
 function alteradocomsucesso() {
     toastr.options.timeOut = 5000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
     toastr.success('Alterado com sucesso');
 }
+

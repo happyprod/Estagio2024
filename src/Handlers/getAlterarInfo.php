@@ -59,7 +59,7 @@ foreach ($data2 as $row2) {
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-0 text-sm">' . $c_nome . '</h6>
-                            <p class="mb-0 text-muted text-xs">' . $c_idName . '</p>
+                            <p class="mb-0 text-muted text-xs" id="idNameUser" >' . $c_idName . '</p>
                         </div>
                         <div class="flex-shrink-0 text-end">
                             <button class="btn btn-xxs my-auto btn-danger" onclick="removerNome(this, event)">Remover</button>
@@ -114,14 +114,15 @@ foreach ($data as $row) {
 
                     <div class="col-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_evento) . ' id="flexSwitchCheckDefault">
+                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_evento) . ' id="switchEvento">
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="' . $p_evento . '" value="' . $p_evento . '" aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" id="eventoInput" oninput="EventosComplete()" placeholder="' . $p_evento . '" value="' . $p_evento . '" aria-describedby="basic-addon1" list="eventoInputs">
+                    <datalist id="eventoInputs"></datalist>
                 </div>
             </div>
         </div>
@@ -143,7 +144,7 @@ foreach ($data as $row) {
 
                     <div class="col-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_data) . ' id="flexSwitchCheckDefault">
+                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_data) . ' id="switchData">
                         </div>
                     </div>
                 </div>
@@ -163,15 +164,15 @@ foreach ($data as $row) {
 
                     <div class="col-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_booking) . ' id="flexSwitchCheckDefault">
+                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_booking) . ' id="switchBooking">
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" id="bookinginput" oninput="bookingComplete()" placeholder="' . $p_booking . '" value="' . $p_booking . '" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1">
-                    <datalist id="bookinginputs"></datalist>
+                    <input type="text" class="form-control" id="bookinginput" oninput="bookingComplete()" placeholder="sonssemtransito" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1" list="bookinginputs">
+                    <datalist id="bookinginputs"></datalist>                    
                 </div>
             </div>
         </div>
@@ -198,7 +199,7 @@ foreach ($data as $row) {
 
                     <div class="col-2">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_local) . ' id="flexSwitchCheckDefault">
+                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_local) . ' id="switchLocal">
                         </div>
                     </div>
                 </div>
@@ -217,7 +218,7 @@ foreach ($data as $row) {
 
                 <div class="col-2">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_collabs) . ' id="flexSwitchCheckDefault">
+                        <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_collabs) . ' id="switchCollabs">
                     </div>
                 </div>
             </div>
@@ -230,7 +231,6 @@ foreach ($data as $row) {
                     <datalist id="emails"></datalist>                    
                     <button class="btn btn-outline-primary mb-0" type="button" id="btnAdicionar">Adicionar</button>
                 </div>
-
             </div>
 
 
@@ -252,12 +252,9 @@ foreach ($data as $row) {
 echo $html;
 
 if ($collabshtml == '') {
-    echo '<script> 
-    document.getElementById("boxcomnomes").classList.add("d-none");
+    echo '
+    <script> 
+        document.getElementById("boxcomnomes").classList.add("d-none");
     </script>';
 }
 
-echo '
-    <script> 
-        initMap();
-    </script>';

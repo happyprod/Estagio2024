@@ -17,7 +17,7 @@ if (isset($_POST['id_name'])) {
     $model = new User($db);
     $controller = new UserController($model);
 
-    $data = $controller->getUsersComplete($pesquisa);
+    $data = $controller->getEventUsersComplete($pesquisa);
 
     $users = array();
 
