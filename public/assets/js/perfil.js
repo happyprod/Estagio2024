@@ -430,8 +430,6 @@ function updateData(var1, var2, var3) {
     });
 }
 
-
-
 function guardarSobre(id_projeto) {
     var nomeEvento = document.getElementById("exampleFormControlInput1")?.value || '';
     var identificacaoEvento = document.getElementById("eventoInput")?.value || '';

@@ -171,7 +171,7 @@ foreach ($data as $row) {
 
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" id="bookinginput" oninput="bookingComplete()" placeholder="sonssemtransito" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1" list="bookinginputs">
+                    <input type="text" class="form-control" id="bookinginput" value="' . $p_booking . '" oninput="bookingComplete()" placeholder="sonssemtransito" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1" list="bookinginputs">
                     <datalist id="bookinginputs"></datalist>                    
                 </div>
             </div>

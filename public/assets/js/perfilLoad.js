@@ -83,6 +83,21 @@ var gostos = [];
 var comentarios = [];
 var contador;
 
+function inserirPrivacyProject(escolha, selectedContainer)
+{
+    projetos[selectedContainer] = escolha;
+}
+
+function inserirPrivacyLikes(escolha, selectedContainer)
+{
+    gostos[selectedContainer] = escolha;
+}
+
+function inserirPrivacyComments(escolha, selectedContainer)
+{
+    comentarios[selectedContainer] = escolha;
+}
+
 function selectCard(cardId, containerSelecionado) {
     var cards = document.getElementsByClassName('card-button');
     var totalImages = 9;
@@ -421,6 +436,7 @@ function showProject(contador) {
                     </div>
                 </div>
             `;
+
 }
 
 
@@ -573,3 +589,43 @@ function alteradocomsucesso() {
     toastr.success('Alterado com sucesso');
 }
 
+function updatePrivacy(var1, var2) {
+    var elementsWithDataId;
+    $.ajax({
+        url: '../../src/Handlers/getPrivacidadeEditar.php',
+        method: 'GET',
+        data: { var1: var1, var2: var2 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#alterarprivacidade' + var1).html(data);
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+function guardarPrivacidade(id_projeto, selectedContainer)
+{
+
+    var xhr = new XMLHttpRequest();
+    var url = "../../src/Handlers/guardarPrivacidadeEditar.php";
+    var params =    "id_projeto=" + encodeURIComponent(id_projeto) +
+                    "&projetos=" + encodeURIComponent(projetos[selectedContainer]) +
+                    "&gostos=" + encodeURIComponent(gostos[selectedContainer]) +
+                    "&comentarios=" + encodeURIComponent(comentarios[selectedContainer]);
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                
+            } else {
+                console.error("Erro na requisição: " + xhr.status);
+            }
+        }
+    };
+    xhr.send(params);
+}

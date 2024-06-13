@@ -61,14 +61,23 @@
                                             </a>
                                         </div>
                                         <div class="card-body px-1 pb-0">
-                                            <p class="text-gradient text-dark mb-2 text-sm">' . $p_local . '</p>
+                                            <p class="text-gradient text-dark mb-2 text-sm">' . $p_local . '</p>';
+                                        
+                                            if ($p_local != "")
+                                            {
+                                                echo '<div style="height: 95px;">';
+                                            } else {
+                                                echo '<div style="height: 116px;">';
+                                            }
+                                            
+                                        echo '
                                                 <h5>
                                                     ' . $p_nome . '
                                                 </h5>
-                                                <p class="mb-4 text-sm" style="height: 40px;">
+                                                <p class="mb-4 text-sm" style="height: 30px;">
                                                 ' . $p_sinopse . '
                                             </p>
-
+                                        </div>
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="w-100">
                                                     <button type="button"
