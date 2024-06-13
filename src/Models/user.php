@@ -206,4 +206,13 @@ class User
         $stmt->bindParam(4, $id_projeto);
         $stmt->execute();
     }
+
+
+    public function apagarProjeto($p_id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
+        
+        $stmt->bindParam(1, $p_id);
+        $stmt->execute();
+    }
 }

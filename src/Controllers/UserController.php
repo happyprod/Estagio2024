@@ -184,4 +184,17 @@ class UserController
         
     }
 
+
+    
+    public function apagarProjeto()
+    {
+        // Ler dados enviados via POST
+        $id_projeto = $_POST['id_projeto'];
+
+        $this->model->apagarProjeto($id_projeto);
+        
+    }
+
+
+
 }

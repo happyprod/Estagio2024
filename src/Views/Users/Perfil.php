@@ -76,6 +76,7 @@ if ($row_infos) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../../public/assets/img/apple-icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" type="image/png" href="../../public/img/logo.png">
     <title>
         ConcertPulse Artist

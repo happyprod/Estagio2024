@@ -621,7 +621,28 @@ function guardarPrivacidade(id_projeto, selectedContainer)
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
-                
+                alteradocomsucesso('Privacidade alterada com sucesso!');
+            } else {
+                console.error("Erro na requisição: " + xhr.status);
+            }
+        }
+    };
+    xhr.send(params);
+}
+
+function apagarProjeto(p_id)
+{
+    var xhr = new XMLHttpRequest();
+    var url = "../../src/Handlers/apagarProjeto.php";
+    var params =    "id_projeto=" + encodeURIComponent(p_id);
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                alteradocomsucesso('Projeto apagado com sucesso!');
             } else {
                 console.error("Erro na requisição: " + xhr.status);
             }
