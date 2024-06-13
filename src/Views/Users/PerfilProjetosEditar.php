@@ -69,7 +69,7 @@ echo '
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModalMessage2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -83,13 +83,24 @@ echo '
                 <div class="modal-body">
 
                 
-                    <div class="card mb-3">
-                        <div class="card-body p-3">
-                            <div class="chart">
-                                <canvas id="line-chart" class="chart-canvas" height="300px"></canvas>
-                            </div>
+                <div class="container">
+                    <div class="">
+                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                        <h1 class="lead ms-2" style="font-size: 40px;">Engajamento Orgânico</h1>
+                        <div class="btn-group mt-3" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" id="week-btn">Semana</button>
+                        <button type="button" class="btn btn-primary" id="month-btn">Mês</button>
+                        <button type="button" class="btn btn-primary" id="year-btn">Ano</button>
+                        <button type="button" class="btn btn-primary" id="all-btn">Todos</button>
                         </div>
                     </div>
+                    <div class="card-body p-3">
+                        <div class="chart-container">
+                        <canvas id="chart-line" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                    </div>
+                </div>
 
                 </div>
 

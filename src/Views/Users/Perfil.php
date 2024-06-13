@@ -262,7 +262,6 @@ if ($row_infos) {
     </script>
 
 
-    <script src="../../public/assets/js/perfil.js"></script>
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -275,7 +274,9 @@ if ($row_infos) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
-    <script src="../public/assets/js/plugins/chartjs.min.js"></script>
+    <script src="../../public/assets/js/plugins/chartjs.min.js"></script>
+    <script src="../../public/assets/js/perfil.js"></script>
+
 
 
 

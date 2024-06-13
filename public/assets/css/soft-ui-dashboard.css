@@ -27773,6 +27773,12 @@ gmp-map:not(:defined) {
 }
 
 
+.chart-container {
+  width: 100%; /* Defina a largura desejada aqui */
+  height: 400px; /* Defina a altura desejada aqui */
+}
+
+
 /*
 Or just:
 div.dropdown-row>a.dropdown-item{

@@ -137,7 +137,7 @@ class User
         // Mensagem de debug para verificar os parâmetros
         error_log("Parâmetros de verificarEvento: evento = $evento, identity = 5, user_id = $user_id");
 
-        $stmt = $this->db->prepare("SELECT 1 FROM accounts WHERE id_name LIKE ? AND identity = ? AND id <> ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE id_name LIKE ? AND identity = ? AND id <> ? LIMIT 1");
         $stmt->execute([$evento, 5, $user_id]);  // Bind the id parameter and the identity value
 
         $result = $stmt->fetch(PDO::FETCH_OBJ);
@@ -163,7 +163,7 @@ class User
         // Mensagem de debug para verificar os parâmetros
         error_log("Parâmetros de verificarBooking: booker = $booker, identity = 4, user_id = $user_id");
 
-        $stmt = $this->db->prepare("SELECT 1 FROM accounts WHERE id_name LIKE ? AND identity = ? AND id <> ? LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE id_name LIKE ? AND identity = ? AND id <> ? LIMIT 1");
         $stmt->execute([$booker, 4, $user_id]);  // Bind the id parameter and the identity value
 
         $result = $stmt->fetch(PDO::FETCH_OBJ);

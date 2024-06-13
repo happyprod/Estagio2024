@@ -66,7 +66,7 @@ class UserController
             $switchBooking = 0;
         }
 
-        if (empty($nomeEvento) || empty($identificacaoEvento)) {
+        if (empty($identificacaoEvento)) {
             $switchEvento = 0;
         }
 

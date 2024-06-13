@@ -650,3 +650,4 @@ function apagarProjeto(p_id)
     };
     xhr.send(params);
 }
+
