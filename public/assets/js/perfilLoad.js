@@ -651,3 +651,19 @@ function apagarProjeto(p_id)
     xhr.send(params);
 }
 
+function updateStats(var1) {
+    console.log('updatestats');
+    $.ajax({
+        url: '../../src/Handlers/getEstatisticasProjeto.php',
+        method: 'GET',
+        data: { var1: var1}, // Passando variáveis na requisição
+        success: function (data) {
+            $('#alterarEstatisticas' + var1).html(data);
+            console.log(data);
+            console.log('updasdasdasdas');
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}

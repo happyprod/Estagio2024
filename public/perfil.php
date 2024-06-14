@@ -13,6 +13,10 @@ if ($pos !== false) {
 } else {
 }
 
+if ($_SESSION['user_id'] == '')
+{
+    header('Location: ../loginartists.php');
+}
 
 // Chamar a função de roteamento com a URL atual e as rotas definidas
 route($url, $routes);

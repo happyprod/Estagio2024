@@ -39,7 +39,7 @@ echo '
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" data-bs-target="#exampleModalMessage2">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateStats(' . $p_id . ')" data-bs-target="#exampleModalMessage2">
                                 Ver Estatisticas
                             </button>
                         </div>
@@ -81,25 +81,9 @@ echo '
 
 
                 <div class="modal-body">
-
-                
-                <div class="container">
-                    <div class="">
-                    <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                        <h1 class="lead ms-2" style="font-size: 40px;">Engajamento Orgânico</h1>
-                        <div class="btn-group mt-3" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-primary" id="week-btn">Semana</button>
-                        <button type="button" class="btn btn-primary" id="month-btn">Mês</button>
-                        <button type="button" class="btn btn-primary" id="year-btn">Ano</button>
-                        <button type="button" class="btn btn-primary" id="all-btn">Todos</button>
-                        </div>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="chart-container">
-                        <canvas id="chart-line" class="chart-canvas"></canvas>
-                        </div>
-                    </div>
-                    </div>
+                   
+                <div id="alterarEstatisticas">
+                    <!-- conteudo dinamico será exibido aquim -->
                 </div>
 
                 </div>

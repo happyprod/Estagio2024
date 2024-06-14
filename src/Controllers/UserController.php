@@ -101,7 +101,7 @@ class UserController
 
             if ($eventoExiste && $bookingExiste) {
                 // Inserir no banco de dados
-                $dadosEvento = array(
+                $dadosEvento = array (
                     'nomeEvento' => $nomeEvento,
                     'identificacaoEvento' => $identificacaoEvento,
                     'descricao' => $descricao,
@@ -140,6 +140,11 @@ class UserController
     public function getBookingUsersComplete($pesquisa)
     {
         return $this->model->getBookingUsersComplete($pesquisa);
+    }
+
+    public function getEstatisticasProjeto($p_id)
+    {
+        return $this->model->getEstatisticasProjeto($p_id);
     }
 
     public function getUsersComplete($pesquisa)

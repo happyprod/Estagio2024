@@ -41,7 +41,7 @@
             }
 
             // Redireciona para a página inicial
-            header('Location: dashboard.php');
+            header('Location: home.php');
             exit(); // Termina o script após redirecionamento
         } else {
             // credenciais de login inválidas

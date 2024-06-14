@@ -185,6 +185,16 @@ class User
         return $result;
     }
 
+    function getEstatisticasProjeto($p_id)
+    {
+        $stmt = $this->db->prepare("SELECT impressions, likes, comments, organic FROM projects_stats_snapshot WHERE id_projeto = ?");
+        $stmt->execute([$p_id]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+
 
     public function editarPrivacidade($dados)
     {
