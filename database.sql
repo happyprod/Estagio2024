@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Jun-2024 às 16:12
+-- Tempo de geração: 16-Jun-2024 às 23:08
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -56,8 +56,8 @@ CREATE TABLE `accounts` (
 INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_background`, `registered`, `method`, `verified`, `location`, `type`, `identity`, `url`, `about`, `number`, `facebook`, `twitter`, `instagram`, `id_name`) VALUES
 (5, 'asjdasnka', 'asjdasnka@gmail.com', '', 'FotoPerfil.jpg', '', '2024-03-11 17:30:49', 'form', 'false', 'asd', 'singer', 1, '', '', '', '', '', '', ''),
 (6, 'asdnkja', 'asdnkja@gmail.com', 'ajksndk@asjkdna', 'img\\fotos\\450f755a089a2c83e790c7337d54c728.jpeg', '', '2024-03-11 17:34:26', 'form', 'true', 'aklsfd', 'dj', 1, '', '', '', '', '', '', ''),
-(10, 'happy', 'amldk@gmail.com', 'asd', 'img\\fotos\\servicos_img1.jpg', '', '2024-04-05 14:53:15', 'login', 'false', 'Sintra', 'Baterist', 1, '', '', '', '', '', '', ''),
-(11, 'Ruben Costa', 'ruben.escola.2006@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocI84I3098-o2aoK5zMBBGTswW-2MLBIFs8_HzoX_ZKOb2doOrXn=s96-c', '', '2024-04-06 13:55:40', 'google', 'false', 'Cacem', 'Gastronomic', 1, '', '', '', '', '', '', ''),
+(10, 'happy', 'amldk@gmail.com', 'asd', 'img\\fotos\\servicos_img1.jpg', '', '2024-04-05 14:53:15', 'login', 'false', 'Sintra', 'Baterist', 5, '', '', '', '', '', '', 'happy'),
+(11, 'Ruben Costa', 'ruben.escola.2006@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocI84I3098-o2aoK5zMBBGTswW-2MLBIFs8_HzoX_ZKOb2doOrXn=s96-c', '', '2024-04-06 13:55:40', 'google', 'false', 'Cacem', 'Gastronomic', 1, '', '', '', '', '', '', 'fghbjkl'),
 (19, 'Rben Costa', 'beatsrubencosta@gmail.com', '', 'FotoPerfil.jpg', 'foto_capa.jpg', '2024-05-04 17:45:18', 'google', 'false', 'New Jersey', 'Promotor de Festivais', 2, '19', ' kdjasc \n\njkhasksdjhacjkhasksdjhac ', '913352194', 'www.facebook.com', 'www.google.com', 'www.instagram.com', 'rei'),
 (20, 'ola', 'ola@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:39:21', 'form', '', '', '', 2, '', '', '', '', '', '', 'ola'),
 (21, 'soufixe', 'soufixe@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:40:24', 'form', '', '', '', 3, '', '', '', '', '', '', 'soufixe'),
@@ -68,12 +68,12 @@ INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_b
 (26, 'ruben', 'costa@gmail.com', 'asd', '', '', '0000-00-00 00:00:00', '', '', 'asdf', '4', 0, '', '', '', '', '', '', ''),
 (27, 'ruben', 'happy@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'asdasd', '2', 0, '', '', '', '', '', '', ''),
 (28, 'nome', 'email@gmail.com', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'localização', '', 2, '', '', '', '', '', '', 'identificacao'),
-(29, 'Ruben', 'happy2@gmail.com', 'bananinha', '', '', '0000-00-00 00:00:00', '', '', 'LDLC Arena, Avenue Simone Veil, Décines-Charpieu, França', '', 0, '', '', '', '', '', '', 'happy'),
+(29, 'Ruben', 'happy2@gmail.com', 'bananinha', '', '', '0000-00-00 00:00:00', '', '', 'LDLC Arena, Avenue Simone Veil, Décines-Charpieu, França', '', 0, '', '', '', '', '', '', 'happy2'),
 (30, 'Gonçalinho', 'goncalinhopan@pan.pt', 'goncalinho', '', '', '0000-00-00 00:00:00', '', '', 'Avanca, Portugal', '', 0, '', '', '', '', '', '', 'goncalinho'),
 (31, 'nome', 'user@gmail.pcm', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'Seychelles', '', 0, '', '', '', '', '', '', 'nome de user'),
 (32, '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 0, '', '', '', '', '', '', ''),
 (33, '', 's@gmail.com', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 5, '', '', '', '', '', '', ''),
-(34, 'ganggang', 'ksd@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'SDF Building, GP Block, Sector V, Bidhannagar, Calcutá, Bengala Ocidental, Índia', '', 4, '', '', '', '', '', '', 'gonçalinho'),
+(34, 'ganggang', 'ksd@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'SDF Building, GP Block, Sector V, Bidhannagar, Calcutá, Bengala Ocidental, Índia', '', 4, '', '', '', '', '', '', 'cao'),
 (35, 'ggggggggg', 'asd@gmail.com', '1234567', '', '', '0000-00-00 00:00:00', '', '', 'Buceta, Santa Cruz de La Sierra, Bolívia', '', 3, '', '', '', '', '', '', 'goncalinho2'),
 (36, '                                ', 'olateste2@gmail.com', 'ola', '', '', '0000-00-00 00:00:00', '', '', 'Mamas Joint Road, MCC B Block, MCC, Davanagere, Karnataka, Índia', '', 5, '', '', '', '', '', '', '                                                                                                                           '),
 (58, 'prod', 'happyzao@gmail.com', 'palavrapasse', '', '', '0000-00-00 00:00:00', '', '', 'Galveias, Portugal', '', 3, '', '', '', '', '', '', 'happyksd');
@@ -142,18 +142,51 @@ CREATE TABLE `projects` (
   `descricao` text NOT NULL,
   `local` text NOT NULL,
   `data` date DEFAULT NULL,
-  `archived` int(35) NOT NULL,
+  `Event` text NOT NULL,
+  `Active_Event` tinyint(1) NOT NULL,
+  `Active_Data` tinyint(1) NOT NULL,
+  `Booking` text NOT NULL,
+  `Active_Booking` tinyint(1) NOT NULL,
+  `Active_Local` tinyint(1) NOT NULL,
+  `Active_Collab` tinyint(1) NOT NULL,
+  `PrivacyProjects` int(35) NOT NULL,
+  `PrivacyLikes` int(35) NOT NULL,
+  `PrivacyComments` int(35) NOT NULL,
+  `impressions` int(35) NOT NULL,
   `likes` int(35) NOT NULL,
-  `comment` int(35) NOT NULL
+  `comments` int(35) NOT NULL,
+  `organic` int(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `projects`
 --
 
-INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `sinopse`, `descricao`, `local`, `data`, `archived`, `likes`, `comment`) VALUES
-(1, 19, 'Lost Lands', 'ola.jpg', 'Thanks for the Bass in my brain <3', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'USA', '2024-05-14', 0, 0, 0),
-(2, 19, 'Tommrowland', 'ola2.jpg', 'Live today, Love Tommorrow!', 'INSANE!', 'BOOM', '2024-05-09', 0, 0, 0);
+INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `sinopse`, `descricao`, `local`, `data`, `Event`, `Active_Event`, `Active_Data`, `Booking`, `Active_Booking`, `Active_Local`, `Active_Collab`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `impressions`, `likes`, `comments`, `organic`) VALUES
+(1, 19, 'Lost Lands', 'ola.jpg', 'Thanks for the Bass in my brain <3', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'US', '2024-05-14', 'LostLandsOfficial', 0, 1, '', 0, 0, 0, 2, 5, 9, 0, 0, 0, 0),
+(2, 19, 'Tommrowland', 'ola2.jpg', 'Live today, Love Tommorrow!Live today, Love Tommorrow!', 'INSANojjjjj', '', '2000-07-07', '', 1, 1, '', 1, 0, 1, 2, 5, 9, 0, 0, 0, 0),
+(6, 0, 'Crato', '', '', 'INSANE!', 'Lisboa', '2024-05-09', 'Tommrrowland', 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projects_collabs`
+--
+
+CREATE TABLE `projects_collabs` (
+  `id` int(35) NOT NULL,
+  `id_project` int(35) NOT NULL,
+  `id_user` int(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `projects_collabs`
+--
+
+INSERT INTO `projects_collabs` (`id`, `id_project`, `id_user`) VALUES
+(1, 2, 19),
+(2, 2, 21),
+(3, 2, 11);
 
 -- --------------------------------------------------------
 
@@ -186,12 +219,13 @@ CREATE TABLE `projects_images` (
 --
 
 INSERT INTO `projects_images` (`id`, `id_project`, `image`, `ordem`) VALUES
-(1, 1, 'ola.jpg', 3),
-(2, 1, 'ola2.jpg', 2),
-(3, 2, 'ola3.jpg', 2),
-(4, 2, 'ola4.jpg', 1),
-(5, 1, 'ola3.jpg', 1),
-(6, 1, 'ola4.jpg', 4);
+(116, 2, 'I391Ef8HQciDeJ6skJHgX3zLOx6BVMo1fK9wbiE2IM9Ix5Q', 1),
+(117, 2, 'PwCYF8bZAQv8AAAAAElFTkSuQmCC', 2),
+(123, 1, 'ola4.jpg', 1),
+(124, 1, 'I391Ef8HQciDeJ6skJHgX3zLOx6BVMo1fK9wbiE2IM9Ix5Q', 2),
+(125, 1, 'ola3.jpg', 3),
+(126, 1, 'ola2.jpg', 4),
+(127, 1, 'I391Ef8HQciDeJ6skJHgX3zLOx6BVMo1fK9wbiE2IM9Ix5Q', 5);
 
 -- --------------------------------------------------------
 
@@ -204,6 +238,27 @@ CREATE TABLE `projects_likes` (
   `id_project` int(35) NOT NULL,
   `id_user_send` int(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projects_privacy`
+--
+
+CREATE TABLE `projects_privacy` (
+  `id` int(35) NOT NULL,
+  `id_project` int(35) NOT NULL,
+  `projects` int(35) NOT NULL,
+  `likes` int(35) NOT NULL,
+  `comments` int(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `projects_privacy`
+--
+
+INSERT INTO `projects_privacy` (`id`, `id_project`, `projects`, `likes`, `comments`) VALUES
+(1, 2, 1, 5, 9);
 
 -- --------------------------------------------------------
 
@@ -244,10 +299,10 @@ CREATE TABLE `projects_stats_snapshot` (
   `id_snapshot` int(11) NOT NULL,
   `data` date DEFAULT NULL,
   `id_projeto` int(11) DEFAULT NULL,
-  `numero_impressoes` int(11) DEFAULT NULL,
-  `numero_likes` int(11) DEFAULT NULL,
-  `numero_comentarios` int(11) DEFAULT NULL,
-  `organico` int(11) DEFAULT NULL,
+  `impressions` int(11) DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL,
+  `comments` int(11) DEFAULT NULL,
+  `organic` int(11) DEFAULT NULL,
   `nao_organico` int(11) DEFAULT NULL,
   `localizacoes` text DEFAULT NULL,
   `dados_demograficos` text DEFAULT NULL
@@ -257,7 +312,7 @@ CREATE TABLE `projects_stats_snapshot` (
 -- Extraindo dados da tabela `projects_stats_snapshot`
 --
 
-INSERT INTO `projects_stats_snapshot` (`id_snapshot`, `data`, `id_projeto`, `numero_impressoes`, `numero_likes`, `numero_comentarios`, `organico`, `nao_organico`, `localizacoes`, `dados_demograficos`) VALUES
+INSERT INTO `projects_stats_snapshot` (`id_snapshot`, `data`, `id_projeto`, `impressions`, `likes`, `comments`, `organic`, `nao_organico`, `localizacoes`, `dados_demograficos`) VALUES
 (1, '2023-05-24', 1, 50585, 56755, 3917, 92481, -92381, 'Local841', 'homens16599, mulheres21463'),
 (2, '2023-05-25', 1, 23948, 67863, 2978, 26687, -26587, 'Local402', 'homens25415, mulheres6862'),
 (3, '2023-05-26', 1, 55273, 14145, 2867, 50279, -50179, 'Local600', 'homens14819, mulheres8781'),
@@ -773,6 +828,12 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `projects_collabs`
+--
+ALTER TABLE `projects_collabs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `projects_comments`
 --
 ALTER TABLE `projects_comments`
@@ -788,6 +849,12 @@ ALTER TABLE `projects_images`
 -- Índices para tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `projects_privacy`
+--
+ALTER TABLE `projects_privacy`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -860,7 +927,13 @@ ALTER TABLE `follows`
 -- AUTO_INCREMENT de tabela `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `projects_collabs`
+--
+ALTER TABLE `projects_collabs`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments`
@@ -872,13 +945,19 @@ ALTER TABLE `projects_comments`
 -- AUTO_INCREMENT de tabela `projects_images`
 --
 ALTER TABLE `projects_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
   MODIFY `id` int(35) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `projects_privacy`
+--
+ALTER TABLE `projects_privacy`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `projects_stats`
@@ -902,7 +981,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT de tabela `saved`
 --
 ALTER TABLE `saved`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `shows`
