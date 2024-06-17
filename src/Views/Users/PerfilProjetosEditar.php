@@ -39,7 +39,7 @@ echo '
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateStats(' . $p_id . ')" data-bs-target="#exampleModalMessage2">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateStats(' . $p_id . ')" data-bs-target="#exampleModalMessage' . $count . '">
                                 Ver Estatisticas
                             </button>
                         </div>
@@ -68,12 +68,12 @@ echo '
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalMessage2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModalMessage' . $count . '" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nome do asd - Alterar</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">' . $p_nome . ' - Estatísticas</h5>
                     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -82,16 +82,14 @@ echo '
 
                 <div class="modal-body">
                    
-                <div id="alterarEstatisticas">
+                <div id="alterarEstatisticas' . $count . '">
                     <!-- conteudo dinamico será exibido aquim -->
                 </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-secondary btn-block" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1">
-                        Close
-                    </button>
+                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Voltar</button>
                 </div>
             </div>
         </div>
@@ -185,7 +183,7 @@ echo '
         
             <div class="modal-footer">
                 <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
-                <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#exampleModalMessage1" onclick="apagarProjeto(' . $p_id . ')">Confirmar</button>
+                <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal" onclick="apagarProjeto(' . $p_id . ')">Confirmar</button>
             </div>
     </div>
     </div>

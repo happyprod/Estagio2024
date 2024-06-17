@@ -13,20 +13,13 @@
 
                 $count = 1;
 
-
-                $sql = "SELECT * FROM projects WHERE id_founder = ?"; // Use placeholder for PDO
-
-                $stmt_projects = $db->prepare($sql);
-                $stmt_projects->execute([$id]);  // Bind the id parameter
-                $result = $stmt_projects->fetchAll(PDO::FETCH_ASSOC);
-
+                $result = $controller->getProjects($id);
 
                 // Verifica se a consulta retornou resultados
-                if (count($result) > 0) {  // Use PDO method to check rows
-
+                if (!empty($result)) {  // Verifica se $result não está vazio
+                
                     // Exibindo os dados encontrados
                     foreach ($result as $row) {
-
                         $p_id = $row["id"];
                         $p_nome = $row["nome"];
                         $p_imagem = $row["imagem"];
@@ -43,11 +36,10 @@
                         $texto_formatado2 = nl2br(htmlspecialchars($texto_original2)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
 
 
-                        $sql2 = "SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem"; // Use placeholder for PDO
+                        $result2 = $controller->getProjectsImages($p_id);
 
-                        $stmt_projects2 = $db->prepare($sql2);
-                        $stmt_projects2->execute([$p_id]);  // Bind the id parameter
-                        $result2 = $stmt_projects2->fetchAll(PDO::FETCH_ASSOC);
+
+                        
 
 
                         echo '

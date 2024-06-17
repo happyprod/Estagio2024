@@ -101,7 +101,7 @@ class UserController
 
             if ($eventoExiste && $bookingExiste) {
                 // Inserir no banco de dados
-                $dadosEvento = array (
+                $dadosEvento = array(
                     'nomeEvento' => $nomeEvento,
                     'identificacaoEvento' => $identificacaoEvento,
                     'descricao' => $descricao,
@@ -126,8 +126,6 @@ class UserController
         }
     }
 
-
-
     public function getEditarInfoProjects($count, $p_id)
     {
         return $this->model->getEditarInfoProjects($count, $p_id);
@@ -144,7 +142,372 @@ class UserController
 
     public function getEstatisticasProjeto($p_id)
     {
-        return $this->model->getEstatisticasProjeto($p_id);
+        $data = $this->model->getEstatisticasProjeto($p_id);
+        $data7dias = $this->model->getEstatisticas7dias($p_id);
+        $data30dias = $this->model->getEstatisticas30dias($p_id);
+        $data1ano = $this->model->getEstatisticas1ano($p_id);
+        $dataTudo = $this->model->getEstatisticastudo($p_id);
+        
+        $dataVerificarDias = $this->model->getVerificarDias($p_id);
+
+
+        if (!empty($data) || $dataVerificarDias >= 7) {
+
+            $impressions7 = '[';
+            $likes7 = '[';
+            $comments7 = '[';
+            $organic7 = '[';
+            $unganic7 = '[';
+
+            $impressions1ano = '[';
+            $likes1ano = '[';
+            $comments1ano = '[';
+            $organic1ano = '[';
+            $unganic1ano = '[';
+
+            $impressionstudo = '[';
+            $likestudo = '[';
+            $commentstudo = '[';
+            $organictudo = '[';
+            $unganictudo = '[';
+
+            $impressions30 = '[';
+            $likes30 = '[';
+            $comments30 = '[';
+            $organic30 = '[';
+            $unganic30 = '[';
+
+
+
+            foreach ($data7dias as $row) {
+                $impressions7 .= isset($row->impressions) ? $row->impressions . ',' : '';
+                $likes7 .= isset($row->likes) ? $row->likes . ',' : '';
+                $comments7 .= isset($row->comments) ? $row->comments . ',' : '';
+                $organic7 .= isset($row->organic) ? $row->organic . ',' : '';
+
+                $saver7 = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ',' : '';
+                $unganic7 .= $saver7;
+            }
+
+            foreach ($data1ano as $row) {
+                $impressions1ano .= isset($row->impressions) ? $row->impressions . ',' : '';
+                $likes1ano .= isset($row->likes) ? $row->likes . ',' : '';
+                $comments1ano .= isset($row->comments) ? $row->comments . ',' : '';
+                $organic1ano .= isset($row->organic) ? $row->organic . ',' : '';
+
+                $saver1ano = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ',' : '';
+                $unganic1ano .= $saver1ano;
+            }
+
+            foreach ($dataTudo as $row) {
+                $impressionstudo .= isset($row->impressions) ? $row->impressions . ',' : '';
+                $likestudo .= isset($row->likes) ? $row->likes . ',' : '';
+                $commentstudo .= isset($row->comments) ? $row->comments . ',' : '';
+                $organictudo .= isset($row->organic) ? $row->organic . ',' : '';
+
+                $savertudo = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ',' : '';
+                $unganictudo .= $savertudo;
+            }
+
+            foreach ($data30dias as $row) {
+                $impressions30 .= isset($row->impressions) ? $row->impressions . ', ' : '';
+                $likes30 .= isset($row->likes) ? $row->likes . ', ' : '';
+                $comments30 .= isset($row->comments) ? $row->comments . ', ' : '';
+                $organic30 .= isset($row->organic) ? $row->organic . ', ' : '';
+
+                // Calcular e concatenar outras informações conforme necessário
+                $saver30 = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ', ' : '';
+                $unganic30 .= $saver30;
+            }
+
+
+            // Remover a última vírgula de cada variável
+            $impressions7 = rtrim($impressions7, ',');
+            $likes7 = rtrim($likes7, ',');
+            $comments7 = rtrim($comments7, ',');
+            $organic7 = rtrim($organic7, ',');
+            $unganic7 = rtrim($unganic7, ',');
+
+            // Remove a última vírgula
+            $impressions30 = rtrim($impressions30, ', ');
+            $likes30 = rtrim($likes30, ', ');
+            $comments30 = rtrim($comments30, ', ');
+            $organic30 = rtrim($organic30, ', ');
+            $unganic30 = rtrim($unganic30, ', ');
+
+            // Remove a última vírgula
+            $impressions1ano = rtrim($impressions1ano, ', ');
+            $likes1ano = rtrim($likes1ano, ', ');
+            $comments1ano = rtrim($comments1ano, ', ');
+            $organic1ano = rtrim($organic1ano, ', ');
+            $unganic1ano = rtrim($unganic1ano, ', ');
+
+            // Remove a última vírgula
+            $impressionstudo = rtrim($impressionstudo, ', ');
+            $likestudo = rtrim($likestudo, ', ');
+            $commentstudo = rtrim($commentstudo, ', ');
+            $organictudo = rtrim($organictudo, ', ');
+            $unganictudo = rtrim($unganictudo, ', ');
+
+
+            $impressions7 .= ']';
+            $likes7 .= ']';
+            $comments7 .= ']';
+            $organic7 .= ']';
+            $saver7 = ']';
+            $unganic7 .= ']';
+
+            $impressions30 .= ']';
+            $likes30 .= ']';
+            $comments30 .= ']';
+            $organic30 .= ']';
+            $saver30 = ']';
+            $unganic30 .= ']';
+
+            $impressions1ano .= ']';
+            $likes1ano .= ']';
+            $comments1ano .= ']';
+            $organic1ano .= ']';
+            $saver1ano = ']';
+            $unganic1ano .= ']';
+
+            $impressionstudo .= ']';
+            $likestudo .= ']';
+            $commentstudo .= ']';
+            $organictudo .= ']';
+            $savertudo = ']';
+            $unganictudo .= ']';
+
+
+            // Inicializa variáveis para cálculos
+            $totalImpressions = 0;
+            $totalLikes = 0;
+            $totalComments = 0;
+            $totalOrganic = 0;
+            $totalNaoOrganico = 0;
+
+            $weeklyMaxImpressions = 0;
+            $weeklyMaxLikes = 0;
+            $weeklyMaxComments = 0;
+            $weeklyMaxOrganic = 0;
+            $weeklyMaxNaoOrganico = 0;
+
+            $monthlyMaxImpressions = 0;
+            $monthlyMaxLikes = 0;
+            $monthlyMaxComments = 0;
+            $monthlyMaxOrganic = 0;
+            $monthlyMaxNaoOrganico = 0;
+
+            $impressionsCount = 0;
+            $likesCount = 0;
+            $commentsCount = 0;
+            $organicCount = 0;
+            $naoOrganicoCount = 0;
+
+            $monthlyImpressions = [];
+            $monthlyLikes = [];
+            $monthlyComments = [];
+            $monthlyOrganic = [];
+            $monthlyNaoOrganico = [];
+
+            foreach ($data as $row) {
+                $impressions = isset($row->impressions) ? $row->impressions : 0;
+                $organic = isset($row->organic) ? $row->organic : 0;
+                $nao_organico = $impressions - $organic;
+
+                $totalImpressions += $impressions;
+                $totalLikes += isset($row->likes) ? $row->likes : 0;
+                $totalComments += isset($row->comments) ? $row->comments : 0;
+                $totalOrganic += $organic;
+                $totalNaoOrganico += $nao_organico;
+
+                // Semanal
+                if ($impressions > $weeklyMaxImpressions) $weeklyMaxImpressions = $impressions;
+                if (isset($row->likes) && $row->likes > $weeklyMaxLikes) $weeklyMaxLikes = $row->likes;
+                if (isset($row->comments) && $row->comments > $weeklyMaxComments) $weeklyMaxComments = $row->comments;
+                if ($organic > $weeklyMaxOrganic) $weeklyMaxOrganic = $organic;
+                if ($nao_organico > $weeklyMaxNaoOrganico) $weeklyMaxNaoOrganico = $nao_organico;
+
+                // Mensal
+                $month = date('Y-m', isset($row->data) ? strtotime($row->data) : time());
+                if (!isset($monthlyImpressions[$month])) $monthlyImpressions[$month] = 0;
+                if (!isset($monthlyLikes[$month])) $monthlyLikes[$month] = 0;
+                if (!isset($monthlyComments[$month])) $monthlyComments[$month] = 0;
+                if (!isset($monthlyOrganic[$month])) $monthlyOrganic[$month] = 0;
+                if (!isset($monthlyNaoOrganico[$month])) $monthlyNaoOrganico[$month] = 0;
+
+                $monthlyImpressions[$month] += $impressions;
+                if (isset($row->likes)) $monthlyLikes[$month] += $row->likes;
+                if (isset($row->comments)) $monthlyComments[$month] += $row->comments;
+                $monthlyOrganic[$month] += $organic;
+                $monthlyNaoOrganico[$month] += $nao_organico;
+
+                $impressionsCount++;
+                $likesCount++;
+                $commentsCount++;
+                $organicCount++;
+                $naoOrganicoCount++;
+            }
+
+            $monthlyAvgImpressions = $impressionsCount > 0 ? array_sum($monthlyImpressions) / $impressionsCount : 0;
+            $monthlyAvgLikes = $likesCount > 0 ? array_sum($monthlyLikes) / $likesCount : 0;
+            $monthlyAvgComments = $commentsCount > 0 ? array_sum($monthlyComments) / $commentsCount : 0;
+            $monthlyAvgOrganic = $organicCount > 0 ? array_sum($monthlyOrganic) / $organicCount : 0;
+            $monthlyAvgNaoOrganico = $naoOrganicoCount > 0 ? array_sum($monthlyNaoOrganico) / $naoOrganicoCount : 0;
+
+            $monthlyMaxImpressions = max($monthlyImpressions);
+            $monthlyMaxLikes = max($monthlyLikes);
+            $monthlyMaxComments = max($monthlyComments);
+            $monthlyMaxOrganic = max($monthlyOrganic);
+            $monthlyMaxNaoOrganico = max($monthlyNaoOrganico);
+
+            // Gera o HTML
+            $html = '';
+
+            $html .= '  
+        <div class="container">
+            <!-- Primeiro gráfico de linha -->
+            <div class="">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <h1 class="lead ms-2" style="font-size: 40px;">Engajamento Orgânico</h1>
+                    <div class="btn-group mt-3" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" id="week-btn-line">7 Dias</button>
+                        <button type="button" class="btn btn-primary" id="month-btn-line">30 Dias</button>
+                        <button type="button" class="btn btn-primary" id="year-btn-line">1 Ano</button>
+                        <button type="button" class="btn btn-primary" id="all-btn-line">Tudo</button>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart-container" style="height: 500px;">
+                        <canvas id="chart-line" class="chart-canvas"></canvas>
+                    </div>
+                    <div class="ms-1 row text-sm mt-3" style="margin-top: 0em;">
+                        <div class="col-md-4">
+                            <h4>Engajamento Orgânico</h4>
+                            <p class="lead-xs">
+                            Média Mensal: ' . round($monthlyAvgOrganic, 2) . '<br>
+                            Máximo Semanal: ' . $weeklyMaxOrganic . '<br>
+                            Máximo Mensal: ' . $monthlyMaxOrganic . '<br>
+                            Total: ' . $totalOrganic . '</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Engajamento Não Orgânico</h4>
+                            <p class="lead-xs">
+                            Média Mensal: ' . round($monthlyAvgNaoOrganico, 2) . '<br>
+                            Máximo Semanal: ' . $weeklyMaxNaoOrganico . '<br>
+                            Máximo Mensal: ' . $monthlyMaxNaoOrganico . '<br>
+                            Total: ' . $totalNaoOrganico . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segundo gráfico de barras -->
+            <div class="mt-6">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" id="week-btn-bar">7 Dias</button>
+                        <button type="button" class="btn btn-primary" id="month-btn-bar">30 Dias</button>
+                        <button type="button" class="btn btn-primary" id="year-btn-bar">1 Ano</button>
+                        <button type="button" class="btn btn-primary" id="all-btn-bar">Tudo</button>
+                    </div>
+                    <h1 class="lead ms-2" style="font-size: 40px;">Estatísticas Principais</h1>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart-container" style="height: 500px;">
+                        <canvas id="chart-bar" class="chart-canvas"></canvas>
+                    </div>
+
+                    <div class="mt-2 row text-sm mt-3" style="margin-left: 6.5em;">
+                        <div class="col-md-4 text-justify">
+                            <h4>Impressões</h4>
+                            <p class="lead-xs">
+                            Média Mensal: ' . round($monthlyAvgImpressions, 2) . '<br>
+                            Máximo Semanal: ' . $weeklyMaxImpressions . '<br>
+                            Máximo Mensal: ' . $monthlyMaxImpressions . '<br>
+                            Total: ' . $totalImpressions . '</p>
+                        </div>
+
+                        <div class="col-md-4 text-justify">
+                            <h4>Gostos</h4>
+                            <p class="lead-xs">
+                            Média Mensal: ' . round($monthlyAvgLikes, 2) . '<br>
+                            Média Semanal: ' . $weeklyMaxLikes . '<br>
+                            Média Diária: ' . round($totalLikes / max($impressionsCount, 1), 2) . '<br>
+                            Total: ' . $totalLikes . '</p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <h4>Comentários</h4>
+                            <p class="lead-xs">
+                            Média Mensal: ' . round($monthlyAvgComments, 2) . '<br>
+                            Média Semanal: ' . $weeklyMaxComments . '<br>
+                            Média Diária: ' . round($totalComments / max($commentsCount, 1), 2) . '<br>
+                            Total: ' . $totalComments . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        ';
+
+            // Retorna o HTML
+            echo $html;
+
+
+            // Caminho para o arquivo .js no sistema de arquivos
+            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/redes/public/assets/js/graficos.js';
+
+            // Verifica se o arquivo existe no sistema de arquivos
+
+            // Verifica se o arquivo existe no sistema de arquivos
+            if (file_exists($filePath)) {
+                // Lê o conteúdo do arquivo para uma variável
+                $conteudoDoArquivo = file_get_contents($filePath);
+
+                // Verifica se foi possível ler o arquivo
+                if ($conteudoDoArquivo !== false) {
+                    // Sanitiza as variáveis para prevenir ataques XSS
+
+                    // Exibe o conteúdo do arquivo dentro de uma tag <script>
+                    echo '<script>
+                        var impressions30 = ' . json_encode($impressions30) . ';
+                        var likes30 = ' . json_encode($likes30) . ';
+                        var comments30 = ' . json_encode($comments30) . ';
+                        var organic30 = ' . json_encode($organic30) . ';
+                        var unganic30 = ' . json_encode($unganic30) . ';
+
+                        var impressions7 = ' . json_encode($impressions7) . ';
+                        var likes7 = ' . json_encode($likes7) . ';
+                        var comments7 = ' . json_encode($comments7) . ';
+                        var organic7 = ' . json_encode($organic7) . ';
+                        var unganic7 = ' . json_encode($unganic7) . ';
+
+                        var impressions1ano = ' . json_encode($impressions1ano) . ';
+                        var likes1ano = ' . json_encode($likes1ano) . ';
+                        var comments1ano = ' . json_encode($comments1ano) . ';
+                        var organic1ano = ' . json_encode($organic1ano) . ';
+                        var unganic1ano = ' . json_encode($unganic1ano) . ';
+
+                        var impressionstudo = ' . json_encode($impressionstudo) . ';
+                        var likestudo = ' . json_encode($likestudo) . ';
+                        var commentstudo = ' . json_encode($commentstudo) . ';
+                        var organictudo = ' . json_encode($organictudo) . ';
+                        var unganictudo = ' . json_encode($unganictudo) . ';
+
+                        ' . $conteudoDoArquivo . '</script>';
+                } else {
+                    // Adiciona um fallback ou mensagem de erro
+                    echo 'Não foi possível ler o arquivo.';
+                }
+            } else {
+                // Adiciona um fallback ou mensagem de erro
+                echo 'Arquivo não encontrado.';
+            }
+        } else {
+            $html = '<div class="w-100 text-center" style="height: 400px;"><img src="../../public/img/aviso.png" class="mt-6" style="width: 150px; height: 150px;"><p class="mt-4">Ainda não existem estatísticas disponiveis, <br> Em média demora 7 dias após a publicação ser carregada.</p></div>';
+            echo $html;
+        }
     }
 
     public function getUsersComplete($pesquisa)
@@ -162,7 +525,6 @@ class UserController
         return $this->model->getEditarPrivacy($p_id);
     }
 
-
     public function editarPrivacidade()
     {
         // Ler dados enviados via POST
@@ -170,9 +532,8 @@ class UserController
         $projetos = $_POST['projetos'];
         $gostos = $_POST['gostos'];
         $comentarios = $_POST['comentarios'];
-        
-        if($projetos == 3)
-        {
+
+        if ($projetos == 3) {
             $gostos = 6;
             $comentarios = 9;
         }
@@ -186,20 +547,67 @@ class UserController
         );
 
         $this->model->editarPrivacidade($dadosEvento);
-        
     }
 
-
-    
     public function apagarProjeto()
     {
         // Ler dados enviados via POST
         $id_projeto = $_POST['id_projeto'];
 
         $this->model->apagarProjeto($id_projeto);
-        
+    }
+
+    public function getProjects($id)
+    {
+        return $this->model->getProjects($id);
+    }
+
+    public function getProjectsImages($p_id)
+    {
+        return $this->model->getProjectsImages($p_id);
+    }
+
+    public function getAccountByDirectory($lastDirectoryName)
+    {
+        return $this->model->getAccountByDirectory($lastDirectoryName);
+    }
+
+    public function getAccountById($id)
+    {
+        return $this->model->getAccountById($id);
     }
 
 
+    public function getRatings($id)
+    {
+        return $this->model->getRatings($id);
+    }
 
+
+    public function getRatingsAccounts($id)
+    {
+        return $this->model->getRatingsAccounts($id);
+    }
+
+
+    public function getShowsQuantidade($id)
+    {
+        return $this->model->getShowsQuantidade($id);
+    }
+
+
+    public function getavgStars($id)
+    {
+        return $this->model->getavgStars($id);
+    }
+
+    public function getFollowsQuantidade($id)
+    {
+        return $this->model->getFollowsQuantidade($id);
+    }
+
+    public function getFollowingsQuantidade($id)
+    {
+        return $this->model->getFollowingsQuantidade($id);
+    }
 }

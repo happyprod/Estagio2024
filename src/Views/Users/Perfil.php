@@ -1,10 +1,16 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
 
+use App\Controllers\UserController;
+use App\Models\User;
 use App\Helpers\Database;
 
 $db = Database::connect();
 
+
+// Cria instâncias do modelo e do controlador
+$model = new User($db);
+$controller = new UserController($model);
 
 $filePath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
@@ -16,14 +22,7 @@ $lastDirectoryName = basename($filePath);
 $lastDirectoryName = rtrim($lastDirectoryName, ".php");
 
 
-// Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
-$stmt = $db->prepare('SELECT * FROM accounts WHERE id = ?');
-
-// Executa a consulta SQL, substituindo o marcador de posição '?' pelo valor de $lastDirectoryName
-$stmt->execute([$lastDirectoryName]);
-
-// Obtém o resultado da consulta
-$result = $stmt->fetch(PDO::FETCH_ASSOC); // Retorna a primeira linha do resultado como um array associativo
+$result = $controller->getAccountByDirectory($lastDirectoryName);
 
 if ($result) {
     $id = $result['id'];
@@ -43,11 +42,8 @@ $follows = 0;
 $rating = 0;
 $valor = 0;
 
-// Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
-$sql_infos = "SELECT * FROM accounts WHERE id = ?";
-$stmt_infos = $db->prepare($sql_infos);
-$stmt_infos->execute([$id]);
-$row_infos = $stmt_infos->fetch(PDO::FETCH_ASSOC);
+
+$row_infos = $controller->getAccountById($id);
 
 if ($row_infos) {
     $sobre = $row_infos["about"];

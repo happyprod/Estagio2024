@@ -24,33 +24,8 @@
 
                                 <?php
 
-                                /*
-                                $sql = "SELECT r.stars, r.comentario, a.picture, a.name 
-                                        FROM rating AS r
-                                        INNER JOIN accounts AS a ON r.id_send = a.id
-                                        WHERE r.id_receive = ?"; // Use placeholder for PDO
-
-                                    $stmt_rating = $db->prepare($sql);
-                                    $stmt_rating->execute([$id]);  // Bind the id parameter
-                                    $ratings = $stmt_rating->fetchAll(PDO::FETCH_ASSOC);
-
-                                    // Verifica se a consulta retornou resultados
-                                    if (count($ratings) > 0) {  // Use PDO method to check rows
-                                        $count = 0;
-
-                                        // Exibindo os dados encontrados
-                            */
-
-                                // Consulta SQL para obter os dados desejados
-                                $sql = "SELECT r.stars, r.date, r.comentario, a.picture, a.id, a.name 
-                                        FROM rating AS r
-                                        INNER JOIN accounts AS a ON r.id_send = a.id
-                                        WHERE r.id_receive = ?";
-
-                                $stmt_rating = $db->prepare($sql);
-                                $stmt_rating->execute([$id]);  // Bind the id parameter
-                                $ratings = $stmt_rating->fetchAll(PDO::FETCH_ASSOC);
-
+                                $ratings = $controller->getRatings($id);                    
+                                
                                 // Verifica se a consulta retornou resultados
                                 if (count($ratings) > 0) {  // Use PDO method to check rows
                                     // Exibindo os dados encontrados
@@ -66,12 +41,10 @@
                                         // Substituir \n por <br>
                                         $texto_formatado3 = nl2br(htmlspecialchars($texto_original3)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
 
-
                                         $av_data = $row["date"];
                                         $av_foto = $row["picture"];
                                         $av_nome = $row["name"];
                                         $av_user = $row["id"];
-
 
                                         // Obtém a extensão do arquivo em letras minúsculas
                                         $extension2 = strtolower(pathinfo($av_foto, PATHINFO_EXTENSION));
@@ -85,11 +58,6 @@
                                         } else {
                                             $google_image2 = true;
                                         }
-
-
-
-
-
 
 
                                         echo '
@@ -134,15 +102,8 @@
 
                     <?php
 
-                    // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
-                    $sql = "SELECT r.stars, r.comentario, a.picture, a.id, a.name 
-                        FROM rating AS r
-                        INNER JOIN accounts AS a ON r.id_send = a.id
-                        WHERE r.id_receive = ?"; // Use placeholder for PDO
 
-                    $stmt_rating = $db->prepare($sql);
-                    $stmt_rating->execute([$id]);  // Bind the id parameter
-                    $ratings = $stmt_rating->fetchAll(PDO::FETCH_ASSOC);
+                    $ratings = $controller->getRatingsAccounts($id);
 
                     // Verifica se a consulta retornou resultados
                     if (count($ratings) > 0) {  // Use PDO method to check rows
