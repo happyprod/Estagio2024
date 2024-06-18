@@ -129,25 +129,70 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 
 
 
-// Selecionar o elemento textarea pelo ID
-const textarea = document.getElementById('alterar_sobre');
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.getElementById('alterar_sobre');
+    const contadorCaracteres = document.getElementById('contador_caracteres');
+    const contadorPalavras = document.getElementById('contador_palavras');
 
-// Selecionar os elementos de contagem de caracteres e palavras
-const contadorCaracteres = document.getElementById('contador_caracteres');
-const contadorPalavras = document.getElementById('contador_palavras');
+    textarea.addEventListener('input', () => {
+        const texto = textarea.value;
 
-// Adicionar um ouvinte de eventos de entrada (input) ao textarea
-textarea.addEventListener('input', () => {
-    // Obter o conteúdo atual do textarea
-    const texto = textarea.value;
+        // Contar o número de caracteres (incluindo espaços em branco)
+        const numeroCaracteres = texto.length;
+        contadorCaracteres.textContent = numeroCaracteres;
 
-    // Contar o número de caracteres (incluindo espaços em branco)
-    const numeroCaracteres = texto.length;
-    contadorCaracteres.textContent = numeroCaracteres;
-
-    // Contar o número de palavras
-    const palavras = texto.match(/\S+/g); // Expressão regular para encontrar palavras (sequências de caracteres não espaços em branco)
-    const numeroPalavras = palavras ? palavras.length : 0;
-    contadorPalavras.textContent = numeroPalavras;
+        // Contar o número de palavras
+        const palavras = texto.match(/\S+/g); // Expressão regular para encontrar palavras (sequências de caracteres não espaços em branco)
+        const numeroPalavras = palavras ? palavras.length : 0;
+        contadorPalavras.textContent = numeroPalavras;
+    });
 });
 
+
+
+
+
+document.getElementById('change-cover-photo').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+    document.getElementById('file-input').onchange = function(event) {
+        let file = event.target.files[0];
+        uploadPhoto(file, 'cover');
+    };
+});
+
+document.getElementById('change-profile-photo').addEventListener('click', function() {
+    document.getElementById('file-input').click();
+    document.getElementById('file-input').onchange = function(event) {
+        let file = event.target.files[0];
+        uploadPhoto(file, 'profile');
+    };
+});
+
+
+
+window.onload = function() {
+    // Quando a página estiver completamente carregada, esconde o spinner
+    var spinnerContainer = document.querySelector('.spinner-container');
+    spinnerContainer.style.display = 'none';
+};
+
+
+function displaySelectedImage(event, imageId) {
+    const selectedFile = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const imgElement = document.getElementById(imageId);
+        imgElement.src = event.target.result;
+    }
+
+    reader.readAsDataURL(selectedFile);
+}
+
+function uploadCoverImage() {
+    document.getElementById('coverFileInput').click();
+}
+
+function uploadProfileImage() {
+    document.getElementById('profileFileInput').click();
+}

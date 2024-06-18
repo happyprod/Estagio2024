@@ -451,7 +451,7 @@ function guardarSobre(id_projeto) {
     });
 
     var xhr = new XMLHttpRequest();
-    var url = "../../src/Handlers/guardar_sobre.php";
+    var url = "../../src/Handlers/guardarEvento.php";
     var params = "nomeEvento=" + encodeURIComponent(nomeEvento) +
                  "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
                  "&descricao=" + encodeURIComponent(descricao) +

@@ -81,7 +81,7 @@ echo '
 
 
                 <div class="modal-body">
-                   
+                
                 <div id="alterarEstatisticas' . $count . '">
                     <!-- conteudo dinamico será exibido aquim -->
                 </div>

@@ -33,7 +33,10 @@ $nome = $row_infos["name"];
 $email = $row_infos["email"];
 $numero = $row_infos["number"];
 $localizacao = $row_infos["location"];
-$facebook = $row_infos["facebook"];
+$instagram = $row_infos["Instagram"];
+$youtube = $row_infos["Youtube"];
+$tiktok = $row_infos["Tiktok"];
+$blog = $row_infos["Blog"];
 $type_utilizador = $row_infos["type"];
 $fotodeperfil = $row_infos["picture"];
 $fotodecapa = $row_infos["picture_background"];
@@ -96,7 +99,7 @@ $fotodecapa = $row_infos["picture_background"];
 
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
+<body class="g-sidenav-show bg-gray-100" onload="loadDataOnLoadSobre()">
 
     <?php include('../src/Views/Layouts/Menu.php'); ?>
 

@@ -27779,6 +27779,39 @@ gmp-map:not(:defined) {
 }
 
 
+
+
+
+
+.cover-overlay, .profile-overlay {
+  position: relative;
+  cursor: pointer;
+}
+
+.cover-overlay img, .profile-overlay img {
+  display: block;
+}
+
+.cover-mask, .profile-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cover-overlay:hover .cover-mask, .profile-overlay:hover .profile-mask {
+  opacity: 1;
+}
+
+
 /*
 Or just:
 div.dropdown-row>a.dropdown-item{

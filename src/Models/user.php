@@ -406,4 +406,10 @@ class User
         return count($stmt->fetchAll(PDO::FETCH_OBJ));
     }
 
+    public function getEditarSobre()
+    {
+        
+    }
+
+
 }

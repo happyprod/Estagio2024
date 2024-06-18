@@ -654,4 +654,11 @@ class UserController
     {
         return $this->model->getFollowingsQuantidade($id);
     }
+
+
+    public function getEditarSobre()
+    {
+        
+        return $this->model->getEditarSobre();
+    }
 }

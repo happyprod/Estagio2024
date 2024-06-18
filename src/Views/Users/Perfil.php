@@ -51,7 +51,6 @@ if ($row_infos) {
     $email = $row_infos["email"];
     $numero = $row_infos["number"];
     $localizacao = $row_infos["location"];
-    $facebook = $row_infos["facebook"];
     $type_utilizador = $row_infos["type"];
     $fotodeperfil = $row_infos["picture"];
     $fotodecapa = $row_infos["picture_background"];
@@ -119,13 +118,13 @@ if ($row_infos) {
 
         <!-- End Navbar -->
         <div class="container-fluid">
-            <div class="page-header min-height-300 border-radius-xl mt-4" <?php
-                                                                            if ($fotodecapa == null) {
-                                                                                echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
-                                                                            } else {
-                                                                                echo 'style="background-image: url(\'http://localhost/redes/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%; "';
-                                                                            }
-                                                                            ?>>
+            <div class="page-header min-height-300 img-fluid border-radius-xl mt-4" <?php
+                                                                                    if ($fotodecapa == null) {
+                                                                                        echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
+                                                                                    } else {
+                                                                                        echo 'style="background-image: url(\'http://localhost/redes/public/users/' . $id . '/' . $fotodecapa . ' \'); object-fit: cover; background-position-y: 50%; "';
+                                                                                    }
+                                                                                    ?>>
             </div>
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
                 <div class="row gx-4">
@@ -153,7 +152,7 @@ if ($row_infos) {
                                     } else {
                                         echo 'src="' . $fotodeperfil . '"';
                                     }
-                                    ?> alt="profile_image" style="height: 80px; width: 80px;" class="border-radius-lg shadow-sm">
+                                    ?> alt="profile_image" style="height: 80px; width: 80px; object-fit: cover;" class="border-radius-lg img-fluid shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">

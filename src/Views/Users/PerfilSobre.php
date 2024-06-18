@@ -1,31 +1,12 @@
 <?php
 
-$facebook_url = $facebook;
-
-// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-if (!preg_match("~^(?:f|ht)tps?://~i", $facebook_url)) {
-    $facebook_url = 'http://' . $facebook_url;
-}
-
-
-$instagram = $row_infos["instagram"];
+$instagram = $row_infos["Instagram"];
 
 $instagram_url = $instagram;
 
 // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
 if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
     $instagram_url = 'http://' . $instagram_url;
-}
-
-
-
-$twitter = $row_infos["twitter"];
-
-$twitter_url = $twitter;
-
-// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-if (!preg_match("~^(?:f|ht)tps?://~i", $twitter_url)) {
-    $twitter_url = 'http://' . $twitter_url;
 }
 
 ?>
@@ -125,22 +106,6 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $twitter_url)) {
                                                     Sociais:</strong> &nbsp;
 
                                                 <?php
-                                                if ($facebook != null) {
-                                                    echo '<a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="' . $facebook_url . '" target="_blank"> <i class="fab fa-facebook fa-lg"></i>
-                                        </a>';
-                                                }
-                                                ?>
-
-
-                                                <?php
-                                                if ($twitter != null) {
-                                                    echo '<a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="' . $twitter_url . '" target="_blank"> <i class="fab fa-twitter fa-lg"></i>
-                                        </a>';
-                                                }
-                                                ?>
-
-
-                                                <?php
                                                 if ($instagram != null) {
                                                     echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i>
                                         </a>';
@@ -192,22 +157,6 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $twitter_url)) {
                 </li>
                 <li class="list-group-item border-0 ps-0 pb-0">
                     <strong class="text-dark text-sm">Redes Sociais:</strong> &nbsp;
-
-                    <?php
-                    if ($facebook != null) {
-                        echo '<a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="' . $facebook_url . '" target="_blank"> <i class="fab fa-facebook fa-lg"></i>
-                                        </a>';
-                    }
-                    ?>
-
-
-                    <?php
-                    if ($twitter != null) {
-                        echo '<a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="' . $twitter_url . '" target="_blank"> <i class="fab fa-twitter fa-lg"></i>
-                                        </a>';
-                    }
-                    ?>
-
 
                     <?php
                     if ($instagram != null) {
