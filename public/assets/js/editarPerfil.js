@@ -10,9 +10,6 @@ function erro(mensagem) {
     toastr.error(mensagem);
 }
 
-
-
-
 $(document).ready(function() {
     // Função para verificar e ajustar o texto conforme necessário
     $('.comentario').each(function() {
@@ -30,8 +27,6 @@ $(document).ready(function() {
         }
     });
 });
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
     var headerDiv = document.getElementById('headerDiv');
@@ -79,23 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
     sobre_nav.classList.add('px-4');
 });
 
-
-
-
-
 function mostrarSobre() {
     var sobre = document.getElementById('ver_sobre');
     var projetos = document.getElementById('ver_projetos');
-    var perfil = document.getElementById('ver_perfil');
     var sobre_nav = document.getElementById('sobre_nav');
-    var perfil_nav = document.getElementById('perfil_nav');
     var projetos_nav = document.getElementById('projetos_nav');
 
-    console.log(sobre, projetos, perfil, 'aaaaaaaaaaaaaaaa'); // Verifique se os elementos foram corretamente obtidos
-
-
-    perfil.classList.add('d-none');
-    perfil_nav.classList.remove('active');
+    console.log(sobre, projetos, 'aaaaaaaaaaaaaaaa'); // Verifique se os elementos foram corretamente obtidos
 
     sobre.classList.remove('d-none');
     sobre_nav.classList.add('active');
@@ -103,22 +88,16 @@ function mostrarSobre() {
     projetos.classList.add('d-none');
     projetos_nav.classList.remove('active');
 
-    document.getElementById('nomepag').text.add('Sobre');
 }
 
 
 function mostrarProjetos() {
     var sobre = document.getElementById('ver_sobre');
     var projetos = document.getElementById('ver_projetos');
-    var perfil = document.getElementById('ver_perfil');
     var sobre_nav = document.getElementById('sobre_nav');
-    var perfil_nav = document.getElementById('perfil_nav');
     var projetos_nav = document.getElementById('projetos_nav');
 
-    console.log(sobre, projetos, perfil); // Verifique se os elementos foram corretamente obtidos
-
-    perfil.classList.add('d-none');
-    perfil_nav.classList.remove('active');
+    console.log(sobre, projetos); // Verifique se os elementos foram corretamente obtidos
 
     sobre.classList.add('d-none');
     sobre_nav.classList.remove('active');
@@ -126,31 +105,7 @@ function mostrarProjetos() {
     projetos.classList.remove('d-none');
     projetos_nav.classList.add('active');
 
-    document.getElementById('nomepag').text.add('Projetos');
 }
-
-function mostrarPerfil() {
-    var sobre = document.getElementById('ver_sobre');
-    var projetos = document.getElementById('ver_projetos');
-    var perfil = document.getElementById('ver_perfil');
-    var sobre_nav = document.getElementById('sobre_nav');
-    var perfil_nav = document.getElementById('perfil_nav');
-    var projetos_nav = document.getElementById('projetos_nav');
-
-    console.log(sobre, projetos, perfil); // Verifique se os elementos foram corretamente obtidos
-
-    perfil.classList.remove('d-none');
-    perfil_nav.classList.add('active');
-
-    sobre.classList.add('d-none');
-    sobre_nav.classList.remove('active');
-
-    projetos.classList.add('d-none');
-    projetos_nav.classList.remove('active');
-
-    document.getElementById('nomepag').text.add('Sobre');
-}
-
 
 function mostrarTextoCompleto() {
     var divTexto = document.getElementById('textoDiv');

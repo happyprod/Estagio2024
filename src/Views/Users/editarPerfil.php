@@ -102,11 +102,11 @@ $fotodecapa = $row_infos["picture_background"];
 
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 py-3">
         <!-- End Navbar -->
-        <div class="container-fluid w-90" style="margin-top: 9.5em;">
+        <div class="container-fluid" style="margin-top: 7em; width: 95%;">
             <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
                 <div class="row gx-4">
                     <div class="col-lg-12 col-md-12 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        <div class="nav-wrapper position-relative end-0 ms-5">
+                        <div class="nav-wrapper position-relative end-0 ms-1">
                             <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link mb-0 px-0 py-1 active" href="javascript:mostrarSobre();" role="tab" id="sobre_nav">
@@ -121,13 +121,6 @@ $fotodecapa = $row_infos["picture_background"];
                                         <span class="ms-1">Projetos</span>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1" id="perfil_nav" href="javascript:mostrarPerfil();" role="tab" aria-selected="false">
-                                        <i class="ni ni-circle-08" data-bs-toggle="tooltip" data-bs-placement="top" title="Foto de Perfil/Capa"></i>
-                                        <span class="ms-1">Foto de Perfil/Capa</span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -136,19 +129,19 @@ $fotodecapa = $row_infos["picture_background"];
         </div>
 
 
-        <div class="container-fluid py-4 editar w-90">
+        <div class="container-fluid py-4 editar" style="width: 90%;">
 
             <?php include('../src/Views/Users/editarPerfilSobre.php'); ?>
 
-        </div>
 
 
 
 
         <?php 
-            include('../src/Views/Users/editarPerfilPerfil.php'); 
+            include('../src/Views/Users/editarPerfilProjetos.php'); 
         ?>
 
+</div>
 
     </div>
 

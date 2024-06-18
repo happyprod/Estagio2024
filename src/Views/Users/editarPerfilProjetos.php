@@ -1,4 +1,4 @@
-<div class="d-none w-90 mx-auto" id="ver_perfil">
+<div class="d-none w-90 mx-auto" id="ver_projetos">
             <div class="row mt-4">
                 <div class="col-12 col-xl-7">
                     <?php

@@ -50,7 +50,7 @@ var anoAtual = hoje.getFullYear();
 var mesesExibidos = [];
 
 // Adicionar os 12 meses ao array (11 anteriores + mês atual)
-for (var i = 0; i <= 11; i++) {
+for (var i = 0; i <= 12; i++) {
   // Calcular o índice do mês subtraindo i meses
   var indiceMes = mesAtual - i;
   var ano = anoAtual;
@@ -534,51 +534,59 @@ var chartBar = new Chart(ctx2, {
   },
 });
 
+// Função para adicionar event listener de forma segura
+function addListenerIfExists(id, event, callback) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.addEventListener(event, callback);
+  }
+}
+
 // Adiciona listeners aos botões do primeiro gráfico de linha
-document.getElementById('week-btn-line').addEventListener('click', function () {
+addListenerIfExists('week-btn-line', 'click', function () {
   chartLine.data = data.week;
   chartLine.options.scales.y.ticks.suggestedMax = 600;
   chartLine.update();
 });
 
-document.getElementById('month-btn-line').addEventListener('click', function () {
+addListenerIfExists('month-btn-line', 'click', function () {
   chartLine.data = data.month;
   chartLine.options.scales.y.ticks.suggestedMax = 600;
   chartLine.update();
 });
 
-document.getElementById('year-btn-line').addEventListener('click', function () {
+addListenerIfExists('year-btn-line', 'click', function () {
   chartLine.data = data.year;
   chartLine.options.scales.y.ticks.suggestedMax = 600;
   chartLine.update();
 });
 
-document.getElementById('all-btn-line').addEventListener('click', function () {
+addListenerIfExists('all-btn-line', 'click', function () {
   chartLine.data = allData;
   chartLine.options.scales.y.ticks.suggestedMax = 600;
   chartLine.update();
 });
 
 // Adiciona listeners aos botões do segundo gráfico de barras
-document.getElementById('week-btn-bar').addEventListener('click', function () {
+addListenerIfExists('week-btn-bar', 'click', function () {
   chartBar.data = data2.week;
   chartBar.options.scales.y.ticks.suggestedMax = 600;
   chartBar.update();
 });
 
-document.getElementById('month-btn-bar').addEventListener('click', function () {
+addListenerIfExists('month-btn-bar', 'click', function () {
   chartBar.data = data2.month;
   chartBar.options.scales.y.ticks.suggestedMax = 600;
   chartBar.update();
 });
 
-document.getElementById('year-btn-bar').addEventListener('click', function () {
+addListenerIfExists('year-btn-bar', 'click', function () {
   chartBar.data = data2.year;
   chartBar.options.scales.y.ticks.suggestedMax = 600;
   chartBar.update();
 });
 
-document.getElementById('all-btn-bar').addEventListener('click', function () {
+addListenerIfExists('all-btn-bar', 'click', function () {
   chartBar.data = allData2;
   chartBar.options.scales.y.ticks.suggestedMax = 600;
   chartBar.update();

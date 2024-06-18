@@ -401,36 +401,9 @@ class User
 
     public function getVerificarDias($p_id)
     {
-        $p_id = 1;  // ID do projeto (exemplo)
-        $sql = "SELECT data FROM projects WHERE id = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$p_id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row) {
-            $dataBanco = $row['data'];
-
-            // Obter a data atual em formato de timestamp
-            $dataAtual = time();
-
-            // Converter a data do banco de dados para timestamp
-            $dataBancoTimestamp = strtotime($dataBanco);
-
-            // Calcular a diferença em segundos
-            $diferencaEmSegundos = $dataAtual - $dataBancoTimestamp;
-fff
-            // Converter a diferença para dias, semanas, meses e anos
-            $diferencaEmDias = floor($diferencaEmSegundos / (60 * 60 * 24));
-            $diferencaEmSemanas = floor($diferencaEmDias / 7);
-            $diferencaEmMeses = floor($diferencaEmDias / 30);  // Aproximação para meses
-            $diferencaEmAnos = floor($diferencaEmDias / 365);  // Aproximação para anos
-
-            echo "Diferença total em dias: $diferencaEmDias dias<br>";
-            echo "Diferença total em semanas: $diferencaEmSemanas semanas<br>";
-            echo "Diferença total em meses: $diferencaEmMeses meses<br>";
-            echo "Diferença total em anos: $diferencaEmAnos anos<br>";
-        } else {
-            echo "Nenhum registro encontrado para o ID $p_id.";
-        }
+        $stmt = $this->db->prepare("SELECT id_snapshot FROM projects_stats_snapshot WHERE id_projeto = ?");
+        $stmt->execute([$p_id]);  // Bind the id parameter
+        return count($stmt->fetchAll(PDO::FETCH_OBJ));
     }
+
 }
