@@ -129,27 +129,6 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const textarea = document.getElementById('alterar_sobre');
-    const contadorCaracteres = document.getElementById('contador_caracteres');
-    const contadorPalavras = document.getElementById('contador_palavras');
-
-    textarea.addEventListener('input', () => {
-        const texto = textarea.value;
-
-        // Contar o número de caracteres (incluindo espaços em branco)
-        const numeroCaracteres = texto.length;
-        contadorCaracteres.textContent = numeroCaracteres;
-
-        // Contar o número de palavras
-        const palavras = texto.match(/\S+/g); // Expressão regular para encontrar palavras (sequências de caracteres não espaços em branco)
-        const numeroPalavras = palavras ? palavras.length : 0;
-        contadorPalavras.textContent = numeroPalavras;
-    });
-});
-
-
-
 
 
 document.getElementById('change-cover-photo').addEventListener('click', function() {
@@ -195,4 +174,24 @@ function uploadCoverImage() {
 
 function uploadProfileImage() {
     document.getElementById('profileFileInput').click();
+}
+
+
+
+function guardarEditarPerfil()
+{
+    console.log('updatestats');
+    $.ajax({
+        url: '../../src/Handlers/getEditarSobre.php',
+        method: 'GET',
+        data: { var1: var1}, // Passando variáveis na requisição
+        success: function (data) {
+            $('#alterarEstatisticas' + var1).html(data);
+            console.log(data);
+            console.log('updasdasdasdas');
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
 }
