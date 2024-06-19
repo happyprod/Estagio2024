@@ -14,6 +14,28 @@ class User
     }
 
 
+    public function guardarEditarProjetosImagens1($projeto)
+    {
+        // Deleta todos os registros com o id_project igual a $projeto
+        $stmt_delete = $this->db->prepare("DELETE FROM projects_images WHERE id_project = :projeto");
+        $stmt_delete->bindParam(':projeto', $projeto, PDO::PARAM_INT);
+        $stmt_delete->execute();
+    }
+
+
+    public function guardarEditarProjetosImagens2($projeto, $ordem, $nome_arquivo)
+    {
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, Ordem) VALUES (:projeto, :image, :ordem)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':projeto', $projeto, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':image', $nome_arquivo, PDO::PARAM_STR); // Armazena apenas o nome do arquivo
+        $novaordem = $ordem + 1;
+        $stmt_insert->bindParam(':ordem', $novaordem, PDO::PARAM_INT);
+        $stmt_insert->execute();
+    }
+
     public function getAccountByDirectory($lastDirectoryName)
     {
         // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
@@ -406,10 +428,44 @@ class User
         return count($stmt->fetchAll(PDO::FETCH_OBJ));
     }
 
-    public function getEditarSobre()
+    public function guardarEditarPerfilSobre($dadosEvento)
     {
-        
+
+        $user_id = $_SESSION['user_id'];
+
+        $LBLfotoPerfil = $dadosEvento['LBLfotoPerfil'] ?? '';
+        $LBLfotoCapa = $dadosEvento['LBLfotoCapa'] ?? '';
+        $TXTnome = $dadosEvento['TXTnome'] ?? '';
+        $TXTnumero = $dadosEvento['TXTnumero'] ?? '';
+        $TXTemail = $dadosEvento['TXTemail'] ?? '';
+        $TXTlocalizacao = $dadosEvento['TXTlocalizacao'] ?? '';
+        $TXTdescricao = $dadosEvento['TXTdescricao'] ?? '';
+        $youtube = $dadosEvento['youtube'] ?? '';
+        $instagram = $dadosEvento['instagram'] ?? '';
+        $tiktok = $dadosEvento['tiktok'] ?? '';
+        $blog = $dadosEvento['blog'] ?? '';
+        $yt_switch = $dadosEvento['yt_switch'] ?? '';
+        $ig_switch = $dadosEvento['ig_switch'] ?? '';
+        $tiktok_switch = $dadosEvento['tiktok_switch'] ?? '';
+        $blog_switch = $dadosEvento['blog_switch'] ?? '';
+
+        $stmt = $this->db->prepare("UPDATE accounts SET picture = ?, picture_background = ?, name = ?, number = ?, email = ?, location = ?, about = ?, Youtube = ?, Instagram = ?, Tiktok = ?, Blog = ?, Active_Youtube = ?, Active_Instagram = ?, Active_Tiktok = ?, Active_Blog = ? WHERE id = ?");
+        $stmt->bindParam(1, $LBLfotoPerfil);
+        $stmt->bindParam(2, $LBLfotoCapa);
+        $stmt->bindParam(3, $TXTnome);
+        $stmt->bindParam(4, $TXTnumero);
+        $stmt->bindParam(5, $TXTemail);
+        $stmt->bindParam(6, $TXTlocalizacao);
+        $stmt->bindParam(7, $TXTdescricao);
+        $stmt->bindParam(8, $youtube);
+        $stmt->bindParam(9, $instagram);
+        $stmt->bindParam(10, $tiktok);
+        $stmt->bindParam(11, $blog);
+        $stmt->bindParam(12, $yt_switch);
+        $stmt->bindParam(13, $ig_switch);
+        $stmt->bindParam(14, $tiktok_switch);
+        $stmt->bindParam(15, $blog_switch);
+        $stmt->bindParam(16, $user_id);
+        $stmt->execute();
     }
-
-
 }

@@ -1,10 +1,18 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
 
+
+use App\Controllers\UserController;
+use App\Models\User;
 use App\Helpers\Database;
+
 
 $db = Database::connect();
 
+
+// Cria instâncias do modelo e do controlador
+$model = new User($db);
+$controller = new UserController($model);
 
 $id = $_SESSION['user_id'];
 
@@ -20,13 +28,7 @@ $rating = 0;
 $valor = 0;
 
 
-
-
-
-$sql_infos = "SELECT * FROM accounts WHERE id = ?";
-$stmt_infos = $db->prepare($sql_infos);
-$stmt_infos->execute([$id]);
-$row_infos = $stmt_infos->fetch(PDO::FETCH_ASSOC);
+$row_infos = $controller->getAccountById($id);
 
 $sobre = $row_infos["about"];
 $nome = $row_infos["name"];
@@ -40,6 +42,30 @@ $blog = $row_infos["Blog"];
 $type_utilizador = $row_infos["type"];
 $fotodeperfil = $row_infos["picture"];
 $fotodecapa = $row_infos["picture_background"];
+
+if ($row_infos["Active_Youtube"] == 1) {
+    $yt_check = 'checked=""';
+} else {
+    $yt_check = '';
+}
+
+if ($row_infos["Active_Instagram"] == 1) {
+    $ig_check = 'checked=""';
+} else {
+    $ig_check = '';
+}
+
+if ($row_infos["Active_Tiktok"] == 1) {
+    $tiktok_check = 'checked=""';
+} else {
+    $tiktok_check = '';
+}
+
+if ($row_infos["Active_Blog"] == 1) {
+    $blog_check = 'checked=""';
+} else {
+    $blog_check = '';
+}
 
 
 ?>
@@ -62,6 +88,7 @@ $fotodecapa = $row_infos["picture_background"];
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARtHqWhhONSQVfBMlIV4SMerzDmSTDf4o&libraries=places"></script>
 
     <!-- Nucleo Icons -->
     <link href="../public/assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -99,7 +126,7 @@ $fotodecapa = $row_infos["picture_background"];
 
 </head>
 
-<body class="g-sidenav-show bg-gray-100" onload="loadDataOnLoadSobre()">
+<body class="g-sidenav-show bg-gray-100">
 
     <?php include('../src/Views/Layouts/Menu.php'); ?>
 
@@ -140,11 +167,11 @@ $fotodecapa = $row_infos["picture_background"];
 
 
 
-        <?php 
-            include('../src/Views/Users/editarPerfilProjetos.php'); 
-        ?>
+            <?php
+            include('../src/Views/Users/editarPerfilProjetos.php');
+            ?>
 
-</div>
+        </div>
 
     </div>
 

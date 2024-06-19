@@ -1,3 +1,15 @@
+// Função para inicializar o autocomplete
+function initAutocomplete() {
+    var autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('TXTlocalizacao'),
+        {
+            types: ['geocode']  // Restringe os resultados a endereços geográficos
+        }
+    );
+}
+google.maps.event.addDomListener(window, 'load', initAutocomplete);
+
+
 function alteradocomsucesso() {
     toastr.options.timeOut = 10000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
@@ -10,9 +22,9 @@ function erro(mensagem) {
     toastr.error(mensagem);
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Função para verificar e ajustar o texto conforme necessário
-    $('.comentario').each(function() {
+    $('.comentario').each(function () {
         var max_width = $(this).width(); // Largura do elemento <p>
         var text_width = $(this)[0].scrollWidth; // Largura real do texto dentro do elemento
 
@@ -28,25 +40,25 @@ $(document).ready(function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var headerDiv = document.getElementById('headerDiv');
     var overlay = document.getElementById('overlay');
     var imageUpload = document.getElementById('imageUpload');
 
     // Adicionar evento de clique no texto "Alterar Imagem"
-    overlay.addEventListener('click', function() {
+    overlay.addEventListener('click', function () {
         imageUpload.click(); // Quando o texto é clicado, aciona o clique no input de arquivo
     });
 
     // Adicionar evento de seleção de arquivo
-    imageUpload.addEventListener('change', function() {
+    imageUpload.addEventListener('change', function () {
         var file = imageUpload.files[0]; // Obter o arquivo selecionado pelo usuário
 
         if (file) {
             var reader = new FileReader();
 
             // Callback executado quando a imagem é carregada
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 // Atualizar o background-image da div com a imagem carregada
                 headerDiv.style.backgroundImage = 'url(' + e.target.result + ')';
             };
@@ -57,18 +69,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Adicionar evento de mouseover para mostrar a sobreposição
-    headerDiv.addEventListener('mouseover', function() {
+    headerDiv.addEventListener('mouseover', function () {
         overlay.style.opacity = 1; // Torna a sobreposição visível
     });
 
     // Adicionar evento de mouseout para ocultar a sobreposição
-    headerDiv.addEventListener('mouseout', function() {
+    headerDiv.addEventListener('mouseout', function () {
         overlay.style.opacity = 0; // Torna a sobreposição invisível novamente
     });
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var sobre_nav = document.getElementById('sobre_nav');
     sobre_nav.classList.remove('px-0');
     sobre_nav.classList.add('px-4');
@@ -131,17 +143,17 @@ if (divTexto.scrollHeight > divTexto.clientHeight) {
 
 
 
-document.getElementById('change-cover-photo').addEventListener('click', function() {
+document.getElementById('change-cover-photo').addEventListener('click', function () {
     document.getElementById('file-input').click();
-    document.getElementById('file-input').onchange = function(event) {
+    document.getElementById('file-input').onchange = function (event) {
         let file = event.target.files[0];
         uploadPhoto(file, 'cover');
     };
 });
 
-document.getElementById('change-profile-photo').addEventListener('click', function() {
+document.getElementById('change-profile-photo').addEventListener('click', function () {
     document.getElementById('file-input').click();
-    document.getElementById('file-input').onchange = function(event) {
+    document.getElementById('file-input').onchange = function (event) {
         let file = event.target.files[0];
         uploadPhoto(file, 'profile');
     };
@@ -149,7 +161,7 @@ document.getElementById('change-profile-photo').addEventListener('click', functi
 
 
 
-window.onload = function() {
+window.onload = function () {
     // Quando a página estiver completamente carregada, esconde o spinner
     var spinnerContainer = document.querySelector('.spinner-container');
     spinnerContainer.style.display = 'none';
@@ -160,7 +172,7 @@ function displaySelectedImage(event, imageId) {
     const selectedFile = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         const imgElement = document.getElementById(imageId);
         imgElement.src = event.target.result;
     }
@@ -177,21 +189,79 @@ function uploadProfileImage() {
 }
 
 
+function guardarEditarPerfil() {
+    var coverPhoto = document.getElementById('nome_arquivo').src;
+    var LBLfotoPerfil = document.getElementById('profile-image').src;
 
-function guardarEditarPerfil()
-{
-    console.log('updatestats');
-    $.ajax({
-        url: '../../src/Handlers/getEditarSobre.php',
-        method: 'GET',
-        data: { var1: var1}, // Passando variáveis na requisição
-        success: function (data) {
-            $('#alterarEstatisticas' + var1).html(data);
-            console.log(data);
-            console.log('updasdasdasdas');
-        },
-        error: function (xhr, status, error) {
-            console.error('Erro ao obter dados:', error);
+
+    var TXTnome = document.getElementById('TXTnome').value;
+    var TXTnumero = document.getElementById('TXTnumero').value;
+    var TXTemail = document.getElementById('TXTemail').value;
+    var TXTlocalizacao = document.getElementById('TXTlocalizacao').value;
+    var TXTdescricao = document.getElementById('TXTdescricao').value;
+    var youtube = document.getElementById('youtube').value;
+    var instagram = document.getElementById('instagram').value;
+    var tiktok = document.getElementById('tiktok').value;
+    var blog = document.getElementById('blog').value;
+    var yt_switch = document.getElementById('yt_switch').checked;
+    var ig_switch = document.getElementById('ig_switch').checked;
+    var tiktok_switch = document.getElementById('tiktok_switch').checked;
+    var blog_switch = document.getElementById('blog_switch').checked;
+    /////////////////////////////////////////////////////////////////////////////
+    var yt_switch2 = document.getElementById('yt_switch');
+    var ig_switch2 = document.getElementById('ig_switch');
+    var tiktok_switch2 = document.getElementById('tiktok_switch');
+    var blog_switch2 = document.getElementById('blog_switch');
+    ////////////////////////////////////////////////////////////////////////////
+
+    if (youtube == '') {
+        yt_switch2.checked = false;
+    }
+
+    if (instagram == '') {
+        ig_switch2.checked = false;
+    }
+
+    if (tiktok == '') {
+        tiktok_switch2.checked = false;
+    }
+
+    if (blog == '') {
+        blog_switch2.checked = false;
+    }
+
+    console.log(yt_switch, ig_switch, tiktok_switch, blog_switch);
+
+
+    var xhr = new XMLHttpRequest();
+    var url = "../src/Handlers/guardarEditarPerfilSobre.php";
+    var params = "LBLfotoPerfil=" + encodeURIComponent(LBLfotoPerfil) +
+        "&LBLfotoCapa=" + encodeURIComponent(coverPhoto) +
+        "&TXTnome=" + encodeURIComponent(TXTnome) +
+        "&TXTnumero=" + encodeURIComponent(TXTnumero) +
+        "&TXTemail=" + encodeURIComponent(TXTemail) +
+        "&TXTlocalizacao=" + encodeURIComponent(TXTlocalizacao) +
+        "&TXTdescricao=" + encodeURIComponent(TXTdescricao) +
+        "&youtube=" + encodeURIComponent(youtube) +
+        "&instagram=" + encodeURIComponent(instagram) +
+        "&tiktok=" + encodeURIComponent(tiktok) +
+        "&blog=" + encodeURIComponent(blog) +
+        "&yt_switch=" + encodeURIComponent(yt_switch) +
+        "&ig_switch=" + encodeURIComponent(ig_switch) +
+        "&tiktok_switch=" + encodeURIComponent(tiktok_switch) +
+        "&blog_switch=" + encodeURIComponent(blog_switch);
+
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                alteradocomsucesso('Perfil editado com sucesso!');
+            } else {
+                console.error("Erro na requisição: " + xhr.status);
+            }
         }
-    });
+    };
+    xhr.send(params);
 }

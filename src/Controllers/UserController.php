@@ -147,7 +147,7 @@ class UserController
         $data30dias = $this->model->getEstatisticas30dias($p_id);
         $data1ano = $this->model->getEstatisticas1ano($p_id);
         $dataTudo = $this->model->getEstatisticastudo($p_id);
-        
+
         $dataVerificarDias = $this->model->getVerificarDias($p_id);
 
 
@@ -351,7 +351,7 @@ class UserController
             $unganictudo .= ']';
 
 
-           
+
             // Gera o HTML
             $html = '';
 
@@ -362,27 +362,23 @@ class UserController
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <h1 class="lead ms-2" style="font-size: 40px;">Engajamento Orgânico</h1>
                     <div class="btn-group mt-3" role="group" aria-label="Basic example">';
-                    if ($dataVerificarDias > 7)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="week-btn-line">7 Dias</button>';
-                    }
-                     
-                    if ($dataVerificarDias > 31)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="month-btn-line">Ultimo Mês</button>';
-                    }
+            if ($dataVerificarDias > 7) {
+                $html .= '<button type="button" class="btn btn-primary" id="week-btn-line">7 Dias</button>';
+            }
 
-                    if ($dataVerificarDias > 364)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="year-btn-line">Ultimo Ano</button>';
-                    }
+            if ($dataVerificarDias > 31) {
+                $html .= '<button type="button" class="btn btn-primary" id="month-btn-line">Ultimo Mês</button>';
+            }
 
-                    if ($dataVerificarDias > 62)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="all-btn-line">Tudo</button>';
-                    }
-                        
-                    $html .= '</div>
+            if ($dataVerificarDias > 364) {
+                $html .= '<button type="button" class="btn btn-primary" id="year-btn-line">Ultimo Ano</button>';
+            }
+
+            if ($dataVerificarDias > 62) {
+                $html .= '<button type="button" class="btn btn-primary" id="all-btn-line">Tudo</button>';
+            }
+
+            $html .= '</div>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart-container" style="height: 500px;">
@@ -393,26 +389,24 @@ class UserController
                             <h4>Engajamento Orgânico</h4>
                             <p class="lead-xs">
                                 Média Diária: ' . $OrganicMediaDiaria . '<br>';
-                                if ($dataVerificarDias > 31)
-                                {
-                                    $html .= 'Média Mensal: ' . $OrganicMensal . '<br>
+            if ($dataVerificarDias > 31) {
+                $html .= 'Média Mensal: ' . $OrganicMensal . '<br>
                                     Máximo Mensal: ' . $OrganicMaxMensal . '<br>';
-                                }
+            }
 
-                            $html .= 'Total: ' . $OrganicTotal . '</p>
+            $html .= 'Total: ' . $OrganicTotal . '</p>
                         </div>
                         <div class="col-md-4">
                             <h4>Engajamento Não Orgânico</h4>
                             <p class="lead-xs">
                                 Média Diária: ' . $UnganicMediaDiaria . '<br>';
-                                    
-                                    if ($dataVerificarDias > 31)
-                                    {
-                                        $html .= 'Média Mensal: ' . $UnganicMensal . '<br>
-                                        Máximo Mensal: ' . $UnganicMaxMensal . '<br>';
-                                    }
 
-                                $html .= 'Total: ' . $UnganicTotal . '</p>
+            if ($dataVerificarDias > 31) {
+                $html .= 'Média Mensal: ' . $UnganicMensal . '<br>
+                                        Máximo Mensal: ' . $UnganicMaxMensal . '<br>';
+            }
+
+            $html .= 'Total: ' . $UnganicTotal . '</p>
                         </div>
                     </div>
                 </div>
@@ -423,26 +417,22 @@ class UserController
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <div class="btn-group mt-2" role="group" aria-label="Basic example">';
 
-                    if ($dataVerificarDias > 7)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="week-btn-bar">7 Dias</button>';
-                    }
-                     
-                    if ($dataVerificarDias > 31)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="month-btn-bar">Ultimo Mês</button>';
-                    }
+            if ($dataVerificarDias > 7) {
+                $html .= '<button type="button" class="btn btn-primary" id="week-btn-bar">7 Dias</button>';
+            }
 
-                    if ($dataVerificarDias > 364)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="year-btn-bar">Ultimo Ano</button>';
-                    }
+            if ($dataVerificarDias > 31) {
+                $html .= '<button type="button" class="btn btn-primary" id="month-btn-bar">Ultimo Mês</button>';
+            }
 
-                    if ($dataVerificarDias > 62)
-                    {
-                        $html .= '<button type="button" class="btn btn-primary" id="all-btn-bar">Tudo</button>';
-                    }
-                    $html .= '</div>
+            if ($dataVerificarDias > 364) {
+                $html .= '<button type="button" class="btn btn-primary" id="year-btn-bar">Ultimo Ano</button>';
+            }
+
+            if ($dataVerificarDias > 62) {
+                $html .= '<button type="button" class="btn btn-primary" id="all-btn-bar">Tudo</button>';
+            }
+            $html .= '</div>
                     <h1 class="lead ms-2" style="font-size: 40px;">Estatísticas Principais</h1>
                 </div>
                 <div class="card-body p-3">
@@ -455,39 +445,36 @@ class UserController
                             <h4>Impressões</h4>
                             <p class="lead-xs">
                             Média Diária: ' . $ImpressionsMediaDiaria . '<br>';
-                                    if ($dataVerificarDias > 31)
-                                    {
-                                        $html .=  'Média Mensal: ' . $ImpressionsMensal . '<br>
+            if ($dataVerificarDias > 31) {
+                $html .=  'Média Mensal: ' . $ImpressionsMensal . '<br>
                                         Máximo Mensal: ' . $ImpressionsMaxMensal . '<br>';
-                                    }
+            }
 
-                                $html .= 'Total: ' . $ImpressionsTotal . '</p>
+            $html .= 'Total: ' . $ImpressionsTotal . '</p>
                         </div>
 
                         <div class="col-md-4 text-justify">
                             <h4>Gostos</h4>
                             <p class="lead-xs">
                             Média Diária: ' . $LikesMediaDiaria . '<br>';
-                                    if ($dataVerificarDias > 31)
-                                    {
-                                        $html .=  'Média Mensal: ' . $LikesMensal . '<br>
+            if ($dataVerificarDias > 31) {
+                $html .=  'Média Mensal: ' . $LikesMensal . '<br>
                                         Máximo Mensal: ' . $LikesMaxMensal . '<br>';
-                                    }
+            }
 
-                                $html .= 'Total: ' . $LikesTotal . '</p>
+            $html .= 'Total: ' . $LikesTotal . '</p>
                         </div>
 
                         <div class="col-md-4">
                             <h4>Comentários</h4>
                             <p class="lead-xs">
                             Média Diária: ' . $CommentsMediaDiaria . '<br>';
-                                    if ($dataVerificarDias > 31)
-                                    {
-                                        $html .=  'Média Mensal: ' . $CommentsMensal . '<br>
+            if ($dataVerificarDias > 31) {
+                $html .=  'Média Mensal: ' . $CommentsMensal . '<br>
                                         Máximo Mensal: ' . $CommentsMaxMensal . '<br>';
-                                    }
+            }
 
-                                $html .= 'Total: ' . $CommentsTotal . '</p>
+            $html .= 'Total: ' . $CommentsTotal . '</p>
                         </div>
                     </div>
                 </div>
@@ -593,12 +580,159 @@ class UserController
         $this->model->editarPrivacidade($dadosEvento);
     }
 
+    public function guardarEditarPerfilSobre()
+    {
+        $LBLfotoPerfil = $_POST['LBLfotoPerfil'];
+        $LBLfotoCapa = $_POST['LBLfotoCapa'];
+        $TXTnome = $_POST['TXTnome'];
+        $TXTnumero = $_POST['TXTnumero'];
+        $TXTemail = $_POST['TXTemail'];
+        $TXTlocalizacao = $_POST['TXTlocalizacao'];
+        $TXTdescricao = $_POST['TXTdescricao'];
+        $youtube = $_POST['youtube'];
+        $instagram = $_POST['instagram'];
+        $tiktok = $_POST['tiktok'];
+        $blog = $_POST['blog'];
+        $yt_switch = $_POST['yt_switch'];
+        $ig_switch = $_POST['ig_switch'];
+        $tiktok_switch = $_POST['tiktok_switch'];
+        $blog_switch = $_POST['blog_switch'];
+
+        $yt_switch = ($yt_switch == 'true' && $youtube != '') ? 1 : 0;
+        $ig_switch = ($ig_switch == 'true'  && $instagram != '') ? 1 : 0;
+        $tiktok_switch = ($tiktok_switch == 'true' && $tiktok != '') ? 1 : 0;
+        $blog_switch = ($blog_switch == 'true' && $blog != '') ? 1 : 0;
+
+
+        session_start();
+
+        $id_user = $_SESSION['user_id'];
+
+        // Caminho para a pasta onde as imagens serão armazenadas
+        $caminho_para_pasta = '../../public/users/' . $id_user . '/';
+
+        $nome_arquivo_foto_perfil = null;
+        $nome_arquivo_foto_capa = null;
+
+        // Verifica se a URL da imagem de perfil está presente
+        if (strpos($LBLfotoPerfil, 'data:image/') === 0) {
+            // Extrai o tipo da imagem
+            if (preg_match('/^data:image\/(\w+);base64,/', $LBLfotoPerfil, $tipo_imagem)) {
+                // Obtém o tipo da imagem
+                $tipo_imagem = strtolower($tipo_imagem[1]); // jpg, png, gif, etc.
+
+                // Decodifica os dados da imagem
+                $data_imagem = substr($LBLfotoPerfil, strpos($LBLfotoPerfil, ',') + 1);
+                $data_imagem = base64_decode($data_imagem);
+
+                // Verifica se o tipo de imagem é permitido
+                $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'gif'];
+                if (!in_array($tipo_imagem, $extensoes_permitidas)) {
+                    die('Tipo de imagem de perfil não permitido.');
+                }
+
+                // Gera um nome de arquivo único
+                $nome_arquivo_foto_perfil = uniqid() . '.' . $tipo_imagem;
+
+                // Verifica se o diretório de destino existe, se não, cria-o
+                if (!file_exists($caminho_para_pasta)) {
+                    mkdir($caminho_para_pasta, 0777, true); // Cria o diretório recursivamente
+                }
+
+                // Salva o arquivo no diretório de destino
+                if (file_put_contents($caminho_para_pasta . $nome_arquivo_foto_perfil, $data_imagem) === false) {
+                    echo "Erro ao salvar a imagem de perfil";
+                }
+            } else {
+                echo "Erro ao baixar a imagem de perfil";
+            }
+        } else {
+            // Parse a URL into its components
+            $path = parse_url($LBLfotoPerfil, PHP_URL_PATH);
+
+            // Obter apenas o nome do arquivo
+            $nome_arquivo_foto_perfil = basename($path);
+        }
+
+        // Verifica se $LBLfotoCapa é uma data URL de imagem
+        if (strpos($LBLfotoCapa, 'data:image/') === 0) {
+            // Extrai o tipo da imagem
+            if (preg_match('/^data:image\/(\w+);base64,/', $LBLfotoCapa, $tipo_imagem)) {
+                // Obtém o tipo da imagem
+                $tipo_imagem = strtolower($tipo_imagem[1]); // jpg, png, gif, etc.
+
+                // Decodifica os dados da imagem
+                $data_imagem = substr($LBLfotoCapa, strpos($LBLfotoCapa, ',') + 1);
+                $data_imagem = base64_decode($data_imagem);
+
+                // Verifica se o tipo de imagem é permitido
+                $extensoes_permitidas = ['jpg', 'jpeg', 'png', 'gif'];
+                if (!in_array($tipo_imagem, $extensoes_permitidas)) {
+                    die('Tipo de imagem de capa não permitido.');
+                }
+
+                // Gera um nome de arquivo único
+                $nome_arquivo_foto_capa = uniqid() . '.' . $tipo_imagem;
+
+                // Verifica se o diretório de destino existe, se não, cria-o
+                if (!file_exists($caminho_para_pasta)) {
+                    mkdir($caminho_para_pasta, 0777, true); // Cria o diretório recursivamente
+                }
+
+                // Salva o arquivo no diretório de destino
+                if (file_put_contents($caminho_para_pasta . $nome_arquivo_foto_capa, $data_imagem) === false) {
+                    echo "Erro ao salvar a imagem de capa";
+                }
+            } else {
+                echo "Erro ao baixar a imagem de capa";
+            }
+        } else {
+            // Parse a URL into its components
+            $path = parse_url($LBLfotoCapa, PHP_URL_PATH);
+
+            // Obter apenas o nome do arquivo
+            $nome_arquivo_foto_capa = basename($path);
+        }
+
+        // Inserir no banco de dados
+        $dadosEvento = array(
+            'LBLfotoPerfil' => $nome_arquivo_foto_perfil,
+            'LBLfotoCapa' => $nome_arquivo_foto_capa,
+            'TXTnome' => $TXTnome,
+            'TXTnumero' => $TXTnumero,
+            'TXTemail' => $TXTemail,
+            'TXTlocalizacao' => $TXTlocalizacao,
+            'TXTdescricao' => $TXTdescricao,
+            'youtube' => $youtube,
+            'instagram' => $instagram,
+            'tiktok' => $tiktok,
+            'blog' => $blog,
+            'yt_switch' => $yt_switch,
+            'ig_switch' => $ig_switch,
+            'tiktok_switch' => $tiktok_switch,
+            'blog_switch' => $blog_switch
+        );
+
+        $this->model->guardarEditarPerfilSobre($dadosEvento);
+    }
+
+
     public function apagarProjeto()
     {
         // Ler dados enviados via POST
         $id_projeto = $_POST['id_projeto'];
 
         $this->model->apagarProjeto($id_projeto);
+    }
+
+    public function guardarEditarProjetosImagens1($projeto)
+    {
+        $this->model->guardarEditarProjetosImagens1($projeto);
+    }
+
+    public function guardarEditarProjetosImagens2($projeto, $ordem, $nome_arquivo)
+    {
+        $this->model->guardarEditarProjetosImagens2($projeto, $ordem, $nome_arquivo);
     }
 
     public function getProjects($id)
@@ -653,12 +787,5 @@ class UserController
     public function getFollowingsQuantidade($id)
     {
         return $this->model->getFollowingsQuantidade($id);
-    }
-
-
-    public function getEditarSobre()
-    {
-        
-        return $this->model->getEditarSobre();
     }
 }
