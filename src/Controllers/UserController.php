@@ -767,6 +767,10 @@ class UserController
         return $this->model->getRatingsAccounts($id);
     }
 
+    public function getReviewsNumber($id)
+    {
+        return $this->model->getReviewsNumber($id);
+    }
 
     public function getShowsQuantidade($id)
     {

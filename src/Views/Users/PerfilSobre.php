@@ -1,12 +1,34 @@
 <?php
 
-$instagram = $row_infos["Instagram"];
+$instagram_url = $row_infos["Instagram"];
+$youtube_url = $row_infos["Youtube"];
+$tiktok_url = $row_infos["Tiktok"];
+$blog_url = $row_infos["Blog"];
 
-$instagram_url = $instagram;
+$instagram_on = $row_infos["Active_Instagram"];
+$youtube_on = $row_infos["Active_Youtube"];
+$tiktok_on = $row_infos["Active_Tiktok"];
+$blog_on = $row_infos["Active_Blog"];
+
 
 // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
 if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
     $instagram_url = 'http://' . $instagram_url;
+}
+
+// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
+if (!preg_match("~^(?:f|ht)tps?://~i", $youtube_url)) {
+    $youtube_url = 'http://' . $youtube_url;
+}
+
+// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
+if (!preg_match("~^(?:f|ht)tps?://~i", $tiktok_url)) {
+    $tiktok_url = 'http://' . $tiktok_url;
+}
+
+// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
+if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
+    $blog_url = 'http://' . $blog_url;
 }
 
 ?>
@@ -55,7 +77,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
                                                     } else {
                                                         echo 'src="' . $fotodeperfil . '"';
                                                     }
-                                                    ?> alt="profile_image" style="width: 150px; height: 150px;" class="border-radius-md shadow-sm mb-3">
+                                                    ?> alt="profile_image" style="width: 150px; height: 150px; object-fit: cover;" class="border-radius-lg img-fluid shadow-sm mb-3">
 
                                             <div class="mb-3">
                                                 <h5 class="mb-1">
@@ -106,9 +128,20 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
                                                     Sociais:</strong> &nbsp;
 
                                                 <?php
-                                                if ($instagram != null) {
-                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i>
-                                        </a>';
+                                                if ($instagram_url != null && $instagram_on == 1) {
+                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
+                                                }
+
+                                                if ($youtube_url != null && $youtube_on == 1) {
+                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
+                                                }
+
+                                                if ($tiktok_url != null && $tiktok_on == 1) {
+                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
+                                                }
+
+                                                if ($blog_url != null && $blog_on == 1) {
+                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
                                                 }
                                                 ?>
 
@@ -159,9 +192,20 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
                     <strong class="text-dark text-sm">Redes Sociais:</strong> &nbsp;
 
                     <?php
-                    if ($instagram != null) {
-                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i>
-                                        </a>';
+                    if ($instagram_url != null && $instagram_on == 1) {
+                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
+                    }
+
+                    if ($youtube_url != null && $youtube_on == 1) {
+                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
+                    }
+
+                    if ($tiktok_url != null && $tiktok_on == 1) {
+                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
+                    }
+
+                    if ($blog_url != null && $blog_on == 1) {
+                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
                     }
                     ?>
 

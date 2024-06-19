@@ -381,6 +381,18 @@ class User
         return $ratings = $stmt_rating->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getReviewsNumber($id)
+    {
+        // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
+        $sql = "SELECT count(id)
+        FROM rating AS r
+        WHERE r.id_receive = ?"; // Use placeholder for PDO
+
+        $stmt_rating = $this->db->prepare($sql);
+        $stmt_rating->execute([$id]);  // Bind the id parameter
+        return $ratings = $stmt_rating->fetchColumn();
+    }
+
     public function getShowsQuantidade($id)
     {
         // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente

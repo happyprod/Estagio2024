@@ -34,14 +34,19 @@
                     <h5 class="text-lg" style="margin-left: -1em;">
                         <?php
 
-                            $numero_arredondado = $controller->getavgStars($id);
+                        $numero_arredondado = $controller->getavgStars($id);
 
-                            echo $numero_arredondado;
+                        echo $numero_arredondado;
 
                         ?>
 
-                        <button type="button" class="btn-tooltip fa fa-star border-0 text-sm position-absolute" data-bs-toggle="tooltip" data-bs-placement="top" <?php
-                                                                                                                                                                    ?> title="(233 Reviews)" data-container="body" data-animation="true" style="background-color: rgba(255, 238, 0, 0); color: #ffcb0c; margin-top: 0.12em;"></button>
+                        <button type="button" class="btn-tooltip fa fa-star border-0 text-sm position-absolute" data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="
+                        <?php 
+                        $reviews = $controller->getReviewsNumber($id); 
+                        echo $reviews; 
+                        ?> Reviews" 
+                        data-container="body" data-animation="true" style="background-color: rgba(255, 238, 0, 0); color: #ffcb0c; margin-top: 0.12em;"></button>
                     </h5>
                     <h5 class="text-sm mt-0 text-md">Avaliação</h5>
                     <p class="text-sm"></p>
@@ -57,9 +62,9 @@
                     <h5 class="mb-0 text-lg">
                         <?php
 
-                            $following = $controller->getFollowsQuantidade($id);
+                        $following = $controller->getFollowsQuantidade($id);
 
-                            echo $following;
+                        echo $following;
                         ?>
                     </h5>
                     <h5 class="text-sm mt-1 text-lg">A seguir</h5>
@@ -68,9 +73,9 @@
                     <h5 class="mb-0 text-lg">
                         <?php
 
-                            $following = $controller->getFollowingsQuantidade($id);
+                        $following = $controller->getFollowingsQuantidade($id);
 
-                            echo $following;
+                        echo $following;
 
                         ?>
                     </h5>

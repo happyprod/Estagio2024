@@ -486,3 +486,26 @@ function guardarSobre(id_projeto) {
     xhr.send(params);
 }
 
+
+function toggleText(element) {
+    // Encontra os elementos dentro do contêiner do botão clicado
+    var container = element.closest('.text-container');
+    var shortText = container.querySelector('.short-text');
+    var moreText = container.querySelector('.more-text');
+
+    // Se o texto curto está visível, mostra o texto completo e oculta o curto
+    if (shortText.classList.contains('d-none')) {
+        shortText.classList.remove('d-none');
+        moreText.classList.add('d-none');
+        
+        // Altera o texto do botão de volta para "ver mais"
+        element.textContent = 'Ver mais';
+    } else {
+        // Se o texto curto está oculto, mostra o texto curto e oculta o completo
+        shortText.classList.add('d-none');
+        moreText.classList.remove('d-none');
+        
+        // Altera o texto do botão para "ver menos"
+        element.textContent = 'Ver menos';
+    }
+}
