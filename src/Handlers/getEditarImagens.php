@@ -44,7 +44,7 @@ foreach ($data as $row) {
                             </svg>
                         </i>
                     </a>
-                    <img src="http://localhost/redes/public/users/' . $id . '/' . $pi_imagem . '" data-id="' . $ordem . '" class="ui-state-default d-block rounded" style="width:240px; height: 180px;" alt="...">
+                    <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" data-id="' . $ordem . '" class="ui-state-default d-block rounded" style="width:240px; height: 180px;" alt="...">
                 </div>';
 }
 

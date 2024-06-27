@@ -64,7 +64,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                                     }
 
                                                     if ($google_image == false) {
-                                                        echo 'src="http://localhost/redes/public/users/' . $id . '/' . $fotodeperfil . '"';
+                                                        echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
                                                     } else {
                                                         echo 'src="' . $fotodeperfil . '"';
                                                     }

@@ -135,7 +135,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="http://localhost/redes/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
+<img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -168,7 +168,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $picture . '"';
     } else {
-        $html .= 'src="http://localhost/redes/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -528,7 +528,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="http://localhost/redes/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
+<img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -561,7 +561,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $picture . '"';
     } else {
-        $html .= 'src="http://localhost/redes/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>

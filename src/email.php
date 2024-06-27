@@ -23,7 +23,7 @@ use PHPMailer\PHPMailer\Exception;
             $mail->isHTML(true);
             $mail->CharSet = 'UTF-8';
             $mail->Subject = 'Redefinição da Palavra-Passe';
-            $link_redefinicao = "http://localhost/redes/redefinirpp.html?token=$token";
+            $link_redefinicao = "http://localhost/Estagio2024/redefinirpp.html?token=$token";
             $mail->Body = '
                     <html>
                     <head>

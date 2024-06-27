@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
         }
 
         if ($google_image == false) {
-            $row['picture'] = 'http://localhost/redes/public/users/' . $row['user_id'] . '/' . $fotodeperfil;
+            $row['picture'] = 'http://localhost/Estagio2024/public/users/' . $row['user_id'] . '/' . $fotodeperfil;
         } else {
             $row['picture'] = $fotodeperfil;
         }
@@ -78,11 +78,11 @@ if ($result->num_rows > 0) {
                 if ($count == 1)
                 {
                     $imageList .= ' <div class="carousel-item active">
-                    <img src="http://localhost/redes/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
+                    <img src="http://localhost/Estagio2024/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
                     </div>';
                 } else {
                     $imageList .= ' <div class="carousel-item">
-                    <img src="http://localhost/redes/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
+                    <img src="http://localhost/Estagio2024/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
                     </div>';
                 }
 
