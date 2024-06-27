@@ -17,7 +17,7 @@ if (count($result2) > 0) {  // Use PDO method to check rows
 
         echo '
             <div class="carousel-item ' . ($isActive ? 'active' : '') . '">
-                <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" class="d-block rounded" class="d-block rounded"
+                <img src="/public/users/' . $id . '/' . $pi_imagem . '" class="d-block rounded" class="d-block rounded"
                 style="margin-left: 2.5%; width:95%; height: 25em;" alt="...">
             </div>';
 

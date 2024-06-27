@@ -94,8 +94,8 @@ function loadProjects() {
     </div>
                             
                 `);
+                offset += limit;
             });
-            offset += limit;
         }
         $('#loader').hide();
     });

@@ -4,10 +4,10 @@
         <?php if ($fotodecapa == null) {
             echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
         } else {
-            echo 'style="background-image: url(\'http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%;"';
+            echo 'style="background-image: url(\'/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%;"';
         } ?>>
         <div class="cover-overlay w-100" onclick="uploadCoverImage()">
-            <img id="nome_arquivo" src="http://localhost/Estagio2024/public/users/<?php echo $id . '/' . $fotodecapa; ?>" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />
+            <img id="nome_arquivo" src="/public/users/<?php echo $id . '/' . $fotodecapa; ?>" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />
             <div class="cover-mask text-light d-flex justify-content-center flex-column text-center">
                 <h4 style="color: white;">Carregue para Alterar a Imagem</h4>
             </div>
@@ -26,7 +26,7 @@
                             $google_image = true;
                         }
                         if ($google_image == false) {
-                            echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+                            echo 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
                         } else {
                             echo 'src="' . $fotodeperfil . '"';
                         }
