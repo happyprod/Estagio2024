@@ -6,7 +6,9 @@ require_once __DIR__ . '/../vendor/autoload.php'; // Certifique-se de que o auto
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
+use App\Controllers\ChatController;
 use App\Models\User;
+use App\Models\Message;
 use App\Helpers\Database;
 
 $routes = [
@@ -14,6 +16,7 @@ $routes = [
     '/perfil' => [UserController::class, 'show'],
     '/utilizadores/(\d+\.php)' => [UserController::class, 'show'], // Corrigido o padrão de rota
     '/editarPerfil' => [UserController::class, 'showEditar'],
+    '/chat' => [ChatController::class, 'showChat'],
     '/contact' => 'PageController@contact',
     '/registerartists' => [AuthController::class, 'showRegisterForm'],
     '/loginartists' => [AuthController::class, 'showLoginForm'],
@@ -40,7 +43,14 @@ function route($url, $routes) {
             } else {
                 list($controller, $method) = $controller;
                 $db = Database::connect(); // Conectar ao banco de dados
-                $model = new User($db); // Passar a conexão ao modelo
+                
+                // Verificar qual controlador está sendo instanciado e passar o modelo correto
+                if ($controller === ChatController::class) {
+                    $model = new Message($db); // Passar a conexão ao modelo Message para ChatController
+                } else {
+                    $model = new User($db); // Passar a conexão ao modelo User para outros controladores
+                }
+                
                 $controllerInstance = new $controller($model); // Passar o modelo ao controlador
             }
 
@@ -62,3 +72,4 @@ $pos = strrpos($url, "/public/");
 if ($pos !== false) {
     $url = '/' . substr($url, $pos + strlen("/public/"));
 }
+

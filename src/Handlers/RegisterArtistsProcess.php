@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $location = $_POST['location'];
     $name = $_POST['name'];
     $selectedType = $_POST['selectedType'];
-
+    
     // Criar uma instância do controlador
     $authController = new AuthController();
     $authController->register($email, $password, $identity, $location, $name, $selectedType);

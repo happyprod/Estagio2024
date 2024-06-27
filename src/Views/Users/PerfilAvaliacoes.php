@@ -43,7 +43,7 @@
 
                                     $av_data = $row["date"];
                                     $av_foto = $row["picture"];
-                                    $av_nome = $row["name"];
+                                    $av_nome = '@' . $row["name"];
                                     $av_user = $row["id"];
 
                                     // Obtém a extensão do arquivo em letras minúsculas
@@ -95,7 +95,7 @@
                                                 }
                                             echo '</p>
                                             </div>
-                                            <h5 class="text-lg pe-4 me-3 ps-0 mb-0 ms-auto">' . $av_estrelas . '<i type="button"
+                                            <h5 class="text-lg pe-4 me-3 ps-0 mb-0 ms-auto mt-3 mb-auto">' . $av_estrelas . '<i type="button"
                                             class="fa fa-star border-0 ms-1 text-sm position-absolute"
                                             style="background-color: rgba(255, 238, 0, 0); color: #ffcb0c; margin-top: 0.12em;"></i>
                                             </h5>
@@ -132,7 +132,7 @@
                             $av_estrelas = $row["stars"];
                             $av_comentario = $row["comentario"];
                             $av_foto = $row["picture"];
-                            $av_nome = $row["name"];
+                            $av_nome = '@' . $row["name"];
                             $av_user = $row["id"];
 
 
@@ -151,7 +151,7 @@
                             }
 
                             echo '
-                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2" >
                                         <div class="avatar me-3">
                                             <img ';
 

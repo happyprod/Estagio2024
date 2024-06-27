@@ -131,45 +131,10 @@ if ($row_infos["Active_Blog"] == 1) {
     <?php include('../src/Views/Layouts/Menu.php'); ?>
 
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 py-3">
-        <!-- End Navbar -->
-        <div class="container-fluid" style="margin-top: 7em; width: 95%;">
-            <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
-                <div class="row gx-4">
-                    <div class="col-lg-12 col-md-12 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        <div class="nav-wrapper position-relative end-0 ms-1">
-                            <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1 active" href="javascript:mostrarSobre();" role="tab" id="sobre_nav">
-                                        <i class="fas fa-user-edit text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Sobre"></i>
-                                        <span class="ms-1">Sobre</span>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1" id="projetos_nav" href="javascript:mostrarProjetos();" role="tab" aria-selected="false">
-                                        <i class="ni ni-book-bookmark text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Projetos"></i>
-                                        <span class="ms-1">Projetos</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <div class="container-fluid py-4 editar" style="width: 90%;">
 
             <?php include('../src/Views/Users/editarPerfilSobre.php'); ?>
-
-
-
-
-
-            <?php
-            include('../src/Views/Users/editarPerfilProjetos.php');
-            ?>
 
         </div>
 

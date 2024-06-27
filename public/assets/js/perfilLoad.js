@@ -22,7 +22,7 @@ $(function () {
 });
 
 function guardarImagens(index) {
-    console.log (index);
+    console.log(index);
     var order = [];
     $(".sortable-list").eq(index - 1).children("div").each(function () {
         var dataId = $(this).attr('data-id');
@@ -38,18 +38,17 @@ function guardarImagens(index) {
         url: '../../src/Handlers/guardarEditarImagens.php', // URL do seu manipulador PHP
         method: 'POST',
         data: { order: order, index: index },
-        success: function(response) {
-            if (response == 'erro')
-                {
-                    erro("Ocorreu um erro!");
-                } else {
-                    alteradocomsucesso("Alterado com sucesso");
-                }
+        success: function (response) {
+            if (response == 'erro') {
+                erro("Ocorreu um erro!");
+            } else {
+                alteradocomsucesso("Alterado com sucesso");
+            }
 
 
             console.log("Dados enviados com sucesso:", response);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("Erro ao enviar dados:", error);
         }
     });
@@ -83,18 +82,15 @@ var gostos = [];
 var comentarios = [];
 var contador;
 
-function inserirPrivacyProject(escolha, selectedContainer)
-{
+function inserirPrivacyProject(escolha, selectedContainer) {
     projetos[selectedContainer] = escolha;
 }
 
-function inserirPrivacyLikes(escolha, selectedContainer)
-{
+function inserirPrivacyLikes(escolha, selectedContainer) {
     gostos[selectedContainer] = escolha;
 }
 
-function inserirPrivacyComments(escolha, selectedContainer)
-{
+function inserirPrivacyComments(escolha, selectedContainer) {
     comentarios[selectedContainer] = escolha;
 }
 
@@ -556,21 +552,20 @@ function setupDeleteLinks() {
                 divToDelete.remove(); // Remover a div correspondente se encontrada
                 console.log(`Elemento com data-id ${dataId} removido`);
 
-                if (dataId == elementsWithDataId)
-                    {
-                        $lastImageCount++;
-                    }
+                if (dataId == elementsWithDataId) {
+                    $lastImageCount++;
+                }
 
                 dataId = 0;
             } else {
                 console.log(`Elemento com data-id ${dataId} não encontrado`);
             }
-            
+
         });
     });
 }
 
-function limparImagensData (){
+function limparImagensData() {
     elementsWithDataId = document.querySelectorAll('[data-id]');
     console.log(`Número de elementos com data-id: ${elementsWithDataId.length}`);
     elementsWithDataId = elementsWithDataId.length / 2;
@@ -605,15 +600,14 @@ function updatePrivacy(var1, var2) {
     });
 }
 
-function guardarPrivacidade(id_projeto, selectedContainer)
-{
+function guardarPrivacidade(id_projeto, selectedContainer) {
 
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/guardarPrivacidadeEditar.php";
-    var params =    "id_projeto=" + encodeURIComponent(id_projeto) +
-                    "&projetos=" + encodeURIComponent(projetos[selectedContainer]) +
-                    "&gostos=" + encodeURIComponent(gostos[selectedContainer]) +
-                    "&comentarios=" + encodeURIComponent(comentarios[selectedContainer]);
+    var params = "id_projeto=" + encodeURIComponent(id_projeto) +
+        "&projetos=" + encodeURIComponent(projetos[selectedContainer]) +
+        "&gostos=" + encodeURIComponent(gostos[selectedContainer]) +
+        "&comentarios=" + encodeURIComponent(comentarios[selectedContainer]);
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -630,11 +624,10 @@ function guardarPrivacidade(id_projeto, selectedContainer)
     xhr.send(params);
 }
 
-function apagarProjeto(p_id)
-{
+function apagarProjeto(p_id) {
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/apagarProjeto.php";
-    var params =    "id_projeto=" + encodeURIComponent(p_id);
+    var params = "id_projeto=" + encodeURIComponent(p_id);
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -656,11 +649,100 @@ function updateStats(var1) {
     $.ajax({
         url: '../../src/Handlers/getEstatisticasProjeto.php',
         method: 'GET',
-        data: { var1: var1}, // Passando variáveis na requisição
+        data: { var1: var1 }, // Passando variáveis na requisição
         success: function (data) {
             $('#alterarEstatisticas' + var1).html(data);
             console.log(data);
             console.log('updasdasdasdas');
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+
+function getFollowersList1(var1) {
+    var elementsWithDataId;
+
+    $.ajax({
+        url: '../../src/Handlers/getFollowersList.php',
+        method: 'GET',
+        data: { var1: var1, var2: 'open' }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#getFollowersList').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+function getFollowersList2(var1) {
+    var elementsWithDataId;
+
+    // Obtendo o elemento input pelo ID
+    var inputElement = document.getElementById('SearchBarFollowers');
+
+    // Lendo o valor do input
+    var var3 = inputElement.value;
+
+    $.ajax({
+        url: '../../src/Handlers/getFollowersList.php',
+        method: 'GET',
+        data: { var1: var1, var2: 'search', var3: var3 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#getFollowersList').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+function getFollowingsList1(var1) {
+    var elementsWithDataId;
+
+    console.log('executa');
+
+    $.ajax({
+        url: '../../src/Handlers/getFollowingsList.php',
+        method: 'GET',
+        data: { var1: var1, var2: 'open' }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#getFollowingsList').html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+function getFollowingsList2(var1) {
+    var elementsWithDataId;
+
+    // Obtendo o elemento input pelo ID
+    var inputElement = document.getElementById('SearchBarFollowings');
+
+    // Lendo o valor do input
+    var var3 = inputElement.value;
+
+    $.ajax({
+        url: '../../src/Handlers/getFollowingsList.php',
+        method: 'GET',
+        data: { var1: var1, var2: 'search', var3: var3 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#getFollowingsList').html(data);
         },
         error: function (xhr, status, error) {
             console.error('Erro ao obter dados:', error);

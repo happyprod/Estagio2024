@@ -148,7 +148,7 @@ if (isset($_GET['code']) && !empty($_GET['code'])) {
 
 
             // Redireciona para a página de perfil após a autenticação bem-sucedida
-            header('Location: ./dashboard.php');
+            header('Location: ./home.php');
             exit;
         } else {
             exit('Não foi possível obter informações do perfil! Por favor, tente novamente mais tarde!');

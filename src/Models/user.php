@@ -36,6 +36,178 @@ class User
         $stmt_insert->execute();
     }
 
+    public function guardarComments($p_id, $text)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_comments (id_project, id_user_send, comment, parent_comment_id) VALUES (:id_project, :id_user_send, :comment, null)");
+
+        echo 'deuuu';
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_project', $p_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':comment', $text, PDO::PARAM_STR);
+        $stmt_insert->execute();
+    }
+
+    public function guardarParentComments($p_id, $text, $resposta)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_comments (id_project, id_user_send, comment, parent_comment_id) VALUES (:id_project, :id_user_send, :comment, :parent_comment_id)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_project', $p_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':comment', $text, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':parent_comment_id', $resposta, PDO::PARAM_INT);
+        $stmt_insert->execute();
+    }
+
+    public function verificarFollow($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT * FROM follows WHERE id_user = ? AND id_followed = ? LIMIT 1");
+
+        $stmt->execute([$user_id, $id]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
+
+    }
+
+    public function guardarFollow($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO follows (id_user, id_followed) VALUES (:id_user, :id_followed)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_user', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_followed', $id, PDO::PARAM_INT);
+        $stmt_insert->execute();
+    }
+
+    public function removerFollow($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Remove os registros existentes
+        $stmt_delete = $this->db->prepare("DELETE FROM follows WHERE id_user = :id_user AND id_followed = :id_followed");
+
+        // Executa a exclusão
+        $stmt_delete->bindParam(':id_user', $user_id, PDO::PARAM_INT);
+        $stmt_delete->bindParam(':id_followed', $id, PDO::PARAM_INT);
+        $stmt_delete->execute();
+    }
+
+    public function guardarCommentsLikes($id_comentario)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_comments_likes (comment_id, id_user_send) VALUES (:comment_id, :id_user_send)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':comment_id', $id_comentario, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_insert->execute();
+    }
+
+    public function ApagarCommentsLikes($id_comentario)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Remove os registros existentes
+        $stmt_delete = $this->db->prepare("DELETE FROM projects_comments_likes WHERE comment_id = :comment_id AND id_user_send = :id_user_send");
+
+        // Executa a exclusão
+        $stmt_delete->bindParam(':comment_id', $id_comentario, PDO::PARAM_INT);
+        $stmt_delete->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_delete->execute();
+    }
+
+
+
+
+
+    public function guardarProjectLikes($id_projeto)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_likes (id_project, id_user_send) VALUES (:id_project, :id_user_send)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_project', $id_projeto, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_insert->execute();
+    }
+
+    public function ApagarProjectLikes($id_projeto)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Remove os registros existentes
+        $stmt_delete = $this->db->prepare("DELETE FROM projects_likes WHERE id_project = :id_project AND id_user_send = :id_user_send");
+
+        // Executa a exclusão
+        $stmt_delete->bindParam(':id_project', $id_projeto, PDO::PARAM_INT);
+        $stmt_delete->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
+        $stmt_delete->execute();
+    }
+
+
+
+
+
+
+
+
+
+
     public function getAccountByDirectory($lastDirectoryName)
     {
         // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
@@ -46,7 +218,54 @@ class User
 
         // Obtém o resultado da consulta
         return $result = $stmt->fetch(PDO::FETCH_ASSOC); // Retorna a primeira linha do resultado como um array associativo
+    }
 
+    public function getVerifyCommentLikes($id_comentario)
+    {
+        // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
+        $sql = "SELECT count(id)
+                FROM projects_comments_likes
+                WHERE comment_id = ?"; // Use placeholder for PDO
+
+        $stmt_rating = $this->db->prepare($sql);
+        $stmt_rating->execute([$id_comentario]);  // Bind the id parameter
+        return $ratings = $stmt_rating->fetchColumn();
+    }
+
+    public function getVerifyUserLike($p_id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT * FROM projects_likes WHERE id_project = ? AND id_user_send = ? LIMIT 1");
+
+        $stmt->execute([$p_id, $user_id]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
+    }
+
+    public function getVerifyUserCommentLike($id_comentario)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT * FROM projects_comments_likes WHERE comment_id = ? AND id_user_send = ? LIMIT 1");
+
+        $stmt->execute([$id_comentario, $user_id]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
     }
 
     public function getEditarImagens($count, $p_id)
@@ -69,6 +288,18 @@ class User
         return $result;
     }
 
+    public function getProjectbyId($p_id)
+    {
+        $sql = "SELECT * FROM projects WHERE id = ?"; // Use placeholder para PDO
+
+        $stmt_projects = $this->db->prepare($sql);
+        $stmt_projects->execute([$p_id]);  // Vincula o parâmetro $id
+        $result = $stmt_projects->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+
     public function getProjectsImages($p_id)
     {
         $sql2 = "SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem"; // Use placeholder for PDO
@@ -89,7 +320,7 @@ class User
 
     public function getEditarInfoProjectsCollabs($count, $p_id)
     {
-        $stmt = $this->db->prepare("SELECT accounts.name as name, accounts.picture as picture, accounts.id_name as idName
+        $stmt = $this->db->prepare("SELECT accounts.id as id, accounts.name as name, accounts.picture as picture, accounts.id_name as idName
         FROM accounts
         JOIN projects_collabs AS ids ON accounts.id = ids.id_user 
         WHERE ids.id_project = ?");
@@ -178,6 +409,25 @@ class User
         $stmt->execute();
     }
 
+    public function getCommentsByProject($p_id)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT pc.id, pc.id_project, pc.id_user_send, pc.comment, a.id as id_user, a.id_name, a.picture, pc.parent_comment_id
+            FROM 
+                projects_comments pc
+            JOIN 
+                accounts a 
+            ON 
+                pc.id_user_send = a.id 
+            WHERE 
+                pc.id_project = ? AND pc.parent_comment_id IS NULL;"
+        );
+        $stmt->execute([$p_id]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
     public function verificarEvento($evento)
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -201,6 +451,34 @@ class User
 
         // Retorna true se um registro foi encontrado, false caso contrário
         return $result !== false;
+    }
+
+    public function getSubCommentsByComment($id_comentario)
+    {
+        $stmt = $this->db->prepare(
+            "SELECT 
+                pc.id, 
+                pc.id_project, 
+                pc.id_user_send, 
+                pc.comment,
+                a.id as id_user, 
+                a.id_name, 
+                a.picture,
+                pc.parent_comment_id
+                FROM 
+                projects_comments pc
+                JOIN 
+                accounts a 
+                ON 
+                pc.id_user_send = a.id 
+                WHERE 
+                pc.parent_comment_id = ?;"
+
+        );
+        $stmt->execute([$id_comentario]);  // Bind the id parameter
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        return $result;
     }
 
     public function verificarBooking($booker)
@@ -358,7 +636,7 @@ class User
     public function getRatings($id)
     {
         // Consulta SQL para obter os dados desejados
-        $sql = "SELECT r.stars, r.date, r.comentario, a.picture, a.id, a.name 
+        $sql = "SELECT r.stars, r.date, r.comentario, a.picture, a.id, a.id_name as name 
          FROM rating AS r
          INNER JOIN accounts AS a ON r.id_send = a.id
          WHERE r.id_receive = ?";
@@ -371,7 +649,7 @@ class User
     public function getRatingsAccounts($id)
     {
         // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
-        $sql = "SELECT r.stars, r.comentario, a.picture, a.id, a.name 
+        $sql = "SELECT r.stars, r.comentario, a.picture, a.id, a.id_name as name
         FROM rating AS r
         INNER JOIN accounts AS a ON r.id_send = a.id
         WHERE r.id_receive = ?"; // Use placeholder for PDO
@@ -393,6 +671,92 @@ class User
         return $ratings = $stmt_rating->fetchColumn();
     }
 
+    public function getFollowingsList($id)
+    {
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        FROM accounts a
+        JOIN follows f ON a.id = f.id_followed
+        WHERE f.id_user = ?";
+
+        $stmt_followings = $this->db->prepare($sql);
+        $stmt_followings->execute([$id]);
+        $followings = $stmt_followings->fetchAll(PDO::FETCH_OBJ);
+
+        return $followings;
+    }
+
+    public function getVerifyProjectLikes($p_id)
+    {
+        $sql = "SELECT count(id) FROM projects_likes WHERE id_project = ?";
+
+        $stmt_likes = $this->db->prepare($sql);
+        $stmt_likes->execute([$p_id]);  // Bind the id parameter
+        return $ratings = $stmt_likes->fetchColumn();
+    }
+
+
+
+    public function getFollowingsListSearch($id, $id_name_user_search)
+    {
+        // Ajuste na query SQL para incluir a busca por id_name
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+            FROM accounts a
+            JOIN follows f ON a.id = f.id_followed
+            WHERE f.id_user = ? AND a.id_name LIKE ?";  // Adiciona a condição LIKE
+
+        // Preparação da consulta SQL
+        $stmt_followings = $this->db->prepare($sql);
+
+        // Executa a consulta passando os parâmetros
+        $stmt_followings->execute([$id, $id_name_user_search . '%']);
+
+        // Obtém os resultados
+        $followings = $stmt_followings->fetchAll(PDO::FETCH_OBJ);
+
+        // Retorna os resultados
+        return $followings;
+    }
+
+
+
+    public function getFollowersList($id)
+    {
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        FROM accounts a
+        JOIN follows f ON a.id = f.id_user
+        WHERE f.id_followed = ?";
+
+        $stmt_followings = $this->db->prepare($sql);
+        $stmt_followings->execute([$id]);
+        $followings = $stmt_followings->fetchAll(PDO::FETCH_OBJ);
+
+        return $followings;
+    }
+
+    public function getFollowersListSearch($id, $id_name_user_search)
+    {
+        // Ajuste na query SQL para incluir a busca por id_name
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+            FROM accounts a
+            JOIN follows f ON a.id = f.id_user
+            WHERE f.id_followed = ? AND a.id_name LIKE ?";  // Adiciona a condição LIKE
+
+        // Preparação da consulta SQL
+        $stmt_followings = $this->db->prepare($sql);
+
+        // Executa a consulta passando os parâmetros
+        $stmt_followings->execute([$id, $id_name_user_search . '%']);
+
+        // Obtém os resultados
+        $followings = $stmt_followings->fetchAll(PDO::FETCH_OBJ);
+
+        // Retorna os resultados
+        return $followings;
+    }
+
+
+
+
     public function getShowsQuantidade($id)
     {
         // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
@@ -400,6 +764,24 @@ class User
         $stmt_shows = $this->db->prepare($sql_shows);
         $stmt_shows->execute([$id]);
         return $row_shows = $stmt_shows->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getVerifyUserFollows($acc_id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT id FROM follows WHERE id_followed = ? AND id_user = ? LIMIT 1");
+
+        $stmt->execute([$acc_id, $user_id]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
     }
 
     public function getavgStars($id)

@@ -14,7 +14,7 @@ $(document).ready(function() {
       },
       success: function(response) {
         if (response.success) {
-          // Redirecionar para a página de dashboard em caso de sucesso
+          // Redirecionar para a página de home em caso de sucesso
           window.location.href = 'home.php';
         } else {
           // Exibir mensagem de erro usando Toastr

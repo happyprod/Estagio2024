@@ -1,8 +1,14 @@
 <?php
 
 $instagram_url = $row_infos["Instagram"];
+$instagram_url = 'https://www.instagram.com/' . $instagram_url . '/';
+
 $youtube_url = $row_infos["Youtube"];
+$youtube_url = 'https://www.youtube.com/' . $youtube_url;
+
 $tiktok_url = $row_infos["Tiktok"];
+$tiktok_url = 'https://www.tiktok.com/@' . $tiktok_url;
+
 $blog_url = $row_infos["Blog"];
 
 $instagram_on = $row_infos["Active_Instagram"];
@@ -10,21 +16,6 @@ $youtube_on = $row_infos["Active_Youtube"];
 $tiktok_on = $row_infos["Active_Tiktok"];
 $blog_on = $row_infos["Active_Blog"];
 
-
-// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-if (!preg_match("~^(?:f|ht)tps?://~i", $instagram_url)) {
-    $instagram_url = 'http://' . $instagram_url;
-}
-
-// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-if (!preg_match("~^(?:f|ht)tps?://~i", $youtube_url)) {
-    $youtube_url = 'http://' . $youtube_url;
-}
-
-// Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
-if (!preg_match("~^(?:f|ht)tps?://~i", $tiktok_url)) {
-    $tiktok_url = 'http://' . $tiktok_url;
-}
 
 // Verificar se o URL não começa com 'http://' ou 'https://', e adicioná-lo se necessário
 if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {

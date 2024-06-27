@@ -54,9 +54,24 @@ if ($row_infos) {
     $type_utilizador = $row_infos["type"];
     $fotodeperfil = $row_infos["picture"];
     $fotodecapa = $row_infos["picture_background"];
+    $identidadeRow = $row_infos["identity"];
+    $id_name_user = $row_infos["id_name"];
 } else {
     // Tratar o caso onde não há informações adicionais encontradas
     die("No additional account information found for the given ID.");
+}
+$identidade = $identidadeRow;
+
+if ($identidade == 1) {
+    $identidade = "Promotor";
+} else if ($identidade == 2) {
+    $identidade = "Artista";
+} else if ($identidade == 3) {
+    $identidade = "Agente de Booking";
+} else if ($identidade == 4) {
+    $identidade = "Agencia de booking";
+} else {
+    $identidade = "Evento";
 }
 
 ?>
@@ -158,10 +173,17 @@ if ($row_infos) {
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                <?php echo $nome; ?>
+                                <?php echo '@' . $id_name_user; ?>
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
-                                <?php echo $type_utilizador; ?>
+                                <?php
+                                if ($identidadeRow == 2) {
+                                    echo $identidade . ' - ' . $type_utilizador;
+                                } else {
+                                    echo $identidade;
+                                }
+
+                                ?>
                             </p>
                         </div>
                     </div>

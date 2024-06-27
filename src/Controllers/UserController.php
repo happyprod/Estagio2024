@@ -75,31 +75,6 @@ class UserController
         $dataLimite = strtotime('-50 years');
         $dataEvento = strtotime($data);
 
-        if (!empty($data) && ($dataEvento >= $dataLimite && $dataEvento <= $dataAtual)) {
-            // Verificar se o evento e o booking existem
-            $eventoExiste = false;
-            $bookingExiste = false;
-
-            if ($switchBooking == 1) {
-                $bookingExiste = $this->model->verificarBooking($empresaBooking);
-                echo 'Executou o switchBooking<br>';
-                echo 'Resultado de verificarBooking: ' . ($bookingExiste ? '1' : '0') . '<br>';
-            } else {
-                $bookingExiste = true;
-            }
-
-            if ($switchEvento == 1) {
-                $eventoExiste = $this->model->verificarEvento($nomeEvento);
-                echo 'Executou o switchEvento<br>';
-                echo 'Resultado de verificarEvento: ' . ($eventoExiste ? '1' : '0') . '<br>';
-            } else {
-                $eventoExiste = true;
-            }
-
-            echo 'bookingExiste: ' . ($bookingExiste ? '1' : '0') . '<br>';
-            echo 'eventoExiste: ' . ($eventoExiste ? '1' : '0') . '<br>';
-
-            if ($eventoExiste && $bookingExiste) {
                 // Inserir no banco de dados
                 $dadosEvento = array(
                     'nomeEvento' => $nomeEvento,
@@ -108,22 +83,16 @@ class UserController
                     'data' => $data,
                     'empresaBooking' => $empresaBooking,
                     'localizacao' => $localizacao,
-                    'switchEvento' => $eventoExiste ? '1' : '0',
+                    'switchEvento' => $switchEvento ? '1' : '0',
                     'switchData' => $switchData,
-                    'switchBooking' => $bookingExiste ? '1' : '0',
+                    'switchBooking' => $switchBooking ? '1' : '0',
                     'switchLocal' => $switchLocal,
                     'switchCollabs' => $switchCollabs,
                     'id_projeto' => $id_projeto
                 );
 
                 $this->model->inserirEvento($dadosEvento);
-                echo 'Evento inserido com sucesso<br>';
-            } else {
-                echo 'Evento';
-            }
-        } else {
-            echo 'Erro: Data inválida<br>';
-        }
+
     }
 
     public function getEditarInfoProjects($count, $p_id)
@@ -716,6 +685,20 @@ class UserController
         $this->model->guardarEditarPerfilSobre($dadosEvento);
     }
 
+    public function guardarFollow($id)
+    {
+        $this->model->guardarFollow($id);
+    }
+
+    public function removerFollow($id)
+    {
+        $this->model->removerFollow($id);
+    }
+
+    public function verificarFollow($id)
+    {
+        $this->model->verificarFollow($id);
+    }
 
     public function apagarProjeto()
     {
@@ -740,6 +723,12 @@ class UserController
         return $this->model->getProjects($id);
     }
 
+    public function getProjectbyId($p_id)
+    {
+        return $this->model->getProjectbyId($p_id);
+    }
+
+ 
     public function getProjectsImages($p_id)
     {
         return $this->model->getProjectsImages($p_id);
@@ -750,11 +739,30 @@ class UserController
         return $this->model->getAccountByDirectory($lastDirectoryName);
     }
 
+    public function getVerifyUserLike($p_id)
+    {
+        return $this->model->getVerifyUserLike($p_id);
+    }
+
+    public function getVerifyUserCommentLike($id_comentario)
+    {
+        return $this->model->getVerifyUserCommentLike($id_comentario);
+    }
+
+    public function getVerifyCommentLikes($id_comentario)
+    {
+        return $this->model->getVerifyCommentLikes($id_comentario);
+    }
+
     public function getAccountById($id)
     {
         return $this->model->getAccountById($id);
     }
 
+    public function getVerifyUserFollows($acc_id)
+    {
+        return $this->model->getVerifyUserFollows($acc_id);
+    }
 
     public function getRatings($id)
     {
@@ -767,9 +775,76 @@ class UserController
         return $this->model->getRatingsAccounts($id);
     }
 
+    public function getCommentsByProject($p_id)
+    {
+        return $this->model->getCommentsByProject($p_id);
+    }
+
+    public function getSubCommentsByComment($id_comentario)
+    {
+        return $this->model->getSubCommentsByComment($id_comentario);
+    }
+
+    public function guardarCommentsLikes($id_comentario)
+    {
+        return $this->model->guardarCommentsLikes($id_comentario);
+    }
+
+    public function ApagarCommentsLikes($id_comentario)
+    {
+        return $this->model->ApagarCommentsLikes($id_comentario);
+    }
+
+    public function ApagarProjectLikes($id_projeto)
+    {
+        return $this->model->ApagarProjectLikes($id_projeto);
+    }
+
+    public function guardarProjectLikes($id_projeto)
+    {
+        return $this->model->guardarProjectLikes($id_projeto);        ;
+    }
+
+
+    
+    public function getFollowingsList($id)
+    {
+        return $this->model->getFollowingsList($id);
+    }
+
+    public function getFollowingsListSearch($id, $id_name_user_search)
+    {
+        return $this->model->getFollowingsListSearch($id, $id_name_user_search);
+    }
+
+    public function getFollowersList($id)
+    {
+        return $this->model->getFollowersList($id);
+    }
+    
+    public function getFollowersListSearch($id, $id_name_user_search)
+    {
+        return $this->model->getFollowersListSearch($id, $id_name_user_search);
+    }
+
     public function getReviewsNumber($id)
     {
         return $this->model->getReviewsNumber($id);
+    }
+
+    public function getVerifyProjectLikes($p_id)
+    {
+        return $this->model->getVerifyProjectLikes($p_id);
+    }
+
+    public function guardarComments($p_id, $text)
+    {
+        return $this->model->guardarComments($p_id, $text);
+    }
+
+    public function guardarParentComments($p_id, $text, $resposta)
+    {
+        return $this->model->guardarParentComments($p_id, $text, $resposta);
     }
 
     public function getShowsQuantidade($id)

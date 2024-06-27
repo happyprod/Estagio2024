@@ -106,7 +106,7 @@ function initMap() {
     autocomplete = new google.maps.places.Autocomplete(inputEndereco);
     autocomplete.bindTo('bounds', map);
 
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener('place_changed', function () {
         var place = autocomplete.getPlace();
         if (!place.geometry) {
             // Caso o usuário tenha inserido um lugar sem selecionar uma sugestão
@@ -184,6 +184,12 @@ function alteradocomsucesso() {
     toastr.options.timeOut = 10000; // 10 segundos
     toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
     toastr.success('Alterado com sucesso');
+}
+
+function sucesso(mensagem) {
+    toastr.options.timeOut = 10000; // 10 segundos
+    toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
+    toastr.success(mensagem);
 }
 
 function erro(mensagem) {
@@ -430,6 +436,37 @@ function updateData(var1, var2, var3) {
     });
 }
 
+
+function follow(var1) {
+    var elementsWithDataId;
+    $.ajax({
+        url: '../../src/Handlers/Follow.php',
+        method: 'GET',
+        data: { var1: var1 }, // Passando variáveis na requisição
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+function updateDataProjetos(var1, var2) {
+    var elementsWithDataId;
+    $.ajax({
+        url: '../../src/Handlers/getProjetos.php',
+        method: 'GET',
+        data: { var1: var1, var2: var2 }, // Passando variáveis na requisição
+        success: function (data) {
+            $('#projectContainer' + var2).html(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
 function guardarSobre(id_projeto) {
     var nomeEvento = document.getElementById("exampleFormControlInput1")?.value || '';
     var identificacaoEvento = document.getElementById("eventoInput")?.value || '';
@@ -453,18 +490,18 @@ function guardarSobre(id_projeto) {
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/guardarEvento.php";
     var params = "nomeEvento=" + encodeURIComponent(nomeEvento) +
-                 "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
-                 "&descricao=" + encodeURIComponent(descricao) +
-                 "&data=" + encodeURIComponent(data) +
-                 "&empresaBooking=" + encodeURIComponent(empresaBooking) +
-                 "&localizacao=" + encodeURIComponent(localizacao) +
-                 "&switchEvento=" + encodeURIComponent(switchEvento) +
-                 "&switchData=" + encodeURIComponent(switchData) +
-                 "&switchBooking=" + encodeURIComponent(switchBooking) +
-                 "&switchLocal=" + encodeURIComponent(switchLocal) +
-                 "&id_projeto=" + encodeURIComponent(id_projeto) +
-                 "&switchCollabs=" + encodeURIComponent(switchCollabs) +
-                 "&arrayC_idName=" + encodeURIComponent(JSON.stringify(arrayC_idName));
+        "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
+        "&descricao=" + encodeURIComponent(descricao) +
+        "&data=" + encodeURIComponent(data) +
+        "&empresaBooking=" + encodeURIComponent(empresaBooking) +
+        "&localizacao=" + encodeURIComponent(localizacao) +
+        "&switchEvento=" + encodeURIComponent(switchEvento) +
+        "&switchData=" + encodeURIComponent(switchData) +
+        "&switchBooking=" + encodeURIComponent(switchBooking) +
+        "&switchLocal=" + encodeURIComponent(switchLocal) +
+        "&id_projeto=" + encodeURIComponent(id_projeto) +
+        "&switchCollabs=" + encodeURIComponent(switchCollabs) +
+        "&arrayC_idName=" + encodeURIComponent(JSON.stringify(arrayC_idName));
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -472,12 +509,11 @@ function guardarSobre(id_projeto) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
-                if (xhr.responseText == 'Evento')
-                    {
-                        erro("Evento ou booking não existe.");
-                    } else if (xhr.responseText == 'Data') {
-                            erro("Data não suportada!");
-                        }
+                if (xhr.responseText == 'Evento') {
+                    erro("Evento ou booking não existe.");
+                } else if (xhr.responseText == 'Data') {
+                    erro("Data não suportada!");
+                }
             } else {
                 console.error("Erro na requisição: " + xhr.status);
             }
@@ -497,15 +533,304 @@ function toggleText(element) {
     if (shortText.classList.contains('d-none')) {
         shortText.classList.remove('d-none');
         moreText.classList.add('d-none');
-        
+
         // Altera o texto do botão de volta para "ver mais"
         element.textContent = 'Ver mais';
     } else {
         // Se o texto curto está oculto, mostra o texto curto e oculta o completo
         shortText.classList.add('d-none');
         moreText.classList.remove('d-none');
-        
+
         // Altera o texto do botão para "ver menos"
         element.textContent = 'Ver menos';
     }
 }
+
+function toggleColorLike(button) {
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Verifica a classe atual do ícone
+    if (icon.classList.contains('text-secondary')) {
+        // Se atualmente é text-secondary, troca para text-primary
+        icon.classList.remove('text-secondary');
+        icon.classList.add('text-primary');
+    } else {
+        // Se não, troca para text-secondary
+        icon.classList.remove('text-primary');
+        icon.classList.add('text-secondary');
+    }
+}
+
+function guardarLike(id_comentario, button) {
+    // Supondo que você tenha uma maneira de obter o novo número de gostos
+    var likesElement = document.getElementById('likes-' + id_comentario);
+    var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Verifica a classe atual do ícone
+    if (icon.classList.contains('text-secondary')) {
+        var newLikes = currentLikes - 1;
+
+        $.ajax({
+            url: '../../src/Handlers/guardarComentarioLike.php',
+            method: 'GET',
+            data: { var1: id_comentario, var2: 1 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+        var newLikes = currentLikes + 1;
+
+        $.ajax({
+            url: '../../src/Handlers/guardarComentarioLike.php',
+            method: 'GET',
+            data: { var1: id_comentario, var2: 2 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+    
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    }
+
+    // Atualiza o texto do botão
+    likesElement.innerText = newLikes + ' Gostos';
+
+    // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
+}
+
+
+function guardarProjectLike(id_projeto, button) {
+    // Supondo que você tenha uma maneira de obter o novo número de gostos
+    var likesElement = document.getElementById('Projeto-' + id_projeto);
+    var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Verifica a classe atual do ícone
+    if (icon.classList.contains('text-secondary')) {
+        var newLikes = currentLikes - 1;
+
+        $.ajax({
+            url: '../../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 1 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+        var newLikes = currentLikes + 1;
+
+        $.ajax({
+            url: '../../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+    
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    }
+
+    // Atualiza o texto do botão
+    likesElement.innerText = newLikes + ' Gostos';
+
+    // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
+}
+
+
+
+
+function guardarProjectLike2(id_projeto, button) {
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Verifica a classe atual do ícone
+    if (icon.classList.contains('text-secondary')) {
+        $.ajax({
+            url: '../../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 1 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+
+        $.ajax({
+            url: '../../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+    
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    }
+
+    // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
+}
+
+
+function guardarLikeProjeto(projeto_id, button) {
+    // Supondo que você tenha uma maneira de obter o novo número de gostos
+    var likesElement = document.getElementById('Projeto-' + projeto_id);
+    var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Verifica a classe atual do ícone
+    if (icon.classList.contains('text-secondary')) {
+        var newLikes = currentLikes - 1;
+    } else {
+        var newLikes = currentLikes + 1;
+    }
+
+    // Atualiza o texto do botão
+    likesElement.innerText = newLikes + ' Gostos';
+
+    // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
+}
+
+function toggleResponses(containerId) {
+    var container = document.getElementById(containerId);
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        // Alterar texto para "Esconder Respostas" após mostrar
+        container.previousElementSibling.querySelector('p').innerText = "Esconder Respostas";
+    } else {
+        container.style.display = 'none';
+        // Alterar texto para "Mostrar Respostas" após esconder
+        container.previousElementSibling.querySelector('p').innerText = "Mostrar Respostas";
+    }
+}
+
+
+
+var resposta;
+var respostaName;
+
+function CommentReply(id, name, chatid) {
+    resposta = id;
+    var chat = document.getElementById('chat' + chatid);
+    console.log(id, name);
+    if (chat) {
+        chat.value = name + ' ';
+        respostaName = name;
+    }
+}
+
+function CommentSend(chatid, p_id) {
+    var chat = document.getElementById('chat' + chatid);
+
+    if (chat) {
+        var text = chat.value;
+
+        if (text != '') {
+            // Verifica se o texto começa com "respostaName" e a resposta não é igual a 0
+            if (text.startsWith(respostaName)) {
+                //executar para parent message
+                text = text.replace(respostaName, '').trim();
+
+                $.ajax({
+                    url: '../../src/Handlers/guardarComentarios.php',
+                    method: 'GET',
+                    data: { var1: p_id, var2: text, var3: resposta }, // Passando variáveis na requisição
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Erro ao obter dados:', error);
+                    }
+                });
+
+            } else {
+                resposta = 0;
+
+                console.log(p_id, text);
+                $.ajax({
+                    url: '../../src/Handlers/guardarComentarios.php',
+                    method: 'GET',
+                    data: { var1: p_id, var2: text }, // Passando variáveis na requisição
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Erro ao obter dados:', error);
+                    }
+                });
+            }
+
+            console.log(text, resposta, respostaName);
+            chat.value = '';
+            sucesso('Comentado com sucesso');
+            updateDataProjetos(p_id, chatid);
+        } else {
+            erro('Não pode estar vazio...');
+        }
+    }
+}
+
+function alterarElementos(count) {
+    // Referência aos elementos
+    const divComentarios = document.getElementById('divComentarios' + count);
+    const divDescricao = document.getElementById('divDescricao' + count);
+    const separator = document.getElementById('separator' + count);
+    const pDescricao = document.getElementById('pDescricao' + count);
+    const alterarElementos = document.getElementById('alterarElementos' + count);
+    const collabs = document.getElementById('collabs' + count);
+    // Verifica se os elementos estão no estado inicial ou alterado
+    const isAlterado = divComentarios.classList.contains('d-none');
+
+    if (isAlterado) {
+        // Reverter para o estado inicial
+        divComentarios.classList.remove('d-none');
+        divDescricao.classList.remove('overflow-auto');
+        divDescricao.style.height = '';
+        separator.classList.remove('d-none');
+        collabs.classList.add('d-none');
+        pDescricao.style.height = '40px';
+        pDescricao.style.overflow = 'hidden';
+        pDescricao.style.textOverflow = 'ellipsis';
+        pDescricao.style.display = '-webkit-box';
+        pDescricao.style.webkitLineClamp = '2';
+        pDescricao.style.webkitBoxOrient = 'vertical';
+        alterarElementos.innerHTML = 'Ver Mais';
+    } else {
+        // Aplicar as alterações
+        divComentarios.classList.add('d-none');
+        divDescricao.classList.add('overflow-auto');
+        divDescricao.style.height = '280px';
+        separator.classList.add('d-none');
+        pDescricao.style.height = 'auto';
+        pDescricao.style.textOverflow = 'unset';
+        pDescricao.style.display = 'block';
+        collabs.classList.remove('d-none');
+        pDescricao.style.webkitLineClamp = 'unset';
+        pDescricao.style.webkitBoxOrient = 'unset';
+        alterarElementos.innerHTML = 'Ver Menos';
+    }
+}
+
+

@@ -62,6 +62,7 @@ class AuthController
                     return;
                 }
 
+                
 
                 $query = "SELECT id_name FROM accounts WHERE id_name = :id_name";
                 $stmt = $db->prepare($query);

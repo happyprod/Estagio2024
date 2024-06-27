@@ -3,3 +3,4 @@ RewriteBase /redes/public/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ perfil.php?url=$1 [QSA,L]
+
