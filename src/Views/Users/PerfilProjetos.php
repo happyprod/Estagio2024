@@ -1,14 +1,3 @@
-<div class="col-12 mt-4">
-    <div class="card mb-4">
-        <div class="card-header pb-0 p-3">
-            <h6 class="mb-1">Projects</h6>
-            <p class="text-sm">Um pouco sobre o meu trabalho</p>
-        </div>
-        <div class="card-body p-3">
-            <div class="row">
-
-
-
                 <?php
 
                 $count = 1;
@@ -58,6 +47,16 @@
 
 
                         echo '
+
+                        <div class="col-12 mt-4">
+    <div class="card mb-4">
+        <div class="card-header pb-0 p-3">
+            <h6 class="mb-1">Projects</h6>
+            <p class="text-sm">Um pouco sobre o meu trabalho</p>
+        </div>
+        <div class="card-body p-3">
+            <div class="row">
+
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                         
                     <div class="card card-blog card-plain">

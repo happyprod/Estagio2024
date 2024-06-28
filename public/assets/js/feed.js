@@ -176,7 +176,7 @@ function guardarLike(id_comentario, button) {
             data: { var1: id_comentario, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -223,7 +223,7 @@ function guardarProjectLike(id_projeto, button) {
             data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -360,3 +360,44 @@ function alterarElementos(count) {
 }
 
 
+function follow(element) {
+    var elementId = element.id;
+    // Usa uma expressão regular para extrair o número do id
+    var idUtilizador = elementId.match(/\d+/)[0];
+    
+    console.log(idUtilizador); // Mostra o valor de count no console (para verificar)
+
+    var img = element.querySelector('img');
+    img.classList.add('hidden');
+
+    setTimeout(function () {
+        if (img.src.includes('remover-amigo.png')) {
+            $.ajax({
+                url: '../src/Handlers/guardarFollow.php',
+                method: 'GET',
+                data: { var1: idUtilizador, var2: 1 }, // Passando variáveis na requisição
+                success: function (data) {
+                    img.src = '/public/img/adicionar-amigo.png';
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Erro ao obter dados:', error);
+                }
+            });
+        } else {            
+            $.ajax({
+                url: '../src/Handlers/guardarFollow.php',
+                method: 'GET',
+                data: { var1: idUtilizador, var2: 2 }, // Passando variáveis na requisição
+                success: function (data) {
+                    img.src = '/public/img/remover-amigo.png';
+                    console.log(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Erro ao obter dados:', error);
+                }
+            });
+        }
+        img.classList.remove('hidden');
+    }, 500); // O tempo deve corresponder ao tempo de transição em CSS
+}

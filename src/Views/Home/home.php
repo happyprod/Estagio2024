@@ -100,7 +100,7 @@ $controller = new HomeController($model);
             </div>
 
         </div>
-        
+
         <div id="loader">Carregando...</div>
 
     </main>
@@ -116,7 +116,7 @@ $controller = new HomeController($model);
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./assets/js/feed.js"></script>
-
+    
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

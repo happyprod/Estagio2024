@@ -113,7 +113,6 @@ if ($identidade == 1) {
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <!-- CSS Files -->
     <link id="pagestyle" href="../../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />

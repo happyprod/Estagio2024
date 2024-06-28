@@ -23,7 +23,6 @@ $controller = new UserController($model);
         {
             $data = $controller->ApagarProjectLikes($id_projeto);
         } else if ($opcao == 2){
-            echo 'deu';
             $data = $controller->guardarProjectLikes($id_projeto);
 
         }

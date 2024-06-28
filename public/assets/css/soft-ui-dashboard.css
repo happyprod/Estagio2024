@@ -27811,6 +27811,14 @@ gmp-map:not(:defined) {
   opacity: 1;
 }
 
+.img-toggle {
+  transition: opacity 0.75s ease-in-out;
+}
+
+.img-toggle.hidden {
+  opacity: 0;
+}
+
 
 /*
 Or just:
