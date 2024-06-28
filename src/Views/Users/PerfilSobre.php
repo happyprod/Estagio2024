@@ -92,7 +92,11 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                             $texto_formatado = nl2br(htmlspecialchars($texto_original)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
 
                                             // Exibir o texto formatado
-                                            echo $texto_formatado;
+                                            if ($texto_formatado != '') {
+                                                echo $texto_formatado;
+                                            } else {
+                                                echo 'Não sabemos muito sobre ' . $nome . ' mas acreditamos seja uma boa pessoa!';
+                                            }
                                             ?>
                                         </p>
 
@@ -103,7 +107,13 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                             </li>
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">Número:</strong> &nbsp;
-                                                <?php echo $numero; ?>
+                                                <?php
+                                                if ($numero != '') {
+                                                    echo $numero;
+                                                } else {
+                                                    echo 'Não especificado';
+                                                }
+                                                ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">Email:</strong> &nbsp;
@@ -112,27 +122,37 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">País:</strong>
                                                 &nbsp;
-                                                <?php echo $localizacao; ?>
+                                                <?php
+                                                if ($localizacao != '') {
+                                                    echo $localizacao;
+                                                } else {
+                                                    echo 'Não especificado';
+                                                }
+                                                ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
                                                 <strong class="text-dark text-sm">Redes
                                                     Sociais:</strong> &nbsp;
 
                                                 <?php
-                                                if ($instagram_url != null && $instagram_on == 1) {
-                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
-                                                }
+                                                if (($tiktok_on == 0 || $tiktok_url == null) && ($instagram_on == 0 || $instagram_url == null) && ($youtube_on == 0 || $youtube_url == null) && ($blog_on == 0 || $blog_url == null)) {
+                                                    echo '<p class="d-inline text-sm">Não especificado</p>';
+                                                } else {
+                                                    if ($instagram_url != null && $instagram_on == 1) {
+                                                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
+                                                    }
 
-                                                if ($youtube_url != null && $youtube_on == 1) {
-                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
-                                                }
+                                                    if ($youtube_url != null && $youtube_on == 1) {
+                                                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
+                                                    }
 
-                                                if ($tiktok_url != null && $tiktok_on == 1) {
-                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
-                                                }
+                                                    if ($tiktok_url != null && $tiktok_on == 1) {
+                                                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
+                                                    }
 
-                                                if ($blog_url != null && $blog_on == 1) {
-                                                    echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
+                                                    if ($blog_url != null && $blog_on == 1) {
+                                                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
+                                                    }
                                                 }
                                                 ?>
 
@@ -150,6 +170,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                 </div>
             </div>
         </div>
+        
         <div class="card-body p-3">
             <div id="textoDiv" style="height: 8.15em; overflow: hidden;">
                 <p class="text-sm text-justify">
@@ -161,7 +182,11 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                     $texto_formatado = nl2br(htmlspecialchars($texto_original)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
 
                     // Exibir o texto formatado
-                    echo $texto_formatado;
+                    if ($texto_formatado != '') {
+                        echo $texto_formatado;
+                    } else {
+                        echo 'Não sabemos muito sobre ' . $nome . ' mas acreditamos seja uma boa pessoa!';
+                    }
                     ?>
                 </p>
             </div>
@@ -170,33 +195,49 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome:</strong>
                     &nbsp; <?php echo $nome; ?></li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Número:</strong>
-                    &nbsp; <?php echo $numero; ?></li>
+                    &nbsp; <?php
+                            if ($numero != '') {
+                                echo $numero;
+                            } else {
+                                echo 'Não especificado';
+                            }
+                            ?></li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
                     &nbsp;
                     <?php echo $email; ?>
                 </li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">País:</strong>
                     &nbsp;
-                    <?php echo $localizacao; ?>
+                    <?php
+                    if ($localizacao != '') {
+                        echo $localizacao;
+                    } else {
+                        echo 'Não especificado';
+                    }
+                    ?>
                 </li>
                 <li class="list-group-item border-0 ps-0 pb-0">
                     <strong class="text-dark text-sm">Redes Sociais:</strong> &nbsp;
 
                     <?php
-                    if ($instagram_url != null && $instagram_on == 1) {
-                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
-                    }
+                    if (($tiktok_on == 0 || $tiktok_url == null) && ($instagram_on == 0 || $instagram_url == null) && ($youtube_on == 0 || $youtube_url == null) && ($blog_on == 0 || $blog_url == null)) {
+                        echo '<p class="d-inline text-sm">Não especificado</p>';
+                    } else {
+                        if ($instagram_url != null && $instagram_on == 1) {
+                            echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $instagram_url . '" target="_blank"> <i class="fab fa-instagram fa-lg"></i></a>';
+                        }
 
-                    if ($youtube_url != null && $youtube_on == 1) {
-                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
-                    }
+                        if ($youtube_url != null && $youtube_on == 1) {
+                            echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $youtube_url . '" target="_blank"> <i class="fab fa-youtube fa-lg"></i></a>';
+                        }
 
-                    if ($tiktok_url != null && $tiktok_on == 1) {
-                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
-                    }
+                        if ($tiktok_url != null && $tiktok_on == 1) {
+                            echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $tiktok_url . '" target="_blank"> <i class="fab fa-tiktok fa-lg"></i></a>';
+                        }
 
-                    if ($blog_url != null && $blog_on == 1) {
-                        echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
+                        if ($blog_url != null && $blog_on == 1) {
+                            echo '<a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="' . $blog_url . '" target="_blank"> <i class="fa fa-window-restore fa-lg"></i></a>';
+                        }
                     }
                     ?>
 

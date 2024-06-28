@@ -48,14 +48,13 @@ foreach ($data2 as $row2) {
     $c_nome = htmlspecialchars($row2->name);
     $c_picture = htmlspecialchars($row2->picture);
     $c_idName = htmlspecialchars($row2->idName);
-
-    // Remova a declaração de $collabshtml daqui
+    $c_id = htmlspecialchars($row2->id);
 
     $collabshtml .= '  
                 <li class="list-group-item pt-0 pb-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
-                            <img src="' . $c_picture . '" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
+                            <img src="/public/users/' . $c_id . '/' . $c_picture . '" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-0 text-sm">' . $c_nome . '</h6>

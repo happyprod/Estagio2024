@@ -2,14 +2,14 @@
 require_once __DIR__ . '/../../../vendor/autoload.php'; // Certifique-se de que o autoload do Composer está incluído
 
 use App\Controllers\HomeController;
-use App\Models\AccountListing;
+use App\Models\Home;
 use App\Helpers\Database;
 
 $db = Database::connect();
 
 
 // Cria instâncias do modelo e do controlador
-$model = new AccountListing($db);
+$model = new Home($db);
 $controller = new HomeController($model);
 
 ?>
@@ -63,6 +63,7 @@ $controller = new HomeController($model);
 
 
         <div class="row" style="margin-right: 0px; margin-left: 0px;">
+
             <div class="col-8">
                 <div class="w-100 mx-auto"> <!-- Centralizando a div principal -->
                     <div id="projects-container">
@@ -71,90 +72,36 @@ $controller = new HomeController($model);
                     <div class="border-top my-1 w-90  mx-auto"></div>
                 </div>
             </div>
+
             <div class="col-4">
                 <div class="ms-auto me-4 mt-4 border-radius-lg h-100" style="width: 272px;">
 
-                    <?php
-                    $controller->contasSugeridas();
-                    ?>
+                    <div class="p-3 shadow bg-white mx-auto border-radius-lg justify-content-center mt-4">
+
+                        <h6>Contas Sugeridas</h6>
+
+                        <?php
+                        $controller->getSugestions();
+                        ?>
+
+                    </div>
+
+
 
                     <div class="p-3 shadow bg-white mx-auto border-radius-lg justify-content-center mt-4">
                         <h6>Contas Populares</h6>
 
-                        <div class="row mt-3">
-                            <div class="col-3 h-100 my-auto">
-                                <a href="">
-                                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                                </a>
-                            </div>
-                            <div class="col-6 p-2" style="margin-left: -0.5em;">
-                                <a href="">
-                                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                                </a>
-                                <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">Promotor</p>
-                            </div>
-                            <div class="col-2 mx-auto my-auto">
-                                <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-3 h-100 my-auto">
-                                <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                            </div>
-                            <div class="col-6 p-2" style="margin-left: -0.5em;">
-                                <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                                <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                            </div>
-                            <div class="col-2 mx-auto my-auto">
-                                <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-3 h-100 my-auto">
-                                <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                            </div>
-                            <div class="col-6 p-2" style="margin-left: -0.5em;">
-                                <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                                <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                            </div>
-                            <div class="col-2 mx-auto my-auto">
-                                <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-3 h-100 my-auto">
-                                <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                            </div>
-                            <div class="col-6 p-2" style="margin-left: -0.5em;">
-                                <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                                <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                            </div>
-                            <div class="col-2 mx-auto my-auto">
-                                <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-3 h-100 my-auto">
-                                <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                            </div>
-                            <div class="col-6 p-2" style="margin-left: -0.5em;">
-                                <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                                <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                            </div>
-                            <div class="col-2 mx-auto my-auto">
-                                <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                            </div>
-                        </div>
+                        <?php
+                        $controller->getPopulars();
+                        ?>
                     </div>
+
                 </div>
             </div>
-        </div>
-        <div id="loader">Carregando...</div>
 
+        </div>
+        
+        <div id="loader">Carregando...</div>
 
     </main>
 

@@ -18,14 +18,14 @@ register(): Exibe o formulário de registro e cria uma nova conta de usuário.
 
 namespace App\Controllers;
 
-use App\Models\AccountListing;
+use App\Models\Home;
 
 class HomeController
 {
 
     private $model;
 
-    public function __construct(AccountListing $model)
+    public function __construct(Home $model)
     {
         $this->model = $model;
     }
@@ -37,77 +37,135 @@ class HomeController
     }
 
 
-    public function contasSugeridas()
+    public function getSugestions()
     {
-    echo '
-        <div class="p-3 shadow bg-white mx-auto border-radius-lg justify-content-center mt-4">
-            <h6>Contas Sugeridas</h6>
+        $data = $this->model->getSugestions();
 
-            <div class="row mt-3">
-                <div class="col-3 h-100 my-auto">
-                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                </div>
-                <div class="col-6 p-2" style="margin-left: -0.5em;">
-                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                </div>
-                <div class="col-2 mx-auto my-auto">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                </div>
-            </div>
+        $count = 0;
 
-            <div class="row mt-3">
-                <div class="col-3 h-100 my-auto">
-                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                </div>
-                <div class="col-6 p-2" style="margin-left: -0.5em;">
-                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                </div>
-                <div class="col-2 mx-auto my-auto">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                </div>
-            </div>
+        foreach ($data as $row) {
+            $sugs_nome = htmlspecialchars($row->name);
+            $sugs_picture = htmlspecialchars($row->picture);
+            $sugs_idName = htmlspecialchars($row->id_name);
+            $sugs_id = htmlspecialchars($row->picture);
+            $sugs_identity = htmlspecialchars($row->indentity);
 
-            <div class="row mt-3">
-                <div class="col-3 h-100 my-auto">
-                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                </div>
-                <div class="col-6 p-2" style="margin-left: -0.5em;">
-                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                </div>
-                <div class="col-2 mx-auto my-auto">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                </div>
-            </div>
 
-            <div class="row mt-3">
-                <div class="col-3 h-100 my-auto">
-                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
-                </div>
-                <div class="col-6 p-2" style="margin-left: -0.5em;">
-                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                </div>
-                <div class="col-2 mx-auto my-auto">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                </div>
-            </div>
+            if ($sugs_identity == 1) {
+                $sugs_identity = "Promotor";
+            } else if ($sugs_identity == 2) {
+                $sugs_identity = "Artista";
+            } else if ($sugs_identity == 3) {
+                $sugs_identity = "Agente de Booking";
+            } else if ($sugs_identity == 4) {
+                $sugs_identity = "Agencia de booking";
+            } else {
+                $sugs_identity = "Evento";
+            }
 
-            <div class="row mt-3">
-                <div class="col-3 h-100 my-auto">
-                    <img src="/public/img/fotos/14b5dd793d1dc687a4657997cd8e8db4.jpg" class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
+            // Obtém a extensão do arquivo em letras minúsculas
+            $extension = strtolower(pathinfo($sugs_picture, PATHINFO_EXTENSION));
+
+            // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
+            $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
+
+            // Verifica se a extensão está na lista de extensões permitidas
+            $google_image = !in_array($extension, $allowed_extensions);
+
+            if ($google_image) {
+                $sugs_picture = 'src="' . $sugs_picture . '"';
+            } else {
+                $sugs_picture = 'src="/public/users/' . $sugs_id . '/' . $sugs_picture . '"';
+            }
+
+
+            echo '
+            <div class="p-3 shadow bg-white mx-auto border-radius-lg justify-content-center mt-4">
+                <h6>Contas Sugeridas</h6>
+
+                <div class="row mt-3">
+                    <div class="col-3 h-100 my-auto">
+                        <a href="utilizadores/' . $sugs_id . '">
+                            <img ' . $sugs_picture . ' class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
+                        </a>
+                    </div>
+                    <div class="col-6 p-2" style="margin-left: -0.5em;">
+                        <a href="">
+                            <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @' . $sugs_idName . '</p>
+                        </a>
+                        <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' . $sugs_identity . '</p>
+                    </div>
+                    <div class="col-2 mx-auto my-auto" id="sugestion-' . $count . '" onclick="follow(this)">
+                        <img src="/public/img/remover-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
+                    </div>
                 </div>
-                <div class="col-6 p-2" style="margin-left: -0.5em;">
-                    <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @happyprod19asdlkasmldkmaskldmlak </p>
-                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> Rúben Costa </p>
-                </div>
-                <div class="col-2 mx-auto my-auto">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
-                </div>
-            </div>
-        </div>';
+            </div>';
+
+            $count++;
+        }
     }
 
+    public function getPopulars()
+    {
+        $data = $this->model->getPopulars();
+
+        $count = 0;
+
+        foreach ($data as $row) {
+            $sugs_nome = htmlspecialchars($row->name);
+            $sugs_picture = htmlspecialchars($row->picture);
+            $sugs_idName = htmlspecialchars($row->id_name);
+            $sugs_id = htmlspecialchars($row->picture);
+            $sugs_identity = htmlspecialchars($row->indentity);
+
+
+            if ($sugs_identity == 1) {
+                $sugs_identity = "Promotor";
+            } else if ($sugs_identity == 2) {
+                $sugs_identity = "Artista";
+            } else if ($sugs_identity == 3) {
+                $sugs_identity = "Agente de Booking";
+            } else if ($sugs_identity == 4) {
+                $sugs_identity = "Agencia de booking";
+            } else {
+                $sugs_identity = "Evento";
+            }
+
+            // Obtém a extensão do arquivo em letras minúsculas
+            $extension = strtolower(pathinfo($sugs_picture, PATHINFO_EXTENSION));
+
+            // Verifica se a extensão do arquivo está em um array de extensões de imagem permitidas
+            $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
+
+            // Verifica se a extensão está na lista de extensões permitidas
+            $google_image = !in_array($extension, $allowed_extensions);
+
+            if ($google_image) {
+                $sugs_picture = 'src="' . $sugs_picture . '"';
+            } else {
+                $sugs_picture = 'src="/public/users/' . $sugs_id . '/' . $sugs_picture . '"';
+            }
+
+
+            echo '
+            <div class="row mt-3">
+                <div class="col-3 h-100 my-auto">
+                    <a href="utilizadores/' . $sugs_id . '">
+                        <img ' . $sugs_picture . ' class="img-fluid rounded-circle" style="object-fit: cover; width: 40px; height: 40px; padding-right: 0px;">
+                    </a>
+                </div>
+                <div class="col-6 p-2" style="margin-left: -0.5em;">
+                    <a href="">
+                        <p class="text-sm mb-1" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"> @' . $sugs_idName . '</p>
+                    </a>
+                    <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' . $sugs_identity . '</p>
+                </div>
+                <div class="col-2 mx-auto my-auto" id="sugestion-' . $count . '" onclick="follow(this)">
+                    <img src="/public/img/remover-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="mx-auto my-auto">
+                </div>
+            </div>';
+
+            $count++;
+        }
+    }
 }

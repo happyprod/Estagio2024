@@ -8,7 +8,7 @@ use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Controllers\ChatController;
 use App\Models\User;
-use App\Models\AccountListing;
+use App\Models\Home;
 use App\Models\Message;
 use App\Helpers\Database;
 
@@ -51,7 +51,7 @@ function route($url, $routes) {
                 } else if ($controller === UserController::class) {
                     $model = new User($db); // Passar a conexão ao modelo User para outros controladores
                 } else if ($controller === HomeController::class) {
-                    $model = new AccountListing($db); // Passar a conexão ao modelo AccountListing
+                    $model = new Home($db); // Passar a conexão ao modelo Home
                 }
                 
                 $controllerInstance = new $controller($model); // Passar o modelo ao controlador

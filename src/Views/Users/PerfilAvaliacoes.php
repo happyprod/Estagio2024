@@ -103,7 +103,7 @@
                                         ';
                                 }
                             } else {
-                                echo "Nenhum resultado encontrado.";
+                                echo "Ainda não existem avaliações.";
                             }
                             ?>
 
@@ -183,7 +183,7 @@
                         }
                     }
                 } else {
-                    echo "Nenhum resultado encontrado.";
+                    echo "Ainda não existem avaliações.";
                 }
 
 

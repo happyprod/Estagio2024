@@ -456,7 +456,7 @@ class UserController
 
 
             // Caminho para o arquivo .js no sistema de arquivos
-            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/Estagio2024/public/assets/js/graficos.js';
+            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/assets/js/graficos.js';
 
             // Verifica se o arquivo existe no sistema de arquivos
 

@@ -27,7 +27,7 @@ if(isset($_POST['order'])){
     $id_user = $_SESSION['user_id'];
 
     // Caminho para a pasta onde as imagens serão armazenadas
-    $caminho_para_pasta = '../../public/users/' . $id_user . '/';
+    $caminho_para_pasta = '/public/users/' . $id_user . '/';
 
     try {
 

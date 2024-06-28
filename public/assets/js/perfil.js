@@ -306,7 +306,7 @@ function adicionarNome(id_name) {
                     <li class="list-group-item pt-0 pb-3">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0 me-3">
-                                <img src="${response.picture}" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
+                                <img src="${response.picture}" alt="" class="avatar rounded-circle img-fluid my-auto" style="object-fit: cover; width: 45px; height: 45px;">
                             </div>
                             <div class="flex-grow-1">
                                 <h6 class="mb-0 text-sm">${response.name}</h6>
