@@ -23,6 +23,30 @@ class UserController
         require __DIR__ . '/../Views/Users/editarPerfil.php';
     }
 
+    public function showLoginForm($error = null)
+    {
+        session_destroy();
+
+        require __DIR__ . '/../Views/Accounts/login.php';
+    }
+
+    public function showRegisterForm($error = null)
+    {
+        session_destroy();
+
+        require __DIR__ . '/../Views/Accounts/register.php';
+    }
+
+    // Exemplo da função register no controlador UserController
+public function register($email, $password, $identity, $location, $name, $selectedType)
+{
+    $this->model->register($email, $password, $identity, $location, $name, $selectedType);
+}
+
+    public function criarProjeto()
+    {
+        $this->model->criarProjeto();
+    }
     public function getEditarImagens($count, $p_id)
     {
         return $this->model->getEditarImagens($count, $p_id);
@@ -30,12 +54,6 @@ class UserController
 
     public function inserirEvento()
     {
-        $switchEvento = isset($_POST['switchEvento']) && $_POST['switchEvento'] == 'true' ? 1 : 0;
-        $switchData = isset($_POST['switchData']) && $_POST['switchData'] == 'true' ? 1 : 0;
-        $switchBooking = isset($_POST['switchBooking']) && $_POST['switchBooking'] == 'true' ? 1 : 0;
-        $switchLocal = isset($_POST['switchLocal']) && $_POST['switchLocal'] == 'true' ? 1 : 0;
-        $switchCollabs = isset($_POST['switchCollabs']) && $_POST['switchCollabs'] == 'true' ? 1 : 0;
-
         $id_projeto = $_POST['id_projeto'] ?? '';
 
         // Outros dados
@@ -54,46 +72,22 @@ class UserController
         echo "Data: " . htmlspecialchars($data) . "<br>";
         echo "Empresa de Booking: " . htmlspecialchars($empresaBooking) . "<br>";
         echo "Localização: " . htmlspecialchars($localizacao) . "<br>";
-        echo "switchBooking: " . htmlspecialchars($switchBooking) . "<br>";
-        echo "switchEvento: " . htmlspecialchars($switchEvento) . "<br>";
+        echo "Array de Categorias: " . json_encode($arrayC_idName);
 
-        // Verificar se os campos obrigatórios estão vazios
-        if (empty($localizacao)) {
-            $switchLocal = 0;
-        }
+        // Inserir no banco de dados
+        $dadosEvento = array(
+            'nomeEvento' => $nomeEvento,
+            'identificacaoEvento' => $identificacaoEvento,
+            'descricao' => $descricao,
+            'data' => $data,
+            'empresaBooking' => $empresaBooking,
+            'localizacao' => $localizacao,
+            'id_projeto' => $id_projeto
+        );
 
-        if (empty($empresaBooking)) {
-            $switchBooking = 0;
-        }
-
-        if (empty($identificacaoEvento)) {
-            $switchEvento = 0;
-        }
-
-        // Verificar se a data está dentro dos últimos 50 anos e não ultrapassa a data atual
-        $dataAtual = strtotime(date('Y-m-d'));
-        $dataLimite = strtotime('-50 years');
-        $dataEvento = strtotime($data);
-
-                // Inserir no banco de dados
-                $dadosEvento = array(
-                    'nomeEvento' => $nomeEvento,
-                    'identificacaoEvento' => $identificacaoEvento,
-                    'descricao' => $descricao,
-                    'data' => $data,
-                    'empresaBooking' => $empresaBooking,
-                    'localizacao' => $localizacao,
-                    'switchEvento' => $switchEvento ? '1' : '0',
-                    'switchData' => $switchData,
-                    'switchBooking' => $switchBooking ? '1' : '0',
-                    'switchLocal' => $switchLocal,
-                    'switchCollabs' => $switchCollabs,
-                    'id_projeto' => $id_projeto
-                );
-
-                $this->model->inserirEvento($dadosEvento);
-
+        $this->model->inserirEvento($dadosEvento, $arrayC_idName);
     }
+
 
     public function getEditarInfoProjects($count, $p_id)
     {
@@ -456,7 +450,7 @@ class UserController
 
 
             // Caminho para o arquivo .js no sistema de arquivos
-            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/assets/js/graficos.js';
+            $filePath = $_SERVER['DOCUMENT_ROOT'] . '/Estagio2024/public/assets/js/graficos.js';
 
             // Verifica se o arquivo existe no sistema de arquivos
 
@@ -697,7 +691,22 @@ class UserController
 
     public function verificarFollow($id)
     {
-        $this->model->verificarFollow($id);
+        return $this->model->verificarFollow($id);
+    }
+
+    public function guardarAssuntoChat($idAcc, $message)
+    {
+        $this->model->guardarAssuntoChat($idAcc, $message);
+    }
+
+    public function verificarChat($id)
+    {
+        return $this->model->verificarChat($id);
+    }
+
+    public function guardarContract($id_acc, $assuntoContract, $nameFile)
+    {
+        $this->model->guardarContract($id_acc, $assuntoContract, $nameFile);
     }
 
     public function apagarProjeto()
@@ -720,7 +729,25 @@ class UserController
 
     public function getProjects($id)
     {
-        return $this->model->getProjects($id);
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id_user = $_SESSION['user_id'];
+        
+        if ($id_user == $id)
+        {
+            return $this->model->getProjects($id);
+        } else {
+            return $this->model->getProjectsPublic($id, $id_user);
+        }
+        
+    }
+
+
+    public function getProjectTumb($p_id)
+    {
+        return $this->model->getProjectTumb($p_id);
     }
 
     public function getProjectbyId($p_id)
@@ -728,7 +755,7 @@ class UserController
         return $this->model->getProjectbyId($p_id);
     }
 
- 
+
     public function getProjectsImages($p_id)
     {
         return $this->model->getProjectsImages($p_id);
@@ -802,11 +829,11 @@ class UserController
 
     public function guardarProjectLikes($id_projeto)
     {
-        return $this->model->guardarProjectLikes($id_projeto);        ;
+        return $this->model->guardarProjectLikes($id_projeto);;
     }
 
 
-    
+
     public function getFollowingsList($id)
     {
         return $this->model->getFollowingsList($id);
@@ -821,7 +848,7 @@ class UserController
     {
         return $this->model->getFollowersList($id);
     }
-    
+
     public function getFollowersListSearch($id, $id_name_user_search)
     {
         return $this->model->getFollowersListSearch($id, $id_name_user_search);

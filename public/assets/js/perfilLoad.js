@@ -3,10 +3,10 @@ $lastImageCount = 0;
 var elementsWithDataId;
 // Variável para contar o número de usuários na lista
 var numUsuarios = 0;
-
 $(function () {
     // Selecione todas as listas com a classe .sortable-list e inicialize o sortable para cada uma
     $(".sortable-list").each(function (index) {
+
         $(this).sortable({
             items: "> div:not(.fixed-item)", // Somente itens que não têm a classe .fixed-item são ordenáveis
             update: function (event, ui) {
@@ -22,12 +22,32 @@ $(function () {
 });
 
 function guardarImagens(index) {
+
     console.log(index);
     var order = [];
-    $(".sortable-list").eq(index - 1).children("div").each(function () {
-        var dataId = $(this).attr('data-id');
-        var imgSrc = $(this).find('img').attr('src');
-        order.push({ dataId: dataId, imgSrc: imgSrc });
+
+    // Seleciona todos os elementos dentro da div com id="imageContainer + numero" que têm a classe "imageContainer"
+    const imageContainers = document.querySelectorAll('#imageContainer' + index + ' .imageContainer');
+//é so meter imageContainer11 nas div das imagens
+
+
+    // Itera sobre cada elemento encontrado
+    imageContainers.forEach(container => {
+        // Encontra a tag <img> dentro do container atual
+        const imgElement = container.querySelector('img');
+
+        // Verifica se encontrou a tag <img>
+        if (imgElement) {
+            // Obtém o valor do atributo src e data-id
+            const imgSrc = imgElement.getAttribute('src');
+            const dataId = imgElement.getAttribute('data-id');
+
+            // Cria um objeto com os valores encontrados e adiciona ao array
+            order.push({
+                imgSrc: imgSrc,
+                dataId: dataId
+            });
+        }
     });
 
     // Verificar os dados antes de enviar
@@ -458,6 +478,8 @@ function handleButtonClick(event) {
 
 function handleFileInputChange() {
     const files = this.files;
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Tipos de arquivo permitidos
+
     if (files.length > 0) {
         let lastDataId = 0;
         const existingDivs = document.querySelectorAll(`#${id_entrada} div[data-id]`);
@@ -470,16 +492,22 @@ function handleFileInputChange() {
         });
 
         Array.from(files).forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const imageUrl = e.target.result;
-                const newId = lastDataId + index + 1; // Incrementar o último data-id
-                displayImageBeforeFixedItem(imageUrl, newId);
-            };
-            reader.readAsDataURL(file);
+            // Verifica se o tipo do arquivo está entre os permitidos
+            if (allowedTypes.includes(file.type)) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageUrl = e.target.result;
+                    const newId = lastDataId + index + 1; // Incrementa o último data-id
+                    displayImageBeforeFixedItem(imageUrl, newId);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                console.log(`O arquivo '${file.name}' não é um tipo de imagem suportado.`);
+            }
         });
     }
 }
+
 
 function alterarImageContainer(novothis) {
     const fileInput = document.getElementById('fileInput');
@@ -501,7 +529,7 @@ function displayImageBeforeFixedItem(imageUrl, newId) {
     const div = document.createElement('div');
     newId = newId + $lastImageCount;
     $lastImageCount = 0;
-    div.classList.add('col-4', 'mb-3', 'ui-sortable-handle');
+    div.classList.add('col-4', 'mb-3', 'ui-sortable-handle', 'imageContainer');
     div.setAttribute('data-id', newId);
     div.innerHTML = `
         <a class="delete-image" data-id="${newId}">
@@ -564,6 +592,7 @@ function setupDeleteLinks() {
         });
     });
 }
+
 
 function limparImagensData() {
     elementsWithDataId = document.querySelectorAll('[data-id]');

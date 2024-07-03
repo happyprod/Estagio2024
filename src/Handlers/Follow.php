@@ -18,8 +18,10 @@ $userController = new UserController($userModel);
 
 $id = $_GET['var1'];
 
-if ($userController->verificarFollow($id) == false) {
+if (!$userController->verificarFollow($id) == 1) {
     $userController->guardarFollow($id);
+    echo '1';
 } else {
     $userController->removerFollow($id);
+    echo '0';
 }

@@ -1,26 +1,28 @@
 <?php
-// processa_formulario.php
+// Conectar ao banco de dados
+require_once __DIR__ . '/../../vendor/autoload.php'; // Inclui o autoload do Composer
 
-header('Content-Type: application/json');
-// Código do login
+use App\Controllers\UserController;
+use App\Models\User;
+use App\Helpers\Database;
 
-use App\Controllers\AuthController;
+// Conecta ao banco de dados
+$db = Database::connect();
 
-
-// Verificar se o formulário foi submetido
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once '../Helpers/init.php';
-    require_once '../Helpers/functions.php';
-
-    // Obter os valores dos campos 'username' e 'password'
+// Verifica se houve um POST válido
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Captura os dados do formulário
     $email = $_POST['email'];
     $password = $_POST['password'];
     $identity = $_POST['identity'];
-    $location = $_POST['location'];
+    $location = $_POST['localizacao'];
     $name = $_POST['name'];
     $selectedType = $_POST['selectedType'];
-    
-    // Criar uma instância do controlador
-    $authController = new AuthController();
-    $authController->register($email, $password, $identity, $location, $name, $selectedType);
+
+    // No arquivo guardar_sobre.php
+    $userModel = new User($db);
+    $userController = new UserController($userModel);
+
+    // Chama o método para registrar o usuário
+    $userController->register($email, $password, $identity, $location, $name, $selectedType);
 }

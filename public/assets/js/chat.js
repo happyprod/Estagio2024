@@ -11,13 +11,14 @@ function loadOptions() {
             $('#chat-options').html(data);
             $('#chat-options').scrollTop($('#chat-options')[0].scrollHeight); // Rolagem automática para o final
 
-            $('#chat-options div').click(function () {
-                selectedUser = $(this).attr('id');
-                document.getElementById('mensagemInput').classList.remove('d-none');
-                loadMessages(selectedUser);
-            });
         }
     });
+}
+
+function abrirMensagens(id) {
+    selectedUser = id;
+    document.getElementById('mensagemInput').classList.remove('d-none');
+    loadMessages(selectedUser);
 }
 
 function loadMessages(user) {
@@ -26,10 +27,11 @@ function loadMessages(user) {
         method: 'GET',
         data: { action: 'loadMessages', user: user },
         success: function (data) {
-            $('#chat-box').html(data);
             if (autoScroll) {
                 $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
             }
+            $('#chat-box').html(data);
+
         }
     });
 }
@@ -71,7 +73,7 @@ document.getElementById('message').addEventListener('keypress', function (event)
     }
 });
 
-$('#chat-box').on('scroll', function() {
+$('#chat-box').on('scroll', function () {
     if ($('#chat-box').scrollTop() <= 0) {
         autoScroll = false;
     } else if ($('#chat-box').scrollTop() + $('#chat-box').innerHeight() >= $('#chat-box')[0].scrollHeight - 10) {

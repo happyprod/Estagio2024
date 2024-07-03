@@ -30,10 +30,12 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
             <div class="row">
                 <div class="col-md-8 d-flex align-items-center w-100 justify-content-between">
                     <h6 class="mb-0">Sobre</h6>
-                    <button type="button" id="verMaisBtn" onclick="openModal()" class="btn btn-link btn-block pe-3 ps-0 mb-0" data-bs-toggle="modal" data-bs-target="#modal-vermais" style="display: block;">
+                    <?php if ($sobre != '') {
+                        echo '<button type="button" id="verMaisBtn" onclick="openModal()" class="btn btn-link btn-block pe-3 ps-0 mb-0" data-bs-toggle="modal" data-bs-target="#modal-vermais" style="display: block;">
                         Ver mais
-                    </button>
-
+                    </button>';
+                    }
+                    ?>
                     <!-- Modal -->
                     <div class="modal fade" id="modal-vermais" tabindex="-1" role="dialog" aria-labelledby="modalVerMaisTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
@@ -64,7 +66,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                                     }
 
                                                     if ($google_image == false) {
-                                                        echo 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+                                                        echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
                                                     } else {
                                                         echo 'src="' . $fotodeperfil . '"';
                                                     }
@@ -131,8 +133,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                                 ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
-                                                <strong class="text-dark text-sm">Redes
-                                                    Sociais:</strong> &nbsp;
+                                                <strong class="text-dark text-sm">Redes Sociais:</strong> &nbsp;
 
                                                 <?php
                                                 if (($tiktok_on == 0 || $tiktok_url == null) && ($instagram_on == 0 || $instagram_url == null) && ($youtube_on == 0 || $youtube_url == null) && ($blog_on == 0 || $blog_url == null)) {
@@ -170,7 +171,6 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                 </div>
             </div>
         </div>
-        
         <div class="card-body p-3">
             <div id="textoDiv" style="height: 8.15em; overflow: hidden;">
                 <p class="text-sm text-justify">

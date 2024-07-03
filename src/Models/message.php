@@ -81,7 +81,7 @@ class Message
                     END AS id
                     FROM chat
                     WHERE id_sender = ? OR id_receive = ?
-                    ORDER BY date ASC";
+                    ORDER BY date DESC";
 
             $stmt_projects = $this->db->prepare($sql);
             $stmt_projects->execute([$session, $session, $session, $session]);
@@ -115,29 +115,38 @@ class Message
 
 
     public function getChatTrade($id)
-    {
-        // Iniciar a sessão se ainda não estiver iniciada
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $session = $_SESSION['user_id']; // Obtém o ID do usuário da sessão
-
-        // Consulta geral
-        $sql = "SELECT a.id_name, a.picture, c.id_sender, c.message, c.viewed, c.date
-                FROM chat c
-                JOIN accounts a ON (c.id_sender = a.id OR c.id_receive = a.id)
-                WHERE (c.id_sender = ? AND c.id_receive = ?)
-                OR (c.id_sender = ? AND c.id_receive = ?)
-                ORDER BY c.date DESC
-                LIMIT 1";
-        $stmt2 = $this->db->prepare($sql);
-        $stmt2->execute([$session, $id, $id, $session]);
-        $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-        return $result2;
-        // Outros métodos do modelo...
+{
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
+
+    $session = $_SESSION['user_id'];
+
+    if (!$session || !$id || $session == $id) {
+        error_log("Invalid session or id values. Session: $session, ID: $id");
+        return null;
+    }
+
+    $sql = "SELECT a.id_name, a.picture, c.id_sender, c.message, c.viewed, c.date
+            FROM chat c
+            JOIN accounts a ON a.id = CASE
+                WHEN c.id_sender = ? THEN c.id_receive
+                WHEN c.id_receive = ? THEN c.id_sender
+            END
+            WHERE (c.id_sender = ? AND c.id_receive = ?)
+            OR (c.id_sender = ? AND c.id_receive = ?)
+            ORDER BY c.date DESC
+            LIMIT 1";
+
+    $stmt2 = $this->db->prepare($sql);
+    $stmt2->execute([$session, $session, $session, $id, $id, $session]);
+    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+    error_log("Query result: " . print_r($result2, true));
+
+    return $result2;
+}
+
 
 
 
@@ -167,29 +176,35 @@ class Message
 
 
     public function getLastChat($user)
-    {
-        // Iniciar a sessão se ainda não estiver iniciada
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $session = $_SESSION['user_id']; // Obtém o ID do usuário da sessão
-
-
-        $sql = "SELECT c.id_sender, a.id, a.id_name, a.picture, c.date
-        FROM chat c
-        JOIN accounts a ON (c.id_sender = a.id OR c.id_receive = a.id)
-        WHERE (c.id_sender = ? AND c.id_receive = ?)
-        OR (c.id_sender = ? AND c.id_receive = ?)
-        ORDER BY c.date DESC
-        LIMIT 1";
-
-        $stmt2 = $this->db->prepare($sql);
-        $stmt2->execute([$session, $user, $user, $session]);
-        $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-        return $result2;
+{
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
+
+    $session = $_SESSION['user_id'];
+
+    // Verifique se o $session e o $user não são nulos ou iguais
+    if (!$session || !$user || $session == $user) {
+        return null; // Retorna nulo ou uma mensagem de erro adequada
+    }
+
+    $sql = "SELECT c.id_sender, c.id_receive, a.id, a.id_name, a.picture, c.date
+            FROM chat c
+            JOIN accounts a ON a.id = CASE
+                WHEN c.id_sender = ? THEN c.id_receive
+                WHEN c.id_receive = ? THEN c.id_sender
+            END
+            WHERE (c.id_sender = ? AND c.id_receive = ?)
+            OR (c.id_sender = ? AND c.id_receive = ?)
+            ORDER BY c.date DESC
+            LIMIT 1";
+
+    $stmt2 = $this->db->prepare($sql);
+    $stmt2->execute([$session, $session, $session, $user, $user, $session]);
+    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+    return $result2;
+}
 
     public function getMessages($user)
     {

@@ -12,6 +12,14 @@ function loadProjects() {
                     ? `- <a target="_blank" href="https://www.google.pt/maps/search/${local}.php">${local}</a>`
                     : ``;
 
+
+                var flag = '';
+
+                if (project.imageNum === 1) {
+                    flag = ' d-none'; // Hide buttons if only one image
+                }
+
+
                 $('#projects-container').append(`
                     <div class="p-3 shadow bg-white mx-auto justify-content-center mt-4" style="width: 550px; border-radius: 2.5%;">
                         <div class="card card-blog card-plain">
@@ -41,12 +49,12 @@ function loadProjects() {
                                     ${project.image}
                                     </div>
 
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carousell${offset + projects.indexOf(project) + 1}" data-bs-slide="prev">
+                                    <button class="carousel-control-prev ${flag}" type="button" data-bs-target="#carousell${offset + projects.indexOf(project) + 1}" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                     </button>
 
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carousell${offset + projects.indexOf(project) + 1}" data-bs-slide="next">
+                                    <button class="carousel-control-next ${flag}" type="button" data-bs-target="#carousell${offset + projects.indexOf(project) + 1}" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                     </button>    
@@ -94,12 +102,14 @@ function loadProjects() {
     </div>
                             
                 `);
-                offset += limit;
+                
             });
+            offset += limit;
         }
         $('#loader').hide();
     });
 }
+
 
 // Carrega os projetos iniciais
 loadProjects();
@@ -111,6 +121,11 @@ $(window).scroll(function () {
     }
 });
 
+function sucesso(mensagem) {
+    toastr.options.timeOut = 10000; // 10 segundos
+    toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
+    toastr.success(mensagem);
+}
 
 
 function updateDataProjetos(var1, var2) {
@@ -176,7 +191,7 @@ function guardarLike(id_comentario, button) {
             data: { var1: id_comentario, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-
+    
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -223,7 +238,7 @@ function guardarProjectLike(id_projeto, button) {
             data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-
+    
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -310,8 +325,8 @@ function CommentSend(chatid, p_id) {
 
             console.log(text, resposta, respostaName);
             chat.value = '';
-            sucesso('Comentado com sucesso');
             updateDataProjetos(p_id, chatid);
+            sucesso('Comentado com sucesso');
         } else {
             erro('Não pode estar vazio...');
         }
@@ -360,11 +375,13 @@ function alterarElementos(count) {
 }
 
 
+
+
 function follow(element) {
     var elementId = element.id;
     // Usa uma expressão regular para extrair o número do id
     var idUtilizador = elementId.match(/\d+/)[0];
-    
+
     console.log(idUtilizador); // Mostra o valor de count no console (para verificar)
 
     var img = element.querySelector('img');
@@ -377,20 +394,20 @@ function follow(element) {
                 method: 'GET',
                 data: { var1: idUtilizador, var2: 1 }, // Passando variáveis na requisição
                 success: function (data) {
-                    img.src = '/public/img/adicionar-amigo.png';
+                    img.src = 'img/adicionar-amigo.png';
                     console.log(data);
                 },
                 error: function (xhr, status, error) {
                     console.error('Erro ao obter dados:', error);
                 }
             });
-        } else {            
+        } else {
             $.ajax({
                 url: '../src/Handlers/guardarFollow.php',
                 method: 'GET',
                 data: { var1: idUtilizador, var2: 2 }, // Passando variáveis na requisição
                 success: function (data) {
-                    img.src = '/public/img/remover-amigo.png';
+                    img.src = 'img/remover-amigo.png';
                     console.log(data);
                 },
                 error: function (xhr, status, error) {

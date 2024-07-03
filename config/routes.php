@@ -7,9 +7,11 @@ use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Controllers\ChatController;
+use App\Controllers\ContractsController;
 use App\Models\User;
 use App\Models\Home;
 use App\Models\Message;
+use App\Models\Contracts;
 use App\Helpers\Database;
 
 $routes = [
@@ -18,9 +20,10 @@ $routes = [
     '/utilizadores/(\d+\.php)' => [UserController::class, 'show'], // Corrigido o padrão de rota
     '/editarPerfil' => [UserController::class, 'showEditar'],
     '/chat' => [ChatController::class, 'showChat'],
+    '/contratos' => [ContractsController::class, 'showContratos'],
     '/contact' => 'PageController@contact',
-    '/registerartists' => [AuthController::class, 'showRegisterForm'],
-    '/loginartists' => [AuthController::class, 'showLoginForm'],
+    '/registerartists' => [UserController::class, 'showRegisterForm'],
+    '/loginartists' => [UserController::class, 'showLoginForm'],
     '/logout' => [AuthController::class, 'logout'],
     '/register' => 'AuthController@register',
 ];
@@ -52,6 +55,8 @@ function route($url, $routes) {
                     $model = new User($db); // Passar a conexão ao modelo User para outros controladores
                 } else if ($controller === HomeController::class) {
                     $model = new Home($db); // Passar a conexão ao modelo Home
+                } else if ($controller === ContractsController::class) {
+                    $model = new Contracts($db); // Passar a conexão ao modelo Contracts
                 }
                 
                 $controllerInstance = new $controller($model); // Passar o modelo ao controlador

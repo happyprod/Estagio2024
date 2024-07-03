@@ -74,7 +74,7 @@ class HomeController
             if ($google_image) {
                 $sugs_picture = 'src="' . $sugs_picture . '"';
             } else {
-                $sugs_picture = 'src="/public/users/' . $sugs_id . '/' . $sugs_picture . '"';
+                $sugs_picture = 'src="users/' . $sugs_id . '/' . $sugs_picture . '"';
             }
 
 
@@ -92,7 +92,7 @@ class HomeController
                     <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' . $sugs_identity . '</p>
                 </div>
                 <div class="col-2 mx-auto my-auto" id="sugestion-' . $sugs_id . '" onclick="follow(this)">
-                    <img src="/public/img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="img-toggle mx-auto my-auto">
+                    <img src="img/adicionar-amigo.png" style="cursor:pointer; width: 25px;" alt="" class="img-toggle mx-auto my-auto">
                 </div>
             </div>';
 
@@ -145,7 +145,7 @@ class HomeController
             if ($google_image) {
                 $sugs_picture = 'src="' . $sugs_picture . '"';
             } else {
-                $sugs_picture = 'src="/public/users/' . $sugs_id . '/' . $sugs_picture . '"';
+                $sugs_picture = 'src="users/' . $sugs_id . '/' . $sugs_picture . '"';
             }
 
             if ($is_following == 1) {
@@ -169,12 +169,11 @@ class HomeController
                     <p class="text-xs mb-0" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' . $sugs_identity . '</p>
                 </div>
                 <div class="col-2 mx-auto my-auto" id="sugestion-' . $sugs_id . '" onclick="follow(this)">';
-                
-                if ($sugs_id != $id_user)
-                {
-                    echo '<img src="/public/img/' . $seguirImg . '" style="cursor:pointer; width: 25px;" alt="" class="img-toggle mx-auto my-auto">';
-                }
-                echo '</div>
+
+            if ($sugs_id != $id_user) {
+                echo '<img src="img/' . $seguirImg . '" style="cursor:pointer; width: 25px;" alt="" class="img-toggle mx-auto my-auto">';
+            }
+            echo '</div>
             </div>';
 
             $count++;

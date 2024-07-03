@@ -13,6 +13,100 @@ class User
         $this->db = $db;
     }
 
+    // Exemplo da função register no modelo User
+    public function register($email, $password, $identity, $location, $name, $selectedType)
+    {
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO accounts (email, name, password, location, picture, identity, id_name) VALUES (:email, :name, :password, :location, :picture, :identity, :id_name)");
+
+        // Defina 'fotodeperfil' como a variável para 'picture' (fotodeperfil)
+        $fotodeperfil = 'fotodeperfil';
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':password', $password, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':location', $location, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':picture', $fotodeperfil, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':identity', $selectedType, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_name', $identity, PDO::PARAM_STR);
+        $stmt_insert->execute();
+    }
+
+
+    public function criarProjeto()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO projects (id_founder, nome, descricao, data, PrivacyProjects, PrivacyLikes, PrivacyComments) VALUES (:id_founder, :nome, :descricao, :data, :PrivacyProjects, :PrivacyLikes, :PrivacyComments)");
+
+        $nome = 'Rascunho';
+        $descricao = 'Isto é apenas um Rascunho';
+        $data = date('Y-m-d');  // Mantém o formato de data como ano-mês-dia
+        $PrivacyProjects = 3;
+        $PrivacyLikes = 6;
+        $PrivacyComments = 9;
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_founder', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':data', $data, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':PrivacyProjects', $PrivacyProjects, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':PrivacyLikes', $PrivacyLikes, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':PrivacyComments', $PrivacyComments, PDO::PARAM_INT);
+        $stmt_insert->execute();
+
+        // Obtém o ID do projeto recém-criado
+        $project_id = $this->db->lastInsertId();
+
+        echo 'executou 1: ' . $project_id;
+
+        // Chama a função para guardar a imagem de rascunho
+        // Definir o caminho do arquivo original
+        $arquivoOrigem = '../../public/img/defaultProjectImage.png';
+
+        // Gerar um nome encriptado para a imagem
+        $nomeImagemOriginal = basename($arquivoOrigem); // Obter o nome do arquivo original
+        $extensao = pathinfo($nomeImagemOriginal, PATHINFO_EXTENSION); // Obter a extensão do arquivo
+        $nomeEncriptado = substr(md5($nomeImagemOriginal . time()), 0, 16) . '.' . $extensao; // Nome encriptado com extensão
+
+        // Definir o caminho de destino
+        $diretorioDestino = '../../public/users/' . $user_id . '/';
+        $arquivoDestino = $diretorioDestino . $nomeEncriptado;
+
+        // Verificar se o diretório de destino existe, caso contrário, criar
+        if (!is_dir($diretorioDestino)) {
+            mkdir($diretorioDestino, 0777, true); // Cria o diretório com permissões recursivas
+        }
+
+        echo 'executou 2: ' . $project_id;
+        echo basename(__DIR__) . '<br>';
+
+
+        // Copiar o arquivo
+        if (copy($arquivoOrigem, $arquivoDestino)) {
+            // Insere a informação da imagem no banco de dados
+            $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, ordem) VALUES (:id_project, :image, :ordem)");
+
+            $ordem = 1;
+
+            // Executa a inserção
+            $stmt_insert->bindParam(':id_project', $project_id, PDO::PARAM_INT);
+            $stmt_insert->bindParam(':image', $nomeEncriptado, PDO::PARAM_STR);
+            $stmt_insert->bindParam(':ordem', $ordem, PDO::PARAM_INT);
+            $stmt_insert->execute();
+
+            echo "A imagem foi copiada com sucesso e registrada no banco de dados! Novo nome: " . $nomeEncriptado;
+        } else {
+            echo "Falha ao copiar a imagem.";
+        }
+    }
 
     public function guardarEditarProjetosImagens1($projeto)
     {
@@ -90,7 +184,61 @@ class User
 
         // Retorna true se um registro foi encontrado, false caso contrário
         return $result !== false;
+    }
 
+    public function guardarAssuntoChat($idAcc, $message)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO chat (id_sender, id_receive, message) VALUES (:id_sender, :id_receive, :message)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_sender', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_receive', $idAcc, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':message', $message, PDO::PARAM_STR);
+        $stmt_insert->execute();
+    }
+
+    public function verificarChat($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT * FROM chat WHERE id_sender = ? AND id_receive = ? LIMIT 1");
+
+        $stmt->execute([$user_id, $id]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
+    }
+
+    public function guardarContract($id_acc, $assuntoContract, $nameFile)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $user_id = $_SESSION['user_id'];
+
+        // Insere os novos registros
+        $stmt_insert = $this->db->prepare("INSERT INTO contracts (id_sender, id_receive, file, subject) VALUES (:id_sender, :id_receive, :file, :subject)");
+
+        // Executa a inserção
+        $stmt_insert->bindParam(':id_sender', $user_id, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_receive', $id_acc, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':file', $nameFile, PDO::PARAM_STR);
+        $stmt_insert->bindParam(':subject', $assuntoContract, PDO::PARAM_STR);
+        $stmt_insert->execute();
     }
 
     public function guardarFollow($id)
@@ -279,10 +427,32 @@ class User
 
     public function getProjects($id)
     {
-        $sql = "SELECT * FROM projects WHERE id_founder = ?"; // Use placeholder para PDO
+        $sql = "SELECT * FROM projects WHERE id_founder = ? AND deleted = 0 ORDER BY id DESC"; // Use placeholder para PDO
 
         $stmt_projects = $this->db->prepare($sql);
         $stmt_projects->execute([$id]);  // Vincula o parâmetro $id
+        $result = $stmt_projects->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getProjectsPublic($id, $id_user)
+    {
+        $sql = "SELECT DISTINCT p.*
+        FROM projects p
+        LEFT JOIN follows f ON p.id_founder = f.id_followed
+        WHERE p.id_founder = ?
+        AND (p.PrivacyProjects = 1 
+        OR (p.PrivacyProjects = 2 AND f.id_user = ? AND f.id_followed = ?))
+        AND p.deleted = 0
+        ORDER BY id DESC";
+
+        // Prepara a consulta
+        $stmt_projects = $this->db->prepare($sql);
+
+        // Executa a consulta com os parâmetros $id e $id_user
+        $stmt_projects->execute([$id, $id_user, $id]);
+
+        // Busca todos os resultados
         $result = $stmt_projects->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
@@ -378,7 +548,7 @@ class User
         return $result;
     }
 
-    public function inserirEvento($dadosEvento)
+    public function inserirEvento($dadosEvento, $arrayC_idName)
     {
         $nomeEvento = $dadosEvento['nomeEvento'] ?? '';
         $identificacaoEvento = $dadosEvento['identificacaoEvento'] ?? '';
@@ -386,27 +556,41 @@ class User
         $data = $dadosEvento['data'] ?? '';
         $empresaBooking = $dadosEvento['empresaBooking'] ?? '';
         $localizacao = $dadosEvento['localizacao'] ?? '';
-        $switchEvento = $dadosEvento['switchEvento'] ?? '';
-        $switchData = $dadosEvento['switchData'] ?? '';
-        $switchBooking = $dadosEvento['switchBooking'] ?? '';
-        $switchLocal = $dadosEvento['switchLocal'] ?? '';
-        $switchCollabs = $dadosEvento['switchCollabs'] ?? '';
         $id_projeto = $dadosEvento['id_projeto'] ?? '';
 
-        $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, Event = ?, descricao = ?, data = ?, Booking = ?, local = ?, Active_Event = ?, Active_Data = ?, Active_Booking = ?, Active_local = ?, Active_Collab = ? WHERE id = ?");
+        // Atualizar o projeto
+        $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, Event = ?, descricao = ?, data = ?, Booking = ?, local = ? WHERE id = ?");
         $stmt->bindParam(1, $nomeEvento);
         $stmt->bindParam(2, $identificacaoEvento);
         $stmt->bindParam(3, $descricao);
         $stmt->bindParam(4, $data);
         $stmt->bindParam(5, $empresaBooking);
         $stmt->bindParam(6, $localizacao);
-        $stmt->bindParam(7, $switchEvento);
-        $stmt->bindParam(8, $switchData);
-        $stmt->bindParam(9, $switchBooking);
-        $stmt->bindParam(10, $switchLocal);
-        $stmt->bindParam(11, $switchCollabs);
-        $stmt->bindParam(12, $id_projeto);
+        $stmt->bindParam(7, $id_projeto);
         $stmt->execute();
+
+        $stmt = $this->db->prepare("DELETE FROM projects_collabs WHERE id_project = ?");
+        $stmt->bindParam(1, $id_projeto);
+        $stmt->execute();
+
+        // Inserir colaboradores no projeto
+        foreach ($arrayC_idName as $id_name) {
+            // Buscar o id do usuário baseado no id_name
+            $stmt = $this->db->prepare("SELECT id FROM accounts WHERE id_name = ?");
+            $stmt->bindParam(1, $id_name);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                $id_user = $user['id'];
+
+                // Inserir na tabela projects_collabs
+                $stmt = $this->db->prepare("INSERT INTO projects_collabs (id_project, id_user) VALUES (?, ?)");
+                $stmt->bindParam(1, $id_projeto);
+                $stmt->bindParam(2, $id_user);
+                $stmt->execute();
+            }
+        }
     }
 
     public function getCommentsByProject($p_id)
@@ -420,7 +604,9 @@ class User
             ON 
                 pc.id_user_send = a.id 
             WHERE 
-                pc.id_project = ? AND pc.parent_comment_id IS NULL;"
+                pc.id_project = ? AND pc.parent_comment_id IS NULL
+            ORDER BY 
+                id DESC;"
         );
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -618,7 +804,7 @@ class User
 
     public function apagarProjeto($p_id)
     {
-        $stmt = $this->db->prepare("DELETE FROM projects WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE projects SET deleted = 1 WHERE id = ?");
 
         $stmt->bindParam(1, $p_id);
         $stmt->execute();
@@ -631,6 +817,19 @@ class User
         $stmt_infos = $this->db->prepare($sql_infos);
         $stmt_infos->execute([$id]);
         return $row_infos = $stmt_infos->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getProjectTumb($p_id)
+    {
+        $sql_infos = "SELECT image FROM projects_images WHERE id_project = ? ORDER BY `ordem` ASC";
+        $stmt_infos = $this->db->prepare($sql_infos);
+        $stmt_infos->execute([$p_id]);
+
+        // Armazenar o valor da coluna 'picture' numa variável
+        $picture = $stmt_infos->fetchColumn();
+
+        // Retornar o valor da coluna 'picture'
+        return $picture;
     }
 
     public function getRatings($id)

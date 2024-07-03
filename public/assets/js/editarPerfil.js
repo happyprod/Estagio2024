@@ -214,54 +214,61 @@ function guardarEditarPerfil() {
     var blog_switch2 = document.getElementById('blog_switch');
     ////////////////////////////////////////////////////////////////////////////
 
-    if (youtube == '') {
-        yt_switch2.checked = false;
-    }
+    if (!TXTdescricao) {
+        erro('Preencha a Descrição');
+    } else if (!TXTnome) {
+        erro('Preencha o Nome')
+    } else {
 
-    if (instagram == '') {
-        ig_switch2.checked = false;
-    }
-
-    if (tiktok == '') {
-        tiktok_switch2.checked = false;
-    }
-
-    if (blog == '') {
-        blog_switch2.checked = false;
-    }
-
-    console.log(yt_switch, ig_switch, tiktok_switch, blog_switch);
-
-
-    var xhr = new XMLHttpRequest();
-    var url = "../src/Handlers/guardarEditarPerfilSobre.php";
-    var params = "LBLfotoPerfil=" + encodeURIComponent(LBLfotoPerfil) +
-        "&LBLfotoCapa=" + encodeURIComponent(coverPhoto) +
-        "&TXTnome=" + encodeURIComponent(TXTnome) +
-        "&TXTnumero=" + encodeURIComponent(TXTnumero) +
-        "&TXTemail=" + encodeURIComponent(TXTemail) +
-        "&TXTlocalizacao=" + encodeURIComponent(TXTlocalizacao) +
-        "&TXTdescricao=" + encodeURIComponent(TXTdescricao) +
-        "&youtube=" + encodeURIComponent(youtube) +
-        "&instagram=" + encodeURIComponent(instagram) +
-        "&tiktok=" + encodeURIComponent(tiktok) +
-        "&blog=" + encodeURIComponent(blog) +
-        "&yt_switch=" + encodeURIComponent(yt_switch) +
-        "&ig_switch=" + encodeURIComponent(ig_switch) +
-        "&tiktok_switch=" + encodeURIComponent(tiktok_switch) +
-        "&blog_switch=" + encodeURIComponent(blog_switch);
-
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText);
-                alteradocomsucesso('Perfil editado com sucesso!');
-            } else {
-                console.error("Erro na requisição: " + xhr.status);
-            }
+        if (youtube == '') {
+            yt_switch2.checked = false;
         }
-    };
-    xhr.send(params);
+
+        if (instagram == '') {
+            ig_switch2.checked = false;
+        }
+
+        if (tiktok == '') {
+            tiktok_switch2.checked = false;
+        }
+
+        if (blog == '') {
+            blog_switch2.checked = false;
+        }
+
+        console.log(yt_switch, ig_switch, tiktok_switch, blog_switch);
+
+
+        var xhr = new XMLHttpRequest();
+        var url = "../src/Handlers/guardarEditarPerfilSobre.php";
+        var params = "LBLfotoPerfil=" + encodeURIComponent(LBLfotoPerfil) +
+            "&LBLfotoCapa=" + encodeURIComponent(coverPhoto) +
+            "&TXTnome=" + encodeURIComponent(TXTnome) +
+            "&TXTnumero=" + encodeURIComponent(TXTnumero) +
+            "&TXTemail=" + encodeURIComponent(TXTemail) +
+            "&TXTlocalizacao=" + encodeURIComponent(TXTlocalizacao) +
+            "&TXTdescricao=" + encodeURIComponent(TXTdescricao) +
+            "&youtube=" + encodeURIComponent(youtube) +
+            "&instagram=" + encodeURIComponent(instagram) +
+            "&tiktok=" + encodeURIComponent(tiktok) +
+            "&blog=" + encodeURIComponent(blog) +
+            "&yt_switch=" + encodeURIComponent(yt_switch) +
+            "&ig_switch=" + encodeURIComponent(ig_switch) +
+            "&tiktok_switch=" + encodeURIComponent(tiktok_switch) +
+            "&blog_switch=" + encodeURIComponent(blog_switch);
+
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    alteradocomsucesso('Perfil editado com sucesso!');
+                } else {
+                    console.error("Erro na requisição: " + xhr.status);
+                }
+            }
+        };
+        xhr.send(params);
+    }
 }

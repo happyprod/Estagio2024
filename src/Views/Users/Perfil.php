@@ -130,13 +130,66 @@ if ($identidade == 1) {
 
     <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100 py-3">
 
+        <div class="modal fade" id="contract" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="padding-bottom: 12px; padding-top: 12px;">
+                        <h5 class="modal-title" id="exampleModalLabel">Enviar Proposta</h5>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Qual é o assunto?</h6>
+                        <input type="text" class="form-control" id="assuntoContract" placeholder="Escreve o assunto principal do contrato">
+
+                        <div class="form-group mt-4 mb-4">
+                            <h6>Envie a sua proposta em PDF</h6>
+                            <input type="file" class="form-control" id="pdfFile" name="pdfFile" accept="application/pdf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal" onclick="sendContract(<?php echo $id; ?>)">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php
+
+        $verificar_chat = $controller->verificarChat($id);
+        if (!$verificar_chat == true) {
+            echo '<!-- Modal -->
+                <div class="modal fade" id="contactUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Primeiro assunto da conversa</h5>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control" id="TXTmessage" rows="3" placeholder="Escreva aqui o primeiro assunto da conversa." style="height: 22.5em; overflow-y: scroll; resize: none;"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn bg-gradient-success" onclick="sendFirstComment(' . $id . ')">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+        }
+        ?>
+
         <!-- End Navbar -->
         <div class="container-fluid">
             <div class="page-header min-height-300 img-fluid border-radius-xl mt-4" <?php
                                                                                     if ($fotodecapa == null) {
                                                                                         echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
                                                                                     } else {
-                                                                                        echo 'style="background-image: url(\'/public/users/' . $id . '/' . $fotodecapa . ' \'); object-fit: cover; background-position-y: 50%; "';
+                                                                                        echo 'style="background-image: url(\'http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . ' \'); object-fit: cover; background-position-y: 50%; "';
                                                                                     }
                                                                                     ?>>
             </div>
@@ -162,7 +215,7 @@ if ($identidade == 1) {
 
 
                                     if ($google_image == false) {
-                                        echo 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+                                        echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
                                     } else {
                                         echo 'src="' . $fotodeperfil . '"';
                                     }
@@ -197,38 +250,23 @@ if ($identidade == 1) {
 
                                 if ($session_id == $id) {
                                     echo '
-                                    <a href="/public/editarPerfil.php">
+                                    <a href="http://localhost/Estagio2024/public/editarPerfil.php">
                                        <button type="button" class="btn btn-primary btn-sm me-4" style="margin-top: 1em;" >
                                        <i class="fas fa-user-edit text-sm me-2" data-bs-toggle="tooltip"></i>
                                        Editar Perfil</button>
                                     </a>
                                     ';
                                 } else {
-                                    echo '<li class="nav-item">
-                                    <a class="nav-link mb-0 px-0 py-1" href="javascript:;" role="tab" aria-selected="false">
-                            <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44"
-                                version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>document</title>
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF"
-                                        fill-rule="nonzero">
-                                        <g transform="translate(1716.000000, 291.000000)">
-                                            <g transform="translate(154.000000, 300.000000)">
-                                                <path class="color-background"
-                                                    d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"
-                                                    opacity="0.603585379"></path>
-                                                <path class="color-background"
-                                                    d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z">
-                                                </path>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                            <span class="ms-1">Contactar</span>
-                        </a>
-                    </li>
+                                    echo '
+                                    <button type="button"';
+
+                                    $verificar_chat = $controller->verificarChat($id);
+                                    if ($verificar_chat == true) {
+                                        echo 'onclick="redirectChat()"';
+                                    }
+                                    echo 'data-bs-toggle="modal" data-bs-target="#contactUser" class="btn btn-primary btn-sm me-4" style="margin-top: 1em; padding-left: 20px;" >
+                                                    <i class="ni ni-email-83 me-2" style="font-size: 12px;"></i>
+                                                Contactar</button>
 ';
                                 }
 

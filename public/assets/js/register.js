@@ -1,43 +1,6 @@
 $(document).ready(function () {
   let selectedType = '';
 
-  $('#RegisterForm').submit(function (event) {
-      event.preventDefault(); // Evita o envio padrão do formulário
-
-      var email = $('#email').val();
-      var password = $('#password').val();
-      var identity = $('#identity').val();
-      var location = $('#autocomplete').val();
-      var name = $('#name').val();
-
-      $.ajax({
-          url: '../src/Handlers/RegisterArtistsProcess.php',
-          type: 'POST',
-          data: {
-              email: email,
-              password: password,
-              identity: identity,
-              location: location,
-              name: name,
-              selectedType: selectedType
-          },
-          success: function (response) {
-              // Tratamento da resposta do servidor
-              if (response.success) {
-                  window.location.href = 'home.php';
-              } else {
-                  // Mostrar mensagem de erro usando Toastr
-                  erro(response.message);
-              }
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-              // Tratamento de erros da requisição
-              console.error('Erro: ' + textStatus, errorThrown);
-              erro('Ocorreu um erro durante o registro. Por favor, tente novamente.');
-          }
-      });
-  });
-
   // Função para exibir mensagens de erro com Toastr
   function erro(mensagem) {
       toastr.options.timeOut = 4000; // 4 segundos

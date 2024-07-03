@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Jun-2024 às 17:25
+-- Tempo de geração: 02-Jul-2024 às 12:26
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -59,29 +59,41 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_background`, `registered`, `method`, `verified`, `location`, `type`, `identity`, `url`, `about`, `number`, `Instagram`, `Active_Instagram`, `Youtube`, `Active_Youtube`, `Tiktok`, `Active_Tiktok`, `Blog`, `Active_Blog`, `id_name`) VALUES
-(5, 'asjdasnka', 'asjdasnka@gmail.com', '', 'FotoPerfil.jpg', '', '2024-03-11 17:30:49', 'form', 'false', 'asd', 'singer', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Rita'),
+(5, 'asjdasnka', 'asjdasnka@gmail.com', '', 'FotoPerfil.jpg', '', '2024-03-11 17:30:49', 'form', 'false', 'asd', 'singer', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Rita'),
 (6, 'asdnkja', 'asdnkja@gmail.com', 'ajksndk@asjkdna', '450f755a089a2c83e790c7337d54c728.jpeg', '', '2024-03-11 17:34:26', 'form', 'true', 'aklsfd', 'dj', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'joaninha'),
-(10, 'happy', 'amldk@gmail.com', 'asd', 'img\\fotos\\servicos_img1.jpg', '', '2024-04-05 14:53:15', 'login', 'false', 'Sintra', 'Baterist', 5, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happy'),
-(11, 'Ruben Costa', 'ruben.escola.2006@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocI84I3098-o2aoK5zMBBGTswW-2MLBIFs8_HzoX_ZKOb2doOrXn=s96-c', '', '2024-04-06 13:55:40', 'google', 'false', 'Cacem', 'Gastronomic', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'fghbjkl'),
-(19, 'Ruben', 'beatsrubencosta@gmail.com', '', '6674446dbef28.gif', '667435eb0dba3.gif', '2024-05-04 17:45:18', 'google', 'false', 'Čačak, Sérvia', 'Rapper', 2, '19', 'Hi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n     ', '123123123', 'martingarrix', 1, 'martingarrix', 1, '', 0, 'www.fernandinhadswaippie.pt', 0, 'rei'),
-(20, 'ola', 'ola@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:39:21', 'form', '', '', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'ola'),
-(21, 'soufixe', 'soufixe@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:40:24', 'form', '', '', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'soufixe'),
-(22, 'Simao', 'sougiro@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 11:09:38', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'sougiro'),
-(23, 'simao', 'simao@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 11:44:28', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(24, 'Ruben Costa', 'rubencostagaming@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocKKSxuf4l-kffxxnUCxjOsVJUf7DmMFiYcKMl8FZMe-JHgKBQ=s96-c', '', '2024-05-08 17:54:09', 'google', 'false', '', '', 2, '24', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(25, 'goncalinho', 'goncalinho@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-21 14:08:44', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(26, 'ruben', 'costa@gmail.com', 'asd', '', '', '0000-00-00 00:00:00', '', '', 'asdf', '4', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(27, 'ruben', 'happy@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'asdasd', '2', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(28, 'nome', 'email@gmail.com', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'localização', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'identificacao'),
-(29, 'Ruben', 'happy2@gmail.com', 'bananinha', '', '', '0000-00-00 00:00:00', '', '', 'LDLC Arena, Avenue Simone Veil, Décines-Charpieu, França', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happy2'),
+(10, 'happy', 'amldk@gmail.com', 'asd', 'img\\fotos\\servicos_img1.jpg', '', '2024-04-05 14:53:15', 'login', 'false', 'Sintra', 'Baterist', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happy'),
+(11, 'Ruben Costa', 'ruben.escola.2006@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocI84I3098-o2aoK5zMBBGTswW-2MLBIFs8_HzoX_ZKOb2doOrXn=s96-c', '', '2024-04-06 13:55:40', 'google', 'false', 'Cacem', 'Gastronomic', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Francisco'),
+(19, 'asdasdas', 'beatsrubencosta@gmail.com', '123', '66827b30a4e4d.png', '66827b30a5117.png', '2024-05-04 17:45:18', 'google', 'false', 'Čačak, Sérvia', 'Rapper', 2, '19', 'Hi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n                      ', '123123123', 'martingarrix', 0, 'martingarrix', 0, 'goncalo.s_', 1, 'www.fernandinhadswaippie.pt', 0, 'Ruben'),
+(20, 'ola', 'ola@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:39:21', 'form', '', '', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Rodrigo'),
+(21, 'soufixe', 'soufixe@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:40:24', 'form', '', '', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Ana202'),
+(22, 'Simao', 'sougiro@gmail.com', '123', 'default.jpg', '', '2024-05-07 11:09:38', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'ze04'),
+(23, 'simao', 'simao@gmail.com', '123', 'default.jpg', '', '2024-05-07 11:44:28', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'kshmr'),
+(24, 'Ruben Costa', 'rubencostagaming@gmail.com', '123', '668263bb23675.png', '668263b156f58.gif', '2024-05-08 17:54:09', 'google', 'false', '', '', 2, '24', '  ', '', '', 0, '', 0, '', 0, '', 0, 'ggBacon'),
+(25, 'goncalinho', 'goncalinho@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-21 14:08:44', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Dimitri'),
+(26, 'ruben', 'costa@gmail.com', 'asd', '', '', '0000-00-00 00:00:00', '', '', 'asdf', '4', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Hardwell'),
+(27, 'ruben', 'happy@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'asdasd', '2', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Steve'),
+(28, 'nome', 'email@gmail.com', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'localização', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'roberto'),
+(29, 'Ruben', 'happy2@gmail.com', 'bananinha', '', '', '0000-00-00 00:00:00', '', '', 'LDLC Arena, Avenue Simone Veil, Décines-Charpieu, França', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happy'),
 (30, 'Gonçalinho', 'goncalinhopan@pan.pt', 'goncalinho', '', '', '0000-00-00 00:00:00', '', '', 'Avanca, Portugal', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'goncalinho'),
-(31, 'nome', 'user@gmail.pcm', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'Seychelles', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'nome de user'),
-(32, '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(33, '', 's@gmail.com', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 5, '', '', '', '', 0, '', 0, '', 0, '', 0, ''),
-(34, 'ganggang', 'ksd@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'SDF Building, GP Block, Sector V, Bidhannagar, Calcutá, Bengala Ocidental, Índia', '', 4, '', '', '', '', 0, '', 0, '', 0, '', 0, 'cao'),
-(35, 'ggggggggg', 'asd@gmail.com', '1234567', '', '', '0000-00-00 00:00:00', '', '', 'Buceta, Santa Cruz de La Sierra, Bolívia', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'goncalinho2'),
+(31, 'nome', 'user@gmail.pcm', 'palavra-passe', '', '', '0000-00-00 00:00:00', '', '', 'Seychelles', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'miguel'),
+(32, '', '', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Frozen'),
+(33, '', 's@gmail.com', '', '', '', '0000-00-00 00:00:00', '', '', '', '', 5, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Martin'),
+(34, 'ganggang', 'ksd@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'SDF Building, GP Block, Sector V, Bidhannagar, Calcutá, Bengala Ocidental, Índia', '', 4, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Jorge'),
+(35, 'ggggggggg', 'asd@gmail.com', '1234567', '', '', '0000-00-00 00:00:00', '', '', 'Buceta, Santa Cruz de La Sierra, Bolívia', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Carlos'),
 (36, '                                Lost Lands', 'olateste2@gmail.com', 'ola', '', '', '0000-00-00 00:00:00', '', '', 'Mamas Joint Road, MCC B Block, MCC, Davanagere, Karnataka, Índia', '', 5, '', '', '', '', 0, '', 0, '', 0, '', 0, '                                                                                                                           LostLandsOfficial'),
 (58, 'prod', 'happyzao@gmail.com', 'palavrapasse', '', '', '0000-00-00 00:00:00', '', '', 'Galveias, Portugal', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happyksd');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `agencybooking_members`
+--
+
+CREATE TABLE `agencybooking_members` (
+  `id` int(35) NOT NULL,
+  `id_agency` int(35) NOT NULL,
+  `id_member` int(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -115,6 +127,60 @@ INSERT INTO `artists` (`id`, `name`, `image_url`, `location`, `shows`, `follows`
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(35) NOT NULL,
+  `id_sender` int(35) NOT NULL,
+  `id_receive` int(35) NOT NULL,
+  `message` text NOT NULL,
+  `viewed` int(2) NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `chat`
+--
+
+INSERT INTO `chat` (`id`, `id_sender`, `id_receive`, `message`, `viewed`, `date`) VALUES
+(37, 19, 24, 'boas bro', 1, '2024-07-01 03:02:25'),
+(38, 19, 28, 'Boa tarde,\nPrecisava de esclerecer uma duvida', 0, '2024-07-01 10:30:15'),
+(39, 19, 10, 'mm', 0, '2024-07-02 09:21:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `contracts`
+--
+
+CREATE TABLE `contracts` (
+  `id` int(35) NOT NULL,
+  `id_sender` int(35) NOT NULL,
+  `id_receive` int(35) NOT NULL,
+  `file` text NOT NULL,
+  `subject` text NOT NULL,
+  `state` int(3) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `contracts`
+--
+
+INSERT INTO `contracts` (`id`, `id_sender`, `id_receive`, `file`, `subject`, `state`, `date`) VALUES
+(1, 19, 24, 'preciso de um cao', 'ficha 5.pdf', 0, '2024-06-30'),
+(2, 19, 24, 'asdd', 'ficha 5_1.pdf', 2, '2024-06-30'),
+(3, 19, 24, 'in my soul', 'Ri2xMFZ5TXNw0tdq', 1, '2024-06-30'),
+(4, 19, 24, 'in my soul', 'KhDI4aHPlEzB8CXd', 0, '2024-06-30'),
+(5, 24, 19, 'WyL74fXqbPS9ADcR.pdf', 'asdakjs dasdkas dk', 2, '2024-06-30'),
+(6, 24, 19, 'jgo9Y0d28uz4nQMEet5WvLam.pdf', 'hold back', 1, '2024-06-30'),
+(7, 24, 19, 'QsnqYJ6c9XL5lH1IivRrGmwB.pdf', 'olaaaaasdasdasndjikasndjkias das dkjas kdja sjkd', 2, '2024-06-30'),
+(8, 19, 28, 'LA7PYwQEevtIanTlq23zG6hj.pdf', 'Gostava de atuar num festival', 0, '2024-07-01');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `follows`
 --
 
@@ -130,36 +196,10 @@ CREATE TABLE `follows` (
 
 INSERT INTO `follows` (`id`, `id_user`, `id_followed`) VALUES
 (1, 5, 19),
-(2, 19, 21),
-(3, 5, 19),
-(4, 5, 19),
-(5, 5, 19),
-(6, 5, 19),
-(7, 5, 19),
-(8, 5, 19),
-(9, 5, 19),
-(10, 5, 19),
-(11, 5, 19),
-(12, 5, 19),
-(13, 5, 19),
-(14, 5, 19),
-(15, 5, 19),
-(16, 19, 5),
-(17, 19, 5),
-(18, 19, 5),
-(19, 19, 5),
-(20, 19, 5),
-(21, 19, 5),
-(22, 19, 5),
-(23, 19, 5),
-(24, 19, 5),
-(25, 19, 5),
-(26, 19, 5),
-(27, 19, 5),
-(28, 19, 5),
-(29, 19, 5),
-(30, 19, 5),
-(31, 19, 5);
+(47, 26, 24),
+(48, 19, 11),
+(53, 19, 5),
+(87, 19, 26);
 
 -- --------------------------------------------------------
 
@@ -172,33 +212,36 @@ CREATE TABLE `projects` (
   `id_founder` int(11) NOT NULL,
   `nome` text NOT NULL,
   `imagem` text NOT NULL,
-  `sinopse` text NOT NULL,
   `descricao` text NOT NULL,
   `local` text NOT NULL,
   `data` date DEFAULT NULL,
   `Event` text NOT NULL,
-  `Active_Event` tinyint(1) NOT NULL,
-  `Active_Data` tinyint(1) NOT NULL,
   `Booking` text NOT NULL,
-  `Active_Booking` tinyint(1) NOT NULL,
-  `Active_Local` tinyint(1) NOT NULL,
-  `Active_Collab` tinyint(1) NOT NULL,
   `PrivacyProjects` int(35) NOT NULL,
   `PrivacyLikes` int(35) NOT NULL,
   `PrivacyComments` int(35) NOT NULL,
   `impressions` int(35) NOT NULL,
   `likes` int(35) NOT NULL,
   `comments` int(35) NOT NULL,
-  `organic` int(35) NOT NULL
+  `organic` int(35) NOT NULL,
+  `deleted` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `projects`
 --
 
-INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `sinopse`, `descricao`, `local`, `data`, `Event`, `Active_Event`, `Active_Data`, `Booking`, `Active_Booking`, `Active_Local`, `Active_Collab`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `impressions`, `likes`, `comments`, `organic`) VALUES
-(1, 19, 'Lost Lands', 'ola.jpg', 'Thanks for the Bass in my brain <3', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Águeda, Portugal', '2024-06-16', 'LostLandsOfficial', 1, 1, '', 1, 0, 0, 1, 6, 7, 0, 0, 0, 0),
-(2, 19, 'Tommrowland', 'ola2.jpg', 'Live today, Love Tommorrow!Live today, Love Tommorrow!', 'INSANojjjjj', '', '2000-07-07', '', 1, 1, '', 1, 0, 1, 2, 6, 9, 0, 0, 0, 0);
+INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `descricao`, `local`, `data`, `Event`, `Booking`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `impressions`, `likes`, `comments`, `organic`, `deleted`) VALUES
+(1, 19, 'Lost Landssss', 'ola.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Associação Vida Nova Lar Idosos, Rua das Agras, Pardilhó, Portugal', '2024-06-16', 'asd', 'aaaaaaaaaa', 3, 6, 9, 0, 0, 0, 0, 0),
+(2, 19, 'Tommrowland', 'ola2.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', '', '2000-07-07', '', '', 1, 6, 9, 0, 0, 0, 0, 0),
+(3, 19, 'olaaa', 'ola.jpg', 'Isto é apenas um Rascunho', 'Lisboa, Portugal', '0000-00-00', '', '', 1, 6, 9, 0, 0, 0, 0, 0),
+(4, 19, 'Frozen', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(10, 24, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(11, 19, 'elsa202', '', 'Isto é apenas uma elsa', 'Good Games Town Hall, Lower Ground, York Street, Cidade de Sydney Nova Gales do Sul, Austrália', '0000-00-00', 'elsinha', 'gg', 2, 5, 8, 0, 0, 0, 0, 0),
+(12, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 1),
+(13, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(14, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(15, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -217,9 +260,13 @@ CREATE TABLE `projects_collabs` (
 --
 
 INSERT INTO `projects_collabs` (`id`, `id_project`, `id_user`) VALUES
-(1, 2, 19),
 (2, 2, 21),
-(3, 2, 11);
+(22, 1, 20),
+(23, 1, 10),
+(24, 1, 19),
+(25, 1, 27),
+(26, 1, 19),
+(27, 11, 20);
 
 -- --------------------------------------------------------
 
@@ -231,8 +278,76 @@ CREATE TABLE `projects_comments` (
   `id` int(35) NOT NULL,
   `id_project` int(35) NOT NULL,
   `id_user_send` int(35) NOT NULL,
-  `comment` text NOT NULL
+  `comment` text NOT NULL,
+  `parent_comment_id` int(35) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `projects_comments`
+--
+
+INSERT INTO `projects_comments` (`id`, `id_project`, `id_user_send`, `comment`, `parent_comment_id`) VALUES
+(1, 1, 19, 'mariana', NULL),
+(2, 1, 24, 'paixao era grande', NULL),
+(3, 2, 22, 'asjkdnasdasdasdaskjad kfnsnadfnsdajkfnsadjkf sdajkf sdka fsdjkf ksdjaf ksadf ksdfjsakdf', NULL),
+(4, 1, 22, 'sasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd assasdasdasdasjdknask das dkjas djkas kd as', 1),
+(5, 1, 19, 'Obrigado <3', 3),
+(6, 1, 19, 'mesmo asserio', NULL),
+(7, 1, 19, 'a cena é que é mesmo', NULL),
+(8, 1, 19, 'yah', 7),
+(9, 1, 19, 'era era, dizes tu', 2),
+(10, 1, 19, 'pois...', 2),
+(11, 1, 19, 'ontem comi um cao', NULL),
+(12, 2, 19, 'que cena bro', NULL),
+(13, 2, 19, 'mesmo', 12),
+(14, 1, 19, 'e eu um pastor alemão', 11),
+(19, 2, 19, 'asds', NULL),
+(20, 2, 19, 'esta respondido', 19),
+(21, 1, 19, 'asdasd', NULL),
+(22, 2, 19, 'olaaa', NULL),
+(23, 2, 19, 'olaa', 22),
+(24, 2, 19, 'ola  xd', 22),
+(25, 2, 19, 'doja', NULL),
+(26, 1, 19, 'bem dito', 1),
+(27, 1, 19, 'ronaldo', NULL),
+(28, 1, 19, 'altamento', NULL),
+(29, 1, 19, 'concordo', 28),
+(30, 1, 19, 'yahyahyah', 1),
+(31, 1, 19, 'ola', 6),
+(32, 2, 19, 'muito bom', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projects_comments_likes`
+--
+
+CREATE TABLE `projects_comments_likes` (
+  `id` int(35) NOT NULL,
+  `comment_id` int(35) NOT NULL,
+  `id_user_send` int(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `projects_comments_likes`
+--
+
+INSERT INTO `projects_comments_likes` (`id`, `comment_id`, `id_user_send`) VALUES
+(2, 3, 22),
+(10, 3, 19),
+(11, 2, 19),
+(12, 19, 19),
+(14, 26, 19),
+(15, 11, 19),
+(16, 12, 19),
+(18, 27, 19),
+(19, 28, 19),
+(20, 29, 19),
+(21, 21, 19),
+(22, 6, 19),
+(23, 31, 19),
+(24, 1, 19),
+(25, 32, 19);
 
 -- --------------------------------------------------------
 
@@ -252,12 +367,16 @@ CREATE TABLE `projects_images` (
 --
 
 INSERT INTO `projects_images` (`id`, `id_project`, `image`, `ordem`) VALUES
-(185, 1, 'ufeuqp+P8BlC0+BsFzs88AAAAASUVORK5CYII=', 1),
-(186, 1, 'BZ0Y6WtKU17WkbG9ppopa1rXXta2EbW9lyVrWzte1tcdvZgAAAOw==', 2),
-(187, 1, 'n9Vb8kcTIQOBgAAAABJRU5ErkJggg==', 3),
-(188, 1, 'ola4.jpg', 4),
-(189, 1, 'ola3.jpg', 5),
-(190, 2, 'PwCYF8bZAQv8AAAAAElFTkSuQmCC', 1);
+(281, 3, '8AeRnPGJIm4V8AAAAASUVORK5CYII=', 1),
+(282, 3, '8AikbwswNo2I0AAAAASUVORK5CYII=', 2),
+(300, 4, '8AeRnPGJIm4V8AAAAASUVORK5CYII=', 1),
+(301, 4, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 2),
+(312, 1, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 1),
+(313, 1, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 2),
+(335, 11, '8AikbwswNo2I0AAAAASUVORK5CYII=', 1),
+(336, 11, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 2),
+(337, 2, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 1),
+(338, 2, 'wC2VDt1yN1pZgAAAABJRU5ErkJggg==', 2);
 
 -- --------------------------------------------------------
 
@@ -270,6 +389,14 @@ CREATE TABLE `projects_likes` (
   `id_project` int(35) NOT NULL,
   `id_user_send` int(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `projects_likes`
+--
+
+INSERT INTO `projects_likes` (`id`, `id_project`, `id_user_send`) VALUES
+(20, 1, 19),
+(21, 2, 19);
 
 -- --------------------------------------------------------
 
@@ -837,9 +964,27 @@ ALTER TABLE `accounts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `agencybooking_members`
+--
+ALTER TABLE `agencybooking_members`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `artists`
 --
 ALTER TABLE `artists`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `contracts`
+--
+ALTER TABLE `contracts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -864,6 +1009,12 @@ ALTER TABLE `projects_collabs`
 -- Índices para tabela `projects_comments`
 --
 ALTER TABLE `projects_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `projects_comments_likes`
+--
+ALTER TABLE `projects_comments_likes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -939,46 +1090,70 @@ ALTER TABLE `accounts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
+-- AUTO_INCREMENT de tabela `agencybooking_members`
+--
+ALTER TABLE `agencybooking_members`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `artists`
 --
 ALTER TABLE `artists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de tabela `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de tabela `contracts`
+--
+ALTER TABLE `contracts`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de tabela `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de tabela `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `projects_collabs`
 --
 ALTER TABLE `projects_collabs`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments`
 --
 ALTER TABLE `projects_comments`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT de tabela `projects_comments_likes`
+--
+ALTER TABLE `projects_comments_likes`
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `projects_images`
 --
 ALTER TABLE `projects_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
 
 --
 -- AUTO_INCREMENT de tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `projects_privacy`
@@ -1008,7 +1183,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT de tabela `saved`
 --
 ALTER TABLE `saved`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `shows`

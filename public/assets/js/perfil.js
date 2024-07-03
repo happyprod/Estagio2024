@@ -198,6 +198,22 @@ function erro(mensagem) {
     toastr.error(mensagem);
 }
 
+function criarProjeto() {
+    $.ajax({
+        url: '../../src/Handlers/criarProjeto.php',
+        method: 'GET',
+        data: {}, // Passando variáveis na requisição
+        success: function (data) {
+            window.location.reload();
+            console.log(data);
+        },
+        error: function (xhr, status, error) {
+            console.error('Erro ao obter dados:', error);
+        }
+    });
+}
+
+
 function guardarprivacidade() {
     // Coloque aqui o código que deseja executar quando o botão for clicado
     console.log("Botão 'Confirmar' clicado!");
@@ -306,7 +322,7 @@ function adicionarNome(id_name) {
                     <li class="list-group-item pt-0 pb-3">
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0 me-3">
-                                <img src="${response.picture}" alt="" class="avatar rounded-circle img-fluid my-auto" style="object-fit: cover; width: 45px; height: 45px;">
+                                <img src="${response.picture}" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
                             </div>
                             <div class="flex-grow-1">
                                 <h6 class="mb-0 text-sm">${response.name}</h6>
@@ -427,7 +443,7 @@ function updateData(var1, var2, var3) {
         method: 'GET',
         data: { var1: var1, var2: var2, var3: var3 }, // Passando variáveis na requisição
         success: function (data) {
-            $('#imageContainer' + var1).html(data);
+            $('#imageContainer' + var3).html(data);
 
         },
         error: function (xhr, status, error) {
@@ -436,6 +452,63 @@ function updateData(var1, var2, var3) {
     });
 }
 
+function sendFirstComment(var1) {
+    TXTmessage = document.getElementById('TXTmessage').value;
+    if (TXTmessage != '') {
+        $.ajax({
+            url: '../../src/Handlers/guardarAssuntoChat.php',
+            method: 'GET',
+            data: { var1: var1, var2: TXTmessage }, // Passando variáveis na requisição
+            success: function (data) {
+                console.log(data);
+                window.location.href = "../chat.php";
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+        erro('Digite alguma coisa');
+    }
+}
+
+function sendContract(var1) {
+    var assuntoContract = document.getElementById('assuntoContract').value;
+    const fileInput = document.getElementById('pdfFile');
+    const hasSelectedFile = fileInput.files.length > 0;
+
+    if (hasSelectedFile && assuntoContract) {
+        var formData = new FormData();
+        formData.append('id_acc', var1);
+        formData.append('assuntoContract', assuntoContract);
+        formData.append('pdfFile', fileInput.files[0]);
+
+        $.ajax({
+            url: '../../src/Handlers/guardarContract.php',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data);
+                document.getElementById('assuntoContract').value = '';
+                fileInput.value = '';
+                sucesso('Contrato enviado com sucesso!');
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+        alert('Preencha todos os campos');
+    }
+}
+
+
+
+function redirectChat() {
+    window.location.href = "../chat.php";
+}
 
 function follow(var1) {
     var elementsWithDataId;
@@ -444,6 +517,24 @@ function follow(var1) {
         method: 'GET',
         data: { var1: var1 }, // Passando variáveis na requisição
         success: function (data) {
+            let followAccountElement = document.getElementById('followAccount');
+            let follows = parseInt(followAccountElement.textContent, 10);
+
+            // Check if follows is a valid number
+            if (isNaN(follows)) {
+                follows = 0; // Set to 0 if it's not a number
+            }
+
+            if (data == 1) {
+                follows++;
+                document.getElementById('followButtons').textContent = 'Deixar de Seguir';
+            } else {
+                follows--;
+                document.getElementById('followButtons').textContent = 'Seguir';
+            }
+
+            followAccountElement.textContent = follows;
+
             console.log(data);
         },
         error: function (xhr, status, error) {
@@ -471,7 +562,35 @@ function guardarSobre(id_projeto) {
     var nomeEvento = document.getElementById("exampleFormControlInput1")?.value || '';
     var identificacaoEvento = document.getElementById("eventoInput")?.value || '';
     var descricao = document.getElementById("exampleFormControlTextarea1")?.value || '';
+
     var data = document.getElementById("example-date-input")?.value || '';
+
+    var currentDate = new Date();
+    
+    if (!data) {
+        erro('Preencha a data');
+        return; // Se não houver data de entrada, retorna.
+    }
+    
+    var date = new Date(data);
+    
+    if (isNaN(date.getTime())) {
+        erro('Data não é válida');
+        return; // Se a data de entrada não for válida, retorna.
+    }
+    
+    var pastDate = new Date();
+    pastDate.setFullYear(currentDate.getFullYear() - 100);
+    
+    if (date > currentDate || date < pastDate) {
+        erro('Insira uma data válida, entre hoje e 100 anos atrás.');
+        return;
+    }
+    
+    // Se a data for válida, prossiga com o processamento
+    console.log('Data válida');
+    
+
     var empresaBooking = document.getElementById("bookinginput")?.value || '';
     var localizacao = document.getElementById("endereco")?.value || '';
 
@@ -488,7 +607,7 @@ function guardarSobre(id_projeto) {
     });
 
     var xhr = new XMLHttpRequest();
-    var url = "../../src/Handlers/guardarEvento.php";
+    var url = "../../src/Handlers/guardarProjetoInfo.php";
     var params = "nomeEvento=" + encodeURIComponent(nomeEvento) +
         "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
         "&descricao=" + encodeURIComponent(descricao) +
@@ -513,6 +632,9 @@ function guardarSobre(id_projeto) {
                     erro("Evento ou booking não existe.");
                 } else if (xhr.responseText == 'Data') {
                     erro("Data não suportada!");
+                } else {
+                    $('#modalAlterarInfo' + id_projeto).modal('hide');
+                    $('#menu' + id_projeto).modal('show');
                 }
             } else {
                 console.error("Erro na requisição: " + xhr.status);
@@ -593,7 +715,7 @@ function guardarLike(id_comentario, button) {
             data: { var1: id_comentario, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -611,7 +733,15 @@ function guardarLike(id_comentario, button) {
 function guardarProjectLike(id_projeto, button) {
     // Supondo que você tenha uma maneira de obter o novo número de gostos
     var likesElement = document.getElementById('Projeto-' + id_projeto);
-    var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    var currentLikes = 0;
+
+    // Verifica se o elemento existe antes de tentar acessar suas propriedades
+    if (likesElement) {
+        currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    } else {
+        console.warn('Elemento likes não encontrado para o id_projeto:', id_projeto);
+    }
+
     // Seleciona o ícone dentro do botão
     var icon = button.querySelector('i');
 
@@ -625,6 +755,10 @@ function guardarProjectLike(id_projeto, button) {
             data: { var1: id_projeto, var2: 1 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
+                // Atualiza o texto do botão se o elemento existir
+                if (likesElement) {
+                    likesElement.innerText = newLikes + ' Gostos';
+                }
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -639,16 +773,16 @@ function guardarProjectLike(id_projeto, button) {
             data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+                // Atualiza o texto do botão se o elemento existir
+                if (likesElement) {
+                    likesElement.innerText = newLikes + ' Gostos';
+                }
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
             }
         });
     }
-
-    // Atualiza o texto do botão
-    likesElement.innerText = newLikes + ' Gostos';
 
     // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
 }
@@ -681,7 +815,7 @@ function guardarProjectLike2(id_projeto, button) {
             data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -758,6 +892,8 @@ function CommentSend(chatid, p_id) {
                     method: 'GET',
                     data: { var1: p_id, var2: text, var3: resposta }, // Passando variáveis na requisição
                     success: function (data) {
+                        //#region update comentarios
+                        updateDataProjetos(p_id, p_id);
                         console.log(data);
                     },
                     error: function (xhr, status, error) {
@@ -774,6 +910,7 @@ function CommentSend(chatid, p_id) {
                     method: 'GET',
                     data: { var1: p_id, var2: text }, // Passando variáveis na requisição
                     success: function (data) {
+                        updateDataProjetos(p_id, p_id);
                         console.log(data);
                     },
                     error: function (xhr, status, error) {

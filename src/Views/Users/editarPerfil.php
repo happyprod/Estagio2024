@@ -116,7 +116,6 @@ if ($row_infos["Active_Blog"] == 1) {
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 
     <script src="../public/assets/js/editarPerfilLoad.js"></script>

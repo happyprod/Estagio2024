@@ -14,7 +14,13 @@ if ($conn->connect_error) {
 
 // Obtém o número de projetos a serem carregados e a partir de qual ponto
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$limit = 4;  // Quantidade de projetos por vez
+$limit = 1;  // Quantidade de projetos por vez
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$id_user = $_SESSION['user_id'];
 
 // Consulta SQL que une as tabelas necessárias e faz os contagens
 $sql = "
@@ -29,8 +35,14 @@ FROM
     projects p
 JOIN 
     accounts a ON p.id_founder = a.id
+LEFT JOIN 
+    follows f ON a.id = f.id_followed AND f.id_user = $id_user
+WHERE
+    p.PrivacyProjects = 1 OR 
+    (p.PrivacyProjects = 2 AND f.id_user IS NOT NULL)
+    AND deleted = 0
 LIMIT
-    $limit OFFSET $offset
+    $limit OFFSET $offset;
 ";
 
 $result = $conn->query($sql);
@@ -55,7 +67,7 @@ if ($result->num_rows > 0) {
         }
 
         if ($google_image == false) {
-            $row['picture'] = '/public/users/' . $row['user_id'] . '/' . $fotodeperfil;
+            $row['picture'] = '../public/users/' . $row['user_id'] . '/' . $fotodeperfil;
         } else {
             $row['picture'] = $fotodeperfil;
         }
@@ -78,16 +90,16 @@ if ($result->num_rows > 0) {
                 if ($count == 1)
                 {
                     $imageList .= ' <div class="carousel-item active">
-                    <img src="/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
+                    <img src="../public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
                     </div>';
                 } else {
                     $imageList .= ' <div class="carousel-item">
-                    <img src="/public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
+                    <img src="../public/users/' . $row['id_founder'] . '/' . $imagem . '" class=" img-fluid border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: auto;">
                     </div>';
                 }
 
+                $row['imageNum'] = $count;
                 $count++;
-               
             }
         }
 

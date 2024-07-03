@@ -48,13 +48,14 @@ foreach ($data2 as $row2) {
     $c_nome = htmlspecialchars($row2->name);
     $c_picture = htmlspecialchars($row2->picture);
     $c_idName = htmlspecialchars($row2->idName);
-    $c_id = htmlspecialchars($row2->id);
+
+    // Remova a declaração de $collabshtml daqui
 
     $collabshtml .= '  
                 <li class="list-group-item pt-0 pb-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
-                            <img src="/public/users/' . $c_id . '/' . $c_picture . '" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
+                            <img src="' . $c_picture . '" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-0 text-sm">' . $c_nome . '</h6>
@@ -82,15 +83,8 @@ foreach ($data as $row) {
     $p_data = htmlspecialchars($row->data);
     $p_descricao = htmlspecialchars($row->descricao);
     $p_booking = htmlspecialchars($row->Booking);
-    $p_evento = htmlspecialchars($row->Event);    
-    $p_sinopse = htmlspecialchars($row->sinopse);
+    $p_evento = htmlspecialchars($row->Event);   
     
-    $pa_evento = htmlspecialchars($row->Active_Event);
-    $pa_data = htmlspecialchars($row->Active_Data);
-    $pa_booking = htmlspecialchars($row->Active_Booking);
-    $pa_local = htmlspecialchars($row->Active_Local);
-    $pa_collabs = htmlspecialchars($row->Active_Collab);
-
 
     $html .= '  
     <div class="row">
@@ -104,24 +98,17 @@ foreach ($data as $row) {
         <div class="col-6">
             <div class="form-group">
                 <div class="row" style="height: 2em;">
-                    <div class="col-10">
+                    <div class="col-12">
                         <div class="form-group">
                             <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Identificação do
                                 Evento</label>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_evento) . ' id="switchEvento">
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" id="eventoInput" oninput="EventosComplete()" placeholder="' . $p_evento . '" value="' . $p_evento . '" aria-describedby="basic-addon1" list="eventoInputs">
-                    <datalist id="eventoInputs"></datalist>
+                    <input type="text" class="form-control" id="eventoInput" placeholder="' . $p_evento . '" value="' . $p_evento . '" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -132,19 +119,12 @@ foreach ($data as $row) {
         <textarea placeholder="Adicione a descrição do seu projeto." class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 295px;">' . $p_descricao . '</textarea>
         </div>
 
-
         <div class="row" style="margin-top: 2em;">
         <div class="col-6">
             <div class="form-group">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12">
                         <label class="title" style="font-size: 16px;" for="exampleFormControlTextarea1">Data</label>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_data) . ' id="switchData">
-                        </div>
                     </div>
                 </div>
                 <input class="form-control" type="date" value="' . $p_data . '" id="example-date-input">
@@ -155,23 +135,16 @@ foreach ($data as $row) {
 
             <div class="form-group">
                 <div class="row" style="height: 2.1em;">
-                    <div class="col-10">
+                    <div class="col-12">
                         <div class="form-group">
                             <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Empresa de Booking</label>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_booking) . ' id="switchBooking">
                         </div>
                     </div>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" id="bookinginput" value="' . $p_booking . '" oninput="bookingComplete()" placeholder="sonssemtransito" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1" list="bookinginputs">
-                    <datalist id="bookinginputs"></datalist>                    
+                    <input type="text" class="form-control" id="bookinginput" value="' . $p_booking . '" placeholder="sonssemtransito" aria-label="TomorrowlandOfficial" aria-describedby="basic-addon1">
                 </div>
             </div>
         </div>
@@ -190,15 +163,9 @@ foreach ($data as $row) {
             <div class="">
                 <div class="row" style="height: 2.1em;">
 
-                    <div class="col-10">
+                    <div class="col-12">
                         <div class="form-group">
                             <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Localização</label>
-                        </div>
-                    </div>
-
-                    <div class="col-2">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_local) . ' id="switchLocal">
                         </div>
                     </div>
                 </div>
@@ -209,15 +176,9 @@ foreach ($data as $row) {
 
         <div class="col-6">
             <div class="row" style="height: 1.975em;">
-                <div class="col-10">
+                <div class="col-12">
                     <div class="form-group">
                         <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Colaboradores</label>
-                    </div>
-                </div>
-
-                <div class="col-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" ' . verificarcheck($pa_collabs) . ' id="switchCollabs">
                     </div>
                 </div>
             </div>

@@ -35,7 +35,6 @@ if ($result) {
     $p_userId = $result["Event"];
     $p_bookingUserId = $result["Booking"];
     $p_imagem = $result["imagem"];
-    $p_sinopse = $result["sinopse"];
     $p_descricao = $result["descricao"];
     $p_local = $result["local"];
     $p_data = $result["data"];
@@ -78,7 +77,7 @@ if ($p_data == '') {
 }
 
 
-$row_infos = $controller->getAccountById($id);
+$row_infos = $controller->getAccountById($p_founder);
 
 if ($row_infos) {
     $sobre = $row_infos["about"];
@@ -135,7 +134,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
+<img src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -145,22 +144,24 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     $html .= '
 </div>
 
-<button class="carousel-control-prev ';
-    if (count($result2) == 1) {
-        $html .= 'd-none';
-    }
+<button class="carousel-control-prev'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
 
-    $html .= '"type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Previous</span>
 </button>
 
-<button class="carousel-control-next ';
-    if (count($result2) == 1) {
-        $html .= 'd-none';
-    }
-    
-    $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
+<button class="carousel-control-next'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
 <span class="carousel-control-next-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Next</span>
 </button>
@@ -178,7 +179,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $picture . '"';
     } else {
-        $html .= 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -259,7 +260,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 <div class="d-flex align-items-center">
     <div class="flex-shrink-0 me-3">';
             if ($google_image3 == false) {
-                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="/public/users/' . $collab_idUser . '/' . $collab_picture . '">';
+                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="../../public/users/' . $collab_idUser . '/' . $collab_picture . '">';
             } else {
                 $html .= '<img class="rounded-circle image-fluid" src="' . $collab_picture . '" style="object-fit: cover; width: 35px; height: 35px;">';
             }
@@ -332,7 +333,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 <div class="row">
 <div class="col-2">';
             if ($google_image2 == false) {
-                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="/public/users/' . $UserComment . '/' . $fotodeperfil2 . '">';
+                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="../../public/users/' . $UserComment . '/' . $fotodeperfil2 . '">';
             } else {
                 $html .= '<img class="rounded-circle image-fluid" src="' . $fotodeperfil2 . '" style="object-fit: cover; width: 35px; height: 35px;">';
             }
@@ -433,7 +434,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 <div class="row" style="margin-left: 1.75em; width: 93%;">
 <div class="col-2">';
                     if ($google_image2 == false) {
-                        $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="/public/users/' . $UserComment . '/' . $fotodeperfil2 . '">';
+                        $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="../../public/users/' . $UserComment . '/' . $fotodeperfil2 . '">';
                     } else {
                         $html .= '<img class="rounded-circle image-fluid" src="' . $fotodeperfil2 . '" style="object-fit: cover; width: 35px; height: 35px;">';
                     }
@@ -537,9 +538,9 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
             $pi_imagem = $row2["image"];
 
             $html .= '
-            <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-                <img src="/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
-            </div>';
+<div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
+<img src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
+</div>';
 
             $isActive = false; // Set to false after the first item
         }
@@ -548,23 +549,27 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     $html .= '
 </div>
 
-    <button class="carousel-control-prev ';
-    if (count($result2) == 1) {
-        $html .= 'd-none';
-    }
-    $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-,
-    <button class="carousel-control-next ';
-    if (count($result2) == 1) {
-        $html .= 'd-none';
-    }
-    '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+<button class="carousel-control-prev'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
+<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Previous</span>
+</button>
+
+<button class="carousel-control-next'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
+<span class="carousel-control-next-icon" aria-hidden="true"></span>
+<span class="visually-hidden">Next</span>
+</button>
 </div>
 
 </div>
@@ -579,7 +584,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $picture . '"';
     } else {
-        $html .= 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -655,24 +660,24 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
             }
 
             $html .= '
-            <div class="col-6">
-            <li class="list-group-item pt-0 pb-4">
-            <div class="d-flex align-items-center">
-                <div class="flex-shrink-0 me-3">';
+<div class="col-6">
+<li class="list-group-item pt-0 pb-4">
+<div class="d-flex align-items-center">
+    <div class="flex-shrink-0 me-3">';
             if ($google_image3 == false) {
-                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="/public/users/' . $collab_idUser . '/' . $collab_picture . '">';
+                $html .= '<img class="rounded-circle image-fluid" style="object-fit: cover; width: 35px; height: 35px;" src="../../public/users/' . $collab_idUser . '/' . $collab_picture . '">';
             } else {
                 $html .= '<img class="rounded-circle image-fluid" src="' . $collab_picture . '" style="object-fit: cover; width: 35px; height: 35px;">';
             }
             $html .= '</div>
-                <div class="flex-grow-1">
-                    <a href="' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
-                    <p class="mb-0 text-muted text-xs" style="font-size: 13px;" id="idNameUser" >' . $collab_name . '</p>
-                </div>
-            </div>
-            </li>
-            </div>
-            ';
+    <div class="flex-grow-1">
+        <a href="' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
+        <p class="mb-0 text-muted text-xs" style="font-size: 13px;" id="idNameUser" >' . $collab_name . '</p>
+    </div>
+</div>
+</li>
+</div>
+';
         }
         $html .= '</div>';
         $html .= '</div>';
@@ -708,8 +713,8 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     }
 
     $html .= '</button>
-    </div>
-    <div class="col-10">';
+</div>
+<div class="col-10">';
     if ($privacy_likes == 4 || ($privacy_likes == 5 && $follow == '1') || $p_founder == $id) {
         $html .= '<p class="me-auto" id="Projeto-' . $p_id . '" style="font-size: 14px; margin-left: -1.5em;"><strong>' . $p_likes . ' Gostos</strong></p>';
     } else {

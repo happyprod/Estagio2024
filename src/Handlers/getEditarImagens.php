@@ -36,7 +36,7 @@ foreach ($data as $row) {
     $ordem = htmlspecialchars($row->ordem);
 
     $html .= '  
-                <div class="col-4 mb-3 imageContainer' . $count . '" data-id="' . $ordem . '">
+                <div class="col-4 mb-3 imageContainer" data-id="' . $ordem . '">
                     <a class="delete-image" onclick="setupDeleteLinks()" data-id="' . $ordem . '">
                         <i class="position-absolute mt-2 p-1 bg-danger rounded-circle" style="opacity: 77.5%; margin-left: 12em;">
                             <svg style="width: 2em; height: 2em; color: white;" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 32 32">
@@ -44,7 +44,7 @@ foreach ($data as $row) {
                             </svg>
                         </i>
                     </a>
-                    <img src="/public/users/' . $id . '/' . $pi_imagem . '" data-id="' . $ordem . '" class="ui-state-default d-block rounded" style="width:240px; height: 180px;" alt="...">
+                    <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" data-id="' . $ordem . '" class="ui-state-default d-block rounded" style="width:240px; height: 180px;" alt="...">
                 </div>';
 }
 
@@ -59,7 +59,7 @@ $html2 .= '
             </div>
         </div>
 </label>
-<input id="fileInput"  onclick="handleButtonClick()" type="file" style="display: none;">
+<input id="fileInput"  accept=".jpg, .jpeg, .png, .gif" onclick="handleButtonClick()" type="file" style="display: none;">
 </div>';
 
 

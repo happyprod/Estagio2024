@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="d-flex flex-column align-items-center w-50 text-center" onclick="getFollowersList1(<?php echo $id;?>)" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#followersModal">
-                    <h5 class="mb-0 text-lg">
+                    <h5 id="followAccount" class="mb-0 text-lg">
                         <?php
 
                             $following = $controller->getFollowingsQuantidade($id);
@@ -132,14 +132,15 @@
 
             <?php
                 if ($session_id != $id) {
-                    echo '<button type="button" onclick="follow(' . $id . ')" class="btn btn-primary btn-md d-flex justify-content-center mx-auto w-90 mt-5">';
-                    if ($controller->verificarFollow($id) == false) {
+                    echo '<button type="button" onclick="follow(' . $id . ')" id="followButtons" class="btn btn-primary btn-md d-flex justify-content-center mx-auto w-90 mt-5">';
+                    $verificar_follow = $controller->verificarFollow($id);
+                    if (!$verificar_follow == true) {
                         echo 'Seguir</button>';
                     } else {
                         echo 'Deixar de Seguir</button>';
                     }
                     echo '  
-                    <button type="button" class="btn btn-secondary btn-md d-flex justify-content-center mx-auto w-90">Contratar</button>';
+                    <button type="button" class="btn btn-secondary btn-md d-flex justify-content-center mx-auto w-90" data-bs-toggle="modal" data-bs-target="#contract">Contratar</button>';
                 }
             ?>
 

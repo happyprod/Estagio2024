@@ -7,33 +7,35 @@ use App\Helpers\Database;
 
 $db = Database::connect();
 
+// Verificação de erro na conexão com o banco de dados
+if (!$db) {
+    die("Erro ao conectar ao banco de dados");
+}
+
 // Cria instâncias do modelo e do controlador
 $model = new Message($db);
 $controller = new ChatController($model);
-
 
 // Iniciar a sessão se ainda não estiver iniciada
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$session = $_SESSION['user_id']; // Obtém o ID do usuário da sessão
-
+$session = $_SESSION['user_id'] ?? null; // Obtém o ID do usuário da sessão
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'send') {
 
-    echo 'envou mennsagem';
+    echo 'Enviando mensagem...';
     // Enviar mensagem
-    $user = $_POST['user'];
-    $message = $_POST['message'];
+    $user = htmlspecialchars($_POST['user']);
+    $message = htmlspecialchars($_POST['message']);
 
     $controller->sendMessage($user, $message);
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'options') {
 
-    $search = $_GET['search'];
+    $search = htmlspecialchars($_GET['search']);
     
     $result = $controller->getOptions($search);
-
 
     // Check if there are results
     if (count($result) > 0) {
@@ -44,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
         $uniqueIds = array_unique($uniqueIds);
         foreach ($uniqueIds as $id) {
 
-        $result2 = $controller->getChatTrade($id);
+            $result2 = $controller->getChatTrade($id);
 
             if ($result2) {
                 $id_name = htmlspecialchars($result2['id_name']);
@@ -54,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 $date_bd = htmlspecialchars($result2['date']);
                 $id_sender = htmlspecialchars($result2['id_sender']);
             }
-
 
             $result3 = $controller->getViews($id);
 
@@ -70,10 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 $visto = '';
             }
 
-            // Obter date atual
-            $date_atual = time(); // Isso retorna o date atual
+            // Obter data atual
+            $date_atual = time(); // Isso retorna a data atual
 
-            // Converter o date do banco de dados para um Unix date
+            // Converter a data do banco de dados para um Unix timestamp
             $date_bd = strtotime($date_bd);
 
             // Calcular a diferença em segundos
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
             if ($google_image) {
                 $fotodeperfil = 'src="' . $fotodeperfil . '"';
             } else {
-                $fotodeperfil = 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+                $fotodeperfil = 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
             }
 
             if ($vistas != 0) {
@@ -115,12 +116,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
                 $vistas = '';
             }
 
-            echo '<div id=' . $id . ' class="chat-item d-flex ps-3 pe-0 pt-3 pb-3">
+            echo '<div onclick="abrirMensagens(' . $id . ')" id=' . $id . ' class="chat-item d-flex ps-3 pe-0 pt-3 pb-3">
                 <div class="w-100">
                 <div class="d-flex ps-0">
                     <img class="rounded-circle shadow avatar-sm me-3 img-fluid" style="object-fit: cover;" ' . $fotodeperfil . '>
                     <div>
-                    <p class="margin-auto fw-400 text-dark-75">' . $id_name . '</p>
+                    <p class="margin-auto fw-400 text-dark-75">@' . $id_name . '</p>
                     <div class="d-flex flex-row mt-1">
                         <span>
                         <div class="' . $visto . '"></div>
@@ -143,149 +144,149 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['action']) && $_GET['action'] == 'loadMessages' && isset($_GET['user'])) {
 
-// Carregar mensagens com um usuário específico
-$user = $_GET['user'];
+    // Carregar mensagens com um usuário específico
+    $user = htmlspecialchars($_GET['user']);
 
-// Consulta geral para obter informações do último chat com o usuário específico
-$result2 = $controller->getLastChat($user);
+    // Consulta geral para obter informações do último chat com o usuário específico
+    $result2 = $controller->getLastChat($user);
 
+    if ($result2) {
+        $id_acc = htmlspecialchars($result2['id']);
+        $id_name = htmlspecialchars($result2['id_name']);
+        $fotodeperfil = htmlspecialchars($result2['picture']); // Agora $fotodeperfil será definido se houver linhas
+        $date_bd = htmlspecialchars($result2['date']);
+        $id_sender = htmlspecialchars($result2['id_sender']);
+    }
 
-if ($result2) {
-    $id_acc = htmlspecialchars($result2['id']);
-    $id_name = htmlspecialchars($result2['id_name']);
-    $fotodeperfil = htmlspecialchars($result2['picture']); // Agora $fotodeperfil será definido se houver linhas
-    $date_bd = htmlspecialchars($result2['date']);
-    $id_sender = htmlspecialchars($result2['id_sender']);
-}
+    // Atualizar mensagens para marcá-las como vistas se o usuário não for o mesmo que a sessão atual
+    if ($session != $id_sender) {
+        $controller->saveView($user);
+    }
 
-// Atualizar mensagens para marcá-las como vistas se o usuário não for o mesmo que a sessão atual
-if ($session != $id_sender) {
-    $controller->saveView($user);
-}
+    // Verificação da extensão do arquivo da imagem do perfil
+    $extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
 
-// Verificação da extensão do arquivo da imagem do perfil
-$extension = strtolower(pathinfo($fotodeperfil, PATHINFO_EXTENSION));
+    // Verificar se a extensão do arquivo está em um array de extensões de imagem permitidas
+    $allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
 
-// Verificar se a extensão do arquivo está em um array de extensões de imagem permitidas
-$allowed_extensions = array('jpg', 'jpeg', 'png', 'gif'); // Adicione outras extensões se necessário
+    // Verifica se a extensão está na lista de extensões permitidas
+    if (in_array($extension, $allowed_extensions)) {
+        $google_image = false;
+    } else {
+        $google_image = true;
+    }
 
-// Verifica se a extensão está na lista de extensões permitidas
-if (in_array($extension, $allowed_extensions)) {
-    $google_image = false;
-} else {
-    $google_image = true;
-}
+    if ($google_image) {
+        $fotodeperfil = 'src="' . $fotodeperfil . '"';
+    } else {
+        $fotodeperfil = 'src="http://localhost/Estagio2024/public/users/' . $user . '/' . $fotodeperfil . '"';
+    }
 
-if ($google_image) {
-    $fotodeperfil = 'src="' . $fotodeperfil . '"';
-} else {
-    $fotodeperfil = 'src="/public/users/' . $user . '/' . $fotodeperfil . '"';
-}
+    // Obter a data atual
+    $date_atual = time(); // Retorna a data atual em UNIX timestamp
 
-// Obter a data atual
-$date_atual = time(); // Retorna a data atual em UNIX timestamp
+    // Converter a data do banco de dados para UNIX timestamp
+    $date_bd = strtotime($date_bd);
 
-// Converter a data do banco de dados para UNIX timestamp
-$date_bd = strtotime($date_bd);
+    // Calcular a diferença em segundos
+    $diferenca_segundos = $date_atual - $date_bd;
 
-// Calcular a diferença em segundos
-$diferenca_segundos = $date_atual - $date_bd;
+    // Converter a diferença de segundos para dias
+    $diferenca_dias = floor($diferenca_segundos / (60 * 60 * 24));
 
-// Converter a diferença de segundos para dias
-$diferenca_dias = floor($diferenca_segundos / (60 * 60 * 24));
+    if ($diferenca_dias == 0) {
+        $diferenca_dias = "Hoje";
+    } else if ($diferenca_dias == 1) {
+        $diferenca_dias .= ' Dia atrás';
+    } else {
+        $diferenca_dias .= ' Dias atrás';
+    }
 
-if ($diferenca_dias == 0) {
-    $diferenca_dias = "Hoje";
-} else if ($diferenca_dias == 1) {
-    $diferenca_dias .= ' Dia atrás';
-} else {
-    $diferenca_dias .= ' Dias atrás';
-}
-
-// Saída do cabeçalho do chat com as informações do usuário
-echo '<div class="p-3 chat-header">
-        <div class="d-flex">
-            <div class="w-100 d-flex ps-0">
-                <img class="rounded-circle shadow avatar-sm me-3 chat-profile-picture img-fluid" style="object-fit: cover;" ' . $fotodeperfil . '>
-                <div class="me-3">
-                  <a href="utilizadores/' . $id_acc . '.php">
-                    <p class="fw-400 mb-0 text-dark-75">' . $id_name . '</p>
-                  </a>
-                  <p class="sub-caption text-muted text-small mb-0"><i class="la la-clock me-1"></i>Última mensagem - ' . $diferenca_dias . '</p>
+    // Saída do cabeçalho do chat com as informações do usuário
+    echo '<div class="p-3 chat-header">
+            <div class="d-flex">
+                <div class="w-100 d-flex ps-0">
+                    <img class="rounded-circle shadow avatar-sm me-3 chat-profile-picture img-fluid" style="object-fit: cover;" ' . $fotodeperfil . '>
+                    <div class="me-3">
+                      <a href="utilizadores/' . $id_acc . '.php">
+                        <p class="fw-400 mb-0 text-dark-75">@' . $id_name . '</p>
+                      </a>
+                      <p class="sub-caption text-muted text-small mb-0"><i class="la la-clock me-1"></i>Última mensagem - ' . $diferenca_dias . '</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="h-100">
-        <div class="scrollResponsive w-100 p-3 overflow-auto mt-auto" style="flex-direction: column; justify-content: flex-end;">';
+        <div class="h-100">
+            <div class="scrollResponsive w-100 p-3 overflow-auto mt-auto" style="flex-direction: column; justify-content: flex-end;">';
 
 
-    $result = $controller->getMessages($user);
+        $result = $controller->getMessages($user);
 
-if ($result) {
-    $saver = 0;
-    foreach ($result as $row) {
-        $id_sender = $row['id_sender'];
-        $message = $row['message'];
-        $date_bd = $row['date'];
-        $vistas = $row['viewed'];
+    if ($result) {
+        $saver = 0;
+        foreach ($result as $row) {
+            $id_sender = htmlspecialchars($row['id_sender']);
+            $message = htmlspecialchars($row['message']);
+            $date_bd = htmlspecialchars($row['date']);
+            $vistas = htmlspecialchars($row['viewed']);
 
-        // Converter a data do banco de dados para UNIX timestamp
-        $date_trans = strtotime($date_bd);
+            // Converter a data do banco de dados para UNIX timestamp
+            $date_trans = strtotime($date_bd);
 
-        // Calcular a diferença em segundos
-        if ($saver != 0) {
-            $diferenca_segundos = $saver - $date_trans;
-        }
+            // Calcular a diferença em segundos
+            if ($saver != 0) {
+                $diferenca_segundos = $saver - $date_trans;
+            }
 
-        // Converter a diferença de segundos para horas
-        $diferenca_horas = floor($diferenca_segundos / (60 * 60 * 12));
+            // Converter a diferença de segundos para horas
+            $diferenca_horas = floor($diferenca_segundos / (60 * 60 * 12));
 
-        $saver = $date_trans; // Armazenar a data atual
+            $saver = $date_trans; // Armazenar a data atual
 
-        // Formatar a data para exibir apenas as horas e minutos
-        $time = date('H:i', $date_trans);
+            // Formatar a data para exibir apenas as horas e minutos
+            $time = date('H:i', $date_trans);
 
-        // Verificar se a mensagem foi vista
-        if ($vistas != 0) {
-            $vistas_html = '<div class="svg15 double-check-blue"></div>';
-        } else {
-            $vistas_html = '<div class="svg15 double-check"></div>';
-        }
+            // Verificar se a mensagem foi vista
+            if ($vistas != 0) {
+                $vistas_html = '<div class="svg15 double-check-blue"></div>';
+            } else {
+                $vistas_html = '<div class="svg15 double-check"></div>';
+            }
 
-        // Verificar se a mensagem é do usuário atual ou do outro usuário
-        if ($id_sender == $session) {
-            echo '<div class="d-flex flex-row-reverse mb-2">
-                    <div class="right-chat-message fs-13 mb-2">
-                      <div class="mb-0 me-3 pe-4">
-                        <div class="flex-row">
-                          <div class="pe-2" style="font-size: 13px;">' . $message . '</div>
-                          <div class="pe-4"></div>
-                        </div>
-                      </div>
-                      <div class="message-options dark">
-                        <div class="message-time" style="font-size: 9px;">
-                          <div class="d-flex flex-row">
-                            <div class="me-2">' . $time . '</div>
-                            ' . $vistas_html . '
+            // Verificar se a mensagem é do usuário atual ou do outro usuário
+            if ($id_sender == $session) {
+                echo '<div class="d-flex flex-row-reverse mb-2">
+                        <div class="right-chat-message fs-13 mb-2">
+                          <div class="mb-0 me-3 pe-4">
+                            <div class="flex-row">
+                              <div class="pe-2" style="font-size: 13px;">' . $message . '</div>
+                              <div class="pe-4"></div>
+                            </div>
+                          </div>
+                          <div class="message-options dark">
+                            <div class="message-time" style="font-size: 9px;">
+                              <div class="d-flex flex-row">
+                                <div class="me-2">' . $time . '</div>
+                                ' . $vistas_html . '
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>';
-        } else {
-            echo '<div class="left-chat-message fs-13 mb-2">
-                    <p class="mb-0 me-3 pe-4" style="font-size: 13px;">' . $message . '</p>
-                    <div class="message-options">
-                      <div class="message-time" style="font-size: 9px;">' . $time . '</div>
-                    </div>
-                  </div>';
+                      </div>';
+            } else {
+                echo '<div class="left-chat-message fs-13 mb-2">
+                        <p class="mb-0 me-3 pe-4" style="font-size: 13px;">' . $message . '</p>
+                        <div class="message-options">
+                          <div class="message-time" style="font-size: 9px;">' . $time . '</div>
+                        </div>
+                      </div>';
+            }
         }
+    } else {
+        echo "Nenhuma mensagem.";
     }
-} else {
-    echo "Nenhuma mensagem.";
-}
 
-echo '</div>
-    </div>';
+    echo '</div>
+        </div>';
 }
+?>

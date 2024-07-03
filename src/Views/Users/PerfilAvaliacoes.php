@@ -3,10 +3,21 @@
         <div class="card-header pb-0 p-3 d-flex justify-content-between">
             <h6 class="mb-0">Avaliações</h6>
 
-            <!-- Button trigger modal -->
+            <?php
+
+$ratings = $controller->getRatings($id);
+
+if (count($ratings) != 0)
+{
+    echo '<!-- Button trigger modal -->
             <button type="button" class="btn btn-link btn-block pe-3 ps-0 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModalLong" style="margin-top: -0.3em;">
                 Ver mais
-            </button>
+            </button>';
+}
+                
+
+            ?>
+            
         </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -24,7 +35,6 @@
 
                             <?php
 
-                            $ratings = $controller->getRatings($id);
 
                             // Verifica se a consulta retornou resultados
                             if (count($ratings) > 0) {  // Use PDO method to check rows
@@ -66,7 +76,7 @@
                                                 <img ';
 
                                     if ($google_image2 == false) {
-                                        echo 'src="/public/users/' . $av_user . '/' . $av_foto . '"';
+                                        echo 'src="http://localhost/Estagio2024/public/users/' . $av_user . '/' . $av_foto . '"';
                                     } else {
                                         echo 'src="' . $av_foto . '"';
                                     }
@@ -103,7 +113,7 @@
                                         ';
                                 }
                             } else {
-                                echo "Ainda não existem avaliações.";
+                                echo '<p class="text-sm">Nenhuma avaliação encontrada.</p>';
                             }
                             ?>
 
@@ -156,7 +166,7 @@
                                             <img ';
 
                             if ($google_image2 == false) {
-                                echo 'src="/public/users/' . $av_user . '/' . $av_foto . '"';
+                                echo 'src="http://localhost/Estagio2024/public/users/' . $av_user . '/' . $av_foto . '"';
                             } else {
                                 echo 'src="' . $av_foto . '"';
                             }
@@ -183,7 +193,7 @@
                         }
                     }
                 } else {
-                    echo "Ainda não existem avaliações.";
+                    echo '<p class="text-sm">Nenhuma avaliação encontrada.</p>';
                 }
 
 

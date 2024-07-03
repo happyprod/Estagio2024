@@ -72,7 +72,7 @@ class Home
                                     AND (f.id_followed IS NULL OR f.id_followed <> a.id)
                                     ORDER BY RAND()
                                     LIMIT 5;");
-                                    
+
         $stmt->execute([$sug, $user_id]);  // Vincula os parâmetros identity e user_id
 
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);  // Modo de fetch para obter um array de objetos
@@ -121,7 +121,6 @@ class Home
         $stmt_delete->bindParam(':id_user', $id_user, PDO::PARAM_INT);
         $stmt_delete->bindParam(':id_followed', $idUtilizador, PDO::PARAM_INT);
         $stmt_delete->execute();
-
     }
 
     public function adicionarFollow($idUtilizador)

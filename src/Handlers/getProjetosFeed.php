@@ -35,7 +35,6 @@ if ($result) {
     $p_userId = $result["Event"];
     $p_bookingUserId = $result["Booking"];
     $p_imagem = $result["imagem"];
-    $p_sinopse = $result["sinopse"];
     $p_descricao = $result["descricao"];
     $p_local = $result["local"];
     $p_data = $result["data"];
@@ -135,7 +134,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
                 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-                    <img src="/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
+                    <img src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
                 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -145,12 +144,24 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     $html .= '
 </div>
 
-<button class="carousel-control-prev" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
+<button class="carousel-control-prev'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Previous</span>
 </button>
 
-<button class="carousel-control-next" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
+<button class="carousel-control-next'; 
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
 <span class="carousel-control-next-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Next</span>
 </button>
@@ -168,7 +179,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -528,7 +539,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
+<img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -538,12 +549,26 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     $html .= '
 </div>
 
-<button class="carousel-control-prev" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
+<button class="carousel-control-prev';
+
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="prev">
 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Previous</span>
 </button>
 
-<button class="carousel-control-next" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
+<button class="carousel-control-next'; 
+
+if (count($result2) == 1)
+{
+    $html .= ' d-none';
+}
+
+$html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide="next">
 <span class="carousel-control-next-icon" aria-hidden="true"></span>
 <span class="visually-hidden">Next</span>
 </button>
@@ -561,7 +586,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>

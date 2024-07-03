@@ -31,7 +31,7 @@ if (isset($_POST['id_name'])) {
             array(
                 'status' => 'valid',
                 'name' => $user['name'],
-                'picture' => '/public/users/' . $id_user . '/' . $user['picture'] // Supondo que você também tenha a coluna 'picture' na tabela
+                'picture' => $user['picture'] // Supondo que você também tenha a coluna 'picture' na tabela
             )
         );
     } else {

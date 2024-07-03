@@ -1,9 +1,44 @@
+
+
                 <?php
 
                 $count = 1;
 
                 $result = $controller->getProjects($id);
 
+                
+                echo '<div class="col-12 mt-4">
+                <div class="card mb-4">
+                    <div class="card-header pb-0 p-3">';
+                    if ($id == $session_id)
+                    {
+                    echo '
+                        <div class="row">
+                            <div class="col-9">
+                                <h6 class="mb-1">Projetos</h6>
+                                <p class="text-sm">Veja a qualidade do trabalho de @' . $id_name_user . ' </p>
+                            </div>
+                            
+                            <div class="col-3">
+                                <div>
+                                    <button type="button" onclick="criarProjeto()" class="btn d-flex ms-auto btn-outline-none shadow-none text-primary"><i class="fa fa-plus me-1 mb-3" aria-hidden="true"></i>Criar Projeto</button>
+                                </div>
+                            </div>
+                        </div>';
+                    } else {
+                        echo '<div class="row">
+                            <div class="col-12">
+                                <h6 class="mb-1">Projetos</h6>
+                                <p class="text-sm">Veja a qualidade do trabalho de @' . $id_name_user . ' </p>
+                            </div>
+                        </div>';;
+                    }
+                    echo '
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="row">
+            
+            ';
                 // Verifica se a consulta retornou resultados
                 if (!empty($result)) {  // Verifica se $result não está vazio
 
@@ -13,8 +48,6 @@
                         $p_nome = $row["nome"];
                         $p_userId = $row["Event"];
                         $p_bookingUserId = $row["Booking"];
-                        $p_imagem = $row["imagem"];
-                        $p_sinopse = $row["sinopse"];
                         $p_descricao = $row["descricao"];
                         $p_local = $row["local"];
                         $p_data = $row["data"];
@@ -23,6 +56,8 @@
                         //$p_comments;
                         //$p_userlike;
 
+
+                        $p_imagem = $controller->getProjectTumb($p_id);
 
                         // Converte a string de data para um objeto DateTime
                         $date = new DateTime($p_data);
@@ -47,33 +82,23 @@
 
 
                         echo '
-
-                        <div class="col-12 mt-4">
-    <div class="card mb-4">
-        <div class="card-header pb-0 p-3">
-            <h6 class="mb-1">Projects</h6>
-            <p class="text-sm">Um pouco sobre o meu trabalho</p>
-        </div>
-        <div class="card-body p-3">
-            <div class="row">
-
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                        
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4" id="projectContainerMain' . $p_id . '">
                     <div class="card card-blog card-plain">
                         <div class="position-relative">
                             <a class="d-block shadow-xl border-radius-xl">
-                                <img src="/public/users/' . $id . '/' . $p_imagem . '" alt="img-blur-shadow"
+                                <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $p_imagem . '" alt="img-blur-shadow"
                                     class="img-fluid shadow rounded-sm border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: 12.5vw;">
                             </a>
                         </div>
-                        <div class="card-body px-1 pb-0">
-                            <p class="text-gradient text-dark mb-2 text-sm">' . $p_local . '</p>';
+                        <div class="card-body px-1 pb-0">';
 
                         if ($p_local != "") {
-                            echo '<div style="height: 95px;">';
+                            echo '<a target="_BLANK" href="https://www.google.pt/maps/search/' . $p_local . '"><p class="text-gradient text-dark mb-2 text-sm" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">' . $p_local . '</p></a>';
                         } else {
-                            echo '<div style="height: 116px;">';
+                            echo '<p class="text-gradient text-dark mb-2 text-sm" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">Não especificado...</p>';   
                         }
+
+                        echo '<div style="height: 95px;">';
 
                         echo '
                                 <h5>
@@ -87,33 +112,34 @@
                                 <div class="w-100">
                                     <button type="button"
                                         class="btn bg-gradient-primary btn-sm w-100 d-flex justify-content-center text-center mb-0"
-                                        data-bs-toggle="modal" onclick="updateDataProjetos(' . $p_id . ', ' . $count . ')" data-bs-target="#modal-default' . $count . '">Ver
+                                        data-bs-toggle="modal" onclick="updateDataProjetos(' . $p_id . ', ' . $p_id . ')" data-bs-target="#modal-default' . $p_id . '">Ver
                                         Mais</button>
 
                                         ';
 
-                        include('../src/Views/Users/PerfilProjetosEditar.php');
-
+                        if ($session_id == $id) {
+                            include('../src/Views/Users/PerfilProjetosEditar.php');
+                        }
 
 
                         echo '
                                     
-                                    <div class="modal fade" id="modal-default' . $count . '" tabindex="-1"
-                                    role="dialog" aria-labelledby="modal-default' . $count . '"
+                                    <div class="modal fade" id="modal-default' . $p_id . '" tabindex="-1"
+                                    role="dialog" aria-labelledby="modal-default' . $p_id . '"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                         <div class="modal-content">
 
-                                        <div class="modal-body p-0" style="height: 550px;" id="projectContainer' . $count . '">
+                                        <div class="modal-body p-0" style="height: 550px;" id="projectContainer' . $p_id . '">
 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
         </div>';
 
 
@@ -123,10 +149,18 @@
 
                         $count++;
                     }
-                }
-                ?>
 
+                  
+                } else {
+
+                    echo '
+                    <div class="w-100 text-center mt-7" style="height: 200px;">
+                        <h6>Ainda não existem projetos disponiveis,</h6> <p class="lead text-sm">Se conhecer @' . $id_name_user . ' pode o inspirar a partilhar o seu primeiro projeto!</p>
+                    </div>';
+                }
+                echo '
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>';
+                ?>

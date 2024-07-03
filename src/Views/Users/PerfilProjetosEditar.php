@@ -2,13 +2,13 @@
 echo '
 <div class="col-md-12 mt-2">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">
+    <button type="button" class="btn btn-outline-primary btn-sm w-100 d-flex justify-content-center text-center mb-0" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">
         Alterar Projeto
     </button>
 
 
     <!-- Modal -->
-    <div class="modal fade" id="menu' . $count . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+    <div class="modal fade" id="menu' . $p_id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,14 +22,14 @@ echo '
                     <div class="row">
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" id="update-button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="alterarImageContainer(imageContainer' . $count . '); updateData(' . $count . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#alterarimagens' . $count . '">
+                            <button type="button" id="update-button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="alterarImageContainer(imageContainer' . $p_id . '); updateData(' . $p_id . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#alterarimagens' . $p_id . '">
                                 Alterar Imagens
                             </button>
                         </div>
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateDataInfo(' . $count . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#modalAlterarInfo' . $count . '">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateDataInfo(' . $p_id . ', ' . $id . ', ' . $p_id . ')" data-bs-target="#modalAlterarInfo' . $p_id . '">
                                 Alterar Informações
                             </button>
                         </div>
@@ -39,21 +39,21 @@ echo '
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateStats(' . $p_id . ')" data-bs-target="#exampleModalMessage' . $count . '">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updateStats(' . $p_id . ')" data-bs-target="#exampleModalMessage' . $p_id . '">
                                 Ver Estatisticas
                             </button>
                         </div>
 
                         <div class="col-6">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updatePrivacy(' . $count . ', ' . $p_id . ')" data-bs-target="#splitModal' . $count . '">
+                            <button type="button" class="btn bg-gradient-success btn-block mb-3 w-100" data-bs-toggle="modal" onclick="updatePrivacy(' . $p_id . ', ' . $p_id . ')" data-bs-target="#splitModal' . $p_id . '">
                                 Privacidade
                             </button>
                         </div>
 
                         <div class="row d-flex justify-content-center mx-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn bg-gradient-danger btn-block mb-3 w-100" data-bs-toggle="modal" data-bs-target="#apagarProjeto' . $count . '">
+                            <button type="button" class="btn bg-gradient-danger btn-block mb-3 w-100" data-bs-toggle="modal" data-bs-target="#apagarProjeto' . $p_id . '">
                                 Apagar Projeto
                             </button>
                         </div>
@@ -68,7 +68,7 @@ echo '
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalMessage' . $count . '" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModalMessage' . $p_id . '" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
 
@@ -82,14 +82,14 @@ echo '
 
                 <div class="modal-body">
                 
-                <div id="alterarEstatisticas' . $count . '">
+                <div id="alterarEstatisticas' . $p_id . '">
                     <!-- conteudo dinamico será exibido aquim -->
                 </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Voltar</button>
+                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">Voltar</button>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ echo '
 
 
     <!-- Modal -->
-    <div class="modal fade" id="splitModal' . $count . '" tabindex="-1" data-target="privacidade' . $count . '" aria-labelledby="splitModalLabel" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal fade" id="splitModal' . $p_id . '" tabindex="-1" data-target="privacidade' . $p_id . '" aria-labelledby="splitModalLabel" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
 
@@ -111,14 +111,14 @@ echo '
 
 
                 <div class="modal-body" style="padding: 0px;">
-                    <div id="alterarprivacidade' . $count . '" class="modalcompletoprivacidade">
+                    <div id="alterarprivacidade' . $p_id . '" class="modalcompletoprivacidade">
 
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
-                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '" onclick="guardarPrivacidade(' . $p_id . ', ' . $count . ')">Confirmar</button>
+                    <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">Cancelar</button>
+                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '" onclick="guardarPrivacidade(' . $p_id . ', ' . $p_id . ')">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@ echo '
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalAlterarInfo' . $count . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAlterarInfo' . $p_id . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -138,7 +138,7 @@ echo '
                 <div class="modal-body ">
 
 
-                <div id="alterarInfo' . $count . '">
+                <div id="alterarInfo' . $p_id . '">
                                 
 
                 </div>
@@ -147,8 +147,8 @@ echo '
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
-                    <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '" onclick="guardarSobre(' . $p_id . ')">Confirmar</button>
+                    <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">Cancelar</button>
+                    <button type="button" class="btn bg-gradient-success" onclick="guardarSobre(' . $p_id . ')">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -159,7 +159,7 @@ echo '
 
 
 
-<div class="modal fade" id="apagarProjeto' . $count . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="apagarProjeto' . $p_id . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xs" role="document">
         <div class="modal-content">
 
@@ -182,7 +182,7 @@ echo '
         </div>
         
             <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
+                <button type="button" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">Cancelar</button>
                 <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal" onclick="apagarProjeto(' . $p_id . ')">Confirmar</button>
             </div>
     </div>
@@ -192,7 +192,7 @@ echo '
 
 
 
-<div class="modal fade" id="alterarimagens' . $count . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="alterarimagens' . $p_id . '" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
 
@@ -205,13 +205,13 @@ echo '
 
             <div class="modal-body">
 
-                <div class="row sortable-list" id="imageContainer' . $count . '">
+                <div class="row sortable-list" id="imageContainer' . $p_id . '">
                     <!-- conteudo dinamico será exibido aquim -->
                 </div>
 
             <div class="modal-footer">
-                <button type="button" onclick="verificarOArray()" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $count . '">Cancelar</button>
-                <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $count . '" onclick="guardarImagens(' . $count . ')">Confirmar</button>
+                <button type="button" onclick="verificarOArray()" class="btn bg-gradient-danger" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '">Cancelar</button>
+                <button type="button" class="btn bg-gradient-success" data-bs-toggle="modal" data-bs-target="#menu' . $p_id . '" onclick="guardarImagens(' . $p_id . ')">Confirmar</button>
             </div>
         </div>
     </div>
