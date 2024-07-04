@@ -18,7 +18,6 @@ register(): Exibe o formulário de registro e cria uma nova conta de usuário.
 
 namespace App\Controllers;
 
-use App\Helpers\Database;
 use App\Models\Auth;
 use App\Helpers\ValidationHelper;
 
@@ -54,22 +53,37 @@ class AuthController
         $this->model->register($email, $password, $identity, $location, $name, $selectedType);
     }
 
-    public function LoginAccount($email, $password)
+    public function LoginAccount($email, $password, $remember)
     {
         $result = $this->model->VerifyAccountExist($email, $password);
 
+        echo $remember;
+        exit();
         if ($result) {
-            // Senha correta, iniciar sessão
+
+            if ($remember == 1)
+            {
+                // Configurar o tempo de vida do cookie da sessão (24 horas)
+                session_set_cookie_params(86400 * 30);
+            }
+
+                // Senha correta, iniciar sessão
+
             session_start();
+
             $_SESSION['user_id'] = $result['id'];
             header('Location: ../../public/home.php'); // Redirecionar para a página de dashboard
             exit();
+            
         } else {
             // Usuário não encontrado ou senha incorreta
-            echo 'Credenciais inválidas. Tente novamente.';
+            header('Location: ../../public/login.php'); // Redirecionar para a página de dashboard
+            exit();
         }
     }
 
+
+    
 
     public function logout()
     {

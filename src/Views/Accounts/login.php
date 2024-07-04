@@ -2,43 +2,45 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../public/assets/img/apple-icon.png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="icon" type="image/png" href="../public/img/logo.png">
-    <title>
-        ConcertPulse Artist
-    </title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../public/assets/img/apple-icon.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="icon" type="image/png" href="../public/img/logo.png">
+  <title>
+    ConcertPulse Artist
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
-    <!-- Nucleo Icons -->
-    <link href="../public/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../public/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
+
+  <script src="./assets/js/login.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Incluir Toastr -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!-- Incluir Toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-
-    <!-- CSS Files -->
-    <link id="pagestyle" href="../public/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
-
-    <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
-    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
 <body class="">
@@ -63,30 +65,28 @@
                 </div>
                 <div class="card-body">
 
-                <form id="loginForm" action="../src/Handlers/LoginArtists.php" role="form" method="POST" autocomplete="off">
-                    <label>Identificação @</label>
-                    <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Identificação" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
-                    </div>
-                    <label>Palavra-passe</label>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Password" id="password" aria-label="Password" name="password" aria-describedby="password-addon">
-                    </div>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                        <label class="form-check-label" for="rememberMe">Lembrar</label>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
-                    </div>
-                </form>
+                  <label>Identificação @</label>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Identificação" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
+                  </div>
+                  <label>Palavra-passe</label>
+                  <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Password" id="password" aria-label="password" name="password" aria-describedby="password-addon">
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Lembrar</label>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" onclick="enviar()" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
+                  </div>
 
                 </div>
 
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Ainda não tem conta?
-                    <a href="registerartists.php" class="text-info text-gradient font-weight-bold" id="login_change">Criar uma...</a>
+                    <a href="register.php" class="text-info text-gradient font-weight-bold" id="login_change">Criar uma...</a>
                   </p>
 
                 </div>
@@ -137,6 +137,7 @@
     </div>
   </footer>
   <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+
   <!--   Core JS Files   -->
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap.min.js"></script>

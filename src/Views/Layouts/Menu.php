@@ -147,7 +147,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/loginartists.php">
+                <a class="nav-link" href="http://localhost/Estagio2024/public/login.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <img style="width: 12px; height: 12px;" src="http://localhost/Estagio2024/public/assets/img/logout.png" alt="">
                     </div>

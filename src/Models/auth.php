@@ -93,10 +93,11 @@ class Auth
         $stmt->execute([$email]);  // Bind the id_name parameter
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($result && password_verify($password, $result['password'])) {
+        if ($result && $password === $result['password']) {
             return $result;  // Retorna o resultado da consulta se a senha coincidir
         } else {
             return false;  // Retorna falso se não encontrar usuário ou senha incorreta
         }
+        
     }
 }

@@ -23,5 +23,3 @@ define('EMAIL_FROM', 'concertpulse.ese@gmail.com');
 define('API_KEY', 'minha_chave_api');
 define('API_SECRET', 'meu_segredo_api');
 
-
-

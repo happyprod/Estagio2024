@@ -12,19 +12,20 @@ $db = Database::connect();
 $model = new Auth($db);
 $controller = new AuthController($model);
 
-
-
 // Verifique se os dados foram enviados por POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Receba os dados do formulário
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    // Proteção contra SQL Injection (recomendado usar prepared statements)
-    $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
 
-    $data = $controller->LoginAccount($email, $password);
+    if (isset($_GET['email']) && isset($_GET['password'])) {
+        // Receba os dados do formulário
+        $email = $_GET['email'];
+        $password = $_GET['password'];
+        $remember = $_GET['remember'];
 
+
+        $data = $controller->LoginAccount($email, $password, $remember);
+
+    } else {
+        echo "Erro: Variáveis não foram passadas.";
+    }
 }
-

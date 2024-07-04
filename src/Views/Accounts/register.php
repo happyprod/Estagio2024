@@ -177,7 +177,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Já tem uma conta?
-                    <a href="loginartists.php" class="text-info text-gradient font-weight-bold" id="login_change">Entrar...</a>
+                    <a href="login.php" class="text-info text-gradient font-weight-bold" id="login_change">Entrar...</a>
                   </p>
 
                   <a class="btn btn-dark w-90 h-30" href="../src/google-oauth.php" role="button">

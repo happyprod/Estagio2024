@@ -51,7 +51,7 @@ function route($url, $routes) {
                 // Verificar qual controlador está sendo instanciado e passar o modelo correto
                 if ($controller === ChatController::class) {
                     $model = new Message($db); // Passar a conexão ao modelo Message para ChatController
-                } else if ($controller === UserController::class || $controller == AuthController::class) {
+                } else if ($controller === UserController::class) {
                     $model = new User($db); // Passar a conexão ao modelo User para outros controladores
                 } else if ($controller === HomeController::class) {
                     $model = new Home($db); // Passar a conexão ao modelo Home
