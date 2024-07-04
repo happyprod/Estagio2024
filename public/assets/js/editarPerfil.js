@@ -255,6 +255,7 @@ function guardarEditarPerfil() {
             "&tiktok_switch=" + encodeURIComponent(tiktok_switch) +
             "&blog_switch=" + encodeURIComponent(blog_switch);
 
+
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {

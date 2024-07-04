@@ -14,26 +14,7 @@ class User
     }
 
     // Exemplo da função register no modelo User
-    public function register($email, $password, $identity, $location, $name, $selectedType)
-    {
-        // Insere os novos registros
-        $stmt_insert = $this->db->prepare("INSERT INTO accounts (email, name, password, location, picture, identity, id_name) VALUES (:email, :name, :password, :location, :picture, :identity, :id_name)");
-
-        // Defina 'fotodeperfil' como a variável para 'picture' (fotodeperfil)
-        $fotodeperfil = 'fotodeperfil';
-
-        // Executa a inserção
-        $stmt_insert->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt_insert->bindParam(':name', $name, PDO::PARAM_STR);
-        $stmt_insert->bindParam(':password', $password, PDO::PARAM_STR);
-        $stmt_insert->bindParam(':location', $location, PDO::PARAM_STR);
-        $stmt_insert->bindParam(':picture', $fotodeperfil, PDO::PARAM_STR);
-        $stmt_insert->bindParam(':identity', $selectedType, PDO::PARAM_INT);
-        $stmt_insert->bindParam(':id_name', $identity, PDO::PARAM_STR);
-        $stmt_insert->execute();
-    }
-
-
+    
     public function criarProjeto()
     {
         if (session_status() == PHP_SESSION_NONE) {

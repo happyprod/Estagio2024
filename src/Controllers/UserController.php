@@ -28,26 +28,6 @@ class UserController
         require __DIR__ . '/../Views/Users/editarPerfil.php';
     }
 
-    public function showLoginForm($error = null)
-    {
-        session_destroy();
-
-        require __DIR__ . '/../Views/Accounts/login.php';
-    }
-
-    public function showRegisterForm($error = null)
-    {
-        session_destroy();
-
-        require __DIR__ . '/../Views/Accounts/register.php';
-    }
-
-    // Exemplo da função register no controlador UserController
-    public function register($email, $password, $identity, $location, $name, $selectedType)
-    {
-        $this->model->register($email, $password, $identity, $location, $name, $selectedType);
-    }
-
     public function criarProjeto()
     {
         $this->model->criarProjeto();
@@ -571,10 +551,7 @@ class UserController
         $blog_switch = ($blog_switch == 'true' && $blog != '') ? 1 : 0;
 
         if ($this->helper->validateInputs($TXTemail) != '') {
-            if ($this->helper->validateEmail($TXTemail)) {
-                // Se o e-mail for válido
-                $response = array('status' => 'success');
-            } else {
+            if (!$this->helper->validateEmail($TXTemail)) {
                 // Se o e-mail for inválido
                 $response = array('status' => 'error', 'message' => 'Email inválido');
                 echo json_encode($response);
@@ -584,6 +561,13 @@ class UserController
             $TXTemail = $this->helper->validateInputs($TXTemail);
         }
 
+
+        if (!$this->helper->validateNumber($TXTnumero)) {
+            // Se o e-mail for inválido
+            $response = array('status' => 'error', 'message' => 'Número inválido');
+            echo json_encode($response);
+            return;
+        }
 
         session_start();
 
@@ -695,6 +679,9 @@ class UserController
         );
 
         $this->model->guardarEditarPerfilSobre($dadosEvento);
+
+        // Se tudo correr bem
+        $response = array('status' => 'success');
 
         echo json_encode($response);
     }

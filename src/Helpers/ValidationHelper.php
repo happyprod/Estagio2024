@@ -46,4 +46,12 @@ class ValidationHelper
             return $texto_sem_espacos;
         }
     }
+
+    function validateNumber($numero) {
+        // Expressão regular para validar formato de telefone brasileiro de 9 dígitos
+        $regexTelefone = '/^[2-9][0-9]{8}$/';
+        
+        // Verifica se o telefone corresponde ao formato esperado
+        return preg_match($regexTelefone, $numero);
+    }
 }

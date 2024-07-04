@@ -19,12 +19,21 @@ register(): Exibe o formulário de registro e cria uma nova conta de usuário.
 namespace App\Controllers;
 
 use App\Helpers\Database;
-
-use App\Models\User;
-
+use App\Models\Auth;
+use App\Helpers\ValidationHelper;
 
 class AuthController
 {
+    private $model;
+    public $helper;
+
+
+    public function __construct(Auth $model)
+    {
+        $this->model = $model;
+        $this->helper = new ValidationHelper();
+    }
+
     public function showLoginForm($error = null)
     {
         session_destroy();
@@ -39,136 +48,25 @@ class AuthController
         require __DIR__ . '/../Views/Accounts/register.php';
     }
 
-    public function register($email, $senha, $identity, $location, $name, $selectedType)
+    // Exemplo da função register no controlador UserController
+    public function register($email, $password, $identity, $location, $name, $selectedType)
     {
-        // Conectar ao banco de dados usando PDO
-        $db = Database::connect();
-
-        // Verifica se o formulário foi submetido
-        if (isset($email, $senha, $name, $identity, $location, $selectedType)) {
-
-            // Consulta SQL para verificar se o email já existe
-            $query = "SELECT email FROM accounts WHERE email = :email";
-            $stmt = $db->prepare($query);
-
-            if ($stmt) {
-                $stmt->bindParam(":email", $email);
-                $stmt->execute();
-
-                // Verifica se o email já está registrado
-                if ($stmt->rowCount() > 0) {
-                    // Email já está registrado
-                    echo json_encode(['success' => false, 'message' => 'Email já em uso.']);
-                    return;
-                }
-
-                
-
-                $query = "SELECT id_name FROM accounts WHERE id_name = :id_name";
-                $stmt = $db->prepare($query);
-
-
-                if ($stmt) {
-                    $stmt->bindParam(":id_name", $identity);
-                    $stmt->execute();
-
-                    // Verifica se o email já está registrado
-                    if ($stmt->rowCount() > 0) {
-                        // Email já está registrado
-                        echo json_encode(['success' => false, 'message' => 'Indentificação já em uso.']);
-                        return;
-                    }
-
-
-                    // Consulta SQL para inserir um novo usuário
-                    $query = "INSERT INTO accounts (email, password, name, id_name, location, identity) VALUES (:email, :senha, :name, :id_name, :location, :selectedType)";
-                    $stmt = $db->prepare($query);
-
-                    if ($stmt) {
-                        // Vincula os parâmetros
-                        $stmt->bindParam(":email", $email);
-                        $stmt->bindParam(":senha", $senha); // Deveria usar hash de senha, ex: password_hash($senha, PASSWORD_BCRYPT)
-                        $stmt->bindParam(":name", $name);
-                        $stmt->bindParam(":id_name", $identity);
-                        $stmt->bindParam(":location", $location);
-                        $stmt->bindParam(":selectedType", $selectedType);
-
-                        // Executa a consulta
-                        if ($stmt->execute()) {
-                            // Registro bem-sucedido
-                            echo json_encode(['success' => true, 'message' => 'Registro realizado com sucesso.']);
-                        } else {
-                            // Falha ao inserir o usuário
-                            echo json_encode(['success' => false, 'message' => 'Erro ao registrar usuário.']);
-                        }
-                    } else {
-                        // Erro ao preparar a consulta de inserção
-                        echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de inserção.']);
-                    }
-                } else {
-                    // Erro ao preparar a consulta de verificação de email
-                    echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta de verificação de email.']);
-                }
-            } else {
-                // Dados do formulário não fornecidos
-                echo json_encode(['success' => false, 'message' => 'Dados do formulário não fornecidos.']);
-            }
-        }
+        $this->model->register($email, $password, $identity, $location, $name, $selectedType);
     }
 
-    public function login($email, $senha)
+    public function LoginAccount($email, $password)
     {
-        // Conectar ao banco de dados usando PDO
-        $db = Database::connect();
+        $result = $this->model->VerifyAccountExist($email, $password);
 
-        // Verifica se o formulário foi submetido
-        if (isset($email, $senha)) {
-
-            // Consulta SQL para selecionar o usuário com o email fornecido
-            $query = "SELECT id, email, password FROM accounts WHERE email = :email";
-            $stmt = $db->prepare($query);
-
-            // Verifica se a preparação da consulta foi bem-sucedida
-            if ($stmt) {
-                $stmt->bindParam(":email", $email);
-                $stmt->execute();
-
-                // Obtém o resultado da consulta
-                $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-                // Verifica se encontrou exatamente um registro
-                if ($user) {
-                    // Verifica se a senha fornecida está correta
-                    if ($user['password'] == $senha) {
-                        // Credenciais de login válidas
-                        $_SESSION['user_id'] = $user['id'];
-
-                        // Verifica se o checkbox foi marcado
-                        if (isset($_POST['checkbox'])) {
-                            // Define um cookie com duração de 1 mês (30 dias)
-                            setcookie("email", $email, time() + (60 * 60 * 24 * 30));
-                        } else {
-                            // Define um cookie com duração de 1 dia
-                            setcookie("email", $email, time() + (3600 * 24));
-                        }
-
-                        // Resposta de sucesso
-                        echo json_encode(['success' => true, 'message' => 'Login realizado com sucesso.']);
-                    } else {
-                        // Senha incorreta
-                        echo json_encode(['success' => false, 'message' => 'Nome de email ou senha inválidos.']);
-                    }
-                } else {
-                    // Usuário não encontrado
-                    echo json_encode(['success' => false, 'message' => 'Nome de email ou senha inválidos.']);
-                }
-            } else {
-                // Erro ao preparar a consulta
-                echo json_encode(['success' => false, 'message' => 'Erro ao preparar a consulta SQL.']);
-            }
+        if ($result) {
+            // Senha correta, iniciar sessão
+            session_start();
+            $_SESSION['user_id'] = $result['id'];
+            header('Location: ../../public/home.php'); // Redirecionar para a página de dashboard
+            exit();
         } else {
-            // Dados do formulário não fornecidos
-            echo json_encode(['success' => false, 'message' => 'Dados do formulário não fornecidos.']);
+            // Usuário não encontrado ou senha incorreta
+            echo 'Credenciais inválidas. Tente novamente.';
         }
     }
 

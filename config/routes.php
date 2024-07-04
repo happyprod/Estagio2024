@@ -13,6 +13,7 @@ use App\Models\Home;
 use App\Models\Message;
 use App\Models\Contracts;
 use App\Helpers\Database;
+use App\Models\Auth;
 
 $routes = [
     '/home' => [HomeController::class, 'showHome'],
@@ -22,10 +23,9 @@ $routes = [
     '/chat' => [ChatController::class, 'showChat'],
     '/contratos' => [ContractsController::class, 'showContratos'],
     '/contact' => 'PageController@contact',
-    '/registerartists' => [UserController::class, 'showRegisterForm'],
-    '/loginartists' => [UserController::class, 'showLoginForm'],
-    '/logout' => [AuthController::class, 'logout'],
-    '/register' => 'AuthController@register',
+    '/register' => [AuthController::class, 'showRegisterForm'],
+    '/login' => [AuthController::class, 'showLoginForm'],
+    '/logout' => [AuthController::class, 'logout']
 ];
 
 function route($url, $routes) {
@@ -57,6 +57,8 @@ function route($url, $routes) {
                     $model = new Home($db); // Passar a conexão ao modelo Home
                 } else if ($controller === ContractsController::class) {
                     $model = new Contracts($db); // Passar a conexão ao modelo Contracts
+                } else if ($controller === AuthController::class) {
+                    $model = new Auth($db); // Passar a conexão ao modelo Contracts
                 }
                 
                 $controllerInstance = new $controller($model); // Passar o modelo ao controlador

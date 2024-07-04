@@ -10,12 +10,6 @@ $pos = strrpos($url, "/public/");
 // Se encontrar a string "/public/", obtém a substring a partir dessa posição
 if ($pos !== false) {
     $url = '/' . substr($url, $pos + strlen("/public/"));
-} else {
-}
-
-if ($_SESSION['user_id'] == '')
-{
-    header('Location: ../loginartists.php');
 }
 
 // Chamar a função de roteamento com a URL atual e as rotas definidas

@@ -1,18 +1,17 @@
 <?php
-// Incluir o arquivo de configuração da conexão com o banco de dados
-// Configurações do banco de dados
-$servername = "localhost"; // Nome do servidor MySQL (geralmente 'localhost' em desenvolvimento)
-$username = "root"; // Nome de usuário do banco de dados
-$password = ""; // Senha do banco de dados
-$database = "concertpulse"; // Nome do banco de dados
+require_once __DIR__ . '/../../vendor/autoload.php'; // Inclui o autoload do Composer
 
-// Cria a conexão usando MySQLi
-$conn = new mysqli($servername, $username, $password, $database);
+use App\Controllers\AuthController;
+use App\Models\Auth;
+use App\Helpers\Database;
 
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Falha na conexão com o banco de dados: " . $conn->connect_error);
-}
+// Conecta ao banco de dados
+$db = Database::connect();
+
+// Cria instâncias do modelo e do controlador
+$model = new Auth($db);
+$controller = new AuthController($model);
+
 
 
 // Verifique se os dados foram enviados por POST
@@ -25,26 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conn, $email);
     $password = mysqli_real_escape_string($conn, $password);
 
-    // Consulta para verificar o usuário no banco de dados
-    $sql = "SELECT id, id_name, password FROM accounts WHERE id_name = '$email'";
-    $result = $conn->query($sql);
+    $data = $controller->LoginAccount($email, $password);
 
-    if ($result->num_rows == 1) {
-        // Usuário encontrado, verificar a senha
-        $row = $result->fetch_assoc();
-        if ($password == $row['password']) {
-            // Senha correta, iniciar sessão
-            session_start();
-            $_SESSION['user_id'] = $row['id'];
-            header('Location: ../../public/home.php'); // Redirecionar para a página de dashboard
-            exit();
-        } else {
-            // Senha incorreta
-            echo 'Credenciais inválidas. Tente novamente.';
-        }
-    } else {
-        // Usuário não encontrado
-        echo 'Credenciais inválidas. Tente novamente.';
-    }
 }
-?>
+

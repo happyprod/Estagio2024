@@ -35,7 +35,7 @@ if (isset($_POST['id_name'])) {
             )
         );
     } else {
-        // Usuário não encontrado
+        // User não encontrado
         echo json_encode(array('status' => 'invalid'));
     }
 
