@@ -105,31 +105,28 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                         <ul class="list-group " style="margin-top: 4em;">
                                             <li class="list-group-item border-0 ps-0 pt-0 text-sm">
                                                 <strong class="text-dark">Nome:</strong>
-                                                &nbsp; <?php echo $nome; ?>
+                                                &nbsp; 
+                                                <?php 
+                                                    echo $helper->validateAbout($nome);
+                                                ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">Número:</strong> &nbsp;
                                                 <?php
-                                                if ($numero != '') {
-                                                    echo $numero;
-                                                } else {
-                                                    echo 'Não especificado';
-                                                }
+                                                    echo $helper->validateAbout($numero);
                                                 ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">Email:</strong> &nbsp;
-                                                <?php echo $email; ?>
+                                                <?php
+                                                    echo $helper->validateAbout($email);
+                                                ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 text-sm">
                                                 <strong class="text-dark">País:</strong>
                                                 &nbsp;
                                                 <?php
-                                                if ($localizacao != '') {
-                                                    echo $localizacao;
-                                                } else {
-                                                    echo 'Não especificado';
-                                                }
+                                                    echo $helper->validateAbout($localizacao);
                                                 ?>
                                             </li>
                                             <li class="list-group-item border-0 ps-0 pb-0">
@@ -178,15 +175,19 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                     // Texto original com quebras de linha
                     $texto_original = $sobre;
 
-                    // Substituir \n por <br>
-                    $texto_formatado = nl2br(htmlspecialchars($texto_original)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
+                    // Substituir \n por <br> e escapar caracteres especiais HTML
+                    $texto_formatado = nl2br(htmlspecialchars($texto_original));
+
+                    // Remover espaços em branco do início e do final da string
+                    $texto_sem_espacos = trim($texto_formatado);
 
                     // Exibir o texto formatado
-                    if ($texto_formatado != '') {
+                    if ($texto_sem_espacos != '') {
                         echo $texto_formatado;
                     } else {
-                        echo 'Não sabemos muito sobre ' . $nome . ' mas acreditamos seja uma boa pessoa!';
+                        echo 'Não sabemos muito sobre @' . $nome . ' mas acreditamos que seja uma boa pessoa!';
                     }
+
                     ?>
                 </p>
             </div>
@@ -195,25 +196,21 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                 <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nome:</strong>
                     &nbsp; <?php echo $nome; ?></li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Número:</strong>
-                    &nbsp; <?php
-                            if ($numero != '') {
-                                echo $numero;
-                            } else {
-                                echo 'Não especificado';
-                            }
-                            ?></li>
+                    &nbsp; 
+                    <?php
+                        echo $helper->validateAbout($numero);
+                    ?>
+                </li>
                 <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
                     &nbsp;
-                    <?php echo $email; ?>
+                    <?php
+                        echo $helper->validateAbout($email); 
+                    ?>
                 </li>
-                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">País:</strong>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Localização:</strong>
                     &nbsp;
                     <?php
-                    if ($localizacao != '') {
-                        echo $localizacao;
-                    } else {
-                        echo 'Não especificado';
-                    }
+                        echo $helper->validateAbout($localizacao);
                     ?>
                 </li>
                 <li class="list-group-item border-0 ps-0 pb-0">

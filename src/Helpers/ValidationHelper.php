@@ -9,20 +9,41 @@ class ValidationHelper
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    public static function validateRequired($value)
+    public static function validateAbout($texto)
     {
-        return !empty($value);
+        // Texto original com quebras de linha
+        $texto_original = $texto;
+
+        // Substituir \n por <br> e escapar caracteres especiais HTML
+        $texto_formatado = nl2br(htmlspecialchars($texto_original));
+
+        // Remover espaços em branco do início e do final da string
+        $texto_sem_espacos = trim($texto_formatado);
+
+        // Exibir o texto formatado
+        if ($texto_sem_espacos != '') {
+            return $texto_formatado;
+        } else {
+            echo 'Não especificado';
+        }
     }
 
-    public static function validateLength($value, $min, $max = null)
+    public static function validateInputs($texto)
     {
-        $length = strlen($value);
-        if ($length < $min) {
-            return false;
+        // Texto original com quebras de linha
+        $texto_original = $texto;
+
+        // Substituir \n por <br> e escapar caracteres especiais HTML
+        $texto_formatado = nl2br(htmlspecialchars($texto_original));
+
+        // Remover espaços em branco do início e do final da string
+        $texto_sem_espacos = trim($texto_formatado);
+
+        // Exibir o texto formatado
+        if ($texto_sem_espacos != '') {
+            return $texto_formatado;
+        } else {
+            return $texto_sem_espacos;
         }
-        if ($max !== null && $length > $max) {
-            return false;
-        }
-        return true;
     }
 }

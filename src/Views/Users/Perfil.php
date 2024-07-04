@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php'; // Certifique-se de que 
 use App\Controllers\UserController;
 use App\Models\User;
 use App\Helpers\Database;
+use App\Helpers\ValidationHelper;
 
 $db = Database::connect();
 
@@ -11,6 +12,8 @@ $db = Database::connect();
 // Cria instâncias do modelo e do controlador
 $model = new User($db);
 $controller = new UserController($model);
+$helper = new ValidationHelper();
+
 
 $filePath = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 

@@ -113,7 +113,7 @@ if (count($ratings) != 0)
                                         ';
                                 }
                             } else {
-                                echo '<p class="text-sm">Nenhuma avaliação encontrada.</p>';
+                                echo '<p class="text-sm">Sem avaliações disponiveis.</p>';
                             }
                             ?>
 
@@ -193,7 +193,7 @@ if (count($ratings) != 0)
                         }
                     }
                 } else {
-                    echo '<p class="text-sm">Nenhuma avaliação encontrada.</p>';
+                    echo '<p class="text-sm">Sem avaliações disponiveis.</p>';
                 }
 
 

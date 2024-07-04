@@ -134,7 +134,7 @@
                 <div class="row mt-2">
 
                     <div class="col-6 text-center">
-                        <a href="utilizadores/<?php echo $_SESSION['user_id'];?>.php" class="btn bg-gradient-danger w-90">Cancelar</a>
+                        <a href="utilizadores/<?php echo $_SESSION['user_id'];?>.php" class="btn bg-gradient-danger w-90">Voltar</a>
                     </div>
                     <div class="col-6 text-center">
                         <button type="button" onclick="guardarEditarPerfil()" class="btn bg-gradient-success w-90">Confirmar</button>

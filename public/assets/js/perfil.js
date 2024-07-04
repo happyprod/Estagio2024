@@ -396,45 +396,6 @@ function bookingComplete() {
     }
 }
 
-function EventosComplete() {
-    var id_name = $('#eventoInput').val().trim();
-
-    // Clear the datalist before updating with new options
-    $('#eventoInputs').empty();
-
-    // Send AJAX request only if the field is not empty
-    if (id_name !== '') {
-        $.ajax({
-            url: '../../src/Handlers/eventosComplete.php',
-            type: 'POST',
-            data: { id_name: id_name },
-            success: function (response) {
-                console.log('Resposta do servidor:', response);
-
-                try {
-                    // Try to parse response to JSON if necessary
-                    if (typeof response === 'string') {
-                        response = JSON.parse(response);
-                    }
-
-                    if (Array.isArray(response)) {
-                        response.forEach(function (item) {
-                            var option = $('<option>').val(item.id_name).text(item.name);
-                            $('#eventoInputs').append(option);
-                        });
-                    } else {
-                        console.error('Resposta não é um array:', response);
-                    }
-                } catch (error) {
-                    console.error('Erro ao manipular JSON:', error);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('Erro na requisição AJAX:', error);
-            }
-        });
-    }
-}
 
 function updateData(var1, var2, var3) {
     var elementsWithDataId;
@@ -560,7 +521,6 @@ function updateDataProjetos(var1, var2) {
 
 function guardarSobre(id_projeto) {
     var nomeEvento = document.getElementById("exampleFormControlInput1")?.value || '';
-    var identificacaoEvento = document.getElementById("eventoInput")?.value || '';
     var descricao = document.getElementById("exampleFormControlTextarea1")?.value || '';
 
     var data = document.getElementById("example-date-input")?.value || '';
@@ -609,7 +569,6 @@ function guardarSobre(id_projeto) {
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/guardarProjetoInfo.php";
     var params = "nomeEvento=" + encodeURIComponent(nomeEvento) +
-        "&identificacaoEvento=" + encodeURIComponent(identificacaoEvento) +
         "&descricao=" + encodeURIComponent(descricao) +
         "&data=" + encodeURIComponent(data) +
         "&empresaBooking=" + encodeURIComponent(empresaBooking) +

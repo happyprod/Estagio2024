@@ -3,14 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Helpers\ValidationHelper;
+
 
 class UserController
 {
     private $model;
+    public $helper;
+
 
     public function __construct(User $model)
     {
         $this->model = $model;
+        $this->helper = new ValidationHelper();
     }
 
     public function show($userId)
@@ -38,10 +43,10 @@ class UserController
     }
 
     // Exemplo da função register no controlador UserController
-public function register($email, $password, $identity, $location, $name, $selectedType)
-{
-    $this->model->register($email, $password, $identity, $location, $name, $selectedType);
-}
+    public function register($email, $password, $identity, $location, $name, $selectedType)
+    {
+        $this->model->register($email, $password, $identity, $location, $name, $selectedType);
+    }
 
     public function criarProjeto()
     {
@@ -58,7 +63,6 @@ public function register($email, $password, $identity, $location, $name, $select
 
         // Outros dados
         $nomeEvento = $_POST['nomeEvento'] ?? '';
-        $identificacaoEvento = $_POST['identificacaoEvento'] ?? '';
         $descricao = $_POST['descricao'] ?? '';
         $data = $_POST['data'] ?? '';
         $empresaBooking = $_POST['empresaBooking'] ?? '';
@@ -67,7 +71,6 @@ public function register($email, $password, $identity, $location, $name, $select
 
         // Exibe os dados recebidos para debug
         echo "Nome do Evento: " . htmlspecialchars($nomeEvento) . "<br>";
-        echo "Identificação do Evento: " . htmlspecialchars($identificacaoEvento) . "<br>";
         echo "Descrição: " . htmlspecialchars($descricao) . "<br>";
         echo "Data: " . htmlspecialchars($data) . "<br>";
         echo "Empresa de Booking: " . htmlspecialchars($empresaBooking) . "<br>";
@@ -77,7 +80,6 @@ public function register($email, $password, $identity, $location, $name, $select
         // Inserir no banco de dados
         $dadosEvento = array(
             'nomeEvento' => $nomeEvento,
-            'identificacaoEvento' => $identificacaoEvento,
             'descricao' => $descricao,
             'data' => $data,
             'empresaBooking' => $empresaBooking,
@@ -545,6 +547,8 @@ public function register($email, $password, $identity, $location, $name, $select
 
     public function guardarEditarPerfilSobre()
     {
+        header('Content-Type: application/json');
+
         $LBLfotoPerfil = $_POST['LBLfotoPerfil'];
         $LBLfotoCapa = $_POST['LBLfotoCapa'];
         $TXTnome = $_POST['TXTnome'];
@@ -565,6 +569,20 @@ public function register($email, $password, $identity, $location, $name, $select
         $ig_switch = ($ig_switch == 'true'  && $instagram != '') ? 1 : 0;
         $tiktok_switch = ($tiktok_switch == 'true' && $tiktok != '') ? 1 : 0;
         $blog_switch = ($blog_switch == 'true' && $blog != '') ? 1 : 0;
+
+        if ($this->helper->validateInputs($TXTemail) != '') {
+            if ($this->helper->validateEmail($TXTemail)) {
+                // Se o e-mail for válido
+                $response = array('status' => 'success');
+            } else {
+                // Se o e-mail for inválido
+                $response = array('status' => 'error', 'message' => 'Email inválido');
+                echo json_encode($response);
+                return;
+            }
+        } else {
+            $TXTemail = $this->helper->validateInputs($TXTemail);
+        }
 
 
         session_start();
@@ -677,6 +695,8 @@ public function register($email, $password, $identity, $location, $name, $select
         );
 
         $this->model->guardarEditarPerfilSobre($dadosEvento);
+
+        echo json_encode($response);
     }
 
     public function guardarFollow($id)
@@ -734,14 +754,12 @@ public function register($email, $password, $identity, $location, $name, $select
         }
 
         $id_user = $_SESSION['user_id'];
-        
-        if ($id_user == $id)
-        {
+
+        if ($id_user == $id) {
             return $this->model->getProjects($id);
         } else {
             return $this->model->getProjectsPublic($id, $id_user);
         }
-        
     }
 
 

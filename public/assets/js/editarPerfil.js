@@ -194,15 +194,15 @@ function guardarEditarPerfil() {
     var LBLfotoPerfil = document.getElementById('profile-image').src;
 
 
-    var TXTnome = document.getElementById('TXTnome').value;
-    var TXTnumero = document.getElementById('TXTnumero').value;
-    var TXTemail = document.getElementById('TXTemail').value;
-    var TXTlocalizacao = document.getElementById('TXTlocalizacao').value;
-    var TXTdescricao = document.getElementById('TXTdescricao').value;
-    var youtube = document.getElementById('youtube').value;
-    var instagram = document.getElementById('instagram').value;
-    var tiktok = document.getElementById('tiktok').value;
-    var blog = document.getElementById('blog').value;
+    var TXTnome = document.getElementById('TXTnome').value.trim();    
+    var TXTnumero = document.getElementById('TXTnumero').value.trim();
+    var TXTemail = document.getElementById('TXTemail').value.trim();
+    var TXTlocalizacao = document.getElementById('TXTlocalizacao').value.trim();
+    var TXTdescricao = document.getElementById('TXTdescricao').value.trim();
+    var youtube = document.getElementById('youtube').value.trim();
+    var instagram = document.getElementById('instagram').value.trim();
+    var tiktok = document.getElementById('tiktok').value.trim();
+    var blog = document.getElementById('blog').value.trim();
     var yt_switch = document.getElementById('yt_switch').checked;
     var ig_switch = document.getElementById('ig_switch').checked;
     var tiktok_switch = document.getElementById('tiktok_switch').checked;
@@ -214,10 +214,8 @@ function guardarEditarPerfil() {
     var blog_switch2 = document.getElementById('blog_switch');
     ////////////////////////////////////////////////////////////////////////////
 
-    if (!TXTdescricao) {
-        erro('Preencha a Descrição');
-    } else if (!TXTnome) {
-        erro('Preencha o Nome')
+    if (!TXTnome) {
+        erro('Preencha o Nome');
     } else {
 
         if (youtube == '') {
@@ -262,11 +260,17 @@ function guardarEditarPerfil() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText);
-                    alteradocomsucesso('Perfil editado com sucesso!');
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    
+                    if (response.status === 'error') {
+                        erro(response.message); // Exibe a mensagem de erro específica
+                    } else {
+                        alteradocomsucesso('Perfil editado com sucesso!');
+                    }
                 } else {
                     console.error("Erro na requisição: " + xhr.status);
-                }
+                }                
             }
         };
         xhr.send(params);

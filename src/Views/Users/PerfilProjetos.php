@@ -155,7 +155,7 @@
 
                     echo '
                     <div class="w-100 text-center mt-7" style="height: 200px;">
-                        <h6>Ainda não existem projetos disponiveis,</h6> <p class="lead text-sm">Se conhecer @' . $id_name_user . ' pode o inspirar a partilhar o seu primeiro projeto!</p>
+                        <h6>Ainda não existem projetos disponiveis,</h6> <p class="lead text-sm">Se conhecer @' . $id_name_user . ' tente inspirá-lo(a) a partilhar o seu primeiro projeto!</p>
                     </div>';
                 }
                 echo '

@@ -551,7 +551,6 @@ class User
     public function inserirEvento($dadosEvento, $arrayC_idName)
     {
         $nomeEvento = $dadosEvento['nomeEvento'] ?? '';
-        $identificacaoEvento = $dadosEvento['identificacaoEvento'] ?? '';
         $descricao = $dadosEvento['descricao'] ?? '';
         $data = $dadosEvento['data'] ?? '';
         $empresaBooking = $dadosEvento['empresaBooking'] ?? '';
@@ -559,14 +558,13 @@ class User
         $id_projeto = $dadosEvento['id_projeto'] ?? '';
 
         // Atualizar o projeto
-        $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, Event = ?, descricao = ?, data = ?, Booking = ?, local = ? WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, descricao = ?, data = ?, Booking = ?, local = ? WHERE id = ?");
         $stmt->bindParam(1, $nomeEvento);
-        $stmt->bindParam(2, $identificacaoEvento);
-        $stmt->bindParam(3, $descricao);
-        $stmt->bindParam(4, $data);
-        $stmt->bindParam(5, $empresaBooking);
-        $stmt->bindParam(6, $localizacao);
-        $stmt->bindParam(7, $id_projeto);
+        $stmt->bindParam(2, $descricao);
+        $stmt->bindParam(3, $data);
+        $stmt->bindParam(4, $empresaBooking);
+        $stmt->bindParam(5, $localizacao);
+        $stmt->bindParam(6, $id_projeto);
         $stmt->execute();
 
         $stmt = $this->db->prepare("DELETE FROM projects_collabs WHERE id_project = ?");
