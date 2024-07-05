@@ -4,6 +4,10 @@ function enviar() {
   var checkbox = document.getElementById('rememberMe');
   var remember = checkbox.checked ? 1 : 0;
 
+  console.log('Email:', email);
+  console.log('Password:', password);
+  console.log('Remember:', remember);
+
   $.ajax({
     type: "POST",
     url: "../src/Handlers/login.php",
@@ -14,11 +18,14 @@ function enviar() {
     },
     success: function (result) {
       console.log('Requisição AJAX bem-sucedida');
-      // Faça algo com o resultado retornado, se necessário
+      if (result == 1) {
+        window.location.href = "home.php";
+      } else {
+        window.location.href = "login.php";
+      }
     },
     error: function (xhr, status, error) {
       console.error('Erro na requisição AJAX:', error);
-      // Trate o erro de acordo com suas necessidades
     }
   });
 }

@@ -12,20 +12,23 @@ $db = Database::connect();
 $model = new Auth($db);
 $controller = new AuthController($model);
 
-// Verifique se os dados foram enviados por POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-
-    if (isset($_GET['email']) && isset($_GET['password'])) {
+// Verifica se os dados foram enviados via POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verifica se os campos esperados estão presentes
+    if (isset($_POST['email']) && isset($_POST['password'])) {
         // Receba os dados do formulário
-        $email = $_GET['email'];
-        $password = $_GET['password'];
-        $remember = $_GET['remember'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $remember = $_POST['remember'];
 
-
+        // Chame o método do controlador para fazer login
         $data = $controller->LoginAccount($email, $password, $remember);
 
+        echo json_encode($data); // Retorna os dados como JSON
+        
     } else {
         echo "Erro: Variáveis não foram passadas.";
     }
+} else {
+    echo "Erro: Método de requisição inválido.";
 }

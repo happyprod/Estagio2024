@@ -54,33 +54,31 @@ class AuthController
     }
 
     public function LoginAccount($email, $password, $remember)
-    {
-        $result = $this->model->VerifyAccountExist($email, $password);
+{
+    $result = $this->model->VerifyAccountExist($email, $password);
 
-        echo $remember;
-        exit();
-        if ($result) {
-
-            if ($remember == 1)
-            {
-                // Configurar o tempo de vida do cookie da sessão (24 horas)
-                session_set_cookie_params(86400 * 30);
-            }
-
-                // Senha correta, iniciar sessão
-
-            session_start();
-
-            $_SESSION['user_id'] = $result['id'];
-            header('Location: ../../public/home.php'); // Redirecionar para a página de dashboard
-            exit();
-            
-        } else {
-            // Usuário não encontrado ou senha incorreta
-            header('Location: ../../public/login.php'); // Redirecionar para a página de dashboard
-            exit();
+    if ($result) {
+        if ($remember == 1) {
+            session_set_cookie_params(86400 * 30);
         }
+
+        session_start();
+        $_SESSION['user_id'] = $result['id'];
+
+        // Verificar se a sessão foi iniciada corretamente
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            if ($result) {
+                return 1; //vai para o home
+            } else {
+                return 0; //vai para o login
+            }
+        } else {
+            echo json_encode(['error' => 'Erro ao iniciar a sessão.']);
+        }
+    } else {
+        return 0; //vai para o login
     }
+}
 
 
     
