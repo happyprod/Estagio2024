@@ -59,7 +59,7 @@
                         <div class="form-group">
                           <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">@</span>
-                            <input type="text" class="form-control" required id="identity" name="identity" placeholder="Nome de Utilizador" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" id="identity" name="identity" placeholder="happyprod19" aria-label="Username" aria-describedby="basic-addon1">
                           </div>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
                       <div class="col-6">
                         <label for="email">Email</label>
                         <div class="mb-3">
-                          <input type="email" class="form-control" required placeholder="Email" id="email" name="email" aria-describedby="email-addon">
+                          <input type="email" class="form-control" placeholder="happyprod@gmail.com" id="email" name="email" aria-describedby="email-addon">
                         </div>
                       </div>
                     </div>
@@ -75,20 +75,24 @@
                       <div class="col-6">
                         <label for="name">Nome</label>
                         <div class="mb-3">
-                          <input type="text" class="form-control" required placeholder="Nome" id="name" name="name" aria-describedby="name-addon">
+                          <input type="text" class="form-control" placeholder="Rúben" id="name" name="name" aria-describedby="name-addon">
                         </div>
                       </div>
                       <div class="col-6">
-                        <label for="password">Palavra-passe</label>
-                        <div class="mb-3">
-                          <input type="password" class="form-control" required placeholder="Palavra-passe" id="password" aria-label="Password" name="password" aria-describedby="password-addon">
-                        </div>
-                      </div>
+  <label for="password" class="form-label">Palavra-passe</label>
+  <div class="input-group mb-3">
+    <input type="password" class="form-control" id="password" name="password" placeholder="Rtitinnhadsa#!23." aria-label="Password" aria-describedby="password-addon" required>
+    <button class="btn btn-outline-secondary" type="button" id="olho">
+      <img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" alt="Mostrar Senha" class="olho" style="width: 30px;">
+    </button>
+  </div>
+</div>
+
                     </div>
 
                     <label for="localizacao">Localização</label>
                     <div class="mb-3">
-                      <input type="text" class="form-control" required placeholder="Localização" id="autocomplete" name="localizacao" aria-describedby="localizacao-addon">
+                      <input type="text" class="form-control" placeholder="Portugal" id="autocomplete" name="localizacao" aria-describedby="localizacao-addon">
                     </div>
 
                     <div class="RegisterModal1">
@@ -165,7 +169,7 @@
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                              <button type="submit" class="btn btn-success">Continuar</button>
+                              <button type="button" onclick="submitForm()" class="btn btn-success">Continuar</button>
                             </div>
                           </div>
                         </div>
@@ -179,10 +183,6 @@
                     Já tem uma conta?
                     <a href="login.php" class="text-info text-gradient font-weight-bold" id="login_change">Entrar...</a>
                   </p>
-
-                  <a class="btn btn-dark w-90 h-30" href="../src/google-oauth.php" role="button">
-                    <i class="fab fa-google fa-lg me-2"></i>Continue with Google
-                  </a>
                 </div>
               </div>
             </div>
@@ -199,20 +199,9 @@
   </main>
 
   <!-- START FOOTER -->
-  <footer class="footer py-5">
-    <div class="container d-flex justify-content-center mx-auto">
-      <div class="row">
-        <div class=" mb-2  d-flex justify-content-center">
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            About Us
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Products
-          </a>
-          <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-            Pricing
-          </a>
-        </div>
+  <footer class="footer py-5 w-100">
+    <div class="container d-flex justify-content-center mx-auto w-100">
+      <div class="row w-100 ms-4">
         <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
           <a href="https://www.instagram.com/happyprod19/" target="_blank" class="text-secondary me-xl-4 me-4">
             <span class="text-lg fab fa-instagram"></span>

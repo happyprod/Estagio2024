@@ -53,35 +53,33 @@ class AuthController
         $this->model->register($email, $password, $identity, $location, $name, $selectedType);
     }
 
-    public function LoginAccount($email, $password, $remember)
-{
-    $result = $this->model->VerifyAccountExist($email, $password);
+    public function LoginAccount($email, $password)
+    {
+        $result = $this->model->VerifyAccountExist($email, $password);
 
-    if ($result) {
-        if ($remember == 1) {
+        if ($result) {
             session_set_cookie_params(86400 * 30);
-        }
 
-        session_start();
-        $_SESSION['user_id'] = $result['id'];
+            session_start();
+            $_SESSION['user_id'] = $result['id'];
 
-        // Verificar se a sessão foi iniciada corretamente
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            if ($result) {
-                return 1; //vai para o home
+            // Verificar se a sessão foi iniciada corretamente
+            if (session_status() == PHP_SESSION_ACTIVE) {
+                if ($result) {
+                    return 1; //vai para o home
+                } else {
+                    return 0; //vai para o login
+                }
             } else {
-                return 0; //vai para o login
+                echo json_encode(['error' => 'Erro ao iniciar a sessão.']);
             }
         } else {
-            echo json_encode(['error' => 'Erro ao iniciar a sessão.']);
+            return 0; //vai para o login
         }
-    } else {
-        return 0; //vai para o login
     }
-}
 
 
-    
+
 
     public function logout()
     {

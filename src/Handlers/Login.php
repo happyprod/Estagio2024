@@ -19,10 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Receba os dados do formulário
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $remember = $_POST['remember'];
 
         // Chame o método do controlador para fazer login
-        $data = $controller->LoginAccount($email, $password, $remember);
+        $data = $controller->LoginAccount($email, $password);
 
         echo json_encode($data); // Retorna os dados como JSON
         

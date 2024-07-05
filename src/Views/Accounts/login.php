@@ -67,20 +67,15 @@
 
                   <label>Identificação @</label>
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Identificação" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
+                    <input type="text" class="form-control" placeholder="@happyprod19" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
                   </div>
                   <label>Palavra-passe</label>
                   <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Password" id="password" aria-label="password" name="password" aria-describedby="password-addon">
-                  </div>
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Lembrar</label>
+                    <input type="password" class="form-control" placeholder="Ritinha123_12#!" id="password" aria-label="password" name="password" aria-describedby="password-addon">
                   </div>
                   <div class="text-center">
                     <button type="submit" onclick="enviar()" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
                   </div>
-
                 </div>
 
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
@@ -88,7 +83,6 @@
                     Ainda não tem conta?
                     <a href="register.php" class="text-info text-gradient font-weight-bold" id="login_change">Criar uma...</a>
                   </p>
-
                 </div>
               </div>
             </div>
@@ -132,7 +126,6 @@
           </a>
         </div>
       </div>
-
     </div>
     </div>
   </footer>

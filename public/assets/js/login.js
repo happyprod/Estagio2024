@@ -1,28 +1,31 @@
+function erro(mensagem) {
+  toastr.options.timeOut = 5000; // 10 segundos
+  toastr.options.toastClass = 'custom-toast'; // Aplicar classe de estilo personalizado
+  toastr.error(mensagem);
+}
+
 function enviar() {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
-  var checkbox = document.getElementById('rememberMe');
-  var remember = checkbox.checked ? 1 : 0;
 
   console.log('Email:', email);
   console.log('Password:', password);
-  console.log('Remember:', remember);
 
   $.ajax({
     type: "POST",
     url: "../src/Handlers/login.php",
     data: {
       email: email,
-      password: password,
-      remember: remember
+      password: password
     },
     success: function (result) {
       console.log('Requisição AJAX bem-sucedida');
       if (result == 1) {
         window.location.href = "home.php";
       } else {
-        window.location.href = "login.php";
+        erro('Dados incorretos');
       }
+
     },
     error: function (xhr, status, error) {
       console.error('Erro na requisição AJAX:', error);
