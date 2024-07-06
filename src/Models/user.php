@@ -684,10 +684,8 @@ class User
     {
         $stmt = $this->db->prepare("SELECT 
                                         DATE_FORMAT(data, '%Y-%m-%d') AS dia,
-                                        SUM(impressions) AS impressions,
                                         SUM(likes) AS likes,
-                                        SUM(comments) AS comments,
-                                        SUM(organic) AS organic
+                                        SUM(comments) AS comments
                                     FROM projects_stats_snapshot
                                     WHERE id_projeto = ?
                                         AND data >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)  -- Ajustado para exatamente 7 dias atrás
@@ -705,10 +703,8 @@ class User
         $stmt = $this->db->prepare("SELECT 
                                         DATE_FORMAT(data, '%Y-%u') AS semana,
                                         id_projeto,
-                                        SUM(impressions) AS impressions,
                                         SUM(likes) AS likes,
-                                        SUM(comments) AS comments,
-                                        SUM(organic) AS organic
+                                        SUM(comments) AS comments
                                     FROM 
                                         projects_stats_snapshot 
                                     WHERE 
@@ -726,7 +722,7 @@ class User
 
     function getEstatisticas1ano($p_id)
     {
-        $stmt = $this->db->prepare("SELECT DATE_FORMAT(data, '%Y-%m') AS mes_ano, SUM(impressions) AS impressions, SUM(likes) AS likes, SUM(comments) AS comments, SUM(organic) AS organic FROM projects_stats_snapshot WHERE id_projeto = ? AND data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
+        $stmt = $this->db->prepare("SELECT DATE_FORMAT(data, '%Y-%m') AS mes_ano, SUM(likes) AS likes, SUM(comments) AS comments FROM projects_stats_snapshot WHERE id_projeto = ? AND data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -737,10 +733,8 @@ class User
     {
         $stmt = $this->db->prepare("SELECT 
                     DATE_FORMAT(data, '%Y-%m') AS mes_ano,
-                    SUM(impressions) AS impressions,
                     SUM(likes) AS likes,
-                    SUM(comments) AS comments,
-                    SUM(organic) AS organic
+                    SUM(comments) AS comments
                 FROM projects_stats_snapshot
                 WHERE id_projeto = ?
                 GROUP BY mes_ano
@@ -753,7 +747,7 @@ class User
 
     function getEstatisticasProjeto($p_id)
     {
-        $stmt = $this->db->prepare("SELECT impressions, likes, comments, organic FROM projects_stats_snapshot WHERE id_projeto = ?");
+        $stmt = $this->db->prepare("SELECT likes, comments FROM projects_stats_snapshot WHERE id_projeto = ?");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 

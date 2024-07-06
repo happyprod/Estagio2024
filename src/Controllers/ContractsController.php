@@ -61,6 +61,21 @@ class ContractsController
         return $this->model->aceitarContract($idContract);
     }
 
+    //o guardarReview2 é para os enviados
+    public function guardarReview($rating, $comentario, $id)
+    {
+        $result = $this->model->checkReviewExist($id);
 
-    
+        if ($result) {
+            if (empty($rating) && empty($comentario)) 
+            {
+                $this->model->deleteReview($id);
+            } else {
+                $this->model->updateReview($rating, $comentario, $id);
+            }
+        } else {
+            $this->model->guardarReview($rating, $comentario, $id);
+        }
+    }
+
 }

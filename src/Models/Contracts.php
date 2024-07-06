@@ -120,4 +120,84 @@ class Contracts
         $stmt->execute();
     }
 
+
+
+    #region Avaliações Enviadas
+
+    public function checkReviewExist($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id_user = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("SELECT id FROM rating WHERE id_send = ? AND  id_receive = ?"); // Verifica se já existe uma avaliação
+        $stmt->execute([$id_user, $id]);  // Bind the id_name parameter
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return true;  // Retorna o resultado da consulta se a senha coincidir
+        } else {
+            return false;  // Retorna falso se não encontrar usuário ou senha incorreta
+        }
+    }
+
+    public function guardarReview($rating, $comentario, $id)
+    {
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id_user = $_SESSION['user_id'];
+        $dataAtual = date('Y-m-d'); // Obtém a data atual no formato 'ano-mês-dia'
+
+
+        // Atualizar o projeto
+        $stmt = $this->db->prepare("INSERT INTO rating (id_send, id_receive, stars, date, comentario) VALUES (?, ?, ?, ? ,?)");
+
+        $stmt->bindParam(1, $id_user);
+        $stmt->bindParam(2, $id);
+        $stmt->bindParam(3, $rating);
+        $stmt->bindParam(4, $dataAtual);
+        $stmt->bindParam(5, $comentario);
+        $stmt->execute();
+    }
+
+
+    public function deleteReview($id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id_user = $_SESSION['user_id'];
+
+        $stmt = $this->db->prepare("DELETE FROM rating WHERE id_send = ? AND id_receive = ?");
+        $stmt->execute([$id_user, $id]);
+    }
+
+    public function updateReview($rating, $comentario, $id)
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $id_user = $_SESSION['user_id'];
+        $dataAtual = date('Y-m-d'); // Obtém a data atual no formato 'ano-mês-dia'
+
+        // Prepare a query
+        $stmt = $this->db->prepare("UPDATE rating SET stars = ?, comentario = ?, date = ? WHERE id_send = ? AND id_receive = ?");
+
+        // Vincular os parâmetros com os tipos corretos
+        $stmt->bindParam(1, $rating, PDO::PARAM_INT);
+        $stmt->bindParam(2, $comentario, PDO::PARAM_STR);
+        $stmt->bindParam(3, $dataAtual, PDO::PARAM_STR);
+        $stmt->bindParam(4, $id_user, PDO::PARAM_INT);
+        $stmt->bindParam(5, $id, PDO::PARAM_INT);
+
+        // Execute a query
+        $stmt->execute();
+    }
 }

@@ -71,6 +71,14 @@ $controller = new ContractsController($model);
             </div>
         </div>
 
+        <div class="modal fade" id="avaliarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content" id="avaliarModalBody">
+                    <!-- dados responsivos -->
+                </div>
+            </div>
+        </div>
+
         <div class="row w-100  mt-4">
 
             <div class="col-12">

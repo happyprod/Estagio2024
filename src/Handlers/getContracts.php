@@ -111,7 +111,7 @@ if (isset($_GET['var1'])) {
                                     <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $picture . '" class="avatar avatar-sm me-3" alt="user1">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >' . $id_name . '</h6>
+                                    <h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >@' . $id_name . '</h6>
                                     <p style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs text-secondary mb-0">' . $name . '</p>
                                 </div>
                             </div>
@@ -146,9 +146,10 @@ if (isset($_GET['var1'])) {
                                     <p class="my-auto text-info opacity-8"> Pendente </p>
                                 </td>';
             } else if ($estado == 1) {
+                $name2 = "'" . $id_name . "'";
                 $html .= '
                                 <td class="align-middle text-center">
-                                        <button type="button" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" onclick="AvModalDataSend(' . $name2 . ', ' . $id . ')" data-bs-toggle="modal" data-bs-target="#avaliarModal" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
                                             Aceite / Avaliar
                                         </button>
                                 </td>';
@@ -163,9 +164,11 @@ if (isset($_GET['var1'])) {
             $estado = htmlspecialchars($row->state);
 
             if ($estado == 1) {
+                $name2 = "'" . $id_name . "'";
+
                 $html .= '
                                 <td class="align-middle text-center">
-                                        <button type="button" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" onclick="AvModalDataSend(' . $name2 . ', ' . $id . ')" data-bs-toggle="modal" data-bs-target="#avaliarModal" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
                                             Avaliar
                                         </button>
                                 </td>';
