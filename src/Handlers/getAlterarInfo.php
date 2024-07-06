@@ -83,36 +83,18 @@ foreach ($data as $row) {
     $p_data = htmlspecialchars($row->data);
     $p_descricao = htmlspecialchars($row->descricao);
     $p_booking = htmlspecialchars($row->Booking);
-    $p_evento = htmlspecialchars($row->Event);   
+    $p_evento = '';
     
 
     $html .= '  
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div class="form-group">
                 <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Nome do evento</label>
                 <input type="text" class="form-control" id="exampleFormControlInput1" value="' . $p_nome . '" placeholder="' . $p_nome . '" required>
             </div>
         </div>
-
-        <div class="col-6">
-            <div class="form-group">
-                <div class="row" style="height: 2em;">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Identificação do
-                                Evento</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" id="eventoInput" placeholder="' . $p_evento . '" value="' . $p_evento . '" aria-describedby="basic-addon1">
-                </div>
-            </div>
-        </div>
-        </div>
+    </div>
 
         <div class="form-group">
         <label class="title" style="font-size: 16px;" for="exampleFormControlTextarea1">Descrição</label>
@@ -137,7 +119,7 @@ foreach ($data as $row) {
                 <div class="row" style="height: 2.1em;">
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Empresa de Booking</label>
+                            <label class="title" style="font-size: 16px;" for="exampleFormControlInput1">Agente de Booking</label>
                         </div>
                     </div>
                 </div>

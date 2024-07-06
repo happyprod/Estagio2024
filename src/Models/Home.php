@@ -47,13 +47,13 @@ class Home
         // Definição do valor de $sug com base no identity do usuário logado
         switch ($sug_identity) {
             case 1:
-                $sug = 2; // um artista quer um promotor
+                $sug = 3; // um artista quer um agente de booking
                 break;
             case 2:
                 $sug = 1; // um promotor quer um artista
                 break;
             case 3:
-                $sug = 4; // agente de booking quer uma agencia de booking
+                $sug = 2; // agente de booking quer um promotor
                 break;
             case 4:
                 $sug = 5; // uma agencia de booking quer um evento

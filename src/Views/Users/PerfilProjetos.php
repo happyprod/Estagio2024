@@ -46,7 +46,7 @@
                     foreach ($result as $row) {
                         $p_id = $row["id"];
                         $p_nome = $row["nome"];
-                        $p_userId = $row["Event"];
+                        $p_userId = '';
                         $p_bookingUserId = $row["Booking"];
                         $p_descricao = $row["descricao"];
                         $p_local = $row["local"];

@@ -7,7 +7,16 @@
             echo 'style="background-image: url(\'http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%;"';
         } ?>>
         <div class="cover-overlay w-100" onclick="uploadCoverImage()">
-            <img id="nome_arquivo" src="http://localhost/Estagio2024/public/users/<?php echo $id . '/' . $fotodecapa; ?>" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />
+            <?php
+
+            if ($fotodecapa != '')
+            {
+                echo '<img id="nome_arquivo" src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . '" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />';
+            } else {
+                echo '<img id="nome_arquivo" src="../public/assets/img/curved-images/curved0.jpg" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />';
+            }
+            ?>
+
             <div class="cover-mask text-light d-flex justify-content-center flex-column text-center">
                 <h4 style="color: white;">Carregue para Alterar a Imagem</h4>
             </div>

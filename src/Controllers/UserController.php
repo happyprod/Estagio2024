@@ -53,7 +53,7 @@ class UserController
         echo "Nome do Evento: " . htmlspecialchars($nomeEvento) . "<br>";
         echo "Descrição: " . htmlspecialchars($descricao) . "<br>";
         echo "Data: " . htmlspecialchars($data) . "<br>";
-        echo "Empresa de Booking: " . htmlspecialchars($empresaBooking) . "<br>";
+        echo "Agente de Booking: " . htmlspecialchars($empresaBooking) . "<br>";
         echo "Localização: " . htmlspecialchars($localizacao) . "<br>";
         echo "Array de Categorias: " . json_encode($arrayC_idName);
 
@@ -562,12 +562,13 @@ class UserController
         }
 
 
-        if (!$this->helper->validateNumber($TXTnumero)) {
+        if ($TXTnumero != '' && !$this->helper->validateNumber($TXTnumero)) {
             // Se o e-mail for inválido
             $response = array('status' => 'error', 'message' => 'Número inválido');
             echo json_encode($response);
             return;
         }
+    
 
         session_start();
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Jul-2024 às 12:26
+-- Tempo de geração: 06-Jul-2024 às 05:42
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -31,7 +31,7 @@ CREATE TABLE `accounts` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(35) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `picture` varchar(255) NOT NULL,
   `picture_background` text NOT NULL,
   `registered` datetime NOT NULL,
@@ -63,12 +63,12 @@ INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_b
 (6, 'asdnkja', 'asdnkja@gmail.com', 'ajksndk@asjkdna', '450f755a089a2c83e790c7337d54c728.jpeg', '', '2024-03-11 17:34:26', 'form', 'true', 'aklsfd', 'dj', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'joaninha'),
 (10, 'happy', 'amldk@gmail.com', 'asd', 'img\\fotos\\servicos_img1.jpg', '', '2024-04-05 14:53:15', 'login', 'false', 'Sintra', 'Baterist', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happy'),
 (11, 'Ruben Costa', 'ruben.escola.2006@gmail.com', '', 'https://lh3.googleusercontent.com/a/ACg8ocI84I3098-o2aoK5zMBBGTswW-2MLBIFs8_HzoX_ZKOb2doOrXn=s96-c', '', '2024-04-06 13:55:40', 'google', 'false', 'Cacem', 'Gastronomic', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Francisco'),
-(19, 'asdasdas', 'beatsrubencosta@gmail.com', '123', '66827b30a4e4d.png', '66827b30a5117.png', '2024-05-04 17:45:18', 'google', 'false', 'Čačak, Sérvia', 'Rapper', 2, '19', 'Hi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n                      ', '123123123', 'martingarrix', 0, 'martingarrix', 0, 'goncalo.s_', 1, 'www.fernandinhadswaippie.pt', 0, 'Ruben'),
+(19, 'Martin garrix', 'martingarrix@gmail.com', '123', '668415159af58.jpeg', '668415159bc8a.gif', '2024-05-04 17:45:18', 'google', 'false', 'New Jersey, Estados Unidos', 'Rapper', 2, '19', 'Hi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n\nHi! I need more information asdniasdnasdnasd asjd askdj asjk dasjk dasjk djkas dkjas dkjasd akjd sdksja dasjkd ask Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias eius esse labore mollitia temporibus ducimus enim tempora nesciunt odit, libero voluptatem cupiditate repellat non dolor consequuntur maiores quam molestiae dolorum?\n                       ', '123123123', 'martingarrix', 0, 'martingarrix', 0, 'goncalo.s_', 1, 'www.fernandinhadswaippie.pt', 0, 'Ruben'),
 (20, 'ola', 'ola@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:39:21', 'form', '', '', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Rodrigo'),
 (21, 'soufixe', 'soufixe@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-07 02:40:24', 'form', '', '', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Ana202'),
 (22, 'Simao', 'sougiro@gmail.com', '123', 'default.jpg', '', '2024-05-07 11:09:38', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'ze04'),
 (23, 'simao', 'simao@gmail.com', '123', 'default.jpg', '', '2024-05-07 11:44:28', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'kshmr'),
-(24, 'Ruben Costa', 'rubencostagaming@gmail.com', '123', '668263bb23675.png', '668263b156f58.gif', '2024-05-08 17:54:09', 'google', 'false', '', '', 2, '24', '  ', '', '', 0, '', 0, '', 0, '', 0, 'ggBacon'),
+(24, 'a', 'asdasda@gmail.com', '123', '668263bb23675.png', '668263b156f58.gif', '2024-05-08 17:54:09', 'google', 'false', '', '', 2, '24', '', '913352194', '', 0, '', 0, '', 0, '', 0, 'ggBacon'),
 (25, 'goncalinho', 'goncalinho@gmail.com', '123', './img/foto/default.jpg', '', '2024-05-21 14:08:44', 'form', '', '', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Dimitri'),
 (26, 'ruben', 'costa@gmail.com', 'asd', '', '', '0000-00-00 00:00:00', '', '', 'asdf', '4', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Hardwell'),
 (27, 'ruben', 'happy@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'asdasd', '2', 0, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Steve'),
@@ -81,7 +81,25 @@ INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_b
 (34, 'ganggang', 'ksd@gmail.com', '123', '', '', '0000-00-00 00:00:00', '', '', 'SDF Building, GP Block, Sector V, Bidhannagar, Calcutá, Bengala Ocidental, Índia', '', 4, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Jorge'),
 (35, 'ggggggggg', 'asd@gmail.com', '1234567', '', '', '0000-00-00 00:00:00', '', '', 'Buceta, Santa Cruz de La Sierra, Bolívia', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'Carlos'),
 (36, '                                Lost Lands', 'olateste2@gmail.com', 'ola', '', '', '0000-00-00 00:00:00', '', '', 'Mamas Joint Road, MCC B Block, MCC, Davanagere, Karnataka, Índia', '', 5, '', '', '', '', 0, '', 0, '', 0, '', 0, '                                                                                                                           LostLandsOfficial'),
-(58, 'prod', 'happyzao@gmail.com', 'palavrapasse', '', '', '0000-00-00 00:00:00', '', '', 'Galveias, Portugal', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happyksd');
+(58, 'prod', 'happyzao@gmail.com', 'palavrapasse', '', '', '0000-00-00 00:00:00', '', '', 'Galveias, Portugal', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happyksd'),
+(59, 'asda', 'nasjkidna@gmail.com', 'asdasda.222', '', '', '0000-00-00 00:00:00', '', '', 'Åsdalsveien, Oslo, Noruega', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'gasdfjkansd'),
+(60, 'Gabriel', 'anao_velocista@gmail.com', 'panuco123.', '', '', '0000-00-00 00:00:00', '', '', 'RJ, Rio de Janeiro - RJ, Brasil', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'anao_velocista'),
+(61, 'asd', 'olaasdasd@gmail.com', '$2y$10$8SzOxQ/o.eg3ByCPMbkO4.nqlRCM', '', '', '0000-00-00 00:00:00', '', '', 'asda', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happyasdasdas'),
+(62, 'ruben', 'happyzin@gmail.com', '$2y$10$jro6CDmw6wfnTTVRLaRGluTEGGsr', '', '', '0000-00-00 00:00:00', '', '', 'Ašdod, Israel', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'happyprod19'),
+(63, 'asd', 'lasd@gmail.com', 'olaolaola123.', '', '', '0000-00-00 00:00:00', '', '', 'Providence, Rhode Island, Estados Unidos', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'asd'),
+(64, 'marty', 'marty@gmail.com', 'olaolaola123.', '', '', '0000-00-00 00:00:00', '', '', 'Taiwan, Taipé, Xinyi District, 101大樓2樓連通天橋', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'marty'),
+(65, 'asdaskj', 'martyas@gmail.com', '$2y$10$GCC0mz862mhmS76v5AxPeuK7/rZYATw3kL6.q49gqznas344/oWNO', '', '', '0000-00-00 00:00:00', '', '', '17 Mile Drive, Pebble Beach, Califórnia, Estados Unidos', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'marty2'),
+(66, 'seethesmall', 'seethe@gmail.com', '$2y$10$9jlfkbtHz5zWVWw3eCJQB.pwF5/NEhptiYmD2pfcFzhicyipoIHG2', '', '', '2024-07-06 00:00:00', '', '', 'Seattle, Washington, Estados Unidos', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'see'),
+(67, 'sandjank', 'aksjdnjka@gmail.com', '$2y$10$ZSvRP3./jIIG.5Mvaerv8OiqWdsaDBJcpANFVAc8ZdNy1kHP.l2Fy', '', '', '2024-07-06 00:00:00', '', '', 'asda', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'asdasadnjka'),
+(68, 'sandjank', 'aksjdasdasnjka@gmail.com', '$2y$10$93D8OgB.HG15Dg8S77vbjuBCgnLSxBVZHegcDXJEu0StmBdgPwKJS', '', '', '2024-07-06 00:00:00', '', '', 'asda', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'asdasasadnjka'),
+(69, 'ASDAS', 'asdnas@gmail.com', '$2y$10$QH7kOXXW5hZSBRZqhQQu/OGSdiRYYNYbv/vxbX1Uvmz8nPF6SYuvW', '', '', '2024-07-06 00:00:00', '', '', 'ASDA Retford Supermarket, Retford, Reino Unido', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'najskdnasjknjk'),
+(70, 'ASDAS', 'asdnasasd@gmail.com', '$2y$10$ij7s9Bt7B0fkQMGP//kfBeNaHzuiURhUKl8Z62J5tKESTVQ7lOnaS', '', '', '2024-07-06 00:00:00', '', '', 'ASDA Retford Supermarket, Retford, Reino Unido', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'najskdnasjknjks'),
+(71, 'ASDAS', 'das@gmail.com', '$2y$10$vh68HElGPnxbqXST9y1yqOprPRllOIZm0U/AVAkgdlt.QoV.QAuHe', '', '', '2024-07-06 00:00:00', '', '', 'ASDA Retford Supermarket, Retford, Reino Unido', '', 1, '', '', '', '', 0, '', 0, '', 0, '', 0, 'najskdnasjknjsks'),
+(72, 'dimitri', 'dimitri@gmail.com', '$2y$10$8FJQN35kRp7Tco6LgDWGqusadhtKLr2co4WWoieKSvAsHO2kVWXUW', '', '', '2024-07-06 00:00:00', '', '', 'Albânia', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'dimitri2'),
+(73, 'dimitri', 'dimitrii@gmail.com', '$2y$10$SDJNr/FqcEXPLtS/LaTwoeUY18n7VT/vV7wdSuemKIXs8LtP8uGwm', '', '', '2024-07-06 00:00:00', '', '', 'Albânia', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'dimitri3'),
+(74, 'dimitri', 'dsimitrii@gmail.com', '$2y$10$wNqsaBcMfMcYMLm6VgCjYOfNWJ5SkO9yY/8A1anf7re/B6b7Nh3t.', '', '', '2024-07-06 00:00:00', '', '', 'Albânia', '', 2, '', '', '', '', 0, '', 0, '', 0, '', 0, 'dimitri4'),
+(75, 'papa', 'papa@gmail.com', '$2y$10$sENvcSAAuqgpZTo3lCjT2ez5IWBYvSRWLD69YRer54CSO7MLkqcSS', '31cca1f66220cb9c02782407d7f30793.png', '', '2024-07-06 00:00:00', '', '', 'Assam, Índia', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'papa'),
+(76, 'when', 'far@gmail.com', '$2y$10$Y/SQhHfehDAfD4.lITlnQeFWnYNUttOTMA1FIPsxwclGmDGEcdzCi', 'a7760e8c8753df1d63533d71784c9728.png', '', '2024-07-06 00:00:00', '', '', 'dont have to be afraid', '', 3, '', '', '', '', 0, '', 0, '', 0, '', 0, 'far_away');
 
 -- --------------------------------------------------------
 
@@ -199,7 +217,9 @@ INSERT INTO `follows` (`id`, `id_user`, `id_followed`) VALUES
 (47, 26, 24),
 (48, 19, 11),
 (53, 19, 5),
-(87, 19, 26);
+(87, 19, 26),
+(93, 24, 19),
+(94, 24, 23);
 
 -- --------------------------------------------------------
 
@@ -232,16 +252,13 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `descricao`, `local`, `data`, `Event`, `Booking`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `impressions`, `likes`, `comments`, `organic`, `deleted`) VALUES
-(1, 19, 'Lost Landssss', 'ola.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Associação Vida Nova Lar Idosos, Rua das Agras, Pardilhó, Portugal', '2024-06-16', 'asd', 'aaaaaaaaaa', 3, 6, 9, 0, 0, 0, 0, 0),
-(2, 19, 'Tommrowland', 'ola2.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', '', '2000-07-07', '', '', 1, 6, 9, 0, 0, 0, 0, 0),
-(3, 19, 'olaaa', 'ola.jpg', 'Isto é apenas um Rascunho', 'Lisboa, Portugal', '0000-00-00', '', '', 1, 6, 9, 0, 0, 0, 0, 0),
-(4, 19, 'Frozen', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
-(10, 24, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
-(11, 19, 'elsa202', '', 'Isto é apenas uma elsa', 'Good Games Town Hall, Lower Ground, York Street, Cidade de Sydney Nova Gales do Sul, Austrália', '0000-00-00', 'elsinha', 'gg', 2, 5, 8, 0, 0, 0, 0, 0),
-(12, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 1),
-(13, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
-(14, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
-(15, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '0000-00-00', '', '', 3, 6, 9, 0, 0, 0, 0, 0);
+(1, 19, 'Lost Landssss', 'ola.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Associação Vida Nova Lar Idosos, Rua das Agras, Pardilhó, Portugal', '2024-06-16', 'asd', 'aaaaaaaaaa', 1, 5, 8, 0, 0, 0, 0, 0),
+(2, 19, 'Tommrowland', 'ola2.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Sydney Zoo, Great Western Highway, Eastern Creek Nova Gales do Sul, Austrália', '2000-07-07', '', '', 2, 6, 8, 0, 0, 0, 0, 0),
+(3, 19, 'olaaa', 'ola.jpg', 'Isto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um Rascunho', 'Lisboa, Portugal', '2000-02-19', '', '', 1, 6, 9, 0, 0, 0, 0, 0),
+(42, 19, 'deixou de ser', '', 'é como é parceira', 'São Bento do Sul, SC, Brasil', '1999-09-09', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(43, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-03', '', '', 3, 6, 9, 0, 0, 0, 0, 0),
+(44, 24, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2000-07-03', '', 'ola', 3, 6, 9, 0, 0, 0, 0, 0),
+(45, 76, 'Rascunho', '', 'Isto é apenas um Rascunho', 'Pardilhó, Portugal', '2024-07-06', '', '', 3, 6, 9, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -260,13 +277,14 @@ CREATE TABLE `projects_collabs` (
 --
 
 INSERT INTO `projects_collabs` (`id`, `id_project`, `id_user`) VALUES
-(2, 2, 21),
 (22, 1, 20),
 (23, 1, 10),
 (24, 1, 19),
 (25, 1, 27),
 (26, 1, 19),
-(27, 11, 20);
+(27, 11, 20),
+(32, 2, 21),
+(33, 42, 11);
 
 -- --------------------------------------------------------
 
@@ -314,7 +332,18 @@ INSERT INTO `projects_comments` (`id`, `id_project`, `id_user_send`, `comment`, 
 (29, 1, 19, 'concordo', 28),
 (30, 1, 19, 'yahyahyah', 1),
 (31, 1, 19, 'ola', 6),
-(32, 2, 19, 'muito bom', NULL);
+(32, 2, 19, 'muito bom', NULL),
+(33, 3, 19, 'olaaaa', NULL),
+(34, 42, 19, 'tal e qual', NULL),
+(35, 42, 19, 'ok', NULL),
+(36, 3, 19, 'ok', NULL),
+(37, 3, 19, 'gg', NULL),
+(38, 3, 19, 'falado', NULL),
+(39, 3, 19, 'yy', NULL),
+(40, 3, 19, 'rei', NULL),
+(41, 3, 19, 'boss', NULL),
+(42, 3, 19, 'sotting niggas for fun', NULL),
+(43, 3, 19, 'ui', NULL);
 
 -- --------------------------------------------------------
 
@@ -347,7 +376,12 @@ INSERT INTO `projects_comments_likes` (`id`, `comment_id`, `id_user_send`) VALUE
 (22, 6, 19),
 (23, 31, 19),
 (24, 1, 19),
-(25, 32, 19);
+(25, 32, 19),
+(26, 2, 24),
+(27, 33, 19),
+(28, 25, 24),
+(29, 34, 19),
+(30, 43, 19);
 
 -- --------------------------------------------------------
 
@@ -371,12 +405,18 @@ INSERT INTO `projects_images` (`id`, `id_project`, `image`, `ordem`) VALUES
 (282, 3, '8AikbwswNo2I0AAAAASUVORK5CYII=', 2),
 (300, 4, '8AeRnPGJIm4V8AAAAASUVORK5CYII=', 1),
 (301, 4, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 2),
-(312, 1, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 1),
-(313, 1, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 2),
 (335, 11, '8AikbwswNo2I0AAAAASUVORK5CYII=', 1),
 (336, 11, 'D+XnYiu7oGQ7gAAAABJRU5ErkJggg==', 2),
-(337, 2, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 1),
-(338, 2, 'wC2VDt1yN1pZgAAAABJRU5ErkJggg==', 2);
+(339, 1, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 1),
+(340, 10, '9k=', 1),
+(341, 2, 'wC2VDt1yN1pZgAAAABJRU5ErkJggg==', 1),
+(342, 2, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 2),
+(362, 42, 'd8d93dc1a3c914d2.png', 1),
+(363, 42, 'BZ0Y6WtKU17WkbG9ppopa1rXXta2EbW9lyVrWzte1tcdvZgAAAOw==', 2),
+(364, 42, 'LQxYkAAAAASUVORK5CYII=', 3),
+(365, 43, '099912f0c57d4663.png', 1),
+(366, 44, 'd068fd6b1f48474a.png', 1),
+(367, 45, 'a702c8b78033be98.png', 1);
 
 -- --------------------------------------------------------
 
@@ -395,8 +435,14 @@ CREATE TABLE `projects_likes` (
 --
 
 INSERT INTO `projects_likes` (`id`, `id_project`, `id_user_send`) VALUES
-(20, 1, 19),
-(21, 2, 19);
+(21, 2, 19),
+(23, 1, 24),
+(24, 2, 24),
+(25, 3, 24),
+(26, 1, 19),
+(27, 42, 19),
+(29, 3, 19),
+(30, 1, 76);
 
 -- --------------------------------------------------------
 
@@ -1087,7 +1133,7 @@ ALTER TABLE `verify_accounts`
 -- AUTO_INCREMENT de tabela `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de tabela `agencybooking_members`
@@ -1117,43 +1163,43 @@ ALTER TABLE `contracts`
 -- AUTO_INCREMENT de tabela `follows`
 --
 ALTER TABLE `follows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de tabela `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de tabela `projects_collabs`
 --
 ALTER TABLE `projects_collabs`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments`
 --
 ALTER TABLE `projects_comments`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments_likes`
 --
 ALTER TABLE `projects_comments_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `projects_images`
 --
 ALTER TABLE `projects_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=339;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
 
 --
 -- AUTO_INCREMENT de tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `projects_privacy`

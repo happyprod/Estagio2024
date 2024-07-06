@@ -32,7 +32,7 @@ if ($result) {
     $p_id = $result["id"];
     $p_founder = $result["id_founder"];
     $p_nome = $result["nome"];
-    $p_userId = $result["Event"];
+    $p_userId = '';
     $p_bookingUserId = $result["Booking"];
     $p_imagem = $result["imagem"];
     $p_descricao = $result["descricao"];
@@ -207,9 +207,9 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 </div>';
 
     if ($p_bookingUserName) {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Empresa de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
     } else {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Empresa de Booking:</strong> Não informado</p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> Não informado</p>';
     }
 
 
@@ -614,9 +614,9 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 </div>';
 
     if ($p_bookingUserName) {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Empresa de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
     } else {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Empresa de Booking:</strong> Não informado</p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> Não informado</p>';
     }
 
 
