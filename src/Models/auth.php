@@ -64,18 +64,27 @@ class Auth
         $password = $dadosEvento['password'] ?? '';
         $localizacao = $dadosEvento['localizacao'] ?? '';
         $selectedType = $dadosEvento['selectedType'] ?? '';
+        $dataAtual = date('Y-m-d'); // Obtém a data atual no formato 'ano-mês-dia'
+        $picture = $dadosEvento['picture'] ?? '';
 
         // Encriptar a senha
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Atualizar o projeto
-        $stmt = $this->db->prepare("INSERT INTO accounts (id_name, email, name, password, location, identity) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO accounts (id_name, email, name, password, location, identity, registered, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bindParam(1, $id_name);
         $stmt->bindParam(2, $email);
         $stmt->bindParam(3, $nome);
         $stmt->bindParam(4, $hashed_password);
         $stmt->bindParam(5, $localizacao);
         $stmt->bindParam(6, $selectedType);
+        $stmt->bindParam(7, $dataAtual);
+        $stmt->bindParam(8, $picture);
         $stmt->execute();
+
+        // Obter o ID inserido
+        $lastInsertId = $this->db->lastInsertId();
+
+        return $lastInsertId; // Retorna o ID inserido
     }
 }

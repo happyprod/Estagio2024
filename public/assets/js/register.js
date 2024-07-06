@@ -140,6 +140,12 @@ function submitForm()
             erro('Email já existe!');
         } else if (result == 3) {
             erro('Identificação já em uso!');
+        } else if (result == 4) {
+            erro("Diretório criado com sucesso em $diretorio");
+        } else if (result == 5) {
+            erro("Erro ao criar diretório");
+        } else if (result == 6) {
+            erro('ja existe');
         }
       },
       error: function (xhr, status, error) {

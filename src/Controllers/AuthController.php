@@ -78,17 +78,26 @@ class AuthController
 
         $result = $this->model->VerifyAccountExistByEmail($email);
 
-        if ($result)
-        {
+        if ($result) {
             return 2;
         }
 
         $result = $this->model->VerifyAccountExistByIdentity($identificacao);
 
-        if ($result)
-        {
+        if ($result) {
             return 3;
         }
+
+        
+        // Define o comprimento da string desejada em bytes
+        $comprimento = 16; // 16 bytes = 32 caracteres hexadecimais
+
+        // Gera bytes aleatórios
+        $bytes_aleatorios = random_bytes($comprimento);
+
+        // Converte os bytes em uma string hexadecimal
+        $string_random = bin2hex($bytes_aleatorios) . '.png';
+
 
         // Inserir no banco de dados
         $dadosEvento = array(
@@ -97,15 +106,38 @@ class AuthController
             'nome' => $nome,
             'password' => $password,
             'localizacao' => $localizacao,
-            'selectedType' => $selectedType
+            'selectedType' => $selectedType,
+            'picture' => $string_random
         );
 
-        $this->model->ResgisterAccount($dadosEvento);
+        $namePasta = $this->model->ResgisterAccount($dadosEvento);
 
+        $diretorio = '../../public/users/' . $namePasta;
 
-            return 1;
-
+        if (!file_exists($diretorio)) {
+            // Cria o diretório
+            if (!mkdir($diretorio, 0777, true)) {
+                return 5;
+            }
+        } else {
+            return 6;
         }
+
+        // Caminho do arquivo original
+        $arquivo_origem = '../../public/img/defaultPerfilImage.png';
+
+        // Caminho da pasta de destino
+        $pasta_destino = $diretorio . '/';
+
+        // Nome do arquivo de destino (opcional, se quiser mudar o nome)
+        $nome_arquivo_destino = $string_random;
+
+        // Copia o arquivo para o destino
+        copy($arquivo_origem, $pasta_destino . $nome_arquivo_destino);
+        
+
+        return 1;
+    }
 
 
     public function logout()
