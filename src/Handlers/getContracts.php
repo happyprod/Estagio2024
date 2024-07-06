@@ -40,16 +40,17 @@ if (isset($_GET['var1'])) {
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase w-25 text-secondary text-xxs font-weight-bolder opacity-7">Utilizador</th>
-                                        <th class="text-uppercase w-15 text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Função</th>
-                                        <th class="text-center w-15 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assunto</th>
+                                        <th class="text-uppercase w-15 text-secondary text-xxs font-weight-bolder opacity-7">Utilizador</th>
+                                        <th class="text-uppercase w-10 text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Função</th>
+                                        <th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assunto</th>
                                         <th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
-                                        <th class="text-center w-15 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF</th>';
-                                        if ($opcao != 2)
-                                        {
-                                        $html .= '<th class="text-center w-20 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>';
-                                    }
-                                    $html .= '
+                                        <th class="text-center w-5 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF</th>';
+    if ($opcao != 1) {
+        $html .= '<th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>';
+    }
+
+
+    $html .= '
                                     </tr>
                                 </thead>
                             <tbody>';
@@ -61,23 +62,29 @@ if (isset($_GET['var1'])) {
         $subject = htmlspecialchars($row->subject);
         $date = htmlspecialchars($row->date);
         $file = htmlspecialchars($row->file);
-        $id = htmlspecialchars($row->id_sender);
+
+        if ($opcao == 1)
+        {
+            $id = htmlspecialchars($row->id_sender);
+        } else {
+            $id = htmlspecialchars($row->id_receive);
+        }
         $id_contract = htmlspecialchars($row->id);
 
         // Ensure the date is a valid string before formatting
-if (is_string($date)) {
-    // Use strtotime to convert the date string to a timestamp (optional)
-    // This can help handle various date formats, but might not be necessary
-    // if your date is already in a consistent format.
-    $timestamp = strtotime($date);
-  
-    // Format the date in the desired dd/mm/yyyy format
-    $date = date("d/m/Y", $timestamp);  // Use forward slashes for consistency
-  
-  } else {
-    // Handle the case where $date is not a string (e.g., null)
-    echo 'Invalid date format';  // Or provide a more informative message
-  }
+        if (is_string($date)) {
+            // Use strtotime to convert the date string to a timestamp (optional)
+            // This can help handle various date formats, but might not be necessary
+            // if your date is already in a consistent format.
+            $timestamp = strtotime($date);
+
+            // Format the date in the desired dd/mm/yyyy format
+            $date = date("d/m/Y", $timestamp);  // Use forward slashes for consistency
+
+        } else {
+            // Handle the case where $date is not a string (e.g., null)
+            echo 'Invalid date format';  // Or provide a more informative message
+        }
 
         $onclickMostrarAssunto = "'" . $subject . "'";
 
@@ -104,14 +111,13 @@ if (is_string($date)) {
                                     <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $picture . '" class="avatar avatar-sm me-3" alt="user1">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6 style="max-width: 25ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >' . $id_name . '</h6>
-                                    <p style="max-width: 25ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs text-secondary mb-0">' . $name . '</p>
+                                    <h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >' . $id_name . '</h6>
+                                    <p style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs text-secondary mb-0">' . $name . '</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs font-weight-bold mb-0">' . $identity . '</p>
-                            <p style="max-width: 15ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs text-secondary mb-0">Agencia/Evento/IndependenteAgencia/Evento/IndependenteAgencia/Evento/Independente</p>
+                            <p style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs font-weight-bold mb-0">' . $identity . '</p>
                         </td>
 
                         <td class="align-middle text-center">
@@ -125,35 +131,47 @@ if (is_string($date)) {
                                 <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i> PDF
                             </button>
                         </td>';
-                        if ($opcao == 1){
-                        $html .= '
+        if ($opcao == 1) {
+            $html .= '
                             <td class="align-middle text-center">
                                 <button type="button" onclick="estadoContract(' . $id_contract . ', 2)" class="btn text-xxs my-auto me-2 p-2 ps-3 pe-3 bg-gradient-danger opacity-8">Recusar</button>
                                 <button type="button" onclick="estadoContract(' . $id_contract . ', 1)" class="btn text-xxs my-auto p-2 ps-3 pe-3 bg-gradient-success opacity-8">Aceitar</button>
                             </td>';
-                        } else if ($opcao == 3)
-                        {
-                            $estado = htmlspecialchars($row->state);
+        } else if ($opcao == 3) {
+            $estado = htmlspecialchars($row->state);
 
-                            if ($estado == 0)
-                            {
-                                $html .= '
+            if ($estado == 0) {
+                $html .= '
                                 <td class="align-middle text-center">
                                     <p class="my-auto text-info opacity-8"> Pendente </p>
                                 </td>';
-                            } else if ($estado == 1) {
-                                $html .= '
+            } else if ($estado == 1) {
+                $html .= '
                                 <td class="align-middle text-center">
-                                    <p class="my-auto text-success opacity-8"> Aceite </p>
+                                        <button type="button" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Aceite / Avaliar
+                                        </button>
                                 </td>';
-                            } else {
-                                $html .= '
+            } else {
+                $html .= '
                                 <td class="align-middle text-center">
                                     <p class="my-auto text-danger opacity-8"> Recusado </p>
                                 </td>';
-                            }
-                        }
-                    $html .= '
+            }
+
+        } else if ($opcao == 2) {
+            $estado = htmlspecialchars($row->state);
+
+            if ($estado == 1) {
+                $html .= '
+                                <td class="align-middle text-center">
+                                        <button type="button" class="btn bg-gradient-success opacity-8 mt-3" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Avaliar
+                                        </button>
+                                </td>';
+            }
+        }
+        $html .= '
                     </tr>
         ';
     }
