@@ -47,11 +47,6 @@ class AuthController
         require __DIR__ . '/../Views/Accounts/register.php';
     }
 
-    // Exemplo da função register no controlador UserController
-    public function register($email, $password, $identity, $location, $name, $selectedType)
-    {
-        $this->model->register($email, $password, $identity, $location, $name, $selectedType);
-    }
 
     public function LoginAccount($email, $password)
     {
@@ -78,7 +73,39 @@ class AuthController
         }
     }
 
+    public function ResgisterAccount($identificacao, $email, $nome, $password, $localizacao, $selectedType)
+    {
 
+        $result = $this->model->VerifyAccountExistByEmail($email);
+
+        if ($result)
+        {
+            return 2;
+        }
+
+        $result = $this->model->VerifyAccountExistByIdentity($identificacao);
+
+        if ($result)
+        {
+            return 3;
+        }
+
+        // Inserir no banco de dados
+        $dadosEvento = array(
+            'identificacao' => $identificacao,
+            'email' => $email,
+            'nome' => $nome,
+            'password' => $password,
+            'localizacao' => $localizacao,
+            'selectedType' => $selectedType
+        );
+
+        $this->model->ResgisterAccount($dadosEvento);
+
+
+            return 1;
+
+        }
 
 
     public function logout()

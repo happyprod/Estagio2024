@@ -72,24 +72,23 @@
                       </div>
                     </div>
                     <div class="row">
+
                       <div class="col-6">
                         <label for="name">Nome</label>
                         <div class="mb-3">
                           <input type="text" class="form-control" placeholder="Rúben" id="name" name="name" aria-describedby="name-addon">
                         </div>
                       </div>
+
                       <div class="col-6">
-  <label for="password" class="form-label">Palavra-passe</label>
-  <div class="input-group mb-3">
-    <input type="password" class="form-control" id="password" name="password" placeholder="Rtitinnhadsa#!23." aria-label="Password" aria-describedby="password-addon" required>
-    <button class="btn btn-outline-secondary" type="button" id="olho">
-      <img src="https://cdn0.iconfinder.com/data/icons/ui-icons-pack/100/ui-icon-pack-14-512.png" alt="Mostrar Senha" class="olho" style="width: 30px;">
-    </button>
-  </div>
-</div>
+                        <label for="password" class="form-label">Palavra-passe</label>
+                          <div class="input-group mb-3">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Rtitinnhadsa#!23." aria-label="Password" aria-describedby="password-addon" required>
+                            <button class="btn btn-outline-primary mb-0 olho" id="olho" type="button" id="button-addon2">ver</button>
+                          </div>
+                      </div>
 
                     </div>
-
                     <label for="localizacao">Localização</label>
                     <div class="mb-3">
                       <input type="text" class="form-control" placeholder="Portugal" id="autocomplete" name="localizacao" aria-describedby="localizacao-addon">
@@ -110,7 +109,7 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                              <h4 class="modal-title">Que tipo és?</h4>
+                              <h4 class="modal-title">Qual a tua função?</h4>
                               <button type="button" id="fecharModal" class="btn-close text-dark" style="font-size: 2em; margin-top: -0.8em;" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -143,24 +142,6 @@
                                       <img src="./img/booking agent.png" alt="Agente de Booking">
                                       <h5>Agente de Booking</h5>
                                       <p>Negocia contratos e datas de shows para artistas.</p>
-                                    </div>
-                                  </button>
-                                </div>
-                                <div class="col-md-6">
-                                  <button type="button" data-type="4" class="btn opcao btn-outline-secondary">
-                                    <div class="btn-content">
-                                      <img src="./img/Booking Agency.png" alt="Agencia de Booking">
-                                      <h5>Agencia de Booking</h5>
-                                      <p>Representa artistas na negociação de oportunidades de trabalho.</p>
-                                    </div>
-                                  </button>
-                                </div>
-                                <div class="col-md-6">
-                                  <button type="button" data-type="5" class="btn opcao w-100 btn-outline-secondary">
-                                    <div class="btn-content">
-                                      <img src="./img/festival.png" alt="Festival">
-                                      <h5>Evento</h5>
-                                      <p>Evento com apresentações artísticas e musicais.</p>
                                     </div>
                                   </button>
                                 </div>

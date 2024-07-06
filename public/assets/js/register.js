@@ -1,6 +1,11 @@
 // Seleciona todos os botões de opção
 var opcoes = document.querySelectorAll('.opcao');
 let selectedType = '';
+let identificacao;
+let email;
+let nome;
+let password;
+let localizacao;
 
 $(document).ready(function () {
 
@@ -76,11 +81,11 @@ function validarSenha(password) {
 
 function verificaModal() {
 
-    let identificacao = document.getElementById('identity').value.trim();
-    let email = document.getElementById('email').value.trim();
-    let nome = document.getElementById('name').value.trim();
-    let password = document.getElementById('password').value.trim();
-    let localizacao = document.getElementById('autocomplete').value.trim();
+    identificacao = document.getElementById('identity').value.trim();
+    email = document.getElementById('email').value.trim();
+    nome = document.getElementById('name').value.trim();
+    password = document.getElementById('password').value.trim();
+    localizacao = document.getElementById('autocomplete').value.trim();
 
     if (!identificacao || !email || !nome || !password || !localizacao) {
         erro('Por favor, preencha todos os campos.');
@@ -100,21 +105,58 @@ function verificaModal() {
     if (!validarSenha(password)) {
         erro("A senha deve ter pelo menos 8 caracteres, incluindo pelo menos um número e um caractere especial.");
         return;
-    } 
+    }
 
     $('#exampleModal').modal('show');
 }
 
+function submitForm()
+{
+    
+  
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('nome:', nome);
+    console.log('identificacao:', identificacao);
+    console.log('localizacao:', localizacao);
+    console.log('selectedType:', selectedType);
+  
+    $.ajax({
+      type: "POST",
+      url: "../src/Handlers/register.php",
+      data: {
+        identificacao: identificacao,
+        email: email,
+        nome: nome,
+        password: password,
+        localizacao: localizacao,
+        selectedType: selectedType
+      },
+      success: function (result) {
+        if (result == 1)
+            {
+          window.location.href = "login.php";
+        } else if (result == 2){
+            erro('Email já existe!');
+        } else if (result == 3) {
+            erro('Identificação já em uso!');
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error('Erro na requisição AJAX:', error);
+      }
+    });
+}
 
-document.getElementById('olho').addEventListener('mousedown', function() {
+document.getElementById('olho').addEventListener('mousedown', function () {
     document.getElementById('password').type = 'text';
-  });
-  
-  document.getElementById('olho').addEventListener('mouseup', function() {
+});
+
+document.getElementById('olho').addEventListener('mouseup', function () {
     document.getElementById('password').type = 'password';
-  });
-  
-  // Para que o password não fique exposto apos mover a imagem.
-  document.getElementById('olho').addEventListener('mousemove', function() {
+});
+
+// Para que o password não fique exposto apos mover a imagem.
+document.getElementById('olho').addEventListener('mousemove', function () {
     document.getElementById('password').type = 'password';
-  });
+});

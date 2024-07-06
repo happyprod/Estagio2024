@@ -21,7 +21,6 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../public/assets/css/nucleo-svg.css" rel="stylesheet" />
 
-  <script src="./assets/js/login.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
@@ -67,12 +66,15 @@
 
                   <label>Identificação @</label>
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="@happyprod19" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
+                    <input type="text" class="form-control" placeholder="happyprod19" aria-label="Email" id="email" name="email" aria-describedby="email-addon">
                   </div>
-                  <label>Palavra-passe</label>
-                  <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Ritinha123_12#!" id="password" aria-label="password" name="password" aria-describedby="password-addon">
+
+                  <label for="password" class="form-label">Palavra-passe</label>
+                  <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Rtitinnhadsa#!23." aria-label="Password" aria-describedby="password-addon" required>
+                    <button class="btn btn-outline-primary mb-0 olho" id="olho" type="button" id="button-addon2">ver</button>
                   </div>
+
                   <div class="text-center">
                     <button type="submit" onclick="enviar()" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
                   </div>
@@ -146,6 +148,8 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  <script src="./assets/js/login.js"></script>
+
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
