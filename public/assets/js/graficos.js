@@ -1,7 +1,4 @@
 // Converte a string para um array
-var organic30 = JSON.parse(organic30);
-var unganic30 = JSON.parse(unganic30);
-var impressions30 = JSON.parse(impressions30);
 var likes30 = JSON.parse(likes30);
 var comments30 = JSON.parse(comments30);
         
@@ -20,16 +17,10 @@ for (var i = 1; i <= length; i++) {
 console.log(semanasArray);
 
 
-var organic7 = JSON.parse(organic7);
-var unganic7 = JSON.parse(unganic7);
-var impressions7 = JSON.parse(impressions7);
 var likes7 = JSON.parse(likes7);
 var comments7 = JSON.parse(comments7);
 
 
-var organic1ano = JSON.parse(organic1ano);
-var unganic1ano = JSON.parse(unganic1ano);
-var impressions1ano = JSON.parse(impressions1ano);
 var likes1ano = JSON.parse(likes1ano);
 var comments1ano = JSON.parse(comments1ano);
 
@@ -69,20 +60,12 @@ for (var i = 0; i <= 12; i++) {
 console.log("Meses dos últimos 12 meses:");
 console.log(mesesExibidos);
 
-// Garante que a tua variável 'organic30' agora é um array
-console.log(organic30); // Deverá mostrar [127364, 10] no console
-console.log(unganic30);
-
-
-var organictudo = JSON.parse(organictudo);
-var unganictudo = JSON.parse(unganictudo);
-var impressionstudo = JSON.parse(impressionstudo);
 var likestudo = JSON.parse(likestudo);
 var commentstudo = JSON.parse(commentstudo);
 
 
 // Obter o comprimento do array
-var totalMeses = organictudo.length;
+var totalMeses = likestudo.length;
 
 // Obter a data atual
 var dataAtual = new Date();
@@ -121,160 +104,28 @@ console.log("Meses desde a data atual até o comprimento do array:");
 console.log(mesesCalculados);
 
 
+var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-
-
-var ctx1 = document.getElementById("chart-line").getContext("2d");
-var ctx2 = document.getElementById("chart-bar").getContext("2d");
-
-
-var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
 gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
 gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
 
-var gradientStroke2 = ctx1.createLinearGradient(0, 230, 0, 50);
+var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
 gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
 gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
-var gradientStroke3 = ctx1.createLinearGradient(0, 230, 0, 50);
+var gradientStroke3 = ctx2.createLinearGradient(0, 230, 0, 50);
 gradientStroke3.addColorStop(1, 'rgba(75,192,192,0.2)');
 gradientStroke3.addColorStop(0.2, 'rgba(75,192,192,0.0)');
 gradientStroke3.addColorStop(0, 'rgba(75,192,192,0)');
-
-var data = {
-  week: {
-    labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
-    datasets: [{
-      label: "Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#cb0c9f",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: organic7,
-      maxBarThickness: 6
-    },
-    {
-      label: "Não Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#4bc0c0",
-      borderWidth: 3,
-      backgroundColor: gradientStroke3,
-      fill: true,
-      data: unganic7,
-      maxBarThickness: 6
-    },
-    ]
-  },
-  month: {
-    labels: semanasArray,
-    datasets: [{
-      label: "Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#cb0c9f",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: organic30,
-      maxBarThickness: 6
-    },
-    {
-      label: "Não Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#4bc0c0",
-      borderWidth: 3,
-      backgroundColor: gradientStroke3,
-      fill: true,
-      data: unganic30,
-      maxBarThickness: 6
-    },
-    ]
-  },
-  year: {
-    labels: mesesExibidos,
-    datasets: [{
-      label: "Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#cb0c9f",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: organic1ano,
-      maxBarThickness: 6
-    },
-    {
-      label: "Não Orgânico",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#4bc0c0",
-      borderWidth: 3,
-      backgroundColor: gradientStroke3,
-      fill: true,
-      data: unganic1ano,
-      maxBarThickness: 6
-    },
-    ]
-  }
-};
-
-var allData = {
-  labels: mesesCalculados,
-  datasets: [{
-    label: "Orgânico",
-    tension: 0.4,
-    borderWidth: 0,
-    pointRadius: 0,
-    borderColor: "#cb0c9f",
-    borderWidth: 3,
-    backgroundColor: gradientStroke1,
-    fill: true,
-    data: organictudo,
-    maxBarThickness: 6
-  },
-  {
-    label: "Não Orgânico",
-    tension: 0.4,
-    borderWidth: 0,
-    pointRadius: 0,
-    borderColor: "#4bc0c0",
-    borderWidth: 3,
-    backgroundColor: gradientStroke3,
-    fill: true,
-    data: unganictudo,
-    maxBarThickness: 6
-  },
-  ]
-};
 
 
 var data2 = {
   week: {
     labels: ["Dia 1", "Dia 2", "Dia 3", "Dia 4", "Dia 5", "Dia 6", "Dia 7"],
-    datasets: [{
-      label: "Impressões",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#123e59",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: impressions7,
-      maxBarThickness: 6
-    },
+    datasets: [
     {
       label: "Gostos",
       tension: 0.4,
@@ -303,18 +154,7 @@ var data2 = {
   },
   month: {
     labels: semanasArray,
-    datasets: [{
-      label: "Impressões",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#123e59",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: impressions30,
-      maxBarThickness: 6
-    },
+    datasets: [
     {
       label: "Gostos",
       tension: 0.4,
@@ -343,18 +183,7 @@ var data2 = {
   },
   year: {
     labels: mesesExibidos,
-    datasets: [{
-      label: "Impressões",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#123e59",
-      borderWidth: 3,
-      backgroundColor: gradientStroke1,
-      fill: true,
-      data: impressions1ano,
-      maxBarThickness: 6
-    },
+    datasets: [
     {
       label: "Gostos",
       tension: 0.4,
@@ -385,18 +214,7 @@ var data2 = {
 
 var allData2 = {
   labels: mesesCalculados,
-  datasets: [{
-    label: "Impressões",
-    tension: 0.4,
-    borderWidth: 0,
-    pointRadius: 0,
-    borderColor: "#123e59",
-    borderWidth: 3,
-    backgroundColor: gradientStroke1,
-    fill: true,
-    data: impressionstudo,
-    maxBarThickness: 6
-  },
+  datasets: [
   {
     label: "Gostos",
     tension: 0.4,
@@ -424,63 +242,9 @@ var allData2 = {
   ]
 };
 
-var chartLine = new Chart(ctx1, {
-  type: "line",
-  data: data.year, // Default to yearly data
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'bottom',
-        align: 'end'
-      }
-    },
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-        },
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 600,
-          beginAtZero: true,
-          padding: 15,
-          font: {
-            size: 14,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-          color: "#000"
-        },
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          drawOnChartArea: false,
-          drawTicks: false
-        },
-        ticks: {
-          display: true,
-          color: "#000"
-        },
-      },
-    },
-  },
-});
 
-var chartBar = new Chart(ctx2, {
-  type: "bar",
+var chartLine = new Chart(ctx2, {
+  type: "line",
   data: data2.year, // Default to yearly data
   options: {
     responsive: true,
@@ -542,52 +306,27 @@ function addListenerIfExists(id, event, callback) {
   }
 }
 
-// Adiciona listeners aos botões do primeiro gráfico de linha
-addListenerIfExists('week-btn-line', 'click', function () {
-  chartLine.data = data.week;
-  chartLine.options.scales.y.ticks.suggestedMax = 600;
-  chartLine.update();
-});
-
-addListenerIfExists('month-btn-line', 'click', function () {
-  chartLine.data = data.month;
-  chartLine.options.scales.y.ticks.suggestedMax = 600;
-  chartLine.update();
-});
-
-addListenerIfExists('year-btn-line', 'click', function () {
-  chartLine.data = data.year;
-  chartLine.options.scales.y.ticks.suggestedMax = 600;
-  chartLine.update();
-});
-
-addListenerIfExists('all-btn-line', 'click', function () {
-  chartLine.data = allData;
-  chartLine.options.scales.y.ticks.suggestedMax = 600;
-  chartLine.update();
-});
-
 // Adiciona listeners aos botões do segundo gráfico de barras
 addListenerIfExists('week-btn-bar', 'click', function () {
-  chartBar.data = data2.week;
-  chartBar.options.scales.y.ticks.suggestedMax = 600;
-  chartBar.update();
+  chartLine.data = data2.week;
+  chartLine.options.scales.y.ticks.suggestedMax = 600;
+  chartLine.update();
 });
 
 addListenerIfExists('month-btn-bar', 'click', function () {
-  chartBar.data = data2.month;
-  chartBar.options.scales.y.ticks.suggestedMax = 600;
-  chartBar.update();
+  chartLine.data = data2.month;
+  chartLine.options.scales.y.ticks.suggestedMax = 600;
+  chartLine.update();
 });
 
 addListenerIfExists('year-btn-bar', 'click', function () {
-  chartBar.data = data2.year;
-  chartBar.options.scales.y.ticks.suggestedMax = 600;
-  chartBar.update();
+  chartLine.data = data2.year;
+  chartLine.options.scales.y.ticks.suggestedMax = 600;
+  chartLine.update();
 });
 
 addListenerIfExists('all-btn-bar', 'click', function () {
-  chartBar.data = allData2;
-  chartBar.options.scales.y.ticks.suggestedMax = 600;
-  chartBar.update();
+  chartLine.data = allData2;
+  chartLine.options.scales.y.ticks.suggestedMax = 600;
+  chartLine.update();
 });

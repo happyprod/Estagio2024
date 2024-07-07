@@ -98,122 +98,49 @@ class UserController
 
         if (!empty($data)) {
 
-            $impressions7 = '[';
+            $LikesSoma = 0;
+            $CommentsSoma = 0;
+            $maiorLikes = PHP_INT_MIN;
+            $maiorComments = PHP_INT_MIN;
+
             $likes7 = '[';
             $comments7 = '[';
-            $organic7 = '[';
-            $unganic7 = '[';
 
-            $impressions1ano = '[';
             $likes1ano = '[';
             $comments1ano = '[';
-            $organic1ano = '[';
-            $unganic1ano = '[';
 
-            $impressionstudo = '[';
             $likestudo = '[';
             $commentstudo = '[';
-            $organictudo = '[';
-            $unganictudo = '[';
 
-            $impressions30 = '[';
             $likes30 = '[';
             $comments30 = '[';
-            $organic30 = '[';
-            $unganic30 = '[';
 
 
 
             foreach ($data7dias as $row) {
-                $impressions7 .= isset($row->impressions) ? $row->impressions . ', ' : '';
                 $likes7 .= isset($row->likes) ? $row->likes . ', ' : '';
                 $comments7 .= isset($row->comments) ? $row->comments . ', ' : '';
-                $organic7 .= isset($row->organic) ? $row->organic . ', ' : '';
-
-                $saver7 = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ', ' : '';
-                $unganic7 .= $saver7;
             }
 
             foreach ($data1ano as $row) {
-                $impressions1ano .= isset($row->impressions) ? $row->impressions . ', ' : '';
                 $likes1ano .= isset($row->likes) ? $row->likes . ', ' : '';
                 $comments1ano .= isset($row->comments) ? $row->comments . ', ' : '';
-                $organic1ano .= isset($row->organic) ? $row->organic . ', ' : '';
-
-                $saver1ano = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ', ' : '';
-                $unganic1ano .= $saver1ano;
             }
 
-            $OrganicSoma = 0;
-            // Inicializa o maior número como o menor valor possível
-            $maiorOrganic = PHP_INT_MIN;
-            $maiorUnganic = PHP_INT_MIN;
-            $maiorImpressions = PHP_INT_MIN;
-            $maiorLikes = PHP_INT_MIN;
-            $maiorComments = PHP_INT_MIN;
-
-
-            $UnganicSoma = 0;
-            $UnganicTudoNumero = 0;
-            $ImpressionsSoma = 0;
-            $LikesSoma = 0;
-            $CommentsSoma = 0;
-
+            
             foreach ($dataTudo as $row) {
-                $impressionstudo .= isset($row->impressions) ? $row->impressions . ', ' : '';
-                $likestudo .= isset($row->likes) ? $row->likes . ', ' : '';
-                $commentstudo .= isset($row->comments) ? $row->comments . ', ' : '';
-                $organictudo .= isset($row->organic) ? $row->organic . ', ' : '';
-
-                $savertudo = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ', ' : '';
-                $unganictudo .= $savertudo;
-
-
-                //Maximo mensal
-                if ($row->organic > $maiorOrganic) {
-                    $maiorOrganic = $row->organic;
-                }
-
-                if ($row->impressions > $maiorImpressions) {
-                    $maiorImpressions = $row->impressions;
-                }
-
+                // Somar todos os likes e comments
+                $LikesSoma += isset($row->likes) ? $row->likes : 0;
+                $CommentsSoma += isset($row->comments) ? $row->comments : 0;
+        
+                // Encontrar máximo mensal
                 if ($row->likes > $maiorLikes) {
                     $maiorLikes = $row->likes;
                 }
-
                 if ($row->comments > $maiorComments) {
                     $maiorComments = $row->comments;
                 }
-
-                $UnganicTudoNumero = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) : '';
-                if ($UnganicTudoNumero > $maiorUnganic) {
-                    $maiorUnganic = $UnganicTudoNumero;
-                }
-
-
-                //Somar todos os meses.
-                $OrganicSoma = $OrganicSoma + $row->organic;
-                $UnganicSoma = $UnganicSoma + $UnganicTudoNumero;
-                $ImpressionsSoma = $ImpressionsSoma + $row->impressions;
-                $LikesSoma = $LikesSoma + $row->likes;
-                $CommentsSoma = $CommentsSoma + $row->comments;
             }
-
-            $OrganicMensal = intval($OrganicSoma / count($dataTudo));
-            $OrganicMediaDiaria = intval($OrganicSoma / $dataVerificarDias);
-            $OrganicTotal = $OrganicSoma;
-            $OrganicMaxMensal = $maiorOrganic;
-
-            $UnganicMensal = intval($UnganicSoma / count($dataTudo));
-            $UnganicMediaDiaria = intval($UnganicSoma / $dataVerificarDias);
-            $UnganicTotal = $UnganicSoma;
-            $UnganicMaxMensal = $maiorUnganic;
-
-            $ImpressionsMensal = intval($ImpressionsSoma / count($dataTudo));
-            $ImpressionsMediaDiaria = intval($ImpressionsSoma / $dataVerificarDias);
-            $ImpressionsTotal = $ImpressionsSoma;
-            $ImpressionsMaxMensal = $maiorImpressions;
 
             $LikesMensal = intval($LikesSoma / count($dataTudo));
             $LikesMediaDiaria = intval($LikesSoma / $dataVerificarDias);
@@ -225,76 +152,61 @@ class UserController
             $CommentsTotal = $CommentsSoma;
             $CommentsMaxMensal = $maiorComments;
 
+            foreach ($dataTudo as $row) {
+                $likestudo .= isset($row->likes) ? $row->likes . ', ' : '';
+                $commentstudo .= isset($row->comments) ? $row->comments . ', ' : '';
+
+
+                //Maximo mensal
+
+                if ($row->likes > $maiorLikes) {
+                    $maiorLikes = $row->likes;
+                }
+
+                if ($row->comments > $maiorComments) {
+                    $maiorComments = $row->comments;
+                }
+
+
+                //Somar todos os meses.
+                $LikesSoma = $LikesSoma + $row->likes;
+            }
+
 
             foreach ($data30dias as $row) {
-                $impressions30 .= isset($row->impressions) ? $row->impressions . ', ' : '';
                 $likes30 .= isset($row->likes) ? $row->likes . ', ' : '';
                 $comments30 .= isset($row->comments) ? $row->comments . ', ' : '';
-                $organic30 .= isset($row->organic) ? $row->organic . ', ' : '';
-
-                // Calcular e concatenar outras informações conforme necessário
-                $saver30 = isset($row->impressions) && isset($row->organic) ? ($row->impressions - $row->organic) . ', ' : '';
-                $unganic30 .= $saver30;
             }
 
 
             // Remover a última vírgula de cada variável
-            $impressions7 = rtrim($impressions7, ', ');
             $likes7 = rtrim($likes7, ', ');
             $comments7 = rtrim($comments7, ', ');
-            $organic7 = rtrim($organic7, ', ');
-            $unganic7 = rtrim($unganic7, ', ');
 
             // Remove a última vírgula
-            $impressions30 = rtrim($impressions30, ', ');
             $likes30 = rtrim($likes30, ', ');
             $comments30 = rtrim($comments30, ', ');
-            $organic30 = rtrim($organic30, ', ');
-            $unganic30 = rtrim($unganic30, ', ');
 
             // Remove a última vírgula
-            $impressions1ano = rtrim($impressions1ano, ', ');
             $likes1ano = rtrim($likes1ano, ', ');
             $comments1ano = rtrim($comments1ano, ', ');
-            $organic1ano = rtrim($organic1ano, ', ');
-            $unganic1ano = rtrim($unganic1ano, ', ');
 
             // Remove a última vírgula
-            $impressionstudo = rtrim($impressionstudo, ', ');
             $likestudo = rtrim($likestudo, ', ');
             $commentstudo = rtrim($commentstudo, ', ');
-            $organictudo = rtrim($organictudo, ', ');
-            $unganictudo = rtrim($unganictudo, ', ');
 
-
-            $impressions7 .= ']';
             $likes7 .= ']';
             $comments7 .= ']';
-            $organic7 .= ']';
-            $saver7 = ']';
-            $unganic7 .= ']';
 
-            $impressions30 .= ']';
             $likes30 .= ']';
             $comments30 .= ']';
-            $organic30 .= ']';
-            $saver30 = ']';
-            $unganic30 .= ']';
 
-            $impressions1ano .= ']';
             $likes1ano .= ']';
             $comments1ano .= ']';
-            $organic1ano .= ']';
-            $saver1ano = ']';
-            $unganic1ano .= ']';
 
-            $impressionstudo .= ']';
             $likestudo .= ']';
             $commentstudo .= ']';
-            $organictudo .= ']';
-            $savertudo = ']';
-            $unganictudo .= ']';
-
+            
 
 
             // Gera o HTML
@@ -302,63 +214,8 @@ class UserController
 
             $html .= '  
         <div class="container">
-            <!-- Primeiro gráfico de linha -->
-            <div class="">
-                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                    <h1 class="lead ms-2" style="font-size: 40px;">Engajamento Orgânico</h1>
-                    <div class="btn-group mt-3" role="group" aria-label="Basic example">';
-            if ($dataVerificarDias > 7) {
-                $html .= '<button type="button" class="btn btn-primary" id="week-btn-line">7 Dias</button>';
-            }
-
-            if ($dataVerificarDias > 31) {
-                $html .= '<button type="button" class="btn btn-primary" id="month-btn-line">Ultimo Mês</button>';
-            }
-
-            if ($dataVerificarDias > 364) {
-                $html .= '<button type="button" class="btn btn-primary" id="year-btn-line">Ultimo Ano</button>';
-            }
-
-            if ($dataVerificarDias > 62) {
-                $html .= '<button type="button" class="btn btn-primary" id="all-btn-line">Tudo</button>';
-            }
-
-            $html .= '</div>
-                </div>
-                <div class="card-body p-3">
-                    <div class="chart-container" style="height: 500px;">
-                        <canvas id="chart-line" class="chart-canvas"></canvas>
-                    </div>
-                    <div class="ms-1 row text-sm mt-3" style="margin-top: 0em;">
-                        <div class="col-md-4">
-                            <h4>Engajamento Orgânico</h4>
-                            <p class="lead-xs">
-                                Média Diária: ' . $OrganicMediaDiaria . '<br>';
-            if ($dataVerificarDias > 31) {
-                $html .= 'Média Mensal: ' . $OrganicMensal . '<br>
-                                    Máximo Mensal: ' . $OrganicMaxMensal . '<br>';
-            }
-
-            $html .= 'Total: ' . $OrganicTotal . '</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h4>Engajamento Não Orgânico</h4>
-                            <p class="lead-xs">
-                                Média Diária: ' . $UnganicMediaDiaria . '<br>';
-
-            if ($dataVerificarDias > 31) {
-                $html .= 'Média Mensal: ' . $UnganicMensal . '<br>
-                                        Máximo Mensal: ' . $UnganicMaxMensal . '<br>';
-            }
-
-            $html .= 'Total: ' . $UnganicTotal . '</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Segundo gráfico de barras -->
-            <div class="mt-6">
+            <div class="mt-2">
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <div class="btn-group mt-2" role="group" aria-label="Basic example">';
 
@@ -382,22 +239,10 @@ class UserController
                 </div>
                 <div class="card-body p-3">
                     <div class="chart-container" style="height: 500px;">
-                        <canvas id="chart-bar" class="chart-canvas"></canvas>
+                        <canvas id="chart-line" class="chart-canvas"></canvas>
                     </div>
 
-                    <div class="mt-2 row text-sm mt-3" style="margin-left: 6.5em;">
-                        <div class="col-md-4 text-justify">
-                            <h4>Impressões</h4>
-                            <p class="lead-xs">
-                            Média Diária: ' . $ImpressionsMediaDiaria . '<br>';
-            if ($dataVerificarDias > 31) {
-                $html .=  'Média Mensal: ' . $ImpressionsMensal . '<br>
-                                        Máximo Mensal: ' . $ImpressionsMaxMensal . '<br>';
-            }
-
-            $html .= 'Total: ' . $ImpressionsTotal . '</p>
-                        </div>
-
+                    <div class="mt-2 row text-sm mt-3" style="margin-left: 2em;">
                         <div class="col-md-4 text-justify">
                             <h4>Gostos</h4>
                             <p class="lead-xs">
@@ -447,30 +292,17 @@ class UserController
 
                     // Exibe o conteúdo do arquivo dentro de uma tag <script>
                     echo '<script>
-                        var impressions30 = ' . json_encode($impressions30) . ';
                         var likes30 = ' . json_encode($likes30) . ';
                         var comments30 = ' . json_encode($comments30) . ';
-                        var organic30 = ' . json_encode($organic30) . ';
-                        var unganic30 = ' . json_encode($unganic30) . ';
 
-                        var impressions7 = ' . json_encode($impressions7) . ';
                         var likes7 = ' . json_encode($likes7) . ';
                         var comments7 = ' . json_encode($comments7) . ';
-                        var organic7 = ' . json_encode($organic7) . ';
-                        var unganic7 = ' . json_encode($unganic7) . ';
 
-                        var impressions1ano = ' . json_encode($impressions1ano) . ';
                         var likes1ano = ' . json_encode($likes1ano) . ';
                         var comments1ano = ' . json_encode($comments1ano) . ';
-                        var organic1ano = ' . json_encode($organic1ano) . ';
-                        var unganic1ano = ' . json_encode($unganic1ano) . ';
 
-                        var impressionstudo = ' . json_encode($impressionstudo) . ';
                         var likestudo = ' . json_encode($likestudo) . ';
                         var commentstudo = ' . json_encode($commentstudo) . ';
-                        var organictudo = ' . json_encode($organictudo) . ';
-                        var unganictudo = ' . json_encode($unganictudo) . ';
-
                         ' . $conteudoDoArquivo . '</script>';
                 } else {
                     // Adiciona um fallback ou mensagem de erro
@@ -568,7 +400,7 @@ class UserController
             echo json_encode($response);
             return;
         }
-    
+
 
         session_start();
 
