@@ -37,6 +37,11 @@ class UserController
         return $this->model->getEditarImagens($count, $p_id);
     }
 
+    public function verificarAgenteExiste($AgenteBooking)
+    {
+        return $this->model->verificarAgenteExiste($AgenteBooking);
+    }
+
     public function inserirEvento()
     {
         $id_projeto = $_POST['id_projeto'] ?? '';
@@ -45,24 +50,22 @@ class UserController
         $nomeEvento = $_POST['nomeEvento'] ?? '';
         $descricao = $_POST['descricao'] ?? '';
         $data = $_POST['data'] ?? '';
-        $empresaBooking = $_POST['empresaBooking'] ?? '';
+        $AgenteBooking = $_POST['empresaBooking'] ?? '';
         $localizacao = $_POST['localizacao'] ?? '';
         $arrayC_idName = isset($_POST['arrayC_idName']) ? json_decode($_POST['arrayC_idName'], true) : [];
 
-        // Exibe os dados recebidos para debug
-        echo "Nome do Evento: " . htmlspecialchars($nomeEvento) . "<br>";
-        echo "Descrição: " . htmlspecialchars($descricao) . "<br>";
-        echo "Data: " . htmlspecialchars($data) . "<br>";
-        echo "Agente de Booking: " . htmlspecialchars($empresaBooking) . "<br>";
-        echo "Localização: " . htmlspecialchars($localizacao) . "<br>";
-        echo "Array de Categorias: " . json_encode($arrayC_idName);
+        if (!$this->verificarAgenteExiste($AgenteBooking))
+        {
+            echo 'Agente';
+            return;
+        }
 
         // Inserir no banco de dados
         $dadosEvento = array(
             'nomeEvento' => $nomeEvento,
             'descricao' => $descricao,
             'data' => $data,
-            'empresaBooking' => $empresaBooking,
+            'empresaBooking' => $AgenteBooking,
             'localizacao' => $localizacao,
             'id_projeto' => $id_projeto
         );

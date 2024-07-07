@@ -167,6 +167,18 @@ class User
         return $result !== false;
     }
 
+    public function verificarAgenteExiste($AgenteBooking) 
+    {
+        $stmt = $this->db->prepare("SELECT * FROM accounts WHERE id_name = ? AND identity = 3 LIMIT 1");
+
+        $stmt->execute([$AgenteBooking]);  // Bind the id parameter and the identity value
+
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
+        // Retorna true se um registro foi encontrado, false caso contrário
+        return $result !== false;
+    }
+
     public function guardarAssuntoChat($idAcc, $message)
     {
         if (session_status() == PHP_SESSION_NONE) {

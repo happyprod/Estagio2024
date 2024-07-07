@@ -587,8 +587,8 @@ function guardarSobre(id_projeto) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
-                if (xhr.responseText == 'Evento') {
-                    erro("Evento ou booking não existe.");
+                if (xhr.responseText == 'Agente') {
+                    erro("Agente de booking não existe.");
                 } else if (xhr.responseText == 'Data') {
                     erro("Data não suportada!");
                 } else {
