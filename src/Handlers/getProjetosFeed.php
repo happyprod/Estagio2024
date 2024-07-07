@@ -179,7 +179,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -266,7 +266,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
                                         }
                                         $html .= '</div>
                                 <div class="flex-grow-1">
-                                    <a href="' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
+                                    <a href="utilizadores/' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
                                     <p class="mb-0 text-muted text-xs" style="font-size: 13px;" id="idNameUser" >' . $collab_name . '</p>
                                 </div>
                             </div>
@@ -539,7 +539,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
+<img src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -586,7 +586,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -673,7 +673,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
             }
             $html .= '</div>
     <div class="flex-grow-1">
-        <a href="' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
+        <a href="utilizadores/' . $collab_idUser . '.php"><h6 class="mb-0 text-sm" style="font-size: 13px;">@' . $collab_idName . '</h6></a>
         <p class="mb-0 text-muted text-xs" style="font-size: 13px;" id="idNameUser" >' . $collab_name . '</p>
     </div>
 </div>
