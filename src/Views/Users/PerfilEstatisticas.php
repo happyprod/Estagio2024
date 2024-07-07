@@ -27,7 +27,7 @@
                         echo $shows;
                         ?>
                     </h5>
-                    <h5 class="text-sm text-lg" style="margin-top: 0.55em;">Projects</h5>
+                    <h5 class="text-sm text-lg" style="margin-top: 0.55em;">Projetos</h5>
                 </div>
                 <div class="d-flex flex-column align-items-center w-50 text-center">
 

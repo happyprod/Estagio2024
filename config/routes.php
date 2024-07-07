@@ -8,10 +8,12 @@ use App\Controllers\HomeController;
 use App\Controllers\UserController;
 use App\Controllers\ChatController;
 use App\Controllers\ContractsController;
+use App\Controllers\SearchController;
 use App\Models\User;
 use App\Models\Home;
 use App\Models\Message;
 use App\Models\Contracts;
+use App\Models\Search;
 use App\Helpers\Database;
 use App\Models\Auth;
 
@@ -25,6 +27,7 @@ $routes = [
     '/contact' => 'PageController@contact',
     '/register' => [AuthController::class, 'showRegisterForm'],
     '/login' => [AuthController::class, 'showLoginForm'],
+    '/pesquisar' => [SearchController::class, 'showPesquisar'],
     '/logout' => [AuthController::class, 'logout']
 ];
 
@@ -59,6 +62,8 @@ function route($url, $routes) {
                     $model = new Contracts($db); // Passar a conexão ao modelo Contracts
                 } else if ($controller === AuthController::class) {
                     $model = new Auth($db); // Passar a conexão ao modelo Contracts
+                } else if ($controller === SearchController::class) {
+                    $model = new Search($db); // Passar a conexão ao modelo Search
                 }
                 
                 $controllerInstance = new $controller($model); // Passar o modelo ao controlador

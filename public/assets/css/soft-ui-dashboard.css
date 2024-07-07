@@ -27830,6 +27830,47 @@ gmp-map:not(:defined) {
 }
 
 
+.profile-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+}
+
+.profile-card img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 15px auto;
+}
+
+.profile-card .card-body {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.profile-card .card-title {
+  font-size: 1.25rem;
+  margin-bottom: 5px;
+}
+
+.profile-card .card-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.profile-card .btn-primary {
+  background-color: #3897f0;
+  border-color: #3897f0;
+}
+
+
 
 /*
 Or just:
