@@ -495,6 +495,11 @@ class UserController
             $nome_arquivo_foto_capa = basename($path);
         }
 
+        if ($nome_arquivo_foto_capa == 'curved0.jpg')
+        {
+            $nome_arquivo_foto_capa = '';
+        }
+
         // Inserir no banco de dados
         $dadosEvento = array(
             'LBLfotoPerfil' => $nome_arquivo_foto_perfil,

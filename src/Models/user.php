@@ -869,7 +869,7 @@ class User
 
     public function getFollowingsList($id)
     {
-        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.identity as identity
         FROM accounts a
         JOIN follows f ON a.id = f.id_followed
         WHERE f.id_user = ?";
@@ -895,7 +895,7 @@ class User
     public function getFollowingsListSearch($id, $id_name_user_search)
     {
         // Ajuste na query SQL para incluir a busca por id_name
-        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.identity as identity
             FROM accounts a
             JOIN follows f ON a.id = f.id_followed
             WHERE f.id_user = ? AND a.id_name LIKE ?";  // Adiciona a condição LIKE
@@ -917,7 +917,7 @@ class User
 
     public function getFollowersList($id)
     {
-        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.identity as identity
         FROM accounts a
         JOIN follows f ON a.id = f.id_user
         WHERE f.id_followed = ?";
@@ -932,7 +932,7 @@ class User
     public function getFollowersListSearch($id, $id_name_user_search)
     {
         // Ajuste na query SQL para incluir a busca por id_name
-        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.type as type, a.identity as identity
+        $sql = "SELECT a.id_name as id_name, a.picture as picture, a.id as id, a.identity as identity
             FROM accounts a
             JOIN follows f ON a.id = f.id_user
             WHERE f.id_followed = ? AND a.id_name LIKE ?";  // Adiciona a condição LIKE

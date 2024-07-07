@@ -36,7 +36,6 @@ $followers_list = $controller->getFollowersList($id);
         $fl_id = htmlspecialchars($row->id);
         $fl_picture = htmlspecialchars($row->picture);
         $fl_id_name = htmlspecialchars($row->id_name);
-        $fl_type = htmlspecialchars($row->type);
         $fl_identidadeRow = htmlspecialchars($row->identity);
 
         $fl_identidade = $fl_identidadeRow;
@@ -75,7 +74,7 @@ $followers_list = $controller->getFollowersList($id);
         $html .= '        </div>';
         $html .= '        <div class="col-9">';
         $html .= '            <a href="' . $fl_id . '.php"><h6 class="title mb-1">@' . $fl_id_name . '</h6></a>';
-        $html .= '            <p class="text-muted mb-0 text-sm" style="margin-top: -0.2em;">' . $fl_identidade . ' - ' . $fl_type . '</p>';
+        $html .= '            <p class="text-muted mb-0 text-sm" style="margin-top: -0.2em;">' . $fl_identidade . '</p>';
         $html .= '        </div>';
         $html .= '    </div>';
         $html .= '</div>';
@@ -89,7 +88,6 @@ $followers_list = $controller->getFollowersListSearch($id, $id_name_user_search)
         $fl_id = htmlspecialchars($row->id);
         $fl_picture = htmlspecialchars($row->picture);
         $fl_id_name = htmlspecialchars($row->id_name);
-        $fl_type = htmlspecialchars($row->type);
         $fl_identidadeRow = htmlspecialchars($row->identity);
 
         $fl_identidade = $fl_identidadeRow;
@@ -128,7 +126,7 @@ $followers_list = $controller->getFollowersListSearch($id, $id_name_user_search)
         $html .= '        </div>';
         $html .= '        <div class="col-9">';
         $html .= '            <a href="' . $fl_id . '.php"><h6 class="title mb-1">@' . $fl_id_name . '</h6></a>';
-        $html .= '            <p class="text-muted mb-0 text-sm" style="margin-top: -0.2em;">' . $fl_identidade . ' - ' . $fl_type . '</p>';
+        $html .= '            <p class="text-muted mb-0 text-sm" style="margin-top: -0.2em;">' . $fl_identidade . '</p>';
         $html .= '        </div>';
         $html .= '    </div>';
         $html .= '</div>';

@@ -88,7 +88,6 @@ if ($row_infos) {
     $email = $row_infos["email"];
     $numero = $row_infos["number"];
     $localizacao = $row_infos["location"];
-    $type_utilizador = $row_infos["type"];
     $fotodeperfil = $row_infos["picture"];
     $fotodecapa = $row_infos["picture_background"];
     $identidadeRow = $row_infos["identity"];

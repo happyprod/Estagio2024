@@ -20,7 +20,6 @@ $id = $_SESSION['user_id'];
 $name = "";
 $image_url = "";
 $location = "";
-$type = "";
 
 $shows = 0;
 $follows = 0;
@@ -39,7 +38,6 @@ $instagram = $row_infos["Instagram"];
 $youtube = $row_infos["Youtube"];
 $tiktok = $row_infos["Tiktok"];
 $blog = $row_infos["Blog"];
-$type_utilizador = $row_infos["type"];
 $fotodeperfil = $row_infos["picture"];
 $fotodecapa = $row_infos["picture_background"];
 
