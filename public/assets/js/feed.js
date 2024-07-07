@@ -66,18 +66,18 @@ function loadProjects() {
                                     <i class="bi bi-heart" style="font-size: 24px;"></i>
                                 </button>
 
-                                <button data-bs-toggle="modal" onclick="updateDataProjetos(${project.id}, ${offset + projects.indexOf(project) + 1})" data-bs-target="#modal-default${offset + projects.indexOf(project) + 1}" style="border: 0px; background-color: white !important;">
+                                <button class="${project.comments_count == 0 ? 'd-none ' : ''}" data-bs-toggle="modal" onclick="updateDataProjetos(${project.id}, ${offset + projects.indexOf(project) + 1})" data-bs-target="#modal-default${offset + projects.indexOf(project) + 1}" style="border: 0px; background-color: white !important;">
                                     <i class="bi bi-chat-left-text" style="font-size: 24px;"></i>
                                 </button>
                             </div>
-                            <div class="me-auto mt-2 ms-2" style="height: 20px;">
-                                <p class="mb-4 text-sm" style="height: 30px;"><strong id="fGostos${offset + projects.indexOf(project) + 1}">${project.likes_count}</strong> Gostos</p>
+                            <div class="${project.likes_count == 0 ? 'd-none ' : ''}me-auto mt-2 ms-2" style="height: 20px;">
+                                <p class="mb-4 text-sm" style="height: 30px;"><strong id="fGostos${project.id}">${project.likes_count}</strong> Gostos</p>
                             </div>
 
                             <div class="d-inline text-left ms-2">
                                 <a href="utilizadores/${project.user_id}.php">
                                     <h6 class="title text-justify mb-0" style="font-size: 15px; width: 97%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@${project.id_name}</a> <p class="mb-4 text-sm d-inline" style="height: 30px;">${project.descricao}</p></h6>        
-                                    <h6 class="title text-justify mb-0" style="font-size: 14px;">${project.comments_count} comentários</h6>                        
+                                    <h6 class="${project.comments_count == 0 ? 'd-none ' : ''} title text-justify mb-0" style="font-size: 14px;">${project.comments_count} comentários</h6>                        
                             </div>
                             <div class="card-body px-1 pb-0">
                             <button class="w-100" style="border: 0px; background-color: white !important;" data-bs-toggle="modal" onclick="updateDataProjetos(${project.id}, ${offset + projects.indexOf(project) + 1})" data-bs-target="#modal-default${offset + projects.indexOf(project) + 1}">
@@ -102,9 +102,9 @@ function loadProjects() {
     </div>
                             
                 `);
-                
+                offset += limit;
+
             });
-            offset += limit;
         }
         $('#loader').hide();
     });
@@ -191,7 +191,7 @@ function guardarLike(id_comentario, button) {
             data: { var1: id_comentario, var2: 2 }, // Passando variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
+
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -207,21 +207,38 @@ function guardarLike(id_comentario, button) {
 
 
 function guardarProjectLike(id_projeto, button) {
-    // Supondo que você tenha uma maneira de obter o novo número de gostos
+    // Obtém o elemento que mostra o número de gostos
     var likesElement = document.getElementById('Projeto-' + id_projeto);
-    var fGostos = document.getElementById('fGostos' + id_projeto)
-    var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    var fGostos = document.getElementById('fGostos' + id_projeto);
+    console.log(fGostos);
+
+    // Verifica se o elemento de gostos existe
+    if (likesElement) {
+        var currentLikes = parseInt(likesElement.innerText.split(' ')[0]); // Obtém o número atual de gostos
+    } else {
+        console.warn('Elemento likes não encontrado para o id_projeto:', id_projeto);
+    }
+
     // Seleciona o ícone dentro do botão
     var icon = button.querySelector('i');
 
-    // Verifica a classe atual do ícone
-    if (icon.classList.contains('text-secondary')) {
-        var newLikes = currentLikes - 1;
+    // Inicializa a variável newLikes
+    var newLikes;
 
+    // Verifica a classe atual do ícone para determinar se é um like ou um dislike
+    if (icon.classList.contains('text-secondary')) {
+        newLikes = currentLikes - 1;
+
+        // Atualiza o valor do input hidden fGostos se existir
+        if (fGostos) {
+            fGostos.textContent = newLikes;
+        }
+
+        // Faz uma requisição AJAX para atualizar o like no servidor
         $.ajax({
             url: '../src/Handlers/guardarProjetoLike.php',
             method: 'GET',
-            data: { var1: id_projeto, var2: 1 }, // Passando variáveis na requisição
+            data: { var1: id_projeto, var2: 1 }, // Passa variáveis na requisição
             success: function (data) {
                 console.log(data);
             },
@@ -230,15 +247,20 @@ function guardarProjectLike(id_projeto, button) {
             }
         });
     } else {
-        var newLikes = currentLikes + 1;
+        newLikes = currentLikes + 1;
 
+        // Atualiza o valor do input hidden fGostos se existir
+        if (fGostos) {
+            fGostos.textContent = newLikes;
+        }
+
+        // Faz uma requisição AJAX para atualizar o like no servidor
         $.ajax({
             url: '../src/Handlers/guardarProjetoLike.php',
             method: 'GET',
-            data: { var1: id_projeto, var2: 2 }, // Passando variáveis na requisição
+            data: { var1: id_projeto, var2: 2 }, // Passa variáveis na requisição
             success: function (data) {
                 console.log(data);
-    
             },
             error: function (xhr, status, error) {
                 console.error('Erro ao obter dados:', error);
@@ -246,9 +268,14 @@ function guardarProjectLike(id_projeto, button) {
         });
     }
 
-    // Atualiza o texto do botão
-    likesElement.innerText = newLikes + ' Gostos';
-    fGostos.innerText = newLikes;
+    // Atualiza o texto do elemento likesElement com o novo número de gostos
+    if (likesElement) {
+        likesElement.innerText = newLikes + ' Gostos';
+    }
+    // Atualiza o valor do input hidden fGostos se existir
+    if (fGostos) {
+        fGostos.value = newLikes;
+    }
 
     // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
 }

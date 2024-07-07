@@ -64,12 +64,15 @@ $texto_original2 = $p_descricao;
 // Substituir \n por <br>
 $texto_formatado2 = nl2br(htmlspecialchars($texto_original2)); // Use nl2br para manter as quebras de linha e htmlspecialchars para escapar caracteres especiais HTML
 
-$p_bookingUserName = $controller->getAccountByDirectory($p_bookingUserId);
+$result3 = $controller->getAccountByIdName($p_bookingUserId);
 
 $comentarios = $controller->getCommentsByProject($p_id);
 
-if ($p_bookingUserName) {
-    $p_bookingUserName = $p_bookingUserName['name'];
+$p_bookingUserName = '';
+
+if ($result3) {
+    $p_bookingUserName = '@' . $result3['id_name'];
+    $p_bookingUserId = $result3['id'];    
 }
 
 if ($p_data == '') {
@@ -207,7 +210,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 </div>';
 
     if ($p_bookingUserName) {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="utilizadores/' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
     } else {
         $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> Não informado</p>';
     }
@@ -614,7 +617,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 </div>';
 
     if ($p_bookingUserName) {
-        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
+        $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> <a href="utilizadores/' . $p_bookingUserId . '.php">' . $p_bookingUserName . '</a></p>';
     } else {
         $html .= '<p style="margin-bottom: 2px; width: 100%; font-size: 13px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>Agente de Booking:</strong> Não informado</p>';
     }

@@ -361,6 +361,18 @@ class User
         return $result = $stmt->fetch(PDO::FETCH_ASSOC); // Retorna a primeira linha do resultado como um array associativo
     }
 
+    public function getAccountByIdName($lastDirectoryName)
+    {
+        // Prepara uma consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o url corresponde ao nome do último diretório
+        $stmt = $this->db->prepare('SELECT * FROM accounts WHERE id_name = ?');
+
+        // Executa a consulta SQL, substituindo o marcador de posição '?' pelo valor de $lastDirectoryName
+        $stmt->execute([$lastDirectoryName]);
+
+        // Obtém o resultado da consulta
+        return $result = $stmt->fetch(PDO::FETCH_ASSOC); // Retorna a primeira linha do resultado como um array associativo
+    }
+
     public function getVerifyCommentLikes($id_comentario)
     {
         // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente

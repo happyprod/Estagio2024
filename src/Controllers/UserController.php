@@ -607,6 +607,11 @@ class UserController
         return $this->model->getAccountByDirectory($lastDirectoryName);
     }
 
+    public function getAccountByIdName($lastDirectoryName)
+    {
+        return $this->model->getAccountByIdName($lastDirectoryName);
+    }
+
     public function getVerifyUserLike($p_id)
     {
         return $this->model->getVerifyUserLike($p_id);

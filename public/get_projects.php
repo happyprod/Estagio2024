@@ -29,8 +29,16 @@ SELECT
     a.id as user_id,
     a.id_name, 
     a.picture, 
-    (SELECT COUNT(*) FROM projects_likes pcl WHERE pcl.id_project = p.id) AS likes_count,
-    (SELECT COUNT(*) FROM projects_comments pc WHERE pc.id_project = p.id) AS comments_count
+    (CASE 
+        WHEN p.PrivacyLikes = 4 OR (p.PrivacyLikes = 5 AND f.id_user IS NOT NULL)
+        THEN (SELECT COUNT(*) FROM projects_likes pcl WHERE pcl.id_project = p.id) 
+        ELSE 0 
+    END) AS likes_count,
+    (CASE 
+        WHEN p.PrivacyComments = 7 OR (p.PrivacyComments = 8 AND f.id_user IS NOT NULL)
+        THEN (SELECT COUNT(*) FROM projects_comments pc WHERE pc.id_project = p.id) 
+        ELSE 0 
+    END) AS comments_count
 FROM 
     projects p
 JOIN 
@@ -40,10 +48,13 @@ LEFT JOIN
 WHERE
     p.PrivacyProjects = 1 OR 
     (p.PrivacyProjects = 2 AND f.id_user IS NOT NULL)
-    AND deleted = 0
+    AND p.deleted = 0
 LIMIT
     $limit OFFSET $offset;
 ";
+
+
+
 
 $result = $conn->query($sql);
 
