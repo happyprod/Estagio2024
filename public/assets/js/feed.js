@@ -1,5 +1,5 @@
 let offset = 0;
-const limit = 1;
+const limit = 3;
 
 function loadProjects() {
     $('#loader').show();
@@ -62,8 +62,8 @@ function loadProjects() {
                                 </div>
                             </div>
                             <div class="w-100 text-bottom text-left ms-1 mt-2">
-                                <button style="border: 0px; background-color: white !important;">
-                                    <i class="bi bi-heart" style="font-size: 24px;"></i>
+                                <button onclick="guardarProjectLike2(${project.id}, this)" style="border: 0px; background-color: white !important;">
+                                    ${project.liked_by_user == 1 ? '<i class="ni mt-2 ni-favourite-28 text-primary" style="font-size: 22px;"></i>' : '<i class="bi bi-heart" style="font-size: 24px;"></i>'}
                                 </button>
 
                                 <button class="${project.comments_count == 0 ? 'd-none ' : ''}" data-bs-toggle="modal" onclick="updateDataProjetos(${project.id}, ${offset + projects.indexOf(project) + 1})" data-bs-target="#modal-default${offset + projects.indexOf(project) + 1}" style="border: 0px; background-color: white !important;">
@@ -102,9 +102,9 @@ function loadProjects() {
     </div>
                             
                 `);
-                offset += limit;
 
             });
+            offset += limit;
         }
         $('#loader').hide();
     });
@@ -279,6 +279,77 @@ function guardarProjectLike(id_projeto, button) {
 
     // Aqui você pode adicionar qualquer lógica adicional, como enviar o novo número de gostos para o servidor
 }
+
+
+
+
+function guardarProjectLike2(id_projeto, button) {
+    // Obtém o elemento que mostra o número de gostos
+    var fGostos = document.getElementById('fGostos' + id_projeto);
+
+    console.log(fGostos);
+
+    // Seleciona o ícone dentro do botão
+    var icon = button.querySelector('i');
+
+    // Inicializa a variável newLikes
+    var newLikes;
+
+    // Verifica a classe atual do ícone para determinar se é um like ou um dislike
+    if (icon.classList.contains('ni-favourite-28')) {
+        newLikes = parseInt(fGostos.textContent) - 1;
+
+        // Atualiza o valor do input hidden fGostos se existir
+        if (fGostos) {
+            fGostos.textContent = newLikes;
+        }
+
+        // Atualiza a classe e o estilo do ícone
+        icon.className = 'bi bi-heart';
+        icon.style.fontSize = '24px';
+
+        // Faz uma requisição AJAX para atualizar o like no servidor
+        $.ajax({
+            url: '../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 1 }, // Passa variáveis na requisição
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    } else {
+        newLikes = parseInt(fGostos.textContent)  + 1;
+
+        // Atualiza o valor do input hidden fGostos se existir
+        if (fGostos) {
+            fGostos.textContent = newLikes;
+        }
+
+        // Atualiza a classe e o estilo do ícone
+        icon.className = 'ni text-primary ni-favourite-28';
+        icon.style.fontSize = '22px';
+
+        // Faz uma requisição AJAX para atualizar o like no servidor
+        $.ajax({
+            url: '../src/Handlers/guardarProjetoLike.php',
+            method: 'GET',
+            data: { var1: id_projeto, var2: 2 }, // Passa variáveis na requisição
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, status, error) {
+                console.error('Erro ao obter dados:', error);
+            }
+        });
+    }
+}
+
+
+
+
 
 
 function toggleResponses(containerId) {

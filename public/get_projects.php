@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 // Obtém o número de projetos a serem carregados e a partir de qual ponto
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$limit = 1;  // Quantidade de projetos por vez
+$limit = 3;  // Quantidade de projetos por vez
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -22,7 +22,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $id_user = $_SESSION['user_id'];
 
-// Consulta SQL que une as tabelas necessárias e faz os contagens
 $sql = "
 SELECT 
     p.*, 
@@ -38,20 +37,23 @@ SELECT
         WHEN p.PrivacyComments = 7 OR (p.PrivacyComments = 8 AND f.id_user IS NOT NULL)
         THEN (SELECT COUNT(*) FROM projects_comments pc WHERE pc.id_project = p.id) 
         ELSE 0 
-    END) AS comments_count
+    END) AS comments_count,
+    IF(pl.id_user_send IS NOT NULL, 1, 0) AS liked_by_user
 FROM 
     projects p
 JOIN 
     accounts a ON p.id_founder = a.id
 LEFT JOIN 
     follows f ON a.id = f.id_followed AND f.id_user = $id_user
+LEFT JOIN
+    projects_likes pl ON p.id = pl.id_project AND pl.id_user_send = $id_user
 WHERE
-    p.PrivacyProjects = 1 OR 
-    (p.PrivacyProjects = 2 AND f.id_user IS NOT NULL)
+    (p.PrivacyProjects = 1 OR p.PrivacyProjects = 2 AND f.id_user IS NOT NULL)
     AND p.deleted = 0
 LIMIT
     $limit OFFSET $offset;
 ";
+
 
 
 
