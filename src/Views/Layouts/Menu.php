@@ -35,6 +35,7 @@
                     <span class="nav-link-text ms-1">Mensagens</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost/Estagio2024/public/contratos.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -105,7 +106,13 @@
                 </a>
             </li>
 
+            <hr class="horizontal dark my-1">
 
+            <div id="perfilAtual" class="nav-item smooth-animation">
+
+            </div>
+
+            <script src="http://localhost/Estagio2024/public/assets/js/menu.js"></script>
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">
