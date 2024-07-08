@@ -306,7 +306,7 @@ function adicionarNome(id_name) {
 
     // Verifica se o id_name existe na base de dados
     $.ajax({
-        url: '../../public/verificar_email.php', // Caminho para o arquivo PHP
+        url: '../../src/Handlers/verificar_email.php', // Caminho para o arquivo PHP
         type: 'POST',
         data: {
             id_name: id_name

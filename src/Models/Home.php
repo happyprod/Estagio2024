@@ -139,4 +139,74 @@ class Home
         $stmt_insert->bindParam(':id_followed', $idUtilizador, PDO::PARAM_INT);
         $stmt_insert->execute();
     }
+
+
+    public function getProjectsFeed($limit, $offset)
+    {
+
+        // Definindo a consulta SQL
+        $sql = "
+            SELECT 
+                p.*, 
+                a.id as user_id,
+                a.id_name, 
+                a.picture, 
+                (CASE 
+                    WHEN p.PrivacyLikes = 4 OR (p.PrivacyLikes = 5 AND f.id_user IS NOT NULL)
+                    THEN (SELECT COUNT(*) FROM projects_likes pcl WHERE pcl.id_project = p.id) 
+                    ELSE 0 
+                END) AS likes_count,
+                (CASE 
+                    WHEN p.PrivacyComments = 7 OR (p.PrivacyComments = 8 AND f.id_user IS NOT NULL)
+                    THEN (SELECT COUNT(*) FROM projects_comments pc WHERE pc.id_project = p.id) 
+                    ELSE 0 
+                END) AS comments_count,
+                IF(pl.id_user_send IS NOT NULL, 1, 0) AS liked_by_user
+            FROM 
+                projects p
+            JOIN 
+                accounts a ON p.id_founder = a.id
+            LEFT JOIN 
+                follows f ON a.id = f.id_followed AND f.id_user = :id_user
+            LEFT JOIN
+                projects_likes pl ON p.id = pl.id_project AND pl.id_user_send = :id_user
+            WHERE
+                (p.PrivacyProjects = 1 OR p.PrivacyProjects = 2 AND f.id_user IS NOT NULL)
+                AND p.deleted = 0
+            LIMIT
+                :limit OFFSET :offset;
+        ";
+
+        // Preparando a consulta
+        $stmt = $this->db->prepare($sql);
+
+        // Vinculando os parâmetros
+        $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+
+        // Executando a consulta
+        $stmt->execute();
+
+        // Recuperando os resultados
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getProjectsImagesFeed($p_id)
+    {
+        // Definindo a consulta SQL
+        $sql = "SELECT *, `order` as ordem FROM projects_images WHERE id_project = :p_id ORDER BY ordem";
+
+        // Preparando a consulta
+        $stmt = $this->db->prepare($sql);
+
+        // Vinculando o parâmetro
+        $stmt->bindParam(':p_id', $p_id, PDO::PARAM_INT);
+
+        // Executando a consulta
+        $stmt->execute();
+
+        // Recuperando os resultados
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

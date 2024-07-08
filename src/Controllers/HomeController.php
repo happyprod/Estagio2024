@@ -181,6 +181,16 @@ class HomeController
     }
 
 
+    public function getProjectsFeed($limit, $offset)
+    {
+        return $this->model->getProjectsFeed($limit, $offset);
+    }
+
+    public function getProjectsImagesFeed($p_id)
+    {
+        return $this->model->getProjectsImagesFeed($p_id);
+    }
+
     public function removerFollow($idUtilizador)
     {
         $this->model->removerFollow($idUtilizador);

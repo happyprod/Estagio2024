@@ -3,7 +3,7 @@ const limit = 3;
 
 function loadProjects() {
     $('#loader').show();
-    $.get('get_projects.php', { offset: offset }, function (data) {
+    $.get('../src/Handlers/get_projects.php', { offset: offset }, function (data) {
         const projects = JSON.parse(data);
         if (projects.length > 0) {
             projects.forEach(project => {

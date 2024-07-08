@@ -54,10 +54,11 @@ class UserController
         $localizacao = $_POST['localizacao'] ?? '';
         $arrayC_idName = isset($_POST['arrayC_idName']) ? json_decode($_POST['arrayC_idName'], true) : [];
 
-        if (!$this->verificarAgenteExiste($AgenteBooking))
-        {
-            echo 'Agente';
-            return;
+        if ($AgenteBooking != '') {
+            if (!$this->verificarAgenteExiste($AgenteBooking)) {
+                echo 'Agente';
+                return;
+            }
         }
 
         // Inserir no banco de dados
@@ -130,12 +131,12 @@ class UserController
                 $comments1ano .= isset($row->comments) ? $row->comments . ', ' : '';
             }
 
-            
+
             foreach ($dataTudo as $row) {
                 // Somar todos os likes e comments
                 $LikesSoma += isset($row->likes) ? $row->likes : 0;
                 $CommentsSoma += isset($row->comments) ? $row->comments : 0;
-        
+
                 // Encontrar máximo mensal
                 if ($row->likes > $maiorLikes) {
                     $maiorLikes = $row->likes;
@@ -209,7 +210,7 @@ class UserController
 
             $likestudo .= ']';
             $commentstudo .= ']';
-            
+
 
 
             // Gera o HTML
@@ -495,8 +496,7 @@ class UserController
             $nome_arquivo_foto_capa = basename($path);
         }
 
-        if ($nome_arquivo_foto_capa == 'curved0.jpg')
-        {
+        if ($nome_arquivo_foto_capa == 'curved0.jpg') {
             $nome_arquivo_foto_capa = '';
         }
 

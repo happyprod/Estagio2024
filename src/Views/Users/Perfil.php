@@ -91,7 +91,7 @@ if ($identidade == 1) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" type="image/png" href="../../public/img/logo.png">
     <title>
-        ConcertPulse Artist
+        ConcertPulse
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
