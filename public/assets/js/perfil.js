@@ -577,7 +577,7 @@ function guardarSobre(id_projeto) {
         "&switchData=" + encodeURIComponent(switchData) +
         "&switchBooking=" + encodeURIComponent(switchBooking) +
         "&switchLocal=" + encodeURIComponent(switchLocal) +
-        "&id_projeto=" + encodeURIComponent(id_projeto) +
+        "&id_project=" + encodeURIComponent(id_projeto) +
         "&switchCollabs=" + encodeURIComponent(switchCollabs) +
         "&arrayC_idName=" + encodeURIComponent(JSON.stringify(arrayC_idName));
 

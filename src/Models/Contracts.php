@@ -155,7 +155,7 @@ class Contracts
 
 
         // Atualizar o projeto
-        $stmt = $this->db->prepare("INSERT INTO rating (id_send, id_receive, stars, date, comentario) VALUES (?, ?, ?, ? ,?)");
+        $stmt = $this->db->prepare("INSERT INTO rating (id_send, id_receive, stars, date, comment) VALUES (?, ?, ?, ? ,?)");
 
         $stmt->bindParam(1, $id_user);
         $stmt->bindParam(2, $id);
@@ -188,7 +188,7 @@ class Contracts
         $dataAtual = date('Y-m-d'); // Obtém a data atual no formato 'ano-mês-dia'
 
         // Prepare a query
-        $stmt = $this->db->prepare("UPDATE rating SET stars = ?, comentario = ?, date = ? WHERE id_send = ? AND id_receive = ?");
+        $stmt = $this->db->prepare("UPDATE rating SET stars = ?, comment = ?, date = ? WHERE id_send = ? AND id_receive = ?");
 
         // Vincular os parâmetros com os tipos corretos
         $stmt->bindParam(1, $rating, PDO::PARAM_INT);

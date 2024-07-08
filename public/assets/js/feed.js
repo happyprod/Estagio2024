@@ -33,7 +33,7 @@ function loadProjects() {
                                         <h6 class="title mb-0" style="font-size: 14px;">@${project.id_name}</h6>
                                     </a>
                                     <p class="text-muted mb-0 text-sm" style="font-size: 11px; margin: 0;">
-                                        <strong> ${project.nome} </strong>
+                                        <strong> ${project.name} </strong>
                                         ${link}
                                     </p>
                                 </div>
@@ -75,8 +75,8 @@ function loadProjects() {
                             </div>
 
                             <div class="d-inline text-left ms-2">
-                                <a href="utilizadores/${project.user_id}.php">
-                                    <h6 class="title text-justify mb-0" style="font-size: 15px; width: 97%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@${project.id_name}</a> <p class="mb-4 text-sm d-inline" style="height: 30px;">${project.descricao}</p></h6>        
+                                <a href="utilizadores/${project.user_id}.php">  
+                                    <h6 class="title text-justify mb-0" style="font-size: 15px; width: 97%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">@${project.id_name}</a> <p class="mb-4 text-sm d-inline" style="height: 30px;">${project.description}</p></h6>        
                                     <h6 class="${project.comments_count == 0 ? 'd-none ' : ''} title text-justify mb-0" style="font-size: 14px;">${project.comments_count} comentários</h6>                        
                             </div>
                             <div class="card-body px-1 pb-0">

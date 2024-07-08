@@ -24,7 +24,7 @@ class User
         $user_id = $_SESSION['user_id'];
 
         // Insere os novos registros
-        $stmt_insert = $this->db->prepare("INSERT INTO projects (id_founder, nome, descricao, data, PrivacyProjects, PrivacyLikes, PrivacyComments) VALUES (:id_founder, :nome, :descricao, :data, :PrivacyProjects, :PrivacyLikes, :PrivacyComments)");
+        $stmt_insert = $this->db->prepare("INSERT INTO projects (id_founder, name, description, date, PrivacyProjects, PrivacyLikes, PrivacyComments) VALUES (:id_founder, :nome, :descricao, :data, :PrivacyProjects, :PrivacyLikes, :PrivacyComments)");
 
         $nome = 'Rascunho';
         $descricao = 'Isto é apenas um Rascunho';
@@ -73,7 +73,7 @@ class User
         // Copiar o arquivo
         if (copy($arquivoOrigem, $arquivoDestino)) {
             // Insere a informação da imagem no banco de dados
-            $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, ordem) VALUES (:id_project, :image, :ordem)");
+            $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, `order`) VALUES (:id_project, :image, :ordem)");
 
             $ordem = 1;
 
@@ -101,7 +101,7 @@ class User
     public function guardarEditarProjetosImagens2($projeto, $ordem, $nome_arquivo)
     {
         // Insere os novos registros
-        $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, Ordem) VALUES (:projeto, :image, :ordem)");
+        $stmt_insert = $this->db->prepare("INSERT INTO projects_images (id_project, image, `order`) VALUES (:projeto, :image, :ordem)");
 
         // Executa a inserção
         $stmt_insert->bindParam(':projeto', $projeto, PDO::PARAM_INT);
@@ -423,7 +423,8 @@ class User
 
     public function getEditarImagens($count, $p_id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem");
+        $stmt = $this->db->prepare("SELECT *, `order` as ordem FROM projects_images WHERE id_project = ? ORDER BY ordem");
+
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -432,7 +433,7 @@ class User
 
     public function getProjects($id)
     {
-        $sql = "SELECT * FROM projects WHERE id_founder = ? AND deleted = 0 ORDER BY id DESC"; // Use placeholder para PDO
+        $sql = "SELECT *, name as nome, description as descricao, date as data FROM projects WHERE id_founder = ? AND deleted = 0 ORDER BY id DESC"; // Use placeholder para PDO
 
         $stmt_projects = $this->db->prepare($sql);
         $stmt_projects->execute([$id]);  // Vincula o parâmetro $id
@@ -442,7 +443,7 @@ class User
 
     public function getProjectsPublic($id, $id_user)
     {
-        $sql = "SELECT DISTINCT p.*
+        $sql = "SELECT DISTINCT p.*, p.name as nome, p.description as descricao, p.date as data
         FROM projects p
         LEFT JOIN follows f ON p.id_founder = f.id_followed
         WHERE p.id_founder = ?
@@ -465,7 +466,7 @@ class User
 
     public function getProjectbyId($p_id)
     {
-        $sql = "SELECT * FROM projects WHERE id = ?"; // Use placeholder para PDO
+        $sql = "SELECT *, name as nome, description as descricao, date as data FROM projects WHERE id = ?"; // Use placeholder para PDO
 
         $stmt_projects = $this->db->prepare($sql);
         $stmt_projects->execute([$p_id]);  // Vincula o parâmetro $id
@@ -477,7 +478,7 @@ class User
 
     public function getProjectsImages($p_id)
     {
-        $sql2 = "SELECT * FROM projects_images WHERE id_project = ? ORDER BY ordem"; // Use placeholder for PDO
+        $sql2 = "SELECT *, `order` as ordem FROM projects_images WHERE id_project = ? ORDER BY ordem"; // Use placeholder for PDO
 
         $stmt_projects2 = $this->db->prepare($sql2);
         $stmt_projects2->execute([$p_id]);  // Bind the id parameter
@@ -486,7 +487,7 @@ class User
 
     public function getEditarInfoProjects($count, $p_id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM projects WHERE id = ?");
+        $stmt = $this->db->prepare("SELECT *, name as nome, description as descricao, date as data FROM projects WHERE id = ?");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -563,7 +564,7 @@ class User
         $id_project = $dadosEvento['id_project'] ?? '';
 
         // Atualizar o projeto
-        $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, descricao = ?, data = ?, Booking = ?, local = ? WHERE id = ?");
+        $stmt = $this->db->prepare("UPDATE Projects SET name = ?, description = ?, date = ?, Booking = ?, local = ? WHERE id = ?");
         $stmt->bindParam(1, $nomeEvento);
         $stmt->bindParam(2, $descricao);
         $stmt->bindParam(3, $data);
@@ -707,13 +708,13 @@ class User
     function getEstatisticas7dias($p_id)
     {
         $stmt = $this->db->prepare("SELECT 
-                                        DATE_FORMAT(data, '%Y-%m-%d') AS dia,
+                                        DATE_FORMAT(date, '%Y-%m-%d') AS dia,
                                         SUM(likes) AS likes,
                                         SUM(comments) AS comments
                                     FROM projects_stats_snapshot
                                     WHERE id_project = ?
-                                        AND data >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)  -- Ajustado para exatamente 7 dias atrás
-                                        AND data <= CURDATE()  -- Inclui apenas até a data atual
+                                        AND date >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)  -- Ajustado para exatamente 7 dias atrás
+                                        AND date <= CURDATE()  -- Inclui apenas até a data atual
                                     GROUP BY dia
                                     ORDER BY dia");
         $stmt->execute([$p_id]);  // Bind the id parameter
@@ -725,7 +726,7 @@ class User
     function getEstatisticas30dias($p_id)
     {
         $stmt = $this->db->prepare("SELECT 
-                                        DATE_FORMAT(data, '%Y-%u') AS semana,
+                                        DATE_FORMAT(date, '%Y-%u') AS semana,
                                         id_project,
                                         SUM(likes) AS likes,
                                         SUM(comments) AS comments
@@ -733,7 +734,7 @@ class User
                                         projects_stats_snapshot 
                                     WHERE 
                                         id_project = ?
-                                        AND data >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+                                        AND date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
                                     GROUP BY 
                                         semana, id_project
                                     ORDER BY 
@@ -746,7 +747,7 @@ class User
 
     function getEstatisticas1ano($p_id)
     {
-        $stmt = $this->db->prepare("SELECT DATE_FORMAT(data, '%Y-%m') AS mes_ano, SUM(likes) AS likes, SUM(comments) AS comments FROM projects_stats_snapshot WHERE id_project = ? AND data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
+        $stmt = $this->db->prepare("SELECT DATE_FORMAT(date, '%Y-%m') AS mes_ano, SUM(likes) AS likes, SUM(comments) AS comments FROM projects_stats_snapshot WHERE id_project = ? AND date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -756,7 +757,7 @@ class User
     function getEstatisticastudo($p_id)
     {
         $stmt = $this->db->prepare("SELECT 
-                    DATE_FORMAT(data, '%Y-%m') AS mes_ano,
+                    DATE_FORMAT(date, '%Y-%m') AS mes_ano,
                     SUM(likes) AS likes,
                     SUM(comments) AS comments
                 FROM projects_stats_snapshot
@@ -818,7 +819,7 @@ class User
 
     public function getProjectTumb($p_id)
     {
-        $sql_infos = "SELECT image FROM projects_images WHERE id_project = ? ORDER BY `ordem` ASC";
+        $sql_infos = "SELECT image FROM projects_images WHERE id_project = ? ORDER BY `order` ASC";
         $stmt_infos = $this->db->prepare($sql_infos);
         $stmt_infos->execute([$p_id]);
 
@@ -832,7 +833,7 @@ class User
     public function getRatings($id)
     {
         // Consulta SQL para obter os dados desejados
-        $sql = "SELECT r.stars, r.date, r.comentario, a.picture, a.id, a.id_name as name 
+        $sql = "SELECT r.stars, r.date, r.comment as comentario, a.picture, a.id, a.id_name as name 
          FROM rating AS r
          INNER JOIN accounts AS a ON r.id_send = a.id
          WHERE r.id_receive = ?";
@@ -845,7 +846,7 @@ class User
     public function getRatingsAccounts($id)
     {
         // Prepara outra consulta SQL utilizando o PDO para selecionar todos os campos da tabela 'accounts' onde o id corresponde ao id obtido anteriormente
-        $sql = "SELECT r.stars, r.comentario, a.picture, a.id, a.id_name as name
+        $sql = "SELECT r.stars, r.comment as comentario, a.picture, a.id, a.id_name as name
         FROM rating AS r
         INNER JOIN accounts AS a ON r.id_send = a.id
         WHERE r.id_receive = ?"; // Use placeholder for PDO

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Jul-2024 às 02:56
+-- Tempo de geração: 08-Jul-2024 às 04:42
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -97,7 +97,7 @@ INSERT INTO `accounts` (`id`, `name`, `email`, `password`, `picture`, `picture_b
 (75, 'papa', 'papa@gmail.com', '$2y$10$sENvcSAAuqgpZTo3lCjT2ez5IWBYvSRWLD69YRer54CSO7MLkqcSS', '31cca1f66220cb9c02782407d7f30793.png', '', '2024-07-06 00:00:00', 'Assam, Índia', 3, '', '', '', 0, '', 0, '', 0, '', 0, 'papa'),
 (76, 'when', 'far@gmail.com', '$2y$10$Y/SQhHfehDAfD4.lITlnQeFWnYNUttOTMA1FIPsxwclGmDGEcdzCi', 'a7760e8c8753df1d63533d71784c9728.png', '6688c394e0762.png', '2024-07-06 00:00:00', 'dont have to be afraid', 3, '', '', '', 0, '', 0, '', 0, '', 0, 'far_away'),
 (77, 'asmdlak', 'happypod@gmail.com', '$2y$10$YeJE3pfUxhIX6GpbIuLEu.GpmPz47.l2EPvieC/AoD9yNIkF1.aFa', '6688d1b5dddfc.png', '668b00093550a.png', '2024-07-06 00:00:00', 'Sadabad, Uttar Pradesh, Índia', 2, '', '', '', 0, '', 0, '', 0, '', 0, 'happypod'),
-(78, 'ruben', '', '$2y$10$k6.wZnZWby2aAzm8u9vnJevGrPHzuWMK.7xJSFxs6M5w4Iv.OFHeW', '668b00ed70dbb.png', '668b00d8773fc.png', '2024-07-06 00:00:00', 'akslad', 3, '', '', '', 0, '', 0, '', 0, '', 0, 'beats');
+(78, 'rubensdas', 'asmdkla@gmail.com', '$2y$10$k6.wZnZWby2aAzm8u9vnJevGrPHzuWMK.7xJSFxs6M5w4Iv.OFHeW', '668b00ed70dbb.png', '668b00d8773fc.png', '2024-07-06 00:00:00', 'akslad', 3, 'asda', '912123123', '', 0, '', 0, '', 0, '', 0, 'beats');
 
 -- --------------------------------------------------------
 
@@ -195,11 +195,11 @@ INSERT INTO `follows` (`id`, `id_user`, `id_followed`) VALUES
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
   `id_founder` int(11) NOT NULL,
-  `nome` text NOT NULL,
+  `name` text NOT NULL,
   `imagem` text NOT NULL,
-  `descricao` text NOT NULL,
+  `description` text NOT NULL,
   `local` text NOT NULL,
-  `data` date DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `Booking` text NOT NULL,
   `PrivacyProjects` int(35) NOT NULL,
   `PrivacyLikes` int(35) NOT NULL,
@@ -211,7 +211,7 @@ CREATE TABLE `projects` (
 -- Extraindo dados da tabela `projects`
 --
 
-INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `descricao`, `local`, `data`, `Booking`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `deleted`) VALUES
+INSERT INTO `projects` (`id`, `id_founder`, `name`, `imagem`, `description`, `local`, `date`, `Booking`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `deleted`) VALUES
 (1, 19, 'Lost Landssss', 'ola.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Associação Vida Nova Lar Idosos, Rua das Agras, Pardilhó, Portugal', '2024-06-16', 'ana202', 1, 4, 8, 0),
 (2, 19, 'Tommrowland', 'ola2.jpg', 'Atuar no Lost Lands é uma experiência surreal. Desde o momento em que coloco os pés no palco até o momento em que saio, é uma montanha-russa de emoções e energia. O Lost Lands tem uma energia única, uma mistura de selvageria e comunidade que é difícil de replicar em qualquer outro lugar.\n\nO palco é colossal, uma verdadeira maravilha visual. As luzes, os telões, o som estrondoso - tudo conspira para criar uma atmosfera que te envolve completamente. É como estar em outro mundo.\n\nInteragir com a multidão é uma das melhores partes. Ver milhares de pessoas reunidas, todas compartilhando a mesma paixão pela música, é incrivelmente inspirador. Eles estão lá para se divertir, para se perder na batida, e eu estou lá para levá-los nessa jornada.\n\nClaro, há sempre desafios. Manter a energia alta durante um set longo pode ser exigente, mas é aí que reside a magia da atuação ao vivo. É uma troca de energia constante entre o DJ e o público, e quando você está no Lost Lands, essa troca atinge um nível totalmente novo.\n\nNo final do dia, atuar no Lost Lands é mais do que apenas tocar algumas músicas. É uma experiência imersiva, uma celebração da música e da cultura da dance music. E quando você está no palco, fazendo parte dessa celebração, é uma sensação indescritível.', 'Sydney Zoo, Great Western Highway, Eastern Creek Nova Gales do Sul, Austrália', '2000-07-07', '', 2, 6, 8, 0),
 (3, 19, 'olaaa', 'ola.jpg', 'Isto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um RascunhoIsto é apenas um Rascunho', 'Lisboa, Portugal', '2000-02-19', '', 1, 6, 9, 0),
@@ -219,7 +219,8 @@ INSERT INTO `projects` (`id`, `id_founder`, `nome`, `imagem`, `descricao`, `loca
 (43, 19, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-03', '', 3, 6, 9, 0),
 (44, 24, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2000-07-03', 'ola', 3, 6, 9, 0),
 (45, 76, 'Lets get it the rumble', '', 'everybody put the hands in the air!!!!!!!!!!!!!!!!!!', 'Pardilhó, Portugal', '2024-02-03', 'asd', 3, 6, 9, 0),
-(46, 78, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-07', 'ana202', 1, 4, 9, 0);
+(46, 78, 'ola', '', 'isto é apenas uma ceninhaggg', 'Shellharbour Nova Gales do Sul, Austrália', '2024-07-03', 'ana202', 1, 5, 7, 0),
+(47, 78, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-08', '', 3, 6, 9, 0);
 
 -- --------------------------------------------------------
 
@@ -242,7 +243,8 @@ INSERT INTO `projects_collabs` (`id`, `id_project`, `id_user`) VALUES
 (23, 1, 10),
 (24, 1, 19),
 (25, 1, 27),
-(26, 1, 19);
+(26, 1, 19),
+(38, 46, 35);
 
 -- --------------------------------------------------------
 
@@ -258,6 +260,18 @@ CREATE TABLE `projects_comments` (
   `parent_comment_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `projects_comments`
+--
+
+INSERT INTO `projects_comments` (`id`, `id_project`, `id_user_send`, `comment`, `parent_comment_id`) VALUES
+(1, 1, 78, 'toptop', NULL),
+(2, 2, 78, 'gg', NULL),
+(3, 2, 78, 'asd', NULL),
+(4, 46, 78, 'a', NULL),
+(5, 46, 78, 's', NULL),
+(6, 2, 78, 'c', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -270,6 +284,13 @@ CREATE TABLE `projects_comments_likes` (
   `id_user_send` int(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `projects_comments_likes`
+--
+
+INSERT INTO `projects_comments_likes` (`id`, `comment_id`, `id_user_send`) VALUES
+(32, 1, 78);
+
 -- --------------------------------------------------------
 
 --
@@ -280,21 +301,22 @@ CREATE TABLE `projects_images` (
   `id` int(11) NOT NULL,
   `id_project` int(11) NOT NULL,
   `image` text NOT NULL,
-  `ordem` int(11) DEFAULT NULL
+  `order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `projects_images`
 --
 
-INSERT INTO `projects_images` (`id`, `id_project`, `image`, `ordem`) VALUES
+INSERT INTO `projects_images` (`id`, `id_project`, `image`, `order`) VALUES
 (281, 3, '8AeRnPGJIm4V8AAAAASUVORK5CYII=', 1),
 (282, 3, '8AikbwswNo2I0AAAAASUVORK5CYII=', 2),
 (339, 1, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 1),
 (341, 2, 'wC2VDt1yN1pZgAAAABJRU5ErkJggg==', 1),
 (342, 2, 'XtXl05DvXtS+0rxzCl+tzcvK13c1fvTpjIXtm919Or9aryls5NwAAAABJRU5ErkJggg==', 2),
-(372, 46, 'wdwLbyn+0eGKQAAAABJRU5ErkJggg==', 1),
-(373, 46, 'AAAAAElFTkSuQmCC', 2);
+(383, 46, 'D0r8vQe8UEO1AAAAAElFTkSuQmCC', 1),
+(384, 46, 'AAAAAElFTkSuQmCC', 2),
+(385, 47, '4131b92e4a9c7779.png', 1);
 
 -- --------------------------------------------------------
 
@@ -324,7 +346,8 @@ INSERT INTO `projects_likes` (`id`, `id_project`, `id_user_send`) VALUES
 (31, 45, 76),
 (38, 45, 78),
 (88, 2, 78),
-(89, 1, 78);
+(94, 46, 78),
+(96, 1, 78);
 
 -- --------------------------------------------------------
 
@@ -334,7 +357,7 @@ INSERT INTO `projects_likes` (`id`, `id_project`, `id_user_send`) VALUES
 
 CREATE TABLE `projects_stats_snapshot` (
   `id_snapshot` int(11) NOT NULL,
-  `data` date DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `id_project` int(11) DEFAULT NULL,
   `likes` int(11) DEFAULT NULL,
   `comments` int(11) DEFAULT NULL
@@ -344,7 +367,7 @@ CREATE TABLE `projects_stats_snapshot` (
 -- Extraindo dados da tabela `projects_stats_snapshot`
 --
 
-INSERT INTO `projects_stats_snapshot` (`id_snapshot`, `data`, `id_project`, `likes`, `comments`) VALUES
+INSERT INTO `projects_stats_snapshot` (`id_snapshot`, `date`, `id_project`, `likes`, `comments`) VALUES
 (1, '2024-07-08', 2, 3, 0),
 (2, '2024-07-08', 1, 4, 0),
 (3, '2024-07-08', 3, 2, 0),
@@ -364,20 +387,22 @@ CREATE TABLE `rating` (
   `id_receive` int(11) NOT NULL,
   `stars` int(35) NOT NULL,
   `date` date DEFAULT NULL,
-  `comentario` text DEFAULT NULL
+  `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `rating`
 --
 
-INSERT INTO `rating` (`id`, `id_send`, `id_receive`, `stars`, `date`, `comentario`) VALUES
+INSERT INTO `rating` (`id`, `id_send`, `id_receive`, `stars`, `date`, `comment`) VALUES
 (1, 5, 19, 4, '2024-05-24', 'Grande artista'),
 (2, 5, 19, 2, '1900-01-12', 'incrivel'),
 (6, 5, 19, 4, '2024-05-10', '                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptas debitis dolorum labore reiciendis alias ipsa fuga unde repellendus autem consequuntur at itaque, reprehenderit, impedit ducimus mollitia? Tenetur, molestias quaerat.\n\nLorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus voluptatibus minima vel iure, dignissimos alias. Quia id blanditiis eum, aliquam consectetur praesentium ea repellat laudantium. Modi cum provident voluptate temporibus. \n\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, voluptate? Sint, quia. Quis, quas est! Minus dolorum error, maiores inventore in, sint fuga hic temporibus impedit doloremque ex quas aperiam.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Minima vel doloremque illo nesciunt, provident natus eos alias, debitis dolor tenetur vero ducimus facere ea enim, harum consequuntur iste possimus aliquid.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Odit debitis cumque tempore sunt cupiditate impedit tenetur facere deleniti, eligendi possimus temporibus ullam magnam natus sapiente ut excepturi obcaecati quo autem.\n\nLorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat consequatur ipsa ex? At provident voluptates perspiciatis aliquid, accusamus et deserunt velit reiciendis aperiam. At itaque similique, deleniti odio dolores explicabo.\n'),
 (7, 5, 19, 1, '2024-05-10', 'brutal'),
 (8, 5, 19, 4, '2024-05-10', 'brutal'),
-(9, 5, 19, 4, '2024-05-10', 'brutal');
+(9, 5, 19, 4, '2024-05-10', 'brutal'),
+(19, 78, 78, 4, '2024-07-08', 'bom trabalhador'),
+(20, 78, 77, 4, '2024-07-08', 'drown');
 
 --
 -- Índices para tabelas despejadas
@@ -507,37 +532,37 @@ ALTER TABLE `follows`
 -- AUTO_INCREMENT de tabela `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de tabela `projects_collabs`
 --
 ALTER TABLE `projects_collabs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments`
 --
 ALTER TABLE `projects_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `projects_comments_likes`
 --
 ALTER TABLE `projects_comments_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `projects_images`
 --
 ALTER TABLE `projects_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=386;
 
 --
 -- AUTO_INCREMENT de tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT de tabela `projects_stats_snapshot`
@@ -549,7 +574,7 @@ ALTER TABLE `projects_stats_snapshot`
 -- AUTO_INCREMENT de tabela `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restrições para despejos de tabelas
@@ -635,7 +660,7 @@ DELIMITER $$
 -- Eventos
 --
 CREATE DEFINER=`root`@`localhost` EVENT `insert_stats_event` ON SCHEDULE EVERY 1 DAY STARTS '2024-07-07 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
-  INSERT INTO projects_stats_snapshot (data, id_project, likes, comments)
+  INSERT INTO projects_stats_snapshot (date, id_project, likes, comments)
   SELECT CURDATE(), p.id_project, 
          IFNULL(l.likes, 0) AS likes, 
          IFNULL(c.comments, 0) AS comments

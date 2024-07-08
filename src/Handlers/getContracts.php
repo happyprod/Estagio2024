@@ -44,13 +44,8 @@ if (isset($_GET['var1'])) {
                                         <th class="text-uppercase w-10 text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Função</th>
                                         <th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assunto</th>
                                         <th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
-                                        <th class="text-center w-5 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF</th>';
-    if ($opcao != 1) {
-        $html .= '<th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>';
-    }
-
-
-    $html .= '
+                                        <th class="text-center w-5 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PDF</th>
+                                        <th class="text-center w-10 text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
                                     </tr>
                                 </thead>
                             <tbody>';
@@ -63,11 +58,10 @@ if (isset($_GET['var1'])) {
         $date = htmlspecialchars($row->date);
         $file = htmlspecialchars($row->file);
 
-        if ($opcao == 1)
-        {
-            $id = htmlspecialchars($row->id_sender);
-        } else {
+        if (htmlspecialchars($row->id_sender) == $id_user) {
             $id = htmlspecialchars($row->id_receive);
+        } else {
+            $id = htmlspecialchars($row->id_sender);
         }
         $id_contract = htmlspecialchars($row->id);
 
@@ -111,7 +105,7 @@ if (isset($_GET['var1'])) {
                                     <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $picture . '" class="avatar avatar-sm me-3" alt="user1">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >@' . $id_name . '</h6>
+                                    <a href="utilizadores/' . $id . '.php"><h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >@' . $id_name . '</h6></a>
                                     <p style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-xs text-secondary mb-0">' . $name . '</p>
                                 </div>
                             </div>
@@ -159,7 +153,6 @@ if (isset($_GET['var1'])) {
                                     <p class="my-auto text-danger opacity-8"> Recusado </p>
                                 </td>';
             }
-
         } else if ($opcao == 2) {
             $estado = htmlspecialchars($row->state);
 

@@ -89,7 +89,7 @@ if ($result->num_rows > 0) {
         
 
         // Consulta SQL que une as tabelas necessárias e faz os contagens
-        $sql = "SELECT * FROM projects_images WHERE id_project = $p_id ORDER BY ordem";
+        $sql = "SELECT *, `order` as ordem FROM projects_images WHERE id_project = $p_id ORDER BY ordem"; // Use placeholder for PDO
 
         $result2 = $conn->query($sql);
 

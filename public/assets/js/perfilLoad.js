@@ -633,7 +633,7 @@ function guardarPrivacidade(id_projeto, selectedContainer) {
 
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/guardarPrivacidadeEditar.php";
-    var params = "id_projeto=" + encodeURIComponent(id_projeto) +
+    var params = "id_project=" + encodeURIComponent(id_projeto) +
         "&projetos=" + encodeURIComponent(projetos[selectedContainer]) +
         "&gostos=" + encodeURIComponent(gostos[selectedContainer]) +
         "&comentarios=" + encodeURIComponent(comentarios[selectedContainer]);
@@ -656,7 +656,7 @@ function guardarPrivacidade(id_projeto, selectedContainer) {
 function apagarProjeto(p_id) {
     var xhr = new XMLHttpRequest();
     var url = "../../src/Handlers/apagarProjeto.php";
-    var params = "id_projeto=" + encodeURIComponent(p_id);
+    var params = "id_project=" + encodeURIComponent(p_id);
 
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
