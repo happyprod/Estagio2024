@@ -1,20 +1,5 @@
 <?php
 
-
-/*
-Representa uma mensagem privada enviada de um usuário para outro.
-
-Propriedades:
-
-id
-sender_id
-receiver_id
-content
-created_at
-read_at
-
-*/
-
 namespace App\Models;
 
 use PDO;
@@ -115,19 +100,19 @@ class Message
 
 
     public function getChatTrade($id)
-{
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    $session = $_SESSION['user_id'];
+        $session = $_SESSION['user_id'];
 
-    if (!$session || !$id || $session == $id) {
-        error_log("Invalid session or id values. Session: $session, ID: $id");
-        return null;
-    }
+        if (!$session || !$id || $session == $id) {
+            error_log("Invalid session or id values. Session: $session, ID: $id");
+            return null;
+        }
 
-    $sql = "SELECT a.id_name, a.picture, c.id_sender, c.message, c.viewed, c.date
+        $sql = "SELECT a.id_name, a.picture, c.id_sender, c.message, c.viewed, c.date
             FROM chat c
             JOIN accounts a ON a.id = CASE
                 WHEN c.id_sender = ? THEN c.id_receive
@@ -138,14 +123,14 @@ class Message
             ORDER BY c.date DESC
             LIMIT 1";
 
-    $stmt2 = $this->db->prepare($sql);
-    $stmt2->execute([$session, $session, $session, $id, $id, $session]);
-    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $stmt2 = $this->db->prepare($sql);
+        $stmt2->execute([$session, $session, $session, $id, $id, $session]);
+        $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-    error_log("Query result: " . print_r($result2, true));
+        error_log("Query result: " . print_r($result2, true));
 
-    return $result2;
-}
+        return $result2;
+    }
 
 
 
@@ -176,19 +161,19 @@ class Message
 
 
     public function getLastChat($user)
-{
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-    $session = $_SESSION['user_id'];
+        $session = $_SESSION['user_id'];
 
-    // Verifique se o $session e o $user não são nulos ou iguais
-    if (!$session || !$user || $session == $user) {
-        return null; // Retorna nulo ou uma mensagem de erro adequada
-    }
+        // Verifique se o $session e o $user não são nulos ou iguais
+        if (!$session || !$user || $session == $user) {
+            return null; // Retorna nulo ou uma mensagem de erro adequada
+        }
 
-    $sql = "SELECT c.id_sender, c.id_receive, a.id, a.id_name, a.picture, c.date
+        $sql = "SELECT c.id_sender, c.id_receive, a.id, a.id_name, a.picture, c.date
             FROM chat c
             JOIN accounts a ON a.id = CASE
                 WHEN c.id_sender = ? THEN c.id_receive
@@ -199,17 +184,17 @@ class Message
             ORDER BY c.date DESC
             LIMIT 1";
 
-    $stmt2 = $this->db->prepare($sql);
-    $stmt2->execute([$session, $session, $session, $user, $user, $session]);
-    $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $stmt2 = $this->db->prepare($sql);
+        $stmt2->execute([$session, $session, $session, $user, $user, $session]);
+        $result2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-    return $result2;
-}
+        return $result2;
+    }
 
     public function getMessages($user)
     {
-         // Iniciar a sessão se ainda não estiver iniciada
-         if (session_status() == PHP_SESSION_NONE) {
+        // Iniciar a sessão se ainda não estiver iniciada
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
 
