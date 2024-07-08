@@ -43,7 +43,7 @@ class Auth
 
     public function VerifyAccountExistByEmail($email)
     {
-        $stmt = $this->db->prepare("SELECT email FROM accounts WHERE email = ?");
+        $stmt = $this->db->prepare("SELECT mainEmail FROM accounts WHERE mainEmail = ?");
         $stmt->execute([$email]);  // Bind the id_name parameter
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -71,7 +71,7 @@ class Auth
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Atualizar o projeto
-        $stmt = $this->db->prepare("INSERT INTO accounts (id_name, email, name, password, location, identity, registered, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO accounts (id_name, mainEmail, name, password, location, identity, registered, picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bindParam(1, $id_name);
         $stmt->bindParam(2, $email);
         $stmt->bindParam(3, $nome);

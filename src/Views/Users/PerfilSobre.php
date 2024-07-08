@@ -77,7 +77,7 @@ if (!preg_match("~^(?:f|ht)tps?://~i", $blog_url)) {
                                                     <?php echo $nome; ?>
                                                 </h5>
                                                 <p class="mb-0 font-weight-bold text-sm">
-                                                    <?php echo $type_utilizador; ?>
+                                                    <?php echo $identidade; ?>
                                                 </p>
                                             </div>
                                         </div>

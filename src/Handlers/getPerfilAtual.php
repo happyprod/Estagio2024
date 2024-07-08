@@ -49,7 +49,7 @@ $html .= '
             <!-- User Profile Item -->
             <li class="nav-item">
                 <div class="d-flex nav-link align-items-center">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <div class="">
                         <img class="rounded-circle" src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $acc_picture . '" style="height: 40px; width: 40px; object-fit: cover;" alt="Imagem do Perfil">
                     </div>
                     <div class="d-flex ms-1 flex-column">
