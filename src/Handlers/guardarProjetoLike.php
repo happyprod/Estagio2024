@@ -15,16 +15,16 @@ $controller = new UserController($model);
 
     // Verifica se as variáveis foram passadas na requisição
     if(isset($_GET['var1']) && isset($_GET['var2'])) {
-        $id_projeto = $_GET['var1'];
+        $id_project = $_GET['var1'];
         $opcao = $_GET['var2'];
 
         
         if ($opcao == 1)
         {
-            $data = $controller->ApagarProjectLikes($id_projeto);
+            $data = $controller->ApagarProjectLikes($id_project);
         } else if ($opcao == 2){
             echo 'deu';
-            $data = $controller->guardarProjectLikes($id_projeto);
+            $data = $controller->guardarProjectLikes($id_project);
 
         }
 

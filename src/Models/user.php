@@ -306,7 +306,7 @@ class User
 
 
 
-    public function guardarProjectLikes($id_projeto)
+    public function guardarProjectLikes($id_project)
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -318,12 +318,12 @@ class User
         $stmt_insert = $this->db->prepare("INSERT INTO projects_likes (id_project, id_user_send) VALUES (:id_project, :id_user_send)");
 
         // Executa a inserção
-        $stmt_insert->bindParam(':id_project', $id_projeto, PDO::PARAM_INT);
+        $stmt_insert->bindParam(':id_project', $id_project, PDO::PARAM_INT);
         $stmt_insert->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
         $stmt_insert->execute();
     }
 
-    public function ApagarProjectLikes($id_projeto)
+    public function ApagarProjectLikes($id_project)
     {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -335,7 +335,7 @@ class User
         $stmt_delete = $this->db->prepare("DELETE FROM projects_likes WHERE id_project = :id_project AND id_user_send = :id_user_send");
 
         // Executa a exclusão
-        $stmt_delete->bindParam(':id_project', $id_projeto, PDO::PARAM_INT);
+        $stmt_delete->bindParam(':id_project', $id_project, PDO::PARAM_INT);
         $stmt_delete->bindParam(':id_user_send', $user_id, PDO::PARAM_INT);
         $stmt_delete->execute();
     }
@@ -560,7 +560,7 @@ class User
         $data = $dadosEvento['data'] ?? '';
         $empresaBooking = $dadosEvento['empresaBooking'] ?? '';
         $localizacao = $dadosEvento['localizacao'] ?? '';
-        $id_projeto = $dadosEvento['id_projeto'] ?? '';
+        $id_project = $dadosEvento['id_project'] ?? '';
 
         // Atualizar o projeto
         $stmt = $this->db->prepare("UPDATE Projects SET nome = ?, descricao = ?, data = ?, Booking = ?, local = ? WHERE id = ?");
@@ -569,11 +569,11 @@ class User
         $stmt->bindParam(3, $data);
         $stmt->bindParam(4, $empresaBooking);
         $stmt->bindParam(5, $localizacao);
-        $stmt->bindParam(6, $id_projeto);
+        $stmt->bindParam(6, $id_project);
         $stmt->execute();
 
         $stmt = $this->db->prepare("DELETE FROM projects_collabs WHERE id_project = ?");
-        $stmt->bindParam(1, $id_projeto);
+        $stmt->bindParam(1, $id_project);
         $stmt->execute();
 
         // Inserir colaboradores no projeto
@@ -589,7 +589,7 @@ class User
 
                 // Inserir na tabela projects_collabs
                 $stmt = $this->db->prepare("INSERT INTO projects_collabs (id_project, id_user) VALUES (?, ?)");
-                $stmt->bindParam(1, $id_projeto);
+                $stmt->bindParam(1, $id_project);
                 $stmt->bindParam(2, $id_user);
                 $stmt->execute();
             }
@@ -711,7 +711,7 @@ class User
                                         SUM(likes) AS likes,
                                         SUM(comments) AS comments
                                     FROM projects_stats_snapshot
-                                    WHERE id_projeto = ?
+                                    WHERE id_project = ?
                                         AND data >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)  -- Ajustado para exatamente 7 dias atrás
                                         AND data <= CURDATE()  -- Inclui apenas até a data atual
                                     GROUP BY dia
@@ -726,16 +726,16 @@ class User
     {
         $stmt = $this->db->prepare("SELECT 
                                         DATE_FORMAT(data, '%Y-%u') AS semana,
-                                        id_projeto,
+                                        id_project,
                                         SUM(likes) AS likes,
                                         SUM(comments) AS comments
                                     FROM 
                                         projects_stats_snapshot 
                                     WHERE 
-                                        id_projeto = ?
+                                        id_project = ?
                                         AND data >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
                                     GROUP BY 
-                                        semana, id_projeto
+                                        semana, id_project
                                     ORDER BY 
                                         semana ASC");
         $stmt->execute([$p_id]);  // Bind the id parameter
@@ -746,7 +746,7 @@ class User
 
     function getEstatisticas1ano($p_id)
     {
-        $stmt = $this->db->prepare("SELECT DATE_FORMAT(data, '%Y-%m') AS mes_ano, SUM(likes) AS likes, SUM(comments) AS comments FROM projects_stats_snapshot WHERE id_projeto = ? AND data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
+        $stmt = $this->db->prepare("SELECT DATE_FORMAT(data, '%Y-%m') AS mes_ano, SUM(likes) AS likes, SUM(comments) AS comments FROM projects_stats_snapshot WHERE id_project = ? AND data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR) GROUP BY mes_ano ORDER BY mes_ano");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -760,7 +760,7 @@ class User
                     SUM(likes) AS likes,
                     SUM(comments) AS comments
                 FROM projects_stats_snapshot
-                WHERE id_projeto = ?
+                WHERE id_project = ?
                 GROUP BY mes_ano
                 ORDER BY mes_ano");
         $stmt->execute([$p_id]);  // Bind the id parameter
@@ -771,7 +771,7 @@ class User
 
     function getEstatisticasProjeto($p_id)
     {
-        $stmt = $this->db->prepare("SELECT likes, comments FROM projects_stats_snapshot WHERE id_projeto = ?");
+        $stmt = $this->db->prepare("SELECT likes, comments FROM projects_stats_snapshot WHERE id_project = ?");
         $stmt->execute([$p_id]);  // Bind the id parameter
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -781,7 +781,7 @@ class User
     public function editarPrivacidade($dados)
     {
         // Ler dados enviados via POST
-        $id_projeto = $dados['id_projeto'];
+        $id_project = $dados['id_project'];
         $projetos = $dados['projetos'];
         $gostos = $dados['gostos'];
         $comentarios = $dados['comentarios'];
@@ -795,7 +795,7 @@ class User
         $stmt->bindParam(1, $projetos);
         $stmt->bindParam(2, $gostos);
         $stmt->bindParam(3, $comentarios);
-        $stmt->bindParam(4, $id_projeto);
+        $stmt->bindParam(4, $id_project);
         $stmt->execute();
     }
 
@@ -1013,7 +1013,7 @@ class User
 
     public function getVerificarDias($p_id)
     {
-        $stmt = $this->db->prepare("SELECT id_snapshot FROM projects_stats_snapshot WHERE id_projeto = ?");
+        $stmt = $this->db->prepare("SELECT id_snapshot FROM projects_stats_snapshot WHERE id_project = ?");
         $stmt->execute([$p_id]);  // Bind the id parameter
         return count($stmt->fetchAll(PDO::FETCH_OBJ));
     }

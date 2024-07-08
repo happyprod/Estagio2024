@@ -44,7 +44,7 @@ class UserController
 
     public function inserirEvento()
     {
-        $id_projeto = $_POST['id_projeto'] ?? '';
+        $id_project = $_POST['id_project'] ?? '';
 
         // Outros dados
         $nomeEvento = $_POST['nomeEvento'] ?? '';
@@ -67,7 +67,7 @@ class UserController
             'data' => $data,
             'empresaBooking' => $AgenteBooking,
             'localizacao' => $localizacao,
-            'id_projeto' => $id_projeto
+            'id_project' => $id_project
         );
 
         $this->model->inserirEvento($dadosEvento, $arrayC_idName);
@@ -339,7 +339,7 @@ class UserController
     public function editarPrivacidade()
     {
         // Ler dados enviados via POST
-        $id_projeto = $_POST['id_projeto'];
+        $id_project = $_POST['id_project'];
         $projetos = $_POST['projetos'];
         $gostos = $_POST['gostos'];
         $comentarios = $_POST['comentarios'];
@@ -351,7 +351,7 @@ class UserController
 
         // Inserir no banco de dados
         $dadosEvento = array(
-            'id_projeto' => $id_projeto,
+            'id_project' => $id_project,
             'projetos' => $projetos,
             'gostos' => $gostos,
             'comentarios' => $comentarios
@@ -560,9 +560,9 @@ class UserController
     public function apagarProjeto()
     {
         // Ler dados enviados via POST
-        $id_projeto = $_POST['id_projeto'];
+        $id_project = $_POST['id_project'];
 
-        $this->model->apagarProjeto($id_projeto);
+        $this->model->apagarProjeto($id_project);
     }
 
     public function guardarEditarProjetosImagens1($projeto)
@@ -673,14 +673,14 @@ class UserController
         return $this->model->ApagarCommentsLikes($id_comentario);
     }
 
-    public function ApagarProjectLikes($id_projeto)
+    public function ApagarProjectLikes($id_project)
     {
-        return $this->model->ApagarProjectLikes($id_projeto);
+        return $this->model->ApagarProjectLikes($id_project);
     }
 
-    public function guardarProjectLikes($id_projeto)
+    public function guardarProjectLikes($id_project)
     {
-        return $this->model->guardarProjectLikes($id_projeto);;
+        return $this->model->guardarProjectLikes($id_project);;
     }
 
 
