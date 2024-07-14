@@ -49,12 +49,11 @@ class Home
         }
 
         // Consulta para obter sugestões com base nos critérios especificados
-        $stmt = $this->db->prepare("SELECT a.id, a.id_name, a.picture, a.identity
+        $stmt = $this->db->prepare("SELECT DISTINCT a.id, a.id_name, a.picture, a.identity
                                     FROM accounts a
-                                    LEFT JOIN follows f ON a.id = f.id_followed
+                                    LEFT JOIN follows f ON a.id = f.id_user
                                     WHERE a.identity = ?
                                     AND (f.id_user IS NULL OR f.id_user <> ?)
-                                    AND (f.id_followed IS NULL OR f.id_followed <> a.id)
                                     ORDER BY RAND()
                                     LIMIT 5;");
 
@@ -76,12 +75,12 @@ class Home
 
         // Consulta para obter as 5 contas mais seguidas e verificar se $id_user as segue
         $stmt = $this->db->prepare("SELECT a.id, a.id_name, a.picture, a.identity, COUNT(f.id_followed) AS follows_count,
-                                       EXISTS(SELECT 1 FROM follows WHERE id_user = ? AND id_followed = a.id) AS is_following
-                                FROM accounts a
-                                JOIN follows f ON a.id = f.id_followed
-                                GROUP BY a.id, a.id_name, a.picture, a.identity
-                                ORDER BY follows_count DESC
-                                LIMIT 5;");
+                                        EXISTS(SELECT 1 FROM follows WHERE id_user = ? AND id_followed = a.id) AS is_following
+                                    FROM accounts a
+                                    JOIN follows f ON a.id = f.id_followed
+                                    GROUP BY a.id, a.id_name, a.picture, a.identity
+                                    ORDER BY follows_count DESC
+                                    LIMIT 5;");
 
         $stmt->execute([$id_user]);  // Vincula o parâmetro id_user
 

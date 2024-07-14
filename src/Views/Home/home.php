@@ -87,7 +87,7 @@ $controller = new HomeController($model);
                         <h6>Contas Sugeridas</h6>
 
                         <?php
-                        $controller->getSugestions();
+                            $controller->getSugestions();
                         ?>
 
                     </div>
@@ -98,7 +98,7 @@ $controller = new HomeController($model);
                         <h6>Contas Populares</h6>
 
                         <?php
-                        $controller->getPopulars();
+                            $controller->getPopulars();
                         ?>
                     </div>
 

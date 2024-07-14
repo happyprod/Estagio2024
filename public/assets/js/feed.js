@@ -7,7 +7,6 @@ function loadProjects() {
         const projects = JSON.parse(data);
         if (projects.length > 0) {
             projects.forEach(project => {
-                console.log(data);
                 const local = project.local;
                 const link = local
                     ? `- <a target="_blank" href="https://www.google.pt/maps/search/${local}.php">${local}</a>`
