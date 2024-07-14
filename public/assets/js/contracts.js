@@ -30,9 +30,10 @@ function mostrarAssunto(var1)
 }
 
 function downloadFile(fileName, id) {
-    const filePath = '/Estagio2024/public/users/' + id + '/' + fileName;
+    const filePath = '/ConcertPulse/public/users/' + id + '/' + fileName;
     const xhr = new XMLHttpRequest();
     console.log(id);
+    
     xhr.open('GET', filePath, true);
     xhr.responseType = 'blob';
     xhr.onload = function () {

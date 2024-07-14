@@ -76,7 +76,7 @@ if (count($ratings) != 0)
                                                 <img ';
 
                                     if ($google_image2 == false) {
-                                        echo 'src="http://localhost/Estagio2024/public/users/' . $av_user . '/' . $av_foto . '"';
+                                        echo 'src="http://localhost/ConcertPulse/public/users/' . $av_user . '/' . $av_foto . '"';
                                     } else {
                                         echo 'src="' . $av_foto . '"';
                                     }
@@ -166,7 +166,7 @@ if (count($ratings) != 0)
                                             <img ';
 
                             if ($google_image2 == false) {
-                                echo 'src="http://localhost/Estagio2024/public/users/' . $av_user . '/' . $av_foto . '"';
+                                echo 'src="http://localhost/ConcertPulse/public/users/' . $av_user . '/' . $av_foto . '"';
                             } else {
                                 echo 'src="' . $av_foto . '"';
                             }

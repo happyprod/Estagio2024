@@ -50,7 +50,7 @@ $html .= '
             <li class="nav-item">
                 <div class="d-flex nav-link align-items-center">
                     <div class="">
-                        <img class="rounded-circle" src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $acc_picture . '" style="height: 40px; width: 40px; object-fit: cover;" alt="Imagem do Perfil">
+                        <img class="rounded-circle" src="http://localhost/ConcertPulse/public/users/' . $acc_id . '/' . $acc_picture . '" style="height: 40px; width: 40px; object-fit: cover;" alt="Imagem do Perfil">
                     </div>
                     <div class="d-flex ms-1 flex-column">
                         <h6 style="font-size: 15px;" class="title mb-0">@' . $acc_idName . '</h6>

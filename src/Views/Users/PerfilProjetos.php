@@ -86,7 +86,7 @@
                     <div class="card card-blog card-plain">
                         <div class="position-relative">
                             <a class="d-block shadow-xl border-radius-xl">
-                                <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $p_imagem . '" alt="img-blur-shadow"
+                                <img src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $p_imagem . '" alt="img-blur-shadow"
                                     class="img-fluid shadow rounded-sm border-radius-xl w-100" style="object-fit: cover; background-position-y: 50%; height: 12.5vw;">
                             </a>
                         </div>

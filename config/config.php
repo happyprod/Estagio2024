@@ -3,9 +3,9 @@
 define('APP_ENV', 'development');
 
 // URL base da aplicação
-define('BASE_URL', 'http://localhost/Estagio2024/public/home.php');
+define('BASE_URL', 'http://localhost/ConcertPulse/public/home.php');
 
-define('BASE_LOGO', 'http://localhost/Estagio2024/public/img/logo.png');
+define('BASE_LOGO', 'http://localhost/ConcertPulse/public/img/logo.png');
 
 // Constantes globais
 define('APP_NAME', 'Concert Pulse');

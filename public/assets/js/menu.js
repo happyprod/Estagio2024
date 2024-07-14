@@ -1,6 +1,6 @@
 function perfilAtual() {    
     $.ajax({
-        url: 'http://localhost/Estagio2024/src/Handlers/getPerfilAtual.php',
+        url: 'http://localhost/ConcertPulse/src/Handlers/getPerfilAtual.php',
         method: 'GET',
         data: {}, // Passando variáveis na requisição
         success: function (data) {

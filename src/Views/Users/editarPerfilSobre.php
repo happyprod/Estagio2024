@@ -4,14 +4,14 @@
         <?php if ($fotodecapa == null) {
             echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
         } else {
-            echo 'style="background-image: url(\'http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%;"';
+            echo 'style="background-image: url(\'http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodecapa . ' \'); background-position-y: 50%;"';
         } ?>>
         <div class="cover-overlay w-100" onclick="uploadCoverImage()">
             <?php
 
             if ($fotodecapa != '')
             {
-                echo '<img id="nome_arquivo" src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . '" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />';
+                echo '<img id="nome_arquivo" src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodecapa . '" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />';
             } else {
                 echo '<img id="nome_arquivo" src="../public/assets/img/curved-images/curved0.jpg" alt="cover_image" class="img-fluid w-100" style="height: 300px; object-fit: cover; cursor: pointer;" />';
             }
@@ -35,7 +35,7 @@
                             $google_image = true;
                         }
                         if ($google_image == false) {
-                            echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+                            echo 'src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodeperfil . '"';
                         } else {
                             echo 'src="' . $fotodeperfil . '"';
                         }

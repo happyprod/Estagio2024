@@ -105,7 +105,7 @@ $controller = new SearchController($model);
                         echo '
                             <div class="col-6 col-md-4 col-lg-3 mb-4">
                                 <div class="card profile-card">
-                                    <img src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $acc_picture . '" class="card-img-top" alt="Imagem do Perfil">
+                                    <img src="http://localhost/ConcertPulse/public/users/' . $acc_id . '/' . $acc_picture . '" class="card-img-top" alt="Imagem do Perfil">
                                     <div class="card-body">
                                         <h5 class="card-title">@' . $acc_idName . '</h5>
                                         <p class="my-1 ms-1 mt-3 p-0 text-sm text-center" style="height: 20px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">

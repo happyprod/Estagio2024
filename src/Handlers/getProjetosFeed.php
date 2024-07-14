@@ -136,7 +136,7 @@ if ($privacy_comments == 7 || ($privacy_comments == 8 && $follow == '1') || ($pr
 
             $html .= '
                 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-                    <img src="http://localhost/Estagio2024/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" alt="...">
+                    <img src="http://localhost/ConcertPulse/public/users/' . $p_founder . '/' . $pi_imagem . '" class="d-block w-100 img-fluid h-100" style="object-fit: cover; background-position-y: 50%;"  alt="...">
                 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -181,7 +181,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/ConcertPulse/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>
@@ -541,7 +541,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
 
             $html .= '
 <div class="carousel-item w-100 h-100 ' . ($isActive ? 'active' : '') . '">
-<img src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
+<img src="http://localhost/ConcertPulse/public/users/' . $acc_id . '/' . $pi_imagem . '" class="d-block w-100 h-100" alt="...">
 </div>';
 
             $isActive = false; // Set to false after the first item
@@ -588,7 +588,7 @@ $html .= '" type="button" data-bs-target="#carousel' . $count . '" data-bs-slide
     if ($google_image) {
         $html .= 'src="' . $fotodeperfil . '"';
     } else {
-        $html .= 'src="http://localhost/Estagio2024/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
+        $html .= 'src="http://localhost/ConcertPulse/public/users/' . $acc_id . '/' . $fotodeperfil . '"';
     }
     $html .= 'alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 40px; width: 40px; object-fit: cover;">
 </div>

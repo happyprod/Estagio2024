@@ -20,14 +20,13 @@ use App\Models\Auth;
 $routes = [
     '/home' => [HomeController::class, 'showHome'],
     '/perfil' => [UserController::class, 'show'],
-    '/utilizadores/(\d+\.php)' => [UserController::class, 'show'], // Corrigido o padrão de rota
+    '/utilizadores/(\d+\.php)' => [UserController::class, 'show'],
     '/editarPerfil' => [UserController::class, 'showEditar'],
+    '/pesquisar' => [SearchController::class, 'showPesquisar'], 
     '/chat' => [ChatController::class, 'showChat'],
     '/contratos' => [ContractsController::class, 'showContratos'],
-    '/contact' => 'PageController@contact',
     '/register' => [AuthController::class, 'showRegisterForm'],
     '/login' => [AuthController::class, 'showLoginForm'],
-    '/pesquisar' => [SearchController::class, 'showPesquisar'],
     '/logout' => [AuthController::class, 'logout']
 ];
 

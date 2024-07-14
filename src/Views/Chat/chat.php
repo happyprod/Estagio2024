@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
             if ($google_image) {
                 $fotodeperfil = 'src="' . $fotodeperfil . '"';
             } else {
-                $fotodeperfil = 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+                $fotodeperfil = 'src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodeperfil . '"';
             }
 
             if ($vistas != 0) {
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
     if ($google_image) {
         $fotodeperfil = 'src="' . $fotodeperfil . '"';
     } else {
-        $fotodeperfil = 'src="http://localhost/Estagio2024/public/users/' . $user . '/' . $fotodeperfil . '"';
+        $fotodeperfil = 'src="http://localhost/ConcertPulse/public/users/' . $user . '/' . $fotodeperfil . '"';
     }
 
     // Obter a data atual

@@ -188,7 +188,7 @@ if ($identidade == 1) {
                                                                                     if ($fotodecapa == null) {
                                                                                         echo 'style="background-image: url(\'../../public/assets/img/curved-images/curved0.jpg\'); background-position-y: 50%;"';
                                                                                     } else {
-                                                                                        echo 'style="background-image: url(\'http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodecapa . ' \'); object-fit: cover; background-position-y: 50%; "';
+                                                                                        echo 'style="background-image: url(\'http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodecapa . ' \'); object-fit: cover; background-position-y: 50%; "';
                                                                                     }
                                                                                     ?>>
             </div>
@@ -214,7 +214,7 @@ if ($identidade == 1) {
 
 
                                     if ($google_image == false) {
-                                        echo 'src="http://localhost/Estagio2024/public/users/' . $id . '/' . $fotodeperfil . '"';
+                                        echo 'src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $fotodeperfil . '"';
                                     } else {
                                         echo 'src="' . $fotodeperfil . '"';
                                     }
@@ -244,7 +244,7 @@ if ($identidade == 1) {
 
                                 if ($session_id == $id) {
                                     echo '
-                                    <a href="http://localhost/Estagio2024/public/editarPerfil.php">
+                                    <a href="http://localhost/ConcertPulse/public/editarPerfil.php">
                                        <button type="button" class="btn btn-primary btn-sm me-4" style="margin-top: 1em;" >
                                        <i class="fas fa-user-edit text-sm me-2" data-bs-toggle="tooltip"></i>
                                        Editar Perfil</button>

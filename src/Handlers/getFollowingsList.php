@@ -68,7 +68,7 @@ if ($option == 'open') {
         if ($google_image) {
             $html .= 'src="' . $fl_picture . '"';
         } else {
-            $html .= 'src="http://localhost/Estagio2024/public/users/' . $fl_id . '/' . $fl_picture . '"';
+            $html .= 'src="http://localhost/ConcertPulse/public/users/' . $fl_id . '/' . $fl_picture . '"';
         }
         $html .= ' alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 50px; width: 50px; object-fit: cover;">';
         $html .= '        </div>';
@@ -119,7 +119,7 @@ if ($option == 'open') {
         if ($google_image) {
             $html .= 'src="' . $fl_picture . '"';
         } else {
-            $html .= 'src="http://localhost/Estagio2024/public/users/' . $fl_id . '/' . $fl_picture . '"';
+            $html .= 'src="http://localhost/ConcertPulse/public/users/' . $fl_id . '/' . $fl_picture . '"';
         }
         $html .= ' alt="profile_image" class="rounded-circle img-fluid shadow-sm" style="height: 50px; width: 50px; object-fit: cover;">';
         $html .= '        </div>';

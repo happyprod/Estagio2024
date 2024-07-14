@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Jul-2024 às 16:56
+-- Tempo de geração: 09-Jul-2024 às 14:39
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -49,7 +49,7 @@ CREATE TABLE `accounts` (
   `Blog` text NOT NULL,
   `Active_Blog` tinyint(1) NOT NULL,
   `id_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Esta tabela armazena informações sobre os utilizadores da rede social, como os seus perfis, identificadores únicos e outras informações pessoais.';
 
 --
 -- Extraindo dados da tabela `accounts`
@@ -64,7 +64,8 @@ INSERT INTO `accounts` (`id`, `name`, `email`, `mainEmail`, `password`, `picture
 (84, 'David Zedeck', 'davidzedeck@gmail.com', 'davidzedeck@gmail.com', '$2y$10$6.cbHgqDZcxuKkv3tJs4OuLM16olwnF5OBFaajXo/l7gJBuN.6TvC', '668bd258124ad.jpeg', '668bd25812de8.jpeg', '2024-07-08 00:00:00', 'Califórnia, Estados Unidos', 3, 'Eu sou David Zedeck, um agente na UTA, especializado em representar músicos de renome mundial. Com uma combinação única de visão estratégica e conhecimento profundo da indústria, trabalho incansavelmente para garantir que meus clientes atinjam seus objetivos de carreira e expandam seu impacto globalmente.', '968738920', 'davidzedeck', 1, '', 0, '', 0, '', 0, 'davidzedeck'),
 (85, 'Michael Rapino', 'michaelrapino@gmail.com', 'michaelrapino@gmail.com', '$2y$10$3s02MTOJ1L9jPb5xGs3hcu4ElTCXexFRDRMevtxpWI3H6gvKUvK4u', '668bd3a27d79f.jpeg', '668bd3a27da4f.jpeg', '2024-07-08 00:00:00', 'Canadá', 1, 'Sou Michael Rapino, o CEO da Live Nation Entertainment, líder global em entretenimento ao vivo. Com uma equipe dedicada em mais de 40 países, trabalhamos para criar experiências inesquecíveis para milhões de fãs ao redor do mundo. Nosso compromisso é conectar artistas excepcionais com seus públicos, transformando cada evento em um momento memorável.', '928249829', 'michaelrapino', 1, '', 0, '', 0, '', 0, 'michaelrapino'),
 (86, 'Harvey Goldsmith', 'harveygoldsmith@gmail.com', 'harveygoldsmith@gmail.com', '$2y$10$LOTOeD75ZPGSpRs0el1GPeBmJhrisl/3w7eQwXdN40J34y29c7z8a', '668bd53eac47a.jpeg', '668bd53eacf4c.jpeg', '2024-07-08 00:00:00', 'Londres, Reino Unido', 1, 'Meu nome é Harvey Goldsmith e sou fundador da Harvey Goldsmith Productions. Com décadas de experiência, trago paixão e expertise para cada evento que organizo. Meu objetivo é não apenas produzir shows de classe mundial, mas também proporcionar uma plataforma para que artistas brilhem e fãs se conectem profundamente com sua música.', '938407814', 'harveygoldsmith', 1, '', 0, '', 0, '', 0, 'harveygoldsmith'),
-(87, 'Don Law', 'donlaw@gmail.com', 'donlaw@gmail.com', '$2y$10$yjV1wTmHel8zRV0pHjH.YuO20vLrp3LWYPKr3gNdlfMIv7.5woNHm', '668bd86c6c2ed.jpeg', '668bd86c6d3d8.jpeg', '2024-07-08 00:00:00', 'Inglaterra, Reino Unido', 1, 'Sou Don Law, presidente da Live Nation New England. Ao longo dos anos, construí uma reputação sólida como promotor de eventos de sucesso em toda a região. Trabalho lado a lado com artistas e suas equipes para criar experiências únicas que ressoem com o público local. Minha paixão é trazer as melhores performances ao palco e garantir que cada evento seja um triunfo para todos os envolvidos.', '967829018', 'donlaw', 1, '', 0, '', 0, '', 0, 'donlaw');
+(87, 'Don Law', 'donlaw@gmail.com', 'donlaw@gmail.com', '$2y$10$yjV1wTmHel8zRV0pHjH.YuO20vLrp3LWYPKr3gNdlfMIv7.5woNHm', '668bd86c6c2ed.jpeg', '668bd86c6d3d8.jpeg', '2024-07-08 00:00:00', 'Inglaterra, Reino Unido', 1, 'Sou Don Law, presidente da Live Nation New England. Ao longo dos anos, construí uma reputação sólida como promotor de eventos de sucesso em toda a região. Trabalho lado a lado com artistas e suas equipes para criar experiências únicas que ressoem com o público local. Minha paixão é trazer as melhores performances ao palco e garantir que cada evento seja um triunfo para todos os envolvidos.', '967829018', 'donlaw', 1, '', 0, '', 0, '', 0, 'donlaw'),
+(88, 'Rúben Costa', '', 'beatsrubencosta@gmail.com', '$2y$10$UaBARgPGiTHDscOX86DQuOYeAp2esSd7SJQGx3H7Qbd2R8yN4SO52', '6bdd4d7c798682040665b9cb764e03ec.png', '', '2024-07-09 00:00:00', 'Porto, Portugal', 2, '', '', '', 0, '', 0, '', 0, '', 0, 'happyprod');
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,7 @@ CREATE TABLE `chat` (
   `message` text NOT NULL,
   `viewed` int(2) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Contém mensagens de chat trocadas entre os utilizadores, permitindo comunicação direta.';
 
 --
 -- Extraindo dados da tabela `chat`
@@ -178,7 +179,9 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`id`, `id_founder`, `name`, `imagem`, `description`, `local`, `date`, `Booking`, `PrivacyProjects`, `PrivacyLikes`, `PrivacyComments`, `deleted`) VALUES
 (49, 79, 'Tomorrowland', '', 'Foi tão bom estar de volta no Tomorrowland.\nEspero que tenham gostado do meu set!', 'Boom, Bélgica', '2022-08-01', '', 1, 4, 7, 0),
-(50, 81, 'Rock in rio', '', 'Lisboa é de malucos...\nObrigado por participar no melhor festival que já estive!', 'Lisboa, Portugal', '2024-07-08', '', 1, 4, 7, 0);
+(50, 81, 'Rock in rio', '', 'Lisboa é de malucos...\nObrigado por participar no melhor festival que já estive!', 'Lisboa, Portugal', '2024-07-08', '', 1, 4, 7, 0),
+(51, 88, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-09', '', 3, 6, 9, 0),
+(52, 88, 'Rascunho', '', 'Isto é apenas um Rascunho', '', '2024-07-09', '', 3, 6, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -254,7 +257,11 @@ CREATE TABLE `projects_images` (
 INSERT INTO `projects_images` (`id`, `id_project`, `image`, `order`) VALUES
 (2, 49, '9k=', 1),
 (3, 49, 'Z', 2),
-(12, 50, '2Q==', 1);
+(12, 50, '2Q==', 1),
+(14, 51, 'wqAt849gSxgAAAABJRU5ErkJggg==', 1),
+(15, 51, '9k=', 2),
+(19, 52, 'Z', 1),
+(20, 52, '9k=', 2);
 
 -- --------------------------------------------------------
 
@@ -280,7 +287,10 @@ INSERT INTO `projects_likes` (`id`, `id_project`, `id_user_send`) VALUES
 (5, 49, 83),
 (6, 50, 83),
 (7, 49, 84),
-(8, 50, 84);
+(8, 50, 84),
+(9, 50, 88),
+(10, 50, 88),
+(11, 49, 88);
 
 -- --------------------------------------------------------
 
@@ -423,7 +433,7 @@ ALTER TABLE `rating`
 -- AUTO_INCREMENT de tabela `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de tabela `chat`
@@ -447,7 +457,7 @@ ALTER TABLE `follows`
 -- AUTO_INCREMENT de tabela `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `projects_collabs`
@@ -471,13 +481,13 @@ ALTER TABLE `projects_comments_likes`
 -- AUTO_INCREMENT de tabela `projects_images`
 --
 ALTER TABLE `projects_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `projects_likes`
 --
 ALTER TABLE `projects_likes`
-  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `projects_stats_snapshot`

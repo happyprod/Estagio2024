@@ -102,7 +102,7 @@ if (isset($_GET['var1'])) {
                         <td>
                             <div class="d-flex px-2 py-1">
                                 <div>
-                                    <img src="http://localhost/Estagio2024/public/users/' . $id . '/' . $picture . '" class="avatar avatar-sm me-3" alt="user1">
+                                    <img src="http://localhost/ConcertPulse/public/users/' . $id . '/' . $picture . '" class="avatar avatar-sm me-3" alt="user1">
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <a href="utilizadores/' . $id . '.php"><h6 style="max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="mb-0 text-sm" >@' . $id_name . '</h6></a>
@@ -120,9 +120,15 @@ if (isset($_GET['var1'])) {
                         <td class="align-middle text-center">
                             <span style="max-width: 10ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" class="text-secondary text-xs font-weight-bold">' . $date . '</span>
                         </td>
-                        <td class="align-middle text-center text-secondary opacity-8">
-                            <button onclick="downloadFile(\'' . $file . '\', ' . $id . ')" class="btn btn-link text-dark text-xs mb-0 px-0">
-                                <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i> PDF
+                        <td class="align-middle text-center text-secondary opacity-8">';
+
+                        if ($opcao == 1) {
+                            $html .= '<button onclick="downloadFile(\'' . $file . '\', ' . $id_user . ')" class="btn btn-link text-dark text-xs mb-0 px-0">';
+                        } else {
+                            $html .= '<button onclick="downloadFile(\'' . $file . '\', ' . $id . ')" class="btn btn-link text-dark text-xs mb-0 px-0">';
+                        }
+
+                                $html .= '<i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i> PDF
                             </button>
                         </td>';
         if ($opcao == 1) {

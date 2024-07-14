@@ -1,8 +1,8 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="http://localhost/Estagio2024/public/home.php">
-            <img src="http://localhost/Estagio2024/public/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
+        <a class="navbar-brand m-0" href="http://localhost/ConcertPulse/public/home.php">
+            <img src="http://localhost/ConcertPulse/public/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Concert Pulse Artist's</span>
         </a>
     </div>
@@ -19,7 +19,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/pesquisar.php">
+                <a class="nav-link" href="http://localhost/ConcertPulse/public/pesquisar.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-compass-04 text-dark" style="font-size: 12px;"></i>
                     </div>
@@ -28,7 +28,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/chat.php">
+                <a class="nav-link" href="http://localhost/ConcertPulse/public/chat.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-chat-round text-dark" style="font-size: 11px;"></i>
                     </div>
@@ -37,7 +37,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/contratos.php">
+                <a class="nav-link" href="http://localhost/ConcertPulse/public/contratos.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>document</title>
@@ -60,7 +60,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/utilizadores/<?php echo $_SESSION['user_id']; ?>.php">
+                <a class="nav-link" href="http://localhost/ConcertPulse/public/utilizadores/<?php echo $_SESSION['user_id']; ?>.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -85,9 +85,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/Estagio2024/public/login.php">
+                <a class="nav-link" href="http://localhost/ConcertPulse/public/login.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <img style="width: 12px; height: 12px;" src="http://localhost/Estagio2024/public/assets/img/logout.png" alt="">
+                        <img style="width: 12px; height: 12px;" src="http://localhost/ConcertPulse/public/assets/img/logout.png" alt="">
                     </div>
                     <span class="nav-link-text ms-1">Logout</span>
                 </a>
@@ -99,7 +99,7 @@
 
             </div>
 
-            <script src="http://localhost/Estagio2024/public/assets/js/menu.js"></script>
+            <script src="http://localhost/ConcertPulse/public/assets/js/menu.js"></script>
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">
