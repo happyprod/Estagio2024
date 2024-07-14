@@ -17,7 +17,7 @@ class Search
     public function getAccounts()
     {
         // Consulta para carregar todas as contas em ordem aleatória
-        $sql = "SELECT * FROM accounts ORDER BY RAND()";
+        $sql = "SELECT * FROM accounts ORDER BY RAND() LIMIT 25";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,7 +31,7 @@ class Search
         $searchTerm = '%' . $searchBar . '%';
 
         // Consulta SQL com placeholder
-        $sql = "SELECT * FROM accounts WHERE id_name LIKE :searchBar";
+        $sql = "SELECT * FROM accounts WHERE id_name LIKE :searchBar LIMIT 25"; //mostra 25 utilizadores no maximo
         $stmt = $this->db->prepare($sql);
 
         // Vincula o parâmetro :searchBar

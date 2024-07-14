@@ -177,6 +177,30 @@ class Home
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getProjectsLikes($p_id, $id_search)
+    {
+        // Definindo a consulta SQL
+        $sql = "SELECT id FROM projects_likes WHERE id_project = :p_id AND id_user_send = :id_search";
+    
+        // Preparando a consulta
+        $stmt = $this->db->prepare($sql);
+    
+        // Vinculando os parâmetros
+        $stmt->bindParam(':p_id', $p_id, PDO::PARAM_INT);
+        $stmt->bindParam(':id_search', $id_search, PDO::PARAM_INT);
+    
+        // Executando a consulta
+        $stmt->execute();
+    
+        // Recuperando o resultado
+        $result = $stmt->fetchColumn();
+    
+        // Verificando se o resultado existe e retornando 1 ou 0
+        return $result !== false ? 1 : 0;
+    }
+    
+
+
     public function getProjectsImagesFeed($p_id)
     {
         // Definindo a consulta SQL

@@ -13,23 +13,17 @@ $db = Database::connect();
 $model = new User($db);
 $controller = new UserController($model);
 
-    // Verifica se as variáveis foram passadas na requisição
-    if(isset($_GET['var1']) && isset($_GET['var2'])) {
-        $id_project = $_GET['var1'];
-        $opcao = $_GET['var2'];
+// Verifica se as variáveis foram passadas na requisição
+if (isset($_GET['var1']) && isset($_GET['var2'])) {
+    $id_project = $_GET['var1'];
+    $opcao = $_GET['var2'];
 
-        
-        if ($opcao == 1)
-        {
-            $data = $controller->ApagarProjectLikes($id_project);
-        } else if ($opcao == 2){
-            echo 'deu';
-            $data = $controller->guardarProjectLikes($id_project);
 
-        }
-
-    } else {
-        echo "Erro: Variáveis não foram passadas.";
+    if ($opcao == 1) {
+        $data = $controller->ApagarProjectLikes($id_project);
+    } else if ($opcao == 2) {
+        $data = $controller->guardarProjectLikes($id_project);
     }
-
-
+} else {
+    echo "Erro: Variáveis não foram passadas.";
+}

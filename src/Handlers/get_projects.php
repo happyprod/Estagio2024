@@ -12,18 +12,22 @@ $db = Database::connect();
 $model = new Home($db);
 $controller = new HomeController($model);
 
-
 // Obtém o número de projetos a serem carregados e a partir de qual ponto
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$limit = 3;  // Quantidade de projetos por vez
+$limit = 2;  // Quantidade de projetos por vez
 
 $result = $controller->getProjectsFeed($limit, $offset);
 
 $projects = array();
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$user_id = $_SESSION['user_id'];
+
 if (count($result)) {
     foreach ($result as $row) {
-
         $fotodeperfil = $row['picture'];
 
         // Obtém a extensão do arquivo em letras minúsculas
@@ -47,9 +51,7 @@ if (count($result)) {
 
         $p_id = $row['id'];
 
-
         $result2 = $controller->getProjectsImagesFeed($p_id);
-
 
         $imageList = '';
 
@@ -73,12 +75,18 @@ if (count($result)) {
             }
         }
 
-        $row['image'] = $imageList;
+        $liked_by_user = $controller->getProjectsLikes($p_id, $user_id);
 
+        if ($liked_by_user == 1) {
+            $row['p_like'] = '<i class="ni ni-favourite-28 mt-2 text-primary" style="font-size: 22px;"></i>';
+        } else if ($liked_by_user == 0){
+            $row['p_like'] = '<i class="bi bi-heart" style="font-size: 24px;"></i>';
+        }
+
+        $row['image'] = $imageList;
         $projects[] = $row;
     }
 }
 
 // Retorna os projetos em formato JSON
 echo json_encode($projects);
-

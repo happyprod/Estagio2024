@@ -170,6 +170,11 @@ class HomeController
         return $this->model->getProjectsFeed($limit, $offset);
     }
 
+    public function getProjectsLikes($p_id, $id_search)
+    {
+        return $this->model->getProjectsLikes($p_id, $id_search);
+    }
+
     public function getProjectsImagesFeed($p_id)
     {
         return $this->model->getProjectsImagesFeed($p_id);

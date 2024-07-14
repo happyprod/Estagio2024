@@ -1,5 +1,5 @@
 let offset = 0;
-const limit = 3;
+const limit = 2;
 
 function loadProjects() {
     $('#loader').show();
@@ -7,6 +7,7 @@ function loadProjects() {
         const projects = JSON.parse(data);
         if (projects.length > 0) {
             projects.forEach(project => {
+                console.log(data);
                 const local = project.local;
                 const link = local
                     ? `- <a target="_blank" href="https://www.google.pt/maps/search/${local}.php">${local}</a>`
@@ -18,6 +19,10 @@ function loadProjects() {
                 if (project.imageNum === 1) {
                     flag = ' d-none'; // Hide buttons if only one image
                 }
+                // Supondo que `project` seja um objeto de projeto que contém a propriedade `p_like`
+                flag2 = project.p_like;
+
+
 
 
                 $('#projects-container').append(`
@@ -63,7 +68,7 @@ function loadProjects() {
                             </div>
                             <div class="w-100 text-bottom text-left ms-1 mt-2">
                                 <button onclick="guardarProjectLike2(${project.id}, this)" style="border: 0px; background-color: white !important;">
-                                    ${project.liked_by_user == 1 ? '<i class="ni mt-2 ni-favourite-28 text-primary" style="font-size: 22px;"></i>' : '<i class="bi bi-heart" style="font-size: 24px;"></i>'}
+                                    ${flag2}
                                 </button>
 
                                 <button class="${project.comments_count == 0 ? 'd-none ' : ''}" data-bs-toggle="modal" onclick="updateDataProjetos(${project.id}, ${offset + projects.indexOf(project) + 1})" data-bs-target="#modal-default${offset + projects.indexOf(project) + 1}" style="border: 0px; background-color: white !important;">
@@ -287,8 +292,6 @@ function guardarProjectLike2(id_projeto, button) {
     // Obtém o elemento que mostra o número de gostos
     var fGostos = document.getElementById('fGostos' + id_projeto);
 
-    console.log(fGostos);
-
     // Seleciona o ícone dentro do botão
     var icon = button.querySelector('i');
 
@@ -321,7 +324,7 @@ function guardarProjectLike2(id_projeto, button) {
             }
         });
     } else {
-        newLikes = parseInt(fGostos.textContent)  + 1;
+        newLikes = parseInt(fGostos.textContent) + 1;
 
         // Atualiza o valor do input hidden fGostos se existir
         if (fGostos) {
@@ -329,7 +332,7 @@ function guardarProjectLike2(id_projeto, button) {
         }
 
         // Atualiza a classe e o estilo do ícone
-        icon.className = 'ni text-primary ni-favourite-28';
+        icon.className = 'ni ni-favourite-28 text-primary mt-2';
         icon.style.fontSize = '22px';
 
         // Faz uma requisição AJAX para atualizar o like no servidor
