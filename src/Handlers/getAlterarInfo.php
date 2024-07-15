@@ -48,6 +48,7 @@ foreach ($data2 as $row2) {
     $c_nome = htmlspecialchars($row2->name);
     $c_picture = htmlspecialchars($row2->picture);
     $c_idName = htmlspecialchars($row2->idName);
+    $c_id = htmlspecialchars($row2->id);;
 
     // Remova a declaração de $collabshtml daqui
 
@@ -55,7 +56,7 @@ foreach ($data2 as $row2) {
                 <li class="list-group-item pt-0 pb-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
-                            <img src="' . $c_picture . '" alt="" class="avatar rounded-circle my-auto" style="width: 45px; height: 45px;">
+                            <img src="http://localhost/ConcertPulse/public/users/' . $c_id . '/' . $c_picture . '" alt="" class="avatar rounded-circle my-auto img-fluid" style="style="object-fit: cover; width: 45px; height: 45px;">
                         </div>
                         <div class="flex-grow-1">
                             <h6 class="mb-0 text-sm">' . $c_nome . '</h6>

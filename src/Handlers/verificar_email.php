@@ -27,6 +27,7 @@ if (isset($_POST['id_name'])) {
         echo json_encode(
             array(
                 'status' => 'valid',
+                'id' => $user['id'],
                 'name' => $user['name'],
                 'picture' => $user['picture'] // Supondo que você também tenha a coluna 'picture' na tabela
             )
