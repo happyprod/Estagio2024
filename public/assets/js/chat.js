@@ -1,6 +1,7 @@
 let selectedUser = null;
 var text = '';
 var userLoaded;
+var messagesString = null;
 
 function loadOptions() {
     $.ajax({
@@ -26,14 +27,21 @@ function loadMessages(user) {
         method: 'GET',
         data: { action: 'loadMessages', user: user },
         success: function (data) {
-            $('#chat-box').html(data);
+            if (messagesString != data)
+            {
+                $('#chat-box').html(data);
+                messagesString = data;
+
+                
             var objDiv = document.getElementById("scrollUser");
             if (objDiv) {
                 objDiv.scrollTop = objDiv.scrollHeight;
             } else {
                 console.log("Elemento com ID 'scroll' não encontrado.");
             }
-        
+            
+            }
+
         }
     });
 }
