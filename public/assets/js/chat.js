@@ -1,6 +1,6 @@
 let selectedUser = null;
 var text = '';
-var autoScroll = true;
+var userLoaded;
 
 function loadOptions() {
     $.ajax({
@@ -9,14 +9,13 @@ function loadOptions() {
         data: { action: 'options', search: text },
         success: function (data) {
             $('#chat-options').html(data);
-            $('#chat-options').scrollTop($('#chat-options')[0].scrollHeight); // Rolagem automática para o final
-
         }
     });
 }
 
 function abrirMensagens(id) {
     selectedUser = id;
+
     document.getElementById('mensagemInput').classList.remove('d-none');
     loadMessages(selectedUser);
 }
@@ -27,11 +26,14 @@ function loadMessages(user) {
         method: 'GET',
         data: { action: 'loadMessages', user: user },
         success: function (data) {
-            if (autoScroll) {
-                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
-            }
             $('#chat-box').html(data);
-
+            var objDiv = document.getElementById("scrollUser");
+            if (objDiv) {
+                objDiv.scrollTop = objDiv.scrollHeight;
+            } else {
+                console.log("Elemento com ID 'scroll' não encontrado.");
+            }
+        
         }
     });
 }
@@ -73,18 +75,26 @@ document.getElementById('message').addEventListener('keypress', function (event)
     }
 });
 
-$('#chat-box').on('scroll', function () {
-    if ($('#chat-box').scrollTop() <= 0) {
-        autoScroll = false;
-    } else if ($('#chat-box').scrollTop() + $('#chat-box').innerHeight() >= $('#chat-box')[0].scrollHeight - 10) {
-        autoScroll = true;
-    } else {
-        autoScroll = false;
+
+function load() {
+    console.log(userLoaded);
+
+    // Verifica se a função loadOptions já está sendo executada em intervalos
+    if (!loadOptionsInterval) {
+        loadOptions();
+        loadOptionsInterval = setInterval(loadOptions, 1000);
     }
-});
 
-$(document).ready(function () {
-    setInterval(loadOptions, 1000);
-    loadOptions();
-});
+    if (selectedUser != null && !abrirMensagensInterval) {
+        abrirMensagens(selectedUser);
+        abrirMensagensInterval = setInterval(() => abrirMensagens(selectedUser), 1000);
+    }
+}
 
+
+let loadOptionsInterval = null;
+let abrirMensagensInterval = null;
+
+// Inicializa a execução da função load
+load();
+setInterval(load, 1000);

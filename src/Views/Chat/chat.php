@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
 
             $result3 = $controller->getViews($id);
 
-            $vistas = count($result3); // Count the number of rows fetched
+            $vistas = count($result3)/2; // Count the number of rows fetched
 
             if ($id_sender == $session) {
                 if ($visto == 1) {
@@ -117,27 +117,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
             }
 
             echo '<div onclick="abrirMensagens(' . $id . ')" id=' . $id . ' class="chat-item d-flex ps-3 pe-0 pt-3 pb-3">
-                <div class="w-100">
-                <div class="d-flex ps-0">
-                    <img class="rounded-circle shadow avatar-sm me-3 img-fluid" style="object-fit: cover;" ' . $fotodeperfil . '>
-                    <div>
-                    <p class="margin-auto fw-400 text-dark-75">@' . $id_name . '</p>
-                    <div class="d-flex flex-row mt-1">
-                        <span>
-                        <div class="' . $visto . '"></div>
-                        </span>
-                        <span class="message-shortcut margin-auto text-muted fs-13 ml-1 me-4">' . $message . '</span>
+                    <div class="w-100">
+                    <div class="d-flex ps-0">
+                        <img class="rounded-circle shadow avatar-sm me-3 img-fluid" style="object-fit: cover;" ' . $fotodeperfil . '>
+                        <div>
+                        <p class="margin-auto fw-400 text-dark-75">@' . $id_name . '</p>
+                        <div class="d-flex flex-row mt-1">
+                            <span>
+                            <div class="' . $visto . '"></div>
+                            </span>
+                            <span class="message-shortcut margin-auto text-muted fs-13 ml-1 me-4">' . $message . '</span>
+                        </div>
+                        </div>
                     </div>
                     </div>
-                </div>
-                </div>
-                <div class="flex-shrink-0 margin-auto ps-2 pe-3">
-                <div class="d-flex flex-column">
-                    <p class="text-muted text-right fs-13 mb-2">' . $diferenca_dias . '</p>'
-                . $vistas . '
-                </div>
-                </div>
-            </div>';
+                    <div class="flex-shrink-0 margin-auto ps-2 pe-3">
+                    <div class="d-flex flex-column">
+                        <p class="text-muted text-right fs-13 mb-2">' . $diferenca_dias . '</p>'
+                    . $vistas . '
+                    </div>
+                    </div>
+                </div>';
         }
     } else {
         echo "Nenhuma mensagem.";
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
             </div>
         </div>
         <div class="h-100">
-            <div class="scrollResponsive w-100 p-3 overflow-auto mt-auto" style="flex-direction: column; justify-content: flex-end;">';
+            <div id="scrollUser" class="scrollResponsive w-100 p-3 overflow-auto mt-auto" style="flex-direction: column; justify-content: flex-end;">';
 
 
         $result = $controller->getMessages($user);
