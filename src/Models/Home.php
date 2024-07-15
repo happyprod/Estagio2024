@@ -51,13 +51,14 @@ class Home
         // Consulta para obter sugestões com base nos critérios especificados
         $stmt = $this->db->prepare("SELECT DISTINCT a.id, a.id_name, a.picture, a.identity
                                     FROM accounts a
-                                    LEFT JOIN follows f ON a.id = f.id_user
+                                    LEFT JOIN follows f ON a.id = f.id_followed AND f.id_user = ?
                                     WHERE a.identity = ?
                                     AND (f.id_user IS NULL OR f.id_user <> ?)
                                     ORDER BY RAND()
                                     LIMIT 5;");
 
-        $stmt->execute([$sug, $user_id]);  // Vincula os parâmetros identity e user_id
+        $stmt->execute([$user_id, $sug, $user_id]);
+
 
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);  // Modo de fetch para obter um array de objetos
 
@@ -180,24 +181,24 @@ class Home
     {
         // Definindo a consulta SQL
         $sql = "SELECT id FROM projects_likes WHERE id_project = :p_id AND id_user_send = :id_search";
-    
+
         // Preparando a consulta
         $stmt = $this->db->prepare($sql);
-    
+
         // Vinculando os parâmetros
         $stmt->bindParam(':p_id', $p_id, PDO::PARAM_INT);
         $stmt->bindParam(':id_search', $id_search, PDO::PARAM_INT);
-    
+
         // Executando a consulta
         $stmt->execute();
-    
+
         // Recuperando o resultado
         $result = $stmt->fetchColumn();
-    
+
         // Verificando se o resultado existe e retornando 1 ou 0
         return $result !== false ? 1 : 0;
     }
-    
+
 
 
     public function getProjectsImagesFeed($p_id)
