@@ -42,6 +42,9 @@ if(isset($_POST['order'])){
                 // Obtenha o nome do arquivo da URL
                 $nome_arquivo = basename($imgSrc);
 
+                // Gera um nome de arquivo único
+                $nome_arquivo = uniqid() . '_' . $projeto;
+
                 // Verifica se o diretório de destino existe, se não, cria-o
                 if (!file_exists($caminho_para_pasta)) {
                     mkdir($caminho_para_pasta, 0777, true); // Cria o diretório recursivamente
