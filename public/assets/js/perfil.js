@@ -594,6 +594,7 @@ function guardarSobre(id_projeto) {
                 } else {
                     $('#modalAlterarInfo' + id_projeto).modal('hide');
                     $('#menu' + id_projeto).modal('show');
+                    sucesso('Alterado com sucesso!');
                 }
             } else {
                 console.error("Erro na requisição: " + xhr.status);
@@ -853,6 +854,7 @@ function CommentSend(chatid, p_id) {
                     success: function (data) {
                         //#region update comentarios
                         updateDataProjetos(p_id, p_id);
+                        sucesso('Comenta com sucesso!');
                         console.log(data);
                     },
                     error: function (xhr, status, error) {
@@ -870,6 +872,7 @@ function CommentSend(chatid, p_id) {
                     data: { var1: p_id, var2: text }, // Passando variáveis na requisição
                     success: function (data) {
                         updateDataProjetos(p_id, p_id);
+                        sucesso('Comenta com sucesso!');
                         console.log(data);
                     },
                     error: function (xhr, status, error) {

@@ -399,6 +399,7 @@ function CommentSend(chatid, p_id) {
                     method: 'GET',
                     data: { var1: p_id, var2: text, var3: resposta }, // Passando variáveis na requisição
                     success: function (data) {
+                        updateDataProjetos(p_id, p_id);
                         console.log(data);
                     },
                     error: function (xhr, status, error) {
@@ -415,6 +416,7 @@ function CommentSend(chatid, p_id) {
                     method: 'GET',
                     data: { var1: p_id, var2: text }, // Passando variáveis na requisição
                     success: function (data) {
+                        updateDataProjetos(p_id, p_id);
                         console.log(data);
                     },
                     error: function (xhr, status, error) {
